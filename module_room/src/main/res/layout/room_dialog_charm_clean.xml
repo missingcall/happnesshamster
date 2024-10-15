@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:theme="@style/Theme.Unicorn_live">
+
+        <View
+            android:id="@+id/view_cover"
+            android:background="@mipmap/room_dialog_bg_charm_value_clean"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="375:414"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+
+        <TextView
+            android:id="@+id/tv_charm_rank_title"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="11dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="王晓梅的心动值"
+            android:textColor="#ffffffff"
+            android:textSize="14sp"
+            android:shadowColor="#47000000"
+            android:shadowRadius="3.0" />
+
+        <TextView
+            android:id="@+id/tv_clean_all"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_marginRight="@dimen/dp_18"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="86dp"
+            android:background="@mipmap/ic_clean_one_key"
+            android:layout_height="@dimen/dp_28" />
+
+        <com.drake.brv.PageRefreshLayout
+            app:layout_constraintTop_toBottomOf="@id/tv_clean_all"
+            android:id="@+id/page_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_4"
+            android:background="@color/common_transparent"
+            app:empty_layout="@layout/common_view_empty"
+            app:layout_constraintBottom_toBottomOf="@id/view_cover"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+
+        </com.drake.brv.PageRefreshLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.kissspace.mine.viewmodel.UserProfileViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="#28292C"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    followRoomInVisible="@{vm.userInfo}"
+                    android:visibility="visible"
+                    android:id="@+id/tv_dynamic"
+                    android:layout_height="28dp"
+                    android:layout_width="@dimen/dp_82"
+                    android:gravity="center"
+                    android:background="@mipmap/ic_room_in"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="@dimen/dp_40"
+                    android:layout_marginTop="3dp"
+                    />
+
+                <LinearLayout
+                    app:layout_constraintLeft_toLeftOf="@id/tv_nickname"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_dynamic"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nickname"
+                    app:layout_constraintRight_toLeftOf="@id/tv_dynamic"
+                    android:id="@+id/layout_level"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <!--                    <com.kissspace.common.widget.UserLevelIconView-->
+                    <!--                        android:id="@+id/lever1"-->
+                    <!--                        mineLevelCount="@{vm.userInfo.consumeLevel}"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        app:level_type="TYPE_EXPEND"-->
+                    <!--                        android:visibility="visible"-->
+                    <!--                        />-->
+
+                    <!--                    <com.kissspace.common.widget.UserLevelIconView-->
+                    <!--                        android:id="@+id/lever2"-->
+                    <!--                        mineLevelCount="@{vm.userInfo.charmLevel}"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        app:level_type="TYPE_INCOME"-->
+                    <!--                        app:layout_constraintLeft_toRightOf="@+id/lever1"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@+id/tv_nickname"-->
+                    <!--                        android:layout_marginStart="4dp"-->
+                    <!--                        android:visibility="visible"-->
+                    <!--                        />-->
+
+                    <com.nex3z.flowlayout.FlowLayout
+                        showUserMedal="@{vm.userInfo}"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        app:flChildSpacing="2dp"
+                        app:flRowSpacing="5dp"
+                        app:flRowVerticalGravity="center"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{vm.userInfo.nickname}"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="@id/tv_dynamic"
+                    app:layout_constraintBottom_toTopOf="@id/layout_level"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="20dp"/>
+
+                <ImageView
+                    sexImage="@{vm.userInfo.sex}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
+                    app:layout_constraintStart_toEndOf="@id/tv_nickname"
+                    app:layout_constraintTop_toTopOf="@id/tv_nickname" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.angcyo.tablayout.DslTabLayout
+                android:layout_marginTop="-20dp"
+                android:background="#28292C"
+                android:paddingStart="@dimen/dp_16"
+                app:layout_constraintTop_toBottomOf="@id/layout_nickname"
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                style="@style/indication"
+                >
+
+                <TextView
+                    android:paddingStart="@dimen/dp_16"
+                    android:paddingEnd="@dimen/dp_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    userProfileTitle="@{vm.userInfo.userId}"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:paddingStart="@dimen/dp_16"
+                    android:paddingEnd="@dimen/dp_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    userProfileDynamicTitle="@{vm.userInfo.userId}"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:paddingStart="@dimen/dp_16"
+                    android:paddingEnd="@dimen/dp_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="密友关系"
+                    android:visibility="visible"
+                    android:textSize="16sp" />
+
+            </com.angcyo.tablayout.DslTabLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                app:layout_constraintTop_toBottomOf="@id/tab_layout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/view_status_bar"
+                android:layout_width="match_parent"
+                android:layout_height="44dp" />
+
+            <com.hjq.bar.TitleBar
+                style="@style/commonTopBar"
+                android:id="@+id/title_bar"
+                app:leftIcon="@mipmap/common_icon_back_white"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                />
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

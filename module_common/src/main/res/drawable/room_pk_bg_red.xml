@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    &lt;!&ndash;    <item android:state_selected="true" android:drawable="@mipmap/common_wallet_item_exchange_selector_selected">&ndash;&gt;-->
+<!--    &lt;!&ndash;    </item>&ndash;&gt;-->
+
+<!--    <item  android:state_selected="true">-->
+<!--        <layer-list>-->
+<!--            <item>-->
+<!--                <shape>-->
+<!--                    <gradient android:startColor="#FFFF088D"-->
+<!--                        android:centerColor="#FFFFA0D4"-->
+<!--                        android:endColor="#FFFF71BF"-->
+<!--                        android:angle="270"-->
+<!--                        />-->
+<!--                    <corners android:radius="12dp"/>-->
+<!--                </shape>-->
+<!--            </item>-->
+
+<!--            <item android:top="@dimen/dp_1" android:bottom="@dimen/dp_1"-->
+<!--                android:left="@dimen/dp_1" android:right="@dimen/dp_1">-->
+<!--                >-->
+<!--                <shape>-->
+<!--                    <solid android:color="@color/white" />-->
+<!--                    <corners android:radius="12dp"/>-->
+<!--                </shape>-->
+<!--            </item>-->
+
+<!--        </layer-list>-->
+<!--    </item>-->
+<!--    &lt;!&ndash; Default state &ndash;&gt;-->
+<!--    <item  android:state_selected="false" android:drawable="@drawable/common_shape_white_12" />-->
+<!--</selector>-->
+
+        <layer-list  xmlns:android="http://schemas.android.com/apk/res/android">
+            <item>
+                <shape>
+                    <gradient android:startColor="#FFFF088D"
+                        android:centerColor="#FFFFA0D4"
+                        android:endColor="#FFFF71BF"
+                        android:angle="270"
+                        />
+                    <corners android:radius="12dp"/>
+                </shape>
+            </item>
+
+            <item android:top="@dimen/dp_1" android:bottom="@dimen/dp_1"
+                android:left="@dimen/dp_1" android:right="@dimen/dp_1">
+                >
+                <shape>
+                    <solid android:color="@color/white" />
+                    <corners android:radius="12dp"/>
+                </shape>
+            </item>
+        </layer-list>
+

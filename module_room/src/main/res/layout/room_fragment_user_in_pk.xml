@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/black70"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
+            android:layout_height="wrap_content">
+
+            <TextView
+                app:layout_constraintBottom_toBottomOf="@id/iv_user_avatar"
+                app:layout_constraintTop_toTopOf="@id/iv_user_avatar"
+                app:layout_constraintRight_toLeftOf="@id/iv_user_avatar"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="排名"
+                android:textColor="#ffffffff"
+                android:textSize="15sp" />
+
+            <com.kissspace.common.widget.CircleImageView
+                android:id="@+id/iv_user_avatar"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="86.5dp"
+                android:visibility="invisible"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40" />
+
+            <TextView
+                android:layout_marginStart="110.5dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/iv_user_avatar"
+                app:layout_constraintTop_toTopOf="@id/iv_user_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户昵称"
+                android:textColor="#ffffffff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="@dimen/dp_92"
+                android:layout_height="wrap_content"
+                android:text="助力值"
+                android:textColor="#ffffffff"
+                android:textSize="15sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.drake.brv.PageRefreshLayout
+            android:id="@+id/page_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:empty_layout="@layout/common_view_empty"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srlEnableRefresh="false">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_coin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.drake.brv.PageRefreshLayout>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="0dp"
+        android:paddingBottom="20dp"
+        android:background="@mipmap/room_bg_notice_popup"
+        >
+
+        <TextView
+            android:id="@+id/tv_notice_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/room_notice"
+            android:layout_marginTop="22dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scrollbars="vertical"
+            android:layout_below="@id/tv_notice_title"
+            android:layout_marginTop="14dp">
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</LinearLayout>

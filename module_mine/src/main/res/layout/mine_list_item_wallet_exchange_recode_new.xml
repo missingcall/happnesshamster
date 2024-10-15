@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="m"
+            type="com.kissspace.common.model.wallet.WalletExchangeRecode" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        android:background="@color/white"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingBottom="@dimen/dp_12"
+        android:layout_marginTop="1dp"
+        android:layout_height="64dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="提现申请" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_ui_sub_text_middle"
+            android:textSize="12sp"
+            android:layout_marginTop="1dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:text="@{m.createTime}" />
+
+        <TextView
+            android:id="@+id/tv_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="+300"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_time"
+            android:textSize="12sp"
+            android:textColor="@color/color_ui_sub_text_middle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#FF08B93A"
+            app:layout_constraintLeft_toRightOf="@id/tv_name"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_name"
+            tools:text="提现失败"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

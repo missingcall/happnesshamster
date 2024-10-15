@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_explore_make_friend"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="6.5dp"
+        app:layout_constraintDimensionRatio="157:143"
+        app:layout_constraintRight_toLeftOf="@id/layout_explore_live"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:background="@mipmap/app_ic_explore_make_friend"
+        android:layout_height="0dp" >
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="@dimen/dp_12"
+        app:layout_constraintDimensionRatio="157:66"
+        app:layout_constraintRight_toRightOf="@id/layout_explore_make_friend"
+        app:layout_constraintTop_toBottomOf="@id/layout_explore_make_friend"
+        android:id="@+id/layout_explore_heartbeat_murmurs"
+        app:layout_constraintLeft_toLeftOf="@id/layout_explore_make_friend"
+        android:layout_width="0dp"
+        android:background="@mipmap/app_ic_explore_heartbeat_murmurs"
+        android:layout_height="0dp" >
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_explore_live"
+        android:layout_marginStart="6.5dp"
+        app:layout_constraintDimensionRatio="157:66"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        app:layout_constraintLeft_toRightOf="@id/layout_explore_make_friend"
+        android:background="@mipmap/app_ic_explore_live"
+        android:layout_height="0dp" >
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintDimensionRatio="157:66"
+        android:id="@+id/layout_explore_chat"
+        app:layout_constraintRight_toRightOf="@id/layout_explore_live"
+        app:layout_constraintLeft_toLeftOf="@id/layout_explore_live"
+        app:layout_constraintBottom_toBottomOf="@id/layout_explore_make_friend"
+        android:layout_width="0dp"
+        android:background="@mipmap/app_ic_explore_chat"
+        android:layout_height="0dp" >
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_explore_wait_for_you"
+        app:layout_constraintRight_toRightOf="@id/layout_explore_live"
+        app:layout_constraintLeft_toLeftOf="@id/layout_explore_live"
+        app:layout_constraintBottom_toBottomOf="@id/layout_explore_heartbeat_murmurs"
+        android:layout_width="0dp"
+        app:layout_constraintDimensionRatio="157:66"
+        android:background="@mipmap/app_ic_explore_wait_for_you"
+        android:layout_height="0dp" >
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

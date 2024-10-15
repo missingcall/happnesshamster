@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        style="@style/commonTopBar"
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rightIcon="@mipmap/common_icon_question"
+        app:title="真爱墙" />
+
+
+    <com.angcyo.tablayout.DslTabLayout
+        android:id="@+id/custom_tab_layout"
+        app:layout_constraintTop_toBottomOf="@id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:paddingStart="8dp"
+        app:tab_deselect_color="@color/color_ui_sub_text_middle"
+        app:tab_draw_indicator="true"
+        android:layout_marginTop="@dimen/dp_10"
+        app:tab_enable_text_bold="true"
+        app:tab_indicator_drawable="@mipmap/common_icon_tabla_indicator"
+        app:tab_indicator_height="9dp"
+        app:tab_indicator_width="18dp"
+        app:tab_indicator_style="STYLE_BOTTOM"
+        app:tab_indicator_y_offset="10dp"
+        app:tab_orientation="HORIZONTAL"
+        app:tab_item_is_equ_width="true"
+        app:tab_select_color="@color/color_ui_main_text"
+        app:tab_text_max_size="16sp"
+        app:tab_text_min_size="15sp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="最新"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="最壕"
+            android:textSize="16sp" />
+
+    </com.angcyo.tablayout.DslTabLayout>
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

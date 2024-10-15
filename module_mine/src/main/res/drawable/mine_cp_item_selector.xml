@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <item android:state_selected="true" android:drawable="@mipmap/common_wallet_item_exchange_selector_selected">-->
+<!--    </item>-->
+
+    <item  android:state_selected="true">
+        <layer-list>
+            <item>
+                <shape>
+                   <solid android:color="#FF8B55FF" />
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+
+            <item android:top="@dimen/dp_2" android:bottom="@dimen/dp_2"
+                android:left="@dimen/dp_2" android:right="@dimen/dp_2">
+                >
+                <shape>
+                    <solid android:color="@color/white" />
+                    <corners android:radius="8dp"/>
+                </shape>
+            </item>
+
+        </layer-list>
+    </item>
+
+    <!-- Default state -->
+    <item  android:state_selected="false" android:drawable="@drawable/common_shape_gray_8">
+    </item>
+</selector>
+

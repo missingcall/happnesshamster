@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.kissspace.common.model.LoveWallListBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <View
+            android:id="@+id/view_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="75:42"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_avatar_left"
+            loadImage="@{m.sourceUserProfilePath}"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_marginEnd="@dimen/dp_37"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/iv_gift"
+            app:layout_constraintRight_toLeftOf="@id/iv_gift"
+            app:layout_constraintTop_toTopOf="@id/iv_gift" />
+
+        <TextView
+            android:id="@+id/iv_name_left"
+            app:layout_constraintTop_toBottomOf="@id/iv_avatar_left"
+            app:layout_constraintLeft_toLeftOf="@id/iv_avatar_left"
+            app:layout_constraintRight_toRightOf="@id/iv_avatar_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{m.sourceUserNickname}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:shadowColor="#40000000"
+            android:shadowRadius="3.0"
+            />
+
+        <TextView
+            android:id="@+id/iv_name_right"
+            app:layout_constraintTop_toBottomOf="@id/iv_avatar_right"
+            app:layout_constraintLeft_toLeftOf="@id/iv_avatar_right"
+            app:layout_constraintRight_toRightOf="@id/iv_avatar_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{m.targetUserNickname}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:shadowColor="#40000000"
+            android:shadowRadius="3.0"
+            />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginStart="@dimen/dp_37"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/white"
+            android:id="@+id/iv_avatar_right"
+            loadImage="@{m.targetUserProfilePath}"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            app:layout_constraintLeft_toRightOf="@id/iv_gift"
+            app:layout_constraintBottom_toBottomOf="@id/iv_gift"
+            app:layout_constraintTop_toTopOf="@id/iv_gift" />
+
+        <ImageView
+            android:id="@+id/iv_gift"
+            loadImage="@{m.url}"
+            android:layout_width="66dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="@dimen/dp_50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_user_info"
+            loveWallUserInfo="@{m}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="18dp"
+            android:lines="1"
+            android:textSize="14sp"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_avatar_left" />
+
+        <TextView
+            android:id="@+id/tv_gift_info"
+            loveWallGiftInfo="@{m}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:textSize="14sp"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_enter_wall" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{m.showTime}"
+            android:textColor="@color/color_A8A8B3"
+            android:textSize="10sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_gift_info" />
+
+
+        <TextView
+            android:id="@+id/tv_enter_wall"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:text="进入真爱墙"
+            android:textColor="#FF502901"
+            android:layout_marginBottom="22dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@mipmap/message_bg_gift_show_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

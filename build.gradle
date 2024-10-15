@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        google()
+        mavenCentral()
+        maven { url "https://www.jitpack.io" }
+        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url "https://kotlin.bintray.com/kotlinx" }
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
+        classpath "org.jetbrains.kotlin:kotlin-serialization:1.8.0"
+        classpath "io.github.didi:drouter-plugin-proxy:1.0.2"
+        classpath 'com.tencent.vasdolly:plugin:3.0.5'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+allprojects {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        google()
+        mavenCentral()
+        maven { url "https://www.jitpack.io" }
+        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url 'https://storage.zego.im/maven' }
+//
+//        maven flatDir {
+//            dirs project(':module_common').file('libs')
+//        }
+    }
+
+}
+tasks.register('clean', Delete) {
+    delete rootProject.buildDir
+}

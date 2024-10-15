@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+     <LinearLayout
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/layout_members"
+        app:bl_corners_radius="12dp"
+        app:bl_solid_color="@color/white30"
+        android:layout_width="wrap_content"
+         android:paddingStart="@dimen/dp_10"
+         android:paddingEnd="@dimen/dp_10"
+        android:layout_height="@dimen/dp_68"
+        android:orientation="horizontal"
+        android:gravity="center"/>
+
+        <com.kissspace.common.widget.EasyPagImageView
+            android:layout_gravity="center"
+            android:id="@+id/av_game"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+</layout>

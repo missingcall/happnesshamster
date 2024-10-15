@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.kissspace.login.viewmodel.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.kissspace.login.widget.FixedTextureVideoView
+            android:visibility="gone"
+            android:id="@+id/video_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!--        <VideoView-->
+        <!--            android:id = "@+id/video_view"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent" />-->
+
+        <!--        <com.kissspace.common.widget.AssertAnimView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:url="bg_login_with_one_key.mp4" />-->
+
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="202dp"
+            android:layout_height="284dp"
+            android:layout_marginTop="80dp"
+            android:src="@mipmap/login_icon_title"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="@dimen/dp_30"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:layout_marginBottom="30dp"
+            android:background="@mipmap/icon_login_sms"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/ll_agree"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_login_password"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/common_shape_sub_main_28"
+            android:drawablePadding="1dp"
+            android:gravity="center"
+            android:text="密码登录"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/tv_login"
+            app:layout_constraintLeft_toLeftOf="@id/iv_logo"
+            app:layout_constraintRight_toRightOf="@id/iv_logo"
+            app:layout_constraintStart_toStartOf="@id/tv_login"
+            app:layout_constraintTop_toBottomOf="@id/tv_login" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_agree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="45dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/tv_game_advice"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <CheckBox
+                android:id="@+id/cb_agree"
+                android:layout_width="24dp"
+                android:layout_height="29dp"
+                android:background="@android:color/transparent"
+                android:button="@null"
+                android:checked="@{vm.isAgree}"
+                android:drawableEnd="@drawable/login_user_protocol_selector" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我已阅读并同意"
+                android:textColor="@color/common_white"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_user_protocol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《用户协议》"
+                android:textColor="@color/color_5ACBFF"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_privacy_protocol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《隐私条款》"
+                android:textColor="@color/color_5ACBFF"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_game_advice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/privacy_game_advice"
+            android:textColor="@color/color_D0D0D0"
+            android:textSize="@dimen/sp_8"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

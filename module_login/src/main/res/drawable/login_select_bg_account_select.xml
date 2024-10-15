@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:drawable="@mipmap/login_bg_account_select">
+
+    </item>
+
+    <item android:state_selected="false"
+        >
+        <item android:width="343dp" android:height="60dp">
+            <shape android:shape="rectangle">
+                <solid android:color="#ffffffff" />
+                <corners android:topLeftRadius="8dp" android:topRightRadius="8dp" android:bottomLeftRadius="8dp" android:bottomRightRadius="8dp" />
+            </shape>
+        </item>
+    </item>
+</selector>

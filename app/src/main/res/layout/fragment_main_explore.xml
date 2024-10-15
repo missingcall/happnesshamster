@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.hamster.happyness.viewmodel.PartyViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hjq.bar.TitleBar
+            android:id="@+id/title_bar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            app:layout_constraintTop_toTopOf="@id/title_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginEnd="@dimen/dp_16"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.angcyo.tablayout.DslTabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingStart="8dp"
+                    android:layout_weight="1"
+                    app:tab_deselect_color="@color/common_white"
+                    app:tab_draw_indicator="true"
+                    app:tab_enable_text_bold="true"
+                    app:tab_indicator_drawable="@mipmap/icon_home_tablayout_indicator"
+                    app:tab_indicator_height="13dp"
+                    app:tab_indicator_style="STYLE_BOTTOM"
+                    app:tab_indicator_width="46dp"
+                    app:tab_orientation="HORIZONTAL"
+                    app:tab_select_color="@color/color_FFFD5C"
+                    app:tab_text_max_size="20sp"
+                    app:tab_text_min_size="16sp" />
+
+
+                <ImageView
+                    android:id="@+id/iv_explore_search"
+                    android:layout_marginEnd="8dp"
+                    android:src="@mipmap/app_ic_explore_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_achievement_rank"
+                    android:gravity="center|end"
+                    android:background="@mipmap/app_ic_achievement"
+                    android:layout_width="wrap_content"
+                    android:textSize="10sp"
+                    android:paddingEnd="6dp"
+                    android:textColor="@color/white"
+                    android:layout_height="wrap_content"  />
+
+            </LinearLayout>
+
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

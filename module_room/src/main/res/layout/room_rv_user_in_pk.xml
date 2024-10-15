@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.kissspace.common.model.TeamPKUserBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_top_num"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_avatar"
+            app:layout_constraintTop_toTopOf="@id/iv_user_avatar"
+            app:layout_constraintRight_toLeftOf="@id/iv_user_avatar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffffff"
+            android:textSize="15sp" />
+
+
+        <com.kissspace.common.widget.CircleImageView
+            android:id="@+id/iv_user_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            loadImage="@{m.profilePath}"
+            android:layout_marginStart="86.5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40" />
+
+        <TextView
+            android:layout_marginStart="@dimen/dp_12"
+            app:layout_constraintLeft_toRightOf="@id/iv_user_avatar"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_avatar"
+            app:layout_constraintTop_toTopOf="@id/iv_user_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{m.nickname}"
+            android:textColor="#ffffffff"
+            android:textSize="15sp" />
+
+        <TextView
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="@dimen/dp_92"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(m.boostValue)}"
+            android:textColor="#ffffffff"
+            android:textSize="15sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

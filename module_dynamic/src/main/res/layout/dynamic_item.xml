@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+          <variable
+              name="m"
+              type="com.kissspace.common.model.dynamic.DynamicInfoRecord" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp"
+        android:paddingBottom="12dp"
+        android:background="@drawable/common_shape_white_8">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/common_ic_default"
+            loadImage="@{m.profilePath}"/>
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/iv_avatar"
+            app:layout_constraintStart_toEndOf="@id/iv_avatar"
+            android:layout_marginStart="12dp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/color_ui_main_text"
+            android:text="@{m.nickname}"/>
+
+        <ImageView
+            android:id="@+id/iv_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            dynamicSex="@{m.sex}"
+            app:layout_constraintTop_toTopOf="@id/tv_nickname"
+            app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
+            app:layout_constraintStart_toEndOf="@id/tv_nickname"
+            android:layout_marginStart="6dp" />
+
+        <com.kissspace.common.widget.UserLevelIconView
+            android:id="@+id/lever1"
+            userLevelCount='@{m.consumeLevel}'
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@id/iv_sex"
+            app:layout_constraintTop_toTopOf="@id/iv_sex"
+            app:layout_constraintBottom_toBottomOf="@id/iv_sex"
+            app:level_type="TYPE_EXPEND" />
+
+        <com.kissspace.common.widget.UserLevelIconView
+            android:id="@+id/level2"
+            userLevelCount="@{m.charmLevel}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/lever1"
+            app:layout_constraintTop_toTopOf="@id/iv_sex"
+            app:layout_constraintBottom_toBottomOf="@id/iv_sex"
+            android:layout_marginStart="6dp"
+            app:level_type="TYPE_INCOME" />
+
+
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/color_ui_sub_text_light"
+            android:layout_marginTop="5dp"
+            android:text="@{m.friendlyTime}"
+            app:layout_constraintStart_toStartOf="@id/tv_nickname"
+            app:layout_constraintTop_toBottomOf="@id/tv_nickname"/>
+
+        <TextView
+            android:id="@+id/iv_follow"
+            dynamicFollow="@{m.followStatus}"
+            dynamicFollowVisible="@{m}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_avatar"
+            app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+            android:gravity="center"
+            android:background="@drawable/dynamic_bg_follow"
+            android:layout_width="54dp"
+            android:layout_height="28dp"
+            android:textColor="#ffffffff"
+            android:textSize="12sp"
+            />
+
+        <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@mipmap/ic_review"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_width="62.5dp"
+            android:layout_height="47dp"
+            android:visibility="gone"
+            isReviewVisible="@{m}"
+            />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/iv_avatar"
+            app:layout_constraintStart_toStartOf="@id/iv_avatar"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="8dp"
+            android:text="@{m.textDynamicContent}" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_voice"
+                goneIfByContent="@{m.voiceDynamicContent}"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_width="186dp"
+                android:layout_height="40dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:background="@drawable/common_shape_bg_gradient"
+                >
+
+                <ImageView
+                    playVoiceStatusChanged = "@{m.isPlayingVoice}"
+                    android:id="@+id/iv_voice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/common_audio_play_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <com.kissspace.common.widget.music.MusicSpectrumBar
+                    android:id="@+id/msb"
+                    app:layout_constraintLeft_toRightOf="@id/iv_voice"
+                    android:layout_marginStart="@dimen/dp_10"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/tv_duration"
+                    android:layout_marginRight="@dimen/dp_10"
+                    progressChanged = "@{m.currentDuration}"
+                    app:unSelectColor="@color/white50"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{m.speechDuration+"s"}'
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="16dp"
+                    android:paddingRight="20dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <ImageView
+                    app:layout_constraintBottom_toTopOf="@id/tv_duration"
+                    app:layout_constraintLeft_toRightOf="@id/tv_duration"
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/dynamic_ic_second"
+                    android:layout_height="wrap_content" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_picture"
+            goneIf="@{m.pictureDynamicContent.size()==0}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_voice"/>
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/layout_comment"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/recycler_picture"-->
+<!--            app:bl_corners_radius="6dp"-->
+<!--            android:padding="12dp"-->
+<!--            android:orientation="vertical"-->
+<!--            app:bl_solid_color="#1F000000"-->
+<!--            android:layout_marginTop="8dp">-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/recycler_comment"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_check_more"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="13sp"-->
+<!--                android:visibility="gone"-->
+<!--                android:textColor="#01BCFF"-->
+<!--                android:text="查看更多评论"/>-->
+<!--        </LinearLayout>-->
+
+        <TextView
+            android:id="@+id/tv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center_vertical"
+            android:drawablePadding="4dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            dynamicLikeStatus="@{m.likeStatus}"
+            dynamicLikeAmount="@{m.numberOfLikes}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_picture"/>
+
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:drawablePadding="4dp"
+            android:text='@{"评论 "+m.commentAmount}'
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/iv_avatar"
+            app:layout_constraintTop_toTopOf="@id/tv_like"
+            app:drawableStartCompat="@mipmap/dynamic_icon_comment_amount"
+            app:drawableTint="@color/white" />
+
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:gravity="center_vertical"
+            android:drawablePadding="4dp"
+            android:text='@{"分享 "+m.commentAmount}'
+            android:textColor="@color/color_ui_sub_text_light"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_comment"
+            app:layout_constraintTop_toTopOf="@id/tv_like"
+            app:drawableStartCompat="@mipmap/dynamic_icon_share_amount" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

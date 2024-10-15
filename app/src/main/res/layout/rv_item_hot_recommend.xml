@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+        <variable
+            name="m"
+            type="com.kissspace.common.model.RoomListBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="18dp"
+        android:id="@+id/layout"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_marginTop="@dimen/dp_12"
+        android:paddingEnd="@dimen/dp_18">
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_marginStart="25dp"
+            android:background="@mipmap/bg_explore_item"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="3.5dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_hot_item_user_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_hot_item_user_icon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            app:civ_border_width="2dp"
+            app:civ_border_color="#9146FF"
+            android:id="@+id/iv_hot_item_user_icon"
+            imageUrlDefault="@{m.roomIcon}"
+            imageRadius="@{10f}"
+            android:src="#9146FF"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_88" />
+
+        <TextView
+            app:layout_constraintRight_toRightOf="@id/view"
+            android:ellipsize="end"
+            android:id="@+id/iv_hot_item_user_desc"
+            android:layout_marginStart="@dimen/dp_14"
+            app:layout_constraintTop_toTopOf="@id/iv_hot_item_user_icon"
+            android:singleLine="true"
+            app:layout_constraintLeft_toRightOf="@id/iv_hot_item_user_icon"
+            android:layout_width="0dp"
+            android:layout_marginTop="8.5dp"
+            android:layout_height="wrap_content"
+            android:text="@{m.roomTitle}"
+            tools:text="[歌王大赛]今晚八点歌王花落谁家今晚八点歌王花落谁家"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="14sp" />
+
+        <ImageView
+            app:layout_constraintLeft_toLeftOf="@id/iv_hot_item_user_desc"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            loadImageNoPlace="@{m.roomTagUrl}"
+            android:scaleType="centerCrop"
+            tools:src="@mipmap/app_ic_hot_user_flag_male_god"
+            android:layout_height="19.5dp" />
+
+
+        <TextView
+            android:layout_marginEnd="@dimen/dp_12"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="26.5dp"
+            app:layout_constraintBottom_toBottomOf="@id/view"
+            android:drawableStart="@mipmap/app_ic_hot"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            roomHeat="@{m.chatRoomHeat}"
+            android:gravity="center"
+            tools:text="1.8w"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_marginBottom="@dimen/dp_17"
+            android:id="@id/layout_members"
+            app:layout_constraintLeft_toLeftOf="@id/iv_hot_item_user_desc"
+            app:layout_constraintBottom_toBottomOf="@id/iv_hot_item_user_icon"
+            roomListMicMembers="@{m}"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:gravity="center"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

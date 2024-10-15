@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <com.kissspace.common.widget.OutlineTextView
+        app:layout_constraintRight_toRightOf="@id/pb_fudai"
+        app:layout_constraintLeft_toLeftOf="@id/pb_fudai"
+        app:layout_constraintTop_toTopOf="parent"
+        app:inlineColor="#99D5ED"
+        app:outlineColor="@color/white"
+        android:id="@+id/tv_luck_coin"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/dp_8"
+        android:textSize="32sp"
+        android:text="x111"
+        android:layout_height="wrap_content" />
+
+
+
+    <ImageView
+
+        android:id="@+id/iv_luck_coin"
+        app:layout_constraintBottom_toBottomOf="@id/pb_fudai"
+        app:layout_constraintTop_toTopOf="@id/pb_fudai"
+        app:layout_constraintRight_toRightOf="@id/pb_fudai"
+        app:layout_constraintLeft_toLeftOf="@id/pb_fudai"
+        android:src="@mipmap/ic_fudai"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <com.kissspace.common.widget.CircularProgressView
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="@dimen/dp_15"
+        android:id="@+id/pb_fudai"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tv_luck_coin"
+        />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

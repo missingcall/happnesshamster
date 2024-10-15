@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.kissspace.room.game.bean.CharmValueBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingStart="@dimen/dp_18"
+        android:paddingEnd="@dimen/dp_18"
+        android:layout_height="68dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_charm_rank"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:text="5"
+            android:textColor="#ff121637"
+            android:textSize="14sp"
+            />
+        
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_charm_avatar"
+            android:layout_width="40dp"
+            app:civ_border_width="0.5dp"
+            app:civ_border_color="#FF705C99"
+            loadImageWithDefault="@{m.profilePath}"
+            android:layout_marginStart="@dimen/dp_12"
+            app:layout_constraintLeft_toRightOf="@id/tv_charm_rank"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="@dimen/dp_40" />
+
+        <TextView
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/iv_charm_avatar"
+            android:layout_width="84dp"
+            android:layout_height="18dp"
+            android:text="@{m.nickname}"
+            android:textColor="#ff121637"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{m.microphoneNumber}"
+            android:textColor="#FFFC22B8"
+            android:textSize="18sp"
+            />
+
+        <View
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="#33705C99"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

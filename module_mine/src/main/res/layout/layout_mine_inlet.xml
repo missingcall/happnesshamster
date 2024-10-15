@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    >
+
+    <ImageView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/iv_type_icon"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        app:layout_goneMarginStart="@dimen/dp_0"
+        android:layout_marginStart="16dp"
+        android:id="@+id/tv_type_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新人充值超实惠"
+        android:textColor="#ff121637"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/iv_type_icon"
+        />
+
+
+    <ImageView
+        android:id="@+id/iv_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tv_type_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_type_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

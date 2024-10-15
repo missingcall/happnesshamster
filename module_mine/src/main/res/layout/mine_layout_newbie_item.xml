@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.kissspace.common.model.NewBieBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="@dimen/dp_6"
+        android:layout_height="60dp"
+       >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_avatar"
+            loadImage="@{m.profilePath}"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layout_nickname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toTopOf="@+id/tv_id"
+            app:layout_constraintEnd_toStartOf="@id/iv_chat"
+            app:layout_constraintStart_toEndOf="@id/iv_avatar"
+            app:layout_constraintTop_toTopOf="@id/iv_avatar">
+
+<!--            <com.kissspace.common.widget.UserLevelIconView-->
+<!--                userLevelCount="@{m.consumeLevel}"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:level_type="TYPE_EXPEND" />-->
+
+<!--            <com.kissspace.common.widget.UserLevelIconView-->
+<!--                userLevelCount="@{m.charmLevel}"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="2dp"-->
+<!--                android:layout_marginRight="4dp"-->
+<!--                app:level_type="TYPE_INCOME" />-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{m.nickname}"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/color_ui_main_text"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text='@{"ID："+m.displayId}'
+            android:textColor="@color/color_ui_sub_text_middle"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/layout_nickname"
+            app:layout_constraintStart_toStartOf="@id/layout_nickname"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            style="@style/common_btn_sub_style"
+            android:id="@+id/iv_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:text="找他聊聊"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/color_ui_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_id" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

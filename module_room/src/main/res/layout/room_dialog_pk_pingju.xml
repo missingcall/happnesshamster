@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Unicorn_live">
+
+        <View
+            app:layout_constraintTop_toBottomOf="@id/iv_pk_victor_icon"
+            android:id="@+id/iv_pk_victor_bg"
+            android:background="@mipmap/ic_pk_result_pingju_bg"
+            app:layout_constraintDimensionRatio="297:197"
+            android:layout_marginTop="-52dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="@dimen/dp_297"
+            android:layout_height="0dp" />
+
+        <View
+            android:id="@+id/iv_pk_victor_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@mipmap/ic_pk_result_pingju"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="639:315"
+            android:layout_width="@dimen/dp_213"
+            android:layout_height="0dp" />
+
+        <TextView
+
+            android:id="@+id/tv_pk_flag"
+            android:layout_marginTop="@dimen/dp_28"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_pk_victor_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本轮PK平局"
+            android:textColor="#ffffffff"
+            android:textSize="20sp"
+            />
+
+
+
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_16"
+            android:id="@+id/tv_pk_victor_close"
+            android:gravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_pk_victor_bg"
+            android:background="@mipmap/ic_pk_close"
+            android:layout_width="@dimen/dp_108"
+            android:text="关闭(3s)"
+            android:textColor="#ffffffff"
+            android:textSize="16sp"
+            android:layout_height="@dimen/dp_39" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

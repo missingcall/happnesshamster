@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:leftHorizontalPadding="16dp"
+        android:visibility="gone"
+        app:leftIcon="@mipmap/common_icon_back_white"
+        app:lineVisible="false"
+        app:barStyle="transparent"
+        app:titleStyle="bold"
+        app:titleColor="@color/common_white"
+        app:titleSize="18sp" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>

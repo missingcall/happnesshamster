@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.kissspace.login.viewmodel.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.hjq.bar.TitleBar
+            style="@style/commonTopBar"
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/common_transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="手机号登录"
+            />
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_marginTop="38dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_bar"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="20dp"
+            android:text="短信验证码登录"
+            android:textStyle="bold"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="18sp"
+            app:drawableTopCompat="@mipmap/common_login_icon" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/title"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginTop="55dp"-->
+<!--            android:text="@string/login_please_input_phone_number"-->
+<!--            android:textColor="@color/color_ui_main_text"-->
+<!--            android:textSize="28sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/title_bar" />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_phone_number"
+            android:layout_width="match_parent"
+            app:bl_corners_radius="48dp"
+            app:bl_solid_color="@color/black75"
+            android:layout_marginTop="44dp"
+            android:layout_marginStart="30dp"
+            android:paddingStart="@dimen/dp_17"
+            android:paddingEnd="@dimen/dp_17"
+            android:layout_marginEnd="@dimen/dp_30"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            android:layout_height="48dp">
+
+            <ImageView
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:id="@+id/icon_phone"
+                phoneIconStatus="@{vm.phoneIconState}"
+                android:layout_width="15dp"
+                android:layout_height="21dp"
+                android:src="@mipmap/login_icon_phone_normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tint="@color/white" />
+
+            <com.kissspace.login.widget.XEditText
+                android:id="@+id/edit_phone_number"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="100dp"
+                android:maxLength="13"
+                android:background="@null"
+                android:hint="@string/login_please_input_phone_number"
+                android:inputType="number"
+                android:textColor="@color/color_ui_main_text"
+                android:textColorHint="@color/color_ui_sub_text_light"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/icon_phone"
+                />
+
+            <ImageView
+                android:id="@+id/iv_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/login_icon_clear"
+                app:layout_constraintBottom_toBottomOf="@id/icon_phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/icon_phone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/text_submit"
+            commonBtnState="@{vm.getCodeBtnState}"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="36dp"
+            android:gravity="center"
+            android:text="@string/login_get_sms_code"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="@id/layout_phone_number"
+            app:layout_constraintStart_toStartOf="@id/layout_phone_number"
+            app:layout_constraintTop_toBottomOf="@id/layout_phone_number" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

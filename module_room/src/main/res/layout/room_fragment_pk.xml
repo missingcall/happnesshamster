@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/layout_pk_room"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_width="match_parent"
+    app:layout_constraintDimensionRatio="375:184"
+    android:background="@mipmap/room_bg_pk_new"
+    android:layout_height="0dp" >
+
+    <View
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="1dp"
+        android:id="@+id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="wrap_content" />
+    
+    <com.kissspace.common.widget.CircleImageView
+        app:strokeWidth="1px"
+        android:id="@+id/iv_pk_room_left_icon"
+        app:strokeColor="@color/white"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintRight_toRightOf="@id/guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60" />
+
+    <TextView
+        android:id="@+id/iv_pk_room_left_name"
+        android:layout_marginTop="@dimen/dp_12"
+        app:layout_constraintRight_toRightOf="@id/iv_pk_room_left_icon"
+        app:layout_constraintLeft_toLeftOf="@id/iv_pk_room_left_icon"
+        app:layout_constraintTop_toBottomOf="@id/iv_pk_room_left_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="王晓梅1号"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        />
+
+    <com.kissspace.common.widget.CircleImageView
+        app:strokeWidth="1px"
+        android:id="@+id/iv_pk_room_right_icon"
+        app:strokeColor="@color/white"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_pk_room_left_icon"
+        app:layout_constraintLeft_toLeftOf="@id/guideline"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60" />
+
+    <TextView
+        android:id="@+id/iv_pk_room_right_name"
+        android:layout_marginTop="@dimen/dp_12"
+        app:layout_constraintRight_toRightOf="@id/iv_pk_room_right_icon"
+        app:layout_constraintLeft_toLeftOf="@id/iv_pk_room_right_icon"
+        app:layout_constraintTop_toBottomOf="@id/iv_pk_room_right_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="王晓梅1号"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/layout_pk_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:background="@mipmap/bg_pk_mic"
+            android:layout_weight="1"
+            android:id="@+id/rv_left_pk_mic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_weight="1"
+            android:id="@+id/rv_right_pk_mic"
+            android:background="@mipmap/bg_pk_mic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

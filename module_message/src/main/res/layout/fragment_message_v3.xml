@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+        <variable
+            name="m"
+            type="com.kissspace.common.model.LoveWallResponse" />
+
+        <variable
+            name="vm"
+            type="com.kissspace.message.viewmodel.MessageViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/llt_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/common_page_background"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/message_icon_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_clear_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="5dp"
+                android:src="@mipmap/message_icon_clean"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintTop_toBottomOf="@id/title_bar"
+            android:id="@+id/layout_notification"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/black50"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:padding="8dp"
+                android:src="@mipmap/message_icon_close"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/color_ui_main_text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/message_close_notification"
+                android:textColor="@color/color_ui_main_text"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_close"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_open_notification"
+                android:layout_width="77dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/common_shape_bg_gradient"
+                android:gravity="center"
+                android:text="@string/message_open_notification"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_title"-->
+<!--            android:id="@+id/rv_list"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content" />-->
+
+        <com.youth.banner.Banner
+            app:layout_constraintDimensionRatio="75:42"
+            bindMessageBanner="@{m}"
+            app:layout_constraintTop_toBottomOf="@id/layout_notification"
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:layout_marginTop="12dp"
+            />
+
+        <com.drake.statelayout.StateLayout
+            android:id="@+id/stateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            app:empty_layout="@layout/message_layout_empty"
+            app:layout_goneMarginTop="@dimen/dp_12"
+            app:layout_constraintTop_toBottomOf="@id/banner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                android:id="@+id/page_refresh_layout"
+                android:layout_width="match_parent"
+                app:empty_layout="@layout/message_layout_empty"
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never" />
+            </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+        </com.drake.statelayout.StateLayout>
+
+
+        <include
+            android:id="@+id/layout_empty"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"
+            layout="@layout/message_layout_empty" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
