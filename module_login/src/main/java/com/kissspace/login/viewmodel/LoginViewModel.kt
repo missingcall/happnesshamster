@@ -73,6 +73,15 @@ class LoginViewModel : BaseViewModel() {
         request(CommonApi.API_USER_LIST_BY_PHONE, Method.POST,param = params,state = _accouts)
     }
 
+    fun requestUserListByPhoneCheck(phoneNumber: String){
+        val params = mutableMapOf<String,Any?>()
+        params["phone"] = phoneNumber
+        params["machineCode"] = DeviceUtils.getUniqueDeviceId()
+        params["switchAccounts"] = false
+        params["accessFlags"] = 0
+        request(CommonApi.API_CHECK_USER_LIST_BY_PHONE, Method.POST,param = params,state = _accouts)
+    }
+
     fun requestUserListByUMeng(umToken: String){
         val params = mutableMapOf<String,Any?>()
         params["token"] = umToken
@@ -81,13 +90,15 @@ class LoginViewModel : BaseViewModel() {
         request(LoginApi.API_USER_LIST_UMENG, Method.POST,param = params,state = _accouts)
     }
 
-    fun createAccount(phone:String , inviteCode:String){
+    fun createAccount(phone:String , inviteCode:String, smsCode:String ){
         val params = mutableMapOf<String,Any?>()
         params["phone"] = phone
         params["machineCode"] = DeviceUtils.getUniqueDeviceId()
         params["accessFlags"] = 0
         params["appleId"] = ""
         params["inviteCode"] = inviteCode
+        params["smsCode"] = smsCode
+        params["password"] = "12345678"
         request(CommonApi.API_USER_ACCOUNT_CREATE, Method.POST,param = params,state = _createaccouts)
     }
 

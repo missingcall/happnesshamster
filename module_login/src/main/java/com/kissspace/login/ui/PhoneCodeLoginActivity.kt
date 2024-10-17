@@ -7,6 +7,7 @@ import android.text.Editable
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.didi.drouter.annotation.Router
@@ -25,6 +26,7 @@ import com.kissspace.module_login.R
 import com.kissspace.module_login.databinding.LoginActivityPhoneCodeLoginBinding
 import com.kissspace.network.result.collectData
 import com.kissspace.util.addAfterTextChanged
+import com.kissspace.util.logD
 import com.kissspace.util.toJson
 import com.luck.picture.lib.permissions.PermissionUtil
 import com.permissionx.guolindev.PermissionX
@@ -125,37 +127,38 @@ class PhoneCodeLoginActivity : BaseActivity(R.layout.login_activity_phone_code_l
 
         collectData(mViewModel.accounts, onSuccess = {
             hideLoading()
-            if (it.size == 1) {
-                val userAccountBean = it[0]
-                mViewModel.loginByUserId(
-                    userAccountBean.userId,
-                    userAccountBean.tokenHead,
-                    userAccountBean.token
-                )
-            } else if (it.isEmpty()) {
-                //填写邀请码
-                jump(
-                    RouterPath.PATH_INPUT_INVITE_CODE,
-                    "accounts" to toJson(it),
-                    "phone" to mBinding.xetPhone.text.toString().trim().replace(" ", "")
-                )
-            } else {
-                //如果有多个账号,直接登录第一个,不需要选择
-                /*jump(
-                    RouterPath.PATH_CHOOSE_ACCOUNT,
-                    "accounts" to toJson(it),
-                    "phone" to mBinding.xetPhone.text.toString().trim().replace(" ", "")
-                )*/
 
-                val userAccountBean = it[0]
-                mViewModel.loginByUserId(
-                    userAccountBean.userId,
-                    userAccountBean.tokenHead,
-                    userAccountBean.token
-                )
+            when (it.size) {
+                1 -> {
+                    val userAccountBean = it[0]
+                    mViewModel.loginByUserId(
+                        userAccountBean.userId,
+                        userAccountBean.tokenHead,
+                        userAccountBean.token
+                    )
+                }
+
+                else -> {
+                    val userAccountBean = it[0]
+                    mViewModel.loginByUserId(
+                        userAccountBean.userId,
+                        userAccountBean.tokenHead,
+                        userAccountBean.token
+                    )
+                }
             }
         }, onError = {
             hideLoading()
+        }, onEmpty = {
+            hideLoading()
+            //填写邀请码
+            jump(
+                RouterPath.PATH_INPUT_INVITE_CODE,
+
+                "phone" to mBinding.xetPhone.text.toString().trim().replace(" ", ""),
+                "smsCode" to mBinding.xetVerify.text.toString().trim().replace(" ", "")
+            )
+
         })
     }
 

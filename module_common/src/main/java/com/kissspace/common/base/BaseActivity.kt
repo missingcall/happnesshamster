@@ -44,7 +44,7 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         onBackPressedDispatcher.addCallback(onBackCallBack)
-        setStatusBarColor(Color.TRANSPARENT, true)
+        setStatusBarColor(Color.TRANSPARENT, false)
         initView(savedInstanceState)
         createDataObserver()
     }

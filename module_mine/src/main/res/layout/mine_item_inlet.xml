@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:id="@+id/tv_inlet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawableTop="@mipmap/mine_ic_account_task"
+    android:text="任务中心"
+    android:padding="8dp"
+    android:textColor="@color/color_ui_sub_text"
+    android:textSize="10sp"/>

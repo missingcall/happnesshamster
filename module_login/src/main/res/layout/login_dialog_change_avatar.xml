@@ -7,7 +7,7 @@
     android:orientation="vertical"
     app:bl_corners_topRadius="12dp"
     android:paddingBottom="10dp"
-    app:bl_solid_color="@color/color_372648">
+    app:bl_solid_color="@color/color_161616">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

@@ -32,12 +32,13 @@ import com.kissspace.util.toast
  *@Description: 选择账号
  */
 @Router(path = RouterPath.PATH_INPUT_INVITE_CODE)
-class InviteCodeActivity : com.kissspace.common.base.BaseActivity(R.layout.login_activity_invite_code) {
+class InviteCodeActivity :
+    com.kissspace.common.base.BaseActivity(R.layout.login_activity_invite_code) {
 
     private val mBinding by viewBinding<LoginActivityInviteCodeBinding>()
     private val mViewModel by viewModels<LoginViewModel>()
-    var accounts by parseIntent<String>()
     var phone by parseIntent<String>()
+    var smsCode by parseIntent<String>()
     private var mChooseUserId = ""
     private var mTokenHead = ""
     private var mToken = ""
@@ -60,7 +61,7 @@ class InviteCodeActivity : com.kissspace.common.base.BaseActivity(R.layout.login
         super.createDataObserver()
         collectData(mViewModel.token, onSuccess = {
             hideLoading()
-            mViewModel.loginIm(it,onSuccess = {
+            mViewModel.loginIm(it, onSuccess = {
                 finish()
             })
         }, onError = {
@@ -69,7 +70,7 @@ class InviteCodeActivity : com.kissspace.common.base.BaseActivity(R.layout.login
         })
 
         collectData(mViewModel.createAccounts, onSuccess = {
-            mViewModel.loginByUserId(it.userId,mTokenHead,mToken)
+            mViewModel.loginByUserId(it.userId, mTokenHead, mToken)
         }, onError = {
             hideLoading()
             toast("创建账号失败,请稍后重试")
@@ -78,7 +79,11 @@ class InviteCodeActivity : com.kissspace.common.base.BaseActivity(R.layout.login
 
     private fun createAccount() {
         showLoading("正在注册")
-        mViewModel.createAccount(phone , mBinding.xetInviteCode.text.toString().trim())
+        mViewModel.createAccount(
+            phone,
+            mBinding.xetInviteCode.text.toString().trim(),
+            smsCode
+        )
     }
 
 }

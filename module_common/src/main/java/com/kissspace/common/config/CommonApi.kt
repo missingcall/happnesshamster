@@ -40,14 +40,17 @@ object CommonApi {
     //发送验证码
     const val API_SendSms = "/hamster-user/sms/sendCode"
 
-    //根据手机号获取用户账号信息列表
-    val API_USER_LIST_BY_PHONE = "/hamster-user/user/queryUserListByPhone"
+    //根据手机号获取用户账号信息列表(如果为空自动创建)
+    const val API_USER_LIST_BY_PHONE = "/hamster-user/user/queryUserListByPhone"
+
+    //根据手机号获取用户账号信息列表(不执行创建,只查询)
+    const val API_CHECK_USER_LIST_BY_PHONE = "/hamster-user/user/checkUserListByPhone"
 
     //创建账号
-    val API_USER_ACCOUNT_CREATE = "/hamster-user/user/accountCreate"
+    const val API_USER_ACCOUNT_CREATE = "/hamster-user/user/accountCreate"
 
     //根据用户id登录
-    val API_LOGIN_BY_USERID = "/hamster-user/user/loginByUserId"
+    const val API_LOGIN_BY_USERID = "/hamster-user/user/loginByUserId"
 
     //我的收藏
     const val API_QUERY_MY_COLLECT = "/hamster-user/userCollect/queryUserCollect"

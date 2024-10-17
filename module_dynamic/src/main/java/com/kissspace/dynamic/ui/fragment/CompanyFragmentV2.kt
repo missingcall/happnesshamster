@@ -3,7 +3,6 @@ package com.kissspace.dynamic.ui.fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Gravity
-import android.widget.CheckedTextView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -14,21 +13,12 @@ import com.angcyo.tablayout.DslTabLayout
 import com.angcyo.tablayout.delegate2.ViewPager2Delegate
 import com.blankj.utilcode.util.SizeUtils
 import com.kissspace.common.base.BaseFragment
-import com.kissspace.common.config.Constants
-import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setMarginStatusBar
-import com.kissspace.common.model.RoomTagListBean
-import com.kissspace.common.router.RouterPath
-import com.kissspace.common.router.jump
 import com.kissspace.common.util.areCollectionsDifferent
-import com.kissspace.common.util.getH5Url
 import com.kissspace.module_dynamic.R
-import com.kissspace.module_dynamic.databinding.DynamicFragmentMainV2Binding
 import com.kissspace.module_dynamic.databinding.DynamicFragmentMainV3Binding
-import com.kissspace.util.resToColor
-import com.qmuiteam.qmui.kotlin.onClick
 
-class DynamicFragmentV2:BaseFragment(R.layout.dynamic_fragment_main_v3) {
+class CompanyFragmentV2:BaseFragment(R.layout.dynamic_fragment_main_v3) {
     private val mBinding by viewBinding<DynamicFragmentMainV3Binding>()
     private val mTabList = mutableListOf<String>()
     override fun initView(savedInstanceState: Bundle?) {
@@ -41,7 +31,7 @@ class DynamicFragmentV2:BaseFragment(R.layout.dynamic_fragment_main_v3) {
         mBinding.viewPager.apply {
             offscreenPageLimit = 2
             isUserInputEnabled = false
-            adapter = object : FragmentStateAdapter(this@DynamicFragmentV2) {
+            adapter = object : FragmentStateAdapter(this@CompanyFragmentV2) {
                 override fun getItemCount(): Int = 3
                 override fun createFragment(position: Int): Fragment = DynamicListFragment(position)
                 override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {

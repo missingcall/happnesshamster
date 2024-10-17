@@ -15,10 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.blankj.utilcode.util.GsonUtils
 import com.didi.drouter.annotation.Router
 import com.hamster.happyness.databinding.ActivityMainV2Binding
-import com.kissspace.dynamic.ui.fragment.DynamicFragmentV2
+import com.kissspace.dynamic.ui.fragment.CompanyFragmentV2
 import com.kissspace.util.finishAllActivities
 import com.kissspace.util.toast
 import com.netease.nimlib.sdk.NIMClient
@@ -29,7 +28,7 @@ import com.netease.nimlib.sdk.msg.MsgService
 import com.petterp.floatingx.assist.FxGravity
 import com.petterp.floatingx.assist.helper.ScopeHelper
 import com.hamster.happyness.R
-import com.hamster.happyness.ui.fragment.ExploreFragment
+import com.hamster.happyness.ui.fragment.HomeFragmentV2
 import com.hamster.happyness.ui.fragment.PartyV2Fragment
 import com.hamster.happyness.viewmodel.MainViewModel
 import com.hamster.happyness.widget.UpgradeDialog
@@ -39,7 +38,6 @@ import com.kissspace.common.config.Constants
 import com.kissspace.common.router.jump
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
-import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.flowbus.FlowBus.observerEvent
 import com.kissspace.common.http.getAppConfigByKey
 import com.kissspace.common.router.RouterPath
@@ -50,14 +48,12 @@ import com.kissspace.message.ui.fragment.MessageFragmentV3
 import com.kissspace.mine.ui.fragment.MineFragment
 import com.kissspace.network.result.collectData
 import com.kissspace.common.http.getUserInfo
-import com.kissspace.common.model.config.RoomGameConfig
 import com.kissspace.room.manager.RoomServiceManager
 import com.kissspace.util.YYYY_MM_DD
 import com.kissspace.util.apkAbsolutePath
 import com.kissspace.util.appVersionCode
 import com.kissspace.util.deleteDir
 import com.kissspace.util.immersiveStatusBar
-import com.kissspace.util.loadImageCircle
 import com.kissspace.util.loadImageWithDefault
 import com.kissspace.util.logE
 import com.kissspace.util.millis2String
@@ -212,7 +208,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
 
     private fun initViewPager() {
         val fragments =
-            arrayOf(ExploreFragment(),DynamicFragmentV2(), PartyV2Fragment(), MessageFragmentV3(), MineFragment())
+            arrayOf(HomeFragmentV2(),CompanyFragmentV2(), PartyV2Fragment(), MessageFragmentV3(), MineFragment())
         mBinding.viewPager.apply {
             offscreenPageLimit = fragments.size
             isUserInputEnabled = false

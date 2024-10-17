@@ -104,4 +104,10 @@
     <string name="mine_level_income_tips">魅力等级：每收到1金币消费获得1魅力值</string>
     <string name="mine_verify">审核中</string>
     <string name="mine_buy_way">请选择购买方式</string>
+
+
+
+    <string name="receive">领取</string>
+
+
 </resources>

@@ -18,6 +18,12 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name="com.kissspace.login.ui.InviteCodeActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.kissspace.login.ui.PhoneCodeLoginActivity"
             android:exported="true"
             android:launchMode="singleTask"

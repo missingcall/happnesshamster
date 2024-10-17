@@ -2,13 +2,11 @@
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -16,7 +14,6 @@ import com.angcyo.tablayout.DslTabLayout
 import com.angcyo.tablayout.delegate2.ViewPager2Delegate
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.SizeUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.drake.net.utils.scopeLife
 import com.hamster.happyness.R
 import com.hamster.happyness.databinding.FragmentMainExploreBinding
@@ -32,7 +29,7 @@ import com.kissspace.common.util.areCollectionsDifferent
 import com.kissspace.common.util.getH5Url
 
 //探索
-class ExploreFragment : BaseFragment(R.layout.fragment_main_explore) {
+class HomeFragmentV2 : BaseFragment(R.layout.fragment_main_explore) {
 
     private val mBinding by viewBinding<FragmentMainExploreBinding>()
     private val mViewModel by viewModels<ExploreViewModel>()
@@ -70,7 +67,7 @@ class ExploreFragment : BaseFragment(R.layout.fragment_main_explore) {
 
     private fun initViewPager() {
         mBinding.viewPager.apply {
-            adapter = object : FragmentStateAdapter(this@ExploreFragment) {
+            adapter = object : FragmentStateAdapter(this@HomeFragmentV2) {
                 override fun getItemCount(): Int = mTabList.size
                 override fun createFragment(position: Int): Fragment = ExplorePageListFragment.newInstance(position, "")
 
