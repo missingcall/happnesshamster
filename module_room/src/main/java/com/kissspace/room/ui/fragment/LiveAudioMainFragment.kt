@@ -710,7 +710,7 @@ class LiveAudioMainFragment : BaseLiveFragment(R.layout.room_fragment_audio_main
                 PermissionX.init(this).permissions(mutableListOf( Manifest.permission.RECORD_AUDIO, Manifest.permission.READ_PHONE_STATE))
                     .onExplainRequestReason { scope, deniedList ->
                         val message =
-                            "为了您能正常体验【房间语音聊天】功能，趣玩需向你申请麦克风权限和电话权限"
+                            "为了您能正常体验【房间语音聊天】功能，需向你申请麦克风权限和电话权限"
                         scope.showRequestReasonDialog(deniedList, message, "确定", "取消")
                     }.explainReasonBeforeRequest()
 

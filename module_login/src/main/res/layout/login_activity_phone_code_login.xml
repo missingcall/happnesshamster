@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="vm"
             type="com.kissspace.login.viewmodel.LoginViewModel" />
@@ -14,110 +15,158 @@
         android:orientation="vertical">
 
         <com.hjq.bar.TitleBar
-            style="@style/commonTopBar"
             android:id="@+id/title_bar"
+            style="@style/commonTopBar"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="@color/common_transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="手机号登录"
-            />
+            app:title="手机号登录" />
 
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_marginTop="38dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_bar"
-            app:layout_constraintRight_toRightOf="parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_sign_up_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="20dp"
-            android:text="短信验证码登录"
-            android:textStyle="bold"
-            android:textColor="@color/color_ui_main_text"
-            android:textSize="18sp"
-            app:drawableTopCompat="@mipmap/common_login_icon" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/title"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="32dp"-->
-<!--            android:layout_marginTop="55dp"-->
-<!--            android:text="@string/login_please_input_phone_number"-->
-<!--            android:textColor="@color/color_ui_main_text"-->
-<!--            android:textSize="28sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/title_bar" />-->
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_phone_number"
+        <LinearLayout
+            android:id="@+id/ll_phone"
             android:layout_width="match_parent"
-            app:bl_corners_radius="48dp"
-            app:bl_solid_color="@color/black75"
-            android:layout_marginTop="44dp"
-            android:layout_marginStart="30dp"
-            android:paddingStart="@dimen/dp_17"
-            android:paddingEnd="@dimen/dp_17"
-            android:layout_marginEnd="@dimen/dp_30"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            android:layout_height="48dp">
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_15"
+            android:background="@drawable/common_bg_black23_radius15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_bar">
 
-            <ImageView
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:id="@+id/icon_phone"
-                phoneIconStatus="@{vm.phoneIconState}"
-                android:layout_width="15dp"
-                android:layout_height="21dp"
-                android:src="@mipmap/login_icon_phone_normal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:tint="@color/white" />
-
-            <com.kissspace.login.widget.XEditText
-                android:id="@+id/edit_phone_number"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="100dp"
-                android:maxLength="13"
-                android:background="@null"
-                android:hint="@string/login_please_input_phone_number"
-                android:inputType="number"
-                android:textColor="@color/color_ui_main_text"
-                android:textColorHint="@color/color_ui_sub_text_light"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/icon_phone"
-                />
-
-            <ImageView
-                android:id="@+id/iv_clear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/login_icon_clear"
-                app:layout_constraintBottom_toBottomOf="@id/icon_phone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/icon_phone" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/text_submit"
-            commonBtnState="@{vm.getCodeBtnState}"
+            android:id="@+id/tv_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:text="@string/login_phone_number"
+            android:textColor="@color/color_5A60FF"
+            android:textSize="@dimen/sp_17"
+            app:layout_constraintBottom_toBottomOf="@id/ll_phone"
+            app:layout_constraintLeft_toLeftOf="@id/ll_phone"
+            app:layout_constraintTop_toTopOf="@id/ll_phone" />
+
+        <com.kissspace.login.widget.XEditText
+            android:id="@+id/xet_phone"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="36dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@null"
+            android:gravity="center|left"
+            android:hint="@string/login_input_mobile"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="13"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/color_ui_main_text"
+            android:textColorHint="@color/color_66FFFFFF"
+            android:textSize="@dimen/sp_15"
+            app:layout_constraintBottom_toBottomOf="@id/ll_phone"
+            app:layout_constraintLeft_toRightOf="@id/tv_phone_number"
+            app:layout_constraintRight_toRightOf="@id/ll_phone"
+            app:layout_constraintTop_toTopOf="@id/ll_phone" />
+
+        <ImageView
+            android:id="@+id/iv_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/login_icon_clear"
+            app:layout_constraintBottom_toBottomOf="@id/tv_phone_number"
+            app:layout_constraintEnd_toEndOf="@id/xet_phone"
+            app:layout_constraintTop_toTopOf="@id/tv_phone_number" />
+
+        <LinearLayout
+            android:id="@+id/ll_verify"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/common_bg_black23_radius15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="@id/ll_phone"
+            app:layout_constraintRight_toRightOf="@id/guideline_sign_up_2"
+            app:layout_constraintTop_toBottomOf="@id/ll_phone">
+
+
+        </LinearLayout>
+
+        <com.kissspace.login.widget.XEditText
+            android:id="@+id/xet_verify"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:gravity="center|left"
+            android:hint="@string/login_input_verify"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="6"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/common_white"
+            android:textColorHint="@color/color_66FFFFFF"
+            android:textSize="@dimen/sp_15"
+            app:layout_constraintBottom_toBottomOf="@id/ll_verify"
+            app:layout_constraintLeft_toLeftOf="@id/tv_phone_number"
+            app:layout_constraintTop_toTopOf="@id/ll_verify" />
+
+
+        <!--
+        Button
+        android:textColor="@drawable/common_text_color_selector_white"
+        android:background="@drawable/common_btn_selectror_blue_radius15"
+        -->
+        <TextView
+            android:id="@+id/tv_verify"
+            commonBtnStateBlack="@{vm.getCodeBtnState}"
+            android:enabled="@{vm.sendSmsEnable}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:gravity="center"
-            android:text="@string/login_get_sms_code"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="@id/layout_phone_number"
-            app:layout_constraintStart_toStartOf="@id/layout_phone_number"
-            app:layout_constraintTop_toBottomOf="@id/layout_phone_number" />
+            android:text="@string/login_receive_identity_code"
+            android:textSize="@dimen/sp_17"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ll_verify"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_sign_up_2"
+            app:layout_constraintRight_toRightOf="@id/ll_phone"
+            app:layout_constraintTop_toTopOf="@id/ll_verify" />
+
+
+        <!--
+            android:background="@drawable/common_btn_selector_blue_radius15"
+            android:textColor="@drawable/common_text_color_selector_white"
+        -->
+        <TextView
+            android:id="@+id/tv_login"
+            commonBtnStateBlue="@{vm.btnEnable}"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_50"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_40"
+            android:gravity="center"
+            android:text="@string/login_sign_in_now"
+            android:textSize="@dimen/sp_17"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/ll_phone"
+            app:layout_constraintRight_toRightOf="@id/ll_phone"
+            app:layout_constraintTop_toBottomOf="@id/ll_verify" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:barStyle="transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:leftHorizontalPadding="16dp"
+        app:leftIcon="@mipmap/common_icon_back_white"
+        app:lineVisible="false"
+        app:title="账号注册" />
+
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="@string/login_invite_code_hint"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_bar" />
+
+    <LinearLayout
+        android:id="@+id/ll_invite_code"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_15"
+        android:background="@drawable/common_bg_black23_radius15"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_app_name">
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_invite_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:text="@string/login_invite_code"
+        android:textColor="@color/color_5A60FF"
+        android:textSize="@dimen/sp_17"
+        app:layout_constraintBottom_toBottomOf="@id/ll_invite_code"
+        app:layout_constraintLeft_toLeftOf="@id/ll_invite_code"
+        app:layout_constraintTop_toTopOf="@id/ll_invite_code" />
+
+    <com.kissspace.login.widget.XEditText
+        android:id="@+id/xet_invite_code"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_20"
+        android:background="@null"
+        android:gravity="center|left"
+        android:hint="@string/login_input_invite_code"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="11"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/common_white"
+        android:textColorHint="@color/color_66FFFFFF"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintBottom_toBottomOf="@id/ll_invite_code"
+        app:layout_constraintLeft_toRightOf="@id/tv_invite_code"
+        app:layout_constraintRight_toRightOf="@id/ll_invite_code"
+        app:layout_constraintTop_toTopOf="@id/ll_invite_code" />
+
+
+    <TextView
+        android:id="@+id/tv_sign_up"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_50"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@drawable/common_btn_selector_blue_radius15"
+        android:gravity="center"
+        android:text="@string/login_sign_up_now"
+        android:textColor="@drawable/common_text_color_selector_white"
+        android:textSize="@dimen/sp_17"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/ll_invite_code"
+        app:layout_constraintRight_toRightOf="@id/ll_invite_code"
+        app:layout_constraintTop_toBottomOf="@id/ll_invite_code" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

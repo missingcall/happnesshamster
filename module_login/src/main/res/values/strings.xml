@@ -12,7 +12,7 @@
     <string name="login_edit_profile_title">完善个人信息</string>
     <string name="login_nickname">昵称</string>
     <string name="login_sex">性别</string>
-    <string name="login_sex_tips">只有一次选择性别的机会，要想清楚呀</string>
+    <string name="login_sex_tips">温馨提示：性别选择将无法更改</string>
     <string name="login_sex_male">男生</string>
     <string name="login_sex_female">女生</string>
     <string name="login_btn_submit_profile">开启神秘之旅</string>
@@ -30,4 +30,17 @@
     <string name="opt_privacy">隐私协议</string>
 
     <string name="privacy_game_advice">抵制不良游戏，拒绝盗版游戏。 注意自我保护，谨防受骗上当。\n 适度游戏益脑，沉迷游戏伤身。 合理安排时间，享受健康生活。</string>
+    <string name="login_phone_number">手机号</string>
+    <string name="login_input_mobile">请输入手机号</string>
+    <string name="login_input_verify">请输入验证码</string>
+    <string name="login_input_nickname">请输入昵称</string>
+    <string name="login_receive_identity_code">获取验证码</string>
+    <string name="login_sign_in_now">立即登录</string>
+    <string name="login_invite_code_hint">为了提高账号安全，请输入邀请码</string>
+    <string name="login_invite_code">邀请码</string>
+    <string name="login_input_invite_code">请输入邀请码</string>
+    <string name="login_sign_up_now">立即注册</string>
+
+
+
 </resources>

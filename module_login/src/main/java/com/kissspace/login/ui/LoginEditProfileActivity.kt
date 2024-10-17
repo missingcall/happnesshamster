@@ -82,7 +82,7 @@ class LoginEditProfileActivity : BaseActivity(R.layout.login_activity_edit_profi
             }
         }
 
-        mBinding.tvChoosePicture.setOnClickListener {
+        mBinding.civChoosePic.setOnClickListener {
             val dialog = ChangeAvatarDialog()
             dialog.setCallBack { index, url ->
                 if (url != null) {
@@ -126,7 +126,7 @@ class LoginEditProfileActivity : BaseActivity(R.layout.login_activity_edit_profi
                 if (!isClickThisArea(it, ev)) { //判断用户点击的是否是输入框以外的区域
                     hideKeyboard()//收起键盘
                 } else {
-                    mBinding.editNickname.isCursorVisible = true // 再次点击显示光标  编辑框获取触摸监听
+                    mBinding.etNickname.isCursorVisible = true // 再次点击显示光标  编辑框获取触摸监听
                 }
             }
         }

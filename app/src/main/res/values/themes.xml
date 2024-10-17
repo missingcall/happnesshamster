@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Unicorn_soul" parent="@style/QMUI.Compat.NoActionBar">
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-        <item name="android:windowBackground">@mipmap/common_page_background</item>
+        <item name="android:windowBackground">@color/black</item>
     </style>
 
 

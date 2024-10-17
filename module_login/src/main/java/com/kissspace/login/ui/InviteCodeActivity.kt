@@ -21,6 +21,7 @@ import com.kissspace.common.router.parseIntent
 import com.kissspace.login.viewmodel.LoginViewModel
 import com.kissspace.module_login.R
 import com.kissspace.module_login.databinding.LoginActivityChooseAccoutBinding
+import com.kissspace.module_login.databinding.LoginActivityInviteCodeBinding
 import com.kissspace.network.result.collectData
 import com.kissspace.util.fromJson
 import com.kissspace.util.toast
@@ -30,10 +31,10 @@ import com.kissspace.util.toast
  *@date: 2023/4/6
  *@Description: 选择账号
  */
-@Router(path = RouterPath.PATH_CHOOSE_ACCOUNT)
-class ChooseAccountActivity : com.kissspace.common.base.BaseActivity(R.layout.login_activity_choose_accout) {
+@Router(path = RouterPath.PATH_INPUT_INVITE_CODE)
+class InviteCodeActivity : com.kissspace.common.base.BaseActivity(R.layout.login_activity_invite_code) {
 
-    private val mBinding by viewBinding<LoginActivityChooseAccoutBinding>()
+    private val mBinding by viewBinding<LoginActivityInviteCodeBinding>()
     private val mViewModel by viewModels<LoginViewModel>()
     var accounts by parseIntent<String>()
     var phone by parseIntent<String>()
@@ -47,53 +48,13 @@ class ChooseAccountActivity : com.kissspace.common.base.BaseActivity(R.layout.lo
             override fun onLeftClick(titleBar: TitleBar?) {
                 finish()
             }
-
-            override fun onRightClick(titleBar: TitleBar?) {
-               createAccount()
-            }
         })
-        mBinding.tvEnter.safeClick {
-            showLoading("正在登录")
-            mViewModel.loginByUserId(mChooseUserId,mTokenHead,mToken)
+        mBinding.tvSignUp.safeClick {
+            createAccount()
         }
-        initRecyclerView()
-        initData()
+
     }
 
-    private fun initData() {
-        if (accounts.isNotEmpty()){
-            val accountBeanList = fromJson<List<UserAccountBean>>(accounts)
-            if (accountBeanList.size > 9){
-                mBinding.titleBar.rightView.visibility = View.GONE
-            }
-            mBinding.recycler.bindingAdapter.addModels(accountBeanList)
-            mBinding.recycler.bindingAdapter.setChecked(0,true)
-            val userAccountBean = accountBeanList[0]
-            mTokenHead = if (userAccountBean.tokenHead != null) userAccountBean.tokenHead!! else ""
-            mToken = if (userAccountBean.token != null) userAccountBean.token!! else ""
-        }
-    }
-
-    private fun initRecyclerView() {
-        mBinding.recycler.linear().divider(com.kissspace.module_common.R.drawable.common_user_account_divider_item).setup {
-            addType<UserAccountBean> {
-                R.layout.login_choose_account_list_recycler_item
-            }
-            onClick(R.id.root){
-                val checked = getModel<UserAccountBean>().checked
-                if (!checked){
-                    setChecked(adapterPosition, !checked)
-                }
-            }
-            onChecked { position, isChecked, _ ->
-                val model = getModel<UserAccountBean>(position)
-                model.checked = isChecked
-                model.notifyChange()
-                mChooseUserId = model.userId
-            }
-            singleMode = true
-        }.models = mutableListOf()
-    }
 
     override fun createDataObserver() {
         super.createDataObserver()
@@ -116,8 +77,8 @@ class ChooseAccountActivity : com.kissspace.common.base.BaseActivity(R.layout.lo
     }
 
     private fun createAccount() {
-        showLoading()
-        mViewModel.createAccount(phone , "")
+        showLoading("正在注册")
+        mViewModel.createAccount(phone , mBinding.xetInviteCode.text.toString().trim())
     }
 
 }

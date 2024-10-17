@@ -32,6 +32,9 @@ object RouterPath {
     //输入验证码
     const val PATH_INPUT_SMS_CODE = PATH_BASE + "login/input_sms_code"
 
+    //输入邀请码
+    const val PATH_INPUT_INVITE_CODE = PATH_BASE + "login/input_inviteCode"
+
     //选择账号
     const val PATH_CHOOSE_ACCOUNT = PATH_BASE + "user/choose_account"
 

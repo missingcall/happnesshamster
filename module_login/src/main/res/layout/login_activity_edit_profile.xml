@@ -16,27 +16,16 @@
         <com.hjq.bar.TitleBar
             android:id="@+id/title_bar"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="30dp"
-            android:visibility="gone"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            app:barStyle="transparent"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:leftHorizontalPadding="16dp"
-            app:leftIcon="@mipmap/common_icon_back_white"
-            app:lineVisible="false" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:text="@string/login_edit_profile_title"
-            android:textColor="@color/common_white"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_bar" />
+            app:leftIcon="@null"
+            app:lineVisible="false"
+            app:title="完善个人信息" />
 
 
         <LinearLayout
@@ -44,88 +33,108 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="30dp"
-            android:gravity="center"
             android:background="@mipmap/login_edit_profile_head"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title">
+            app:layout_constraintTop_toBottomOf="@id/title_bar">
 
-            <ImageView
+            <com.kissspace.common.widget.CircleImageView
                 imageRadius="@{100f}"
                 imageUrl="@{vm.userInfoBean.profilePath}"
                 android:layout_width="99dp"
                 android:layout_height="99dp"
-                android:src="@mipmap/login_icon_avatar"
-                />
+                android:src="@mipmap/common_app_logo"
+                app:strokeColor="@color/color_F3BA2F"
+                app:strokeWidth="@dimen/dp_3" />
         </LinearLayout>
 
-        <TextView
+        <!--<TextView
             android:id="@+id/tv_choose_picture"
             android:layout_width="74dp"
             android:layout_height="28dp"
             android:layout_marginTop="15dp"
+            android:background="@mipmap/login_edit_profile_head_choose"
             android:gravity="center"
             android:text="去选择"
             android:textColor="@color/common_white"
             android:textSize="13sp"
-            android:background="@mipmap/login_edit_profile_head_choose"
             app:layout_constraintBottom_toBottomOf="@id/llt_avatar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />-->
+
+        <com.kissspace.common.widget.CircleImageView
+            android:id="@+id/civ_choose_pic"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/common_bg_black23_radius15"
+            android:scaleType="center"
+            android:src="@mipmap/icon_login_camera"
+            app:layout_constraintBottom_toBottomOf="@id/llt_avatar"
+            app:layout_constraintEnd_toEndOf="@id/llt_avatar" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_15"
+            android:background="@drawable/common_bg_black23_radius15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llt_avatar">
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginLeft="@dimen/dp_15"
             android:text="@string/login_nickname"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_choose_picture" />
-
+            android:textColor="@color/color_5A60FF"
+            android:textSize="@dimen/sp_17"
+            app:layout_constraintBottom_toBottomOf="@id/ll_nickname"
+            app:layout_constraintLeft_toLeftOf="@id/ll_nickname"
+            app:layout_constraintTop_toTopOf="@id/ll_nickname" />
 
         <EditText
-            android:id="@+id/edit_nickname"
+            android:id="@+id/et_nickname"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="32dp"
-            android:background="@mipmap/login_edit_profile_input_name"
-            android:gravity="center"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@null"
+            android:gravity="center|left"
+            android:hint="@string/login_input_nickname"
             android:inputType="text"
             android:maxLength="15"
             android:maxLines="1"
-            android:text="@={vm.userInfoBean.nickname}"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_nickname"
-            app:layout_constraintTop_toBottomOf="@id/tv_nickname" />
+            android:singleLine="true"
+            android:textColor="@color/color_ui_main_text"
+            android:textColorHint="@color/color_66FFFFFF"
+            android:textSize="@dimen/sp_15"
+            app:layout_constraintBottom_toBottomOf="@id/ll_nickname"
+            app:layout_constraintLeft_toRightOf="@id/tv_nickname"
+            app:layout_constraintRight_toRightOf="@id/ll_nickname"
+            app:layout_constraintTop_toTopOf="@id/ll_nickname" />
 
         <ImageView
             android:id="@+id/iv_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="10dp"
             android:src="@mipmap/login_icon_clear"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/edit_nickname"
-            app:layout_constraintEnd_toEndOf="@id/edit_nickname"
-            app:layout_constraintTop_toTopOf="@id/edit_nickname" />
-
-        <TextView
-            android:id="@+id/tv_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:text="@string/login_sex"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/tv_nickname"
-            app:layout_constraintTop_toBottomOf="@id/edit_nickname" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
+            app:layout_constraintEnd_toEndOf="@id/et_nickname"
+            app:layout_constraintTop_toTopOf="@id/tv_nickname" />
 
         <TextView
             android:id="@+id/tv_sex_tips"
@@ -134,24 +143,24 @@
             android:layout_marginTop="8dp"
             android:text="@string/login_sex_tips"
             android:textColor="@color/white80"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@id/tv_sex"
-            app:layout_constraintTop_toBottomOf="@id/tv_sex" />
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@id/ll_nickname"
+            app:layout_constraintTop_toBottomOf="@id/llt_sex_male" />
 
         <RelativeLayout
             android:id="@+id/llt_sex_male"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@id/tv_sex_tips"
-            app:layout_constraintTop_toBottomOf="@id/tv_sex_tips"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="6dp"
             app:layout_constraintEnd_toStartOf="@id/llt_sex_female"
-            android:layout_marginEnd="6dp">
+            app:layout_constraintStart_toStartOf="@id/tv_sex_tips"
+            app:layout_constraintTop_toBottomOf="@id/ll_nickname">
 
             <ImageView
                 userMaleBg="@{vm.userInfoBean.sex}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -160,9 +169,9 @@
                 android:gravity="center">
 
                 <TextView
+                    userMaleIconBg="@{vm.userInfoBean.sex}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    userMaleIconBg="@{vm.userInfoBean.sex}"
                     android:gravity="center"
                     android:text="@string/login_sex_male"
                     android:textColor="@color/common_white"
@@ -176,16 +185,16 @@
         <RelativeLayout
             android:id="@+id/llt_sex_female"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            app:layout_constraintEnd_toEndOf="@id/edit_nickname"
-            app:layout_constraintTop_toTopOf="@id/llt_sex_male"
+            android:layout_height="60dp"
+            android:layout_marginStart="6dp"
+            app:layout_constraintEnd_toEndOf="@id/ll_nickname"
             app:layout_constraintStart_toEndOf="@id/llt_sex_male"
-            android:layout_marginStart="6dp">
+            app:layout_constraintTop_toTopOf="@id/llt_sex_male">
 
             <ImageView
                 userFemaleBg="@{vm.userInfoBean.sex}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -194,9 +203,9 @@
                 android:gravity="center">
 
                 <TextView
+                    userFemaleIconBg="@{vm.userInfoBean.sex}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    userFemaleIconBg="@{vm.userInfoBean.sex}"
                     android:gravity="center"
                     android:text="@string/login_sex_female"
                     android:textColor="@color/common_white"
@@ -210,14 +219,15 @@
             android:id="@+id/text_submit"
             commonBtnState="@{vm.submitBtnState}"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="93dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="70dp"
             android:gravity="center"
             android:text="@string/login_btn_submit_profile"
             android:textColor="@color/common_white"
             android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="@id/edit_nickname"
-            app:layout_constraintStart_toStartOf="@id/edit_nickname"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ll_nickname"
+            app:layout_constraintStart_toStartOf="@id/ll_nickname"
             app:layout_constraintTop_toBottomOf="@id/tv_sex_tips" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

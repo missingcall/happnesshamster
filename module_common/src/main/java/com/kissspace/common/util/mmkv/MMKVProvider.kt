@@ -1,6 +1,7 @@
 package com.kissspace.common.util.mmkv
 
 import com.blankj.utilcode.util.GsonUtils
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.dylanc.mmkv.*
 import com.kissspace.common.config.Constants
@@ -30,7 +31,7 @@ object MMKVProvider : MMKVOwner {
 
     var userInfo by mmkvGson<UserInfoBean>()
 
-    var tags  by mmkvGson<List<String>>()
+    var tags by mmkvGson<List<String>>()
 
     //用户id
     var userId by mmkvString(default = "")

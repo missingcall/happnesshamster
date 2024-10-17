@@ -81,12 +81,13 @@ class LoginViewModel : BaseViewModel() {
         request(LoginApi.API_USER_LIST_UMENG, Method.POST,param = params,state = _accouts)
     }
 
-    fun createAccount(phone:String){
+    fun createAccount(phone:String , inviteCode:String){
         val params = mutableMapOf<String,Any?>()
         params["phone"] = phone
         params["machineCode"] = DeviceUtils.getUniqueDeviceId()
         params["accessFlags"] = 0
         params["appleId"] = ""
+        params["inviteCode"] = inviteCode
         request(CommonApi.API_USER_ACCOUNT_CREATE, Method.POST,param = params,state = _createaccouts)
     }
 
@@ -101,10 +102,10 @@ class LoginViewModel : BaseViewModel() {
         request(CommonApi.API_LOGIN_BY_USERID, Method.POST,param = params,state = _token)
     }
 
-    fun onTextChange(editable: Editable) {
-        phoneIconState.set(editable.toString().isNotEmpty())
+/*    fun onTextChange(editable: Editable) {
+//        phoneIconState.set(editable.toString().isNotEmpty())
         getCodeBtnState.set(editable.toString().length == 13)
-    }
+    }*/
 
     fun loginIm(
         loginResult: LoginResultBean,

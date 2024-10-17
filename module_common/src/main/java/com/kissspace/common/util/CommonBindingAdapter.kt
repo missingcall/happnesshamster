@@ -174,12 +174,36 @@ object CommonBindingAdapter {
     @BindingAdapter("commonBtnState", requireAll = false)
     fun commonBtnState(textView: TextView, enable: Boolean = false) {
         if (enable) {
-            textView.setBackgroundResource(R.mipmap.common_button_bg)
-            textView.setTextColor(ColorUtils.getColor(R.color.color_FFFD62))
+            textView.setBackgroundResource(R.drawable.common_shape_blue_selected_15)
+            textView.setTextColor(ColorUtils.getColor(R.color.white))
         } else {
-            textView.setBackgroundResource(R.mipmap.common_button_bg_no_check)
-            textView.setTextColor(ColorUtils.getColor(R.color.color_50FFFD62))
+            textView.setBackgroundResource(R.drawable.common_shape_blue_normal_15)
+            textView.setTextColor(ColorUtils.getColor(R.color.common_white80))
         }
+        textView.isEnabled = enable
+    }
+
+    @JvmStatic
+    @BindingAdapter("commonBtnStateBlue", requireAll = false)
+    fun commonBtnStateBlue(textView: TextView, enable: Boolean = false) {
+        if (enable) {
+            textView.setTextColor(ColorUtils.getColor(R.color.white))
+        } else {
+            textView.setTextColor(ColorUtils.getColor(R.color.color_AAAAAA))
+        }
+        textView.setBackgroundResource(R.drawable.common_btn_selector_blue_radius15)
+        textView.isEnabled = enable
+    }
+
+    @JvmStatic
+    @BindingAdapter("commonBtnStateBlack", requireAll = false)
+    fun commonBtnStateBlack(textView: TextView, enable: Boolean = false) {
+        if (enable) {
+            textView.setTextColor(ColorUtils.getColor(R.color.white))
+        } else {
+            textView.setTextColor(ColorUtils.getColor(R.color.color_AAAAAA))
+        }
+        textView.setBackgroundResource(R.drawable.common_btn_selector_black23_radius15_stroke2)
         textView.isEnabled = enable
     }
 
