@@ -45,6 +45,10 @@
             android:name="com.kissspace.login.ui.ChooseAccountActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kissspace.login.ui.AccountCreateActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

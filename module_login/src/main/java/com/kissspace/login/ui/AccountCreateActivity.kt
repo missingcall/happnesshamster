@@ -110,13 +110,15 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
             showLoading("正在注册")
             verificationCode(
                 mBinding.xetPhone.text.toString().replace(" ", ""),
-                mBinding.xetInvite.text.toString(),
+                mBinding.etVerify.text.toString(),
                 "3",
                 onError = {
                     hideLoading()
                 }) {
-                mViewModel.requestUserListByPhone(
-                    mBinding.xetPhone.text.toString().replace(" ", "")
+                mViewModel.createAccount(
+                    mBinding.xetPhone.text.toString().replace(" ", ""),
+                    mBinding.etVerify.text.toString(),
+                    mBinding.xetInvite.text.toString()
                 )
             }
         }
@@ -158,6 +160,15 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
                     )
                 }
             }
+        }, onError = {
+            hideLoading()
+        }, onEmpty = {
+            hideLoading()
+        })
+
+        collectData(mViewModel.createAccounts, onSuccess = {
+            mViewModel.requestUserListByPhone(it.mobile)
+
         }, onError = {
             hideLoading()
         }, onEmpty = {
