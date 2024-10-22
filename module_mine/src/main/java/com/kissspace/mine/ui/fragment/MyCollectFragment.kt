@@ -59,7 +59,7 @@ class MyCollectFragment : BaseFragment(R.layout.mine_fragment_collect) {
                 val model = getModel<CollectListBean>()
                 jumpRoom(model.chatRoomId)
             }
-            onLongClick(R.id.root) {
+            onLongClick(R.id.sml) {
                 val model = getModel<CollectListBean>()
                 CommonConfirmDialog(requireContext(), "确定要取消收藏此房间吗") {
                     if (this) {

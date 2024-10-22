@@ -1,17 +1,14 @@
 package com.kissspace.mine.viewmodel
 
-import android.graphics.drawable.Drawable
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.tencent.bugly.crashreport.biz.UserInfoBean
 import com.kissspace.common.base.BaseViewModel
 import com.kissspace.common.config.CommonApi
 import com.kissspace.common.config.Constants
 import com.kissspace.common.config.Constants.TypeFaceRecognition
-import com.kissspace.common.config.ConstantsKey
-import com.kissspace.common.model.SandWechatPayInfo
+import com.kissspace.common.model.wallet.CollectRecordModel
 import com.kissspace.common.model.wallet.WalletDetailModel
 import com.kissspace.common.model.wallet.WalletExchangeRecodeListModel
 import com.kissspace.common.model.wallet.WalletModel
@@ -20,14 +17,12 @@ import com.kissspace.common.util.customToast
 import com.kissspace.common.util.format.Format
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.util.setApplicationValue
-import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.mine.http.MineApi
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
 import com.kissspace.util.isNotEmptyBlank
 import com.kissspace.util.logE
 import com.kissspace.util.orZero
-import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 /**
@@ -415,4 +410,31 @@ class WalletViewModel : BaseViewModel() {
         }
         )
     }
+
+    /**
+     * 电报仓鼠 钱包- 松果/松子/钻石
+     */
+
+    //钱包记录 最近5条
+    fun queryCollectRecordList(startTime: String?,endTime: String?, pageNum: Int, pageSize: Int, onSuccess: ((CollectRecordModel?) -> Unit)?) {
+        val param = mutableMapOf<String, Any?>()
+        param["startTime"] = ""
+        param["endTime"] = ""
+        param["pageNum"] = pageNum
+        param["pageSize"] = pageSize
+        request<CollectRecordModel?>(MineApi.API_QUERY_COLLECT_RECORD_LIST,
+            Method.GET,
+            param,
+            onSuccess = {
+                onSuccess?.invoke(it)
+            },
+            onError = {
+                customToast(it.message)
+            })
+    }
+
+
+
+
+
 }

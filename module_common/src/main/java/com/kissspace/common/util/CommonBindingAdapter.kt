@@ -3,11 +3,8 @@ package com.kissspace.common.util
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.view.View
-import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.blankj.utilcode.util.ColorUtils
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -174,10 +171,10 @@ object CommonBindingAdapter {
     @BindingAdapter("commonBtnState", requireAll = false)
     fun commonBtnState(textView: TextView, enable: Boolean = false) {
         if (enable) {
-            textView.setBackgroundResource(R.drawable.common_shape_blue_selected_15)
+            textView.setBackgroundResource(R.drawable.common_shape_blue_15)
             textView.setTextColor(ColorUtils.getColor(R.color.white))
         } else {
-            textView.setBackgroundResource(R.drawable.common_shape_blue_normal_15)
+            textView.setBackgroundResource(R.drawable.common_shape_262a2e_normal_13)
             textView.setTextColor(ColorUtils.getColor(R.color.common_white80))
         }
         textView.isEnabled = enable

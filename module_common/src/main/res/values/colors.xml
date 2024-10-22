@@ -230,6 +230,13 @@
     <color name="color_AAAAAA">#AAAAAA</color>
     <color name="color_F3BA2F">#F3BA2F</color>
     <color name="color_161616">#161616</color>
+    <color name="color_FDC120">#FDC120</color>
+    <color name="color_44D8D8D8">#44D8D8D8</color>
+    <color name="color_80F68D">#80F68D</color>
+    <color name="color_B3000000">#B3000000</color>
+    <color name="color_32363B">#32363B</color>
+    <color name="color_FE5F55">#FE5F55</color>
+    <color name="color_36398A">#36398A</color>
 
 
 </resources>

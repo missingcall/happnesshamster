@@ -74,6 +74,15 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
                 customToast("请勾选同意后登录")
             }
         }
+
+        mBinding.tvAccountCreate.setOnClickListener {
+            if (mBinding.cbAgree.isChecked) {
+                jump(RouterPath.PATH_ACCOUNT_CREATE)
+            } else {
+                customToast("请勾选同意后注册")
+            }
+        }
+
         mBinding.tvLoginPassword.onClick {
             if (mBinding.cbAgree.isChecked) {
                 jump(RouterPath.PATH_LOGIN_PASSWORD)

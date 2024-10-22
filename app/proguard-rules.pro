@@ -178,4 +178,8 @@ public static ** valueOf(java.lang.String);
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
 
- -keep class com.netease.htprotect.**{*;}
+-keep class com.netease.htprotect.**{*;}
+
+# BackgroundLibrary
+-dontwarn com.noober.background.**
+-keep public class com.noober.background.** {*;}

@@ -37,7 +37,7 @@ import kotlinx.coroutines.Dispatchers
 
 object ViewClickDelay {
     var lastClickTime: Long = 0
-    var SPACE_TIME: Long = 1000
+    var SPACE_TIME: Long = 500
 }
 
 

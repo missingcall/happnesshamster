@@ -109,5 +109,16 @@
 
     <string name="receive">领取</string>
 
-
+    <string name="coinType_all">所有记录</string>
+    <string name="coinType_001">松果领取</string>
+    <string name="coinType_002">松果转入</string>
+    <string name="coinType_003">存折获取</string>
+    <string name="coinType_004">市场消费</string>
+    <string name="coinType_005">购买皮肤头像</string>
+    <string name="coinType_006">任务获得</string>
+    <string name="coinType_007">邀新获得</string>
+    <string name="coinType_008">养成消费</string>
+    <string name="coinType_009">松果转出</string>
+    <string name="coinType_010">管理员添加</string>
+    <string name="coinType_011">管理员扣除</string>
 </resources>

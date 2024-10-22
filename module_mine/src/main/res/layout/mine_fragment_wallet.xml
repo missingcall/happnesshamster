@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.kissspace.mine.viewmodel.WalletViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp">
+
+
+        <com.kissspace.common.widget.MarqueeView
+            android:id="@+id/mtv_transfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            app:layout_constraintRight_toRightOf="@id/btn_currency_conversion"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/icon_nuts"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/icon_pine_cone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="@dimen/dp_20" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="9999.999"
+            android:textColor="#FDC120"
+            android:textSize="@dimen/sp_20"
+            app:layout_constraintBottom_toBottomOf="@id/icon_nuts"
+            app:layout_constraintLeft_toRightOf="@id/icon_nuts"
+            app:layout_constraintTop_toTopOf="@id/icon_nuts"
+
+            />
+
+        <Button
+            android:id="@+id/btn_give_away"
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/common_selector_blue_gray_radius45"
+            android:gravity="center"
+            android:text="赠送"
+            android:textColor="@drawable/common_text_color_selector_white"
+            android:textSize="@dimen/sp_10"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/icon_nuts"
+            app:layout_constraintRight_toLeftOf="@id/btn_currency_conversion"
+            app:layout_constraintTop_toTopOf="@id/icon_nuts" />
+
+        <Button
+            android:id="@+id/btn_currency_conversion"
+            android:layout_width="70dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/common_selector_blue_gray_radius45"
+            android:gravity="center"
+            android:text="货币转换"
+            android:textColor="@drawable/common_text_color_selector_white"
+            android:textSize="@dimen/sp_10"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/icon_nuts"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/icon_nuts" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

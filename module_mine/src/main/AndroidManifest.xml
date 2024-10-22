@@ -13,7 +13,17 @@
         android:theme="@style/Theme.Unicorn_soul">
 
         <activity
+            android:name="com.kissspace.mine.ui.activity.TransferRecordsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.kissspace.mine.ui.activity.family.FamilyListActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.kissspace.mine.ui.activity.MyWarehouseActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

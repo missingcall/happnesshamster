@@ -11,202 +11,213 @@ object MineApi {
 
     //分页查询公会列表
     const val API_GET_FAMILY_LIST_BY_PARAMETER =
-        "/djsoul-family/family/selectFamilyInfoListByParameter"
+        "/hamster-family/family/selectFamilyInfoListByParameter"
 
     //分页查询公会列表 (在对应的公会里面)
-    const val API_GET_FAMILY_LIST = "/djsoul-family/family/selectFamilyInfoList"
+    const val API_GET_FAMILY_LIST = "/hamster-family/family/selectFamilyInfoList"
 
     //    //分页查询热门公会列表
-    const val API_GET_FAMILY_HOT_LIST = "/djsoul-family/family/selectHotFamilyInfoList"
+    const val API_GET_FAMILY_HOT_LIST = "/hamster-family/family/selectHotFamilyInfoList"
 
     //申请公会接口
-    const val API_GET_FAMILY_USER_APPLY = "/djsoul-family/familyUserApply/userApply"
+    const val API_GET_FAMILY_USER_APPLY = "/hamster-family/familyUserApply/userApply"
 
     //根据Id查询公会信息
-    const val API_GET_FAMILY_BY_ID = "/djsoul-family/family/selectFamilyInfoById"
+    const val API_GET_FAMILY_BY_ID = "/hamster-family/family/selectFamilyInfoById"
 
     //意见反馈列表
-    const val API_QUERY_USER_FEEDBACK = "/djsoul-user/userFeedback/queryUserFeedback"
+    const val API_QUERY_USER_FEEDBACK = "/hamster-user/userFeedback/queryUserFeedback"
 
     //查询意见反馈类型列表
-    const val API_QUERY_USER_FEEDBACK_TYPE = "/djsoul-user/userFeedbackType/queryUserFeedbackType"
+    const val API_QUERY_USER_FEEDBACK_TYPE = "/hamster-user/userFeedbackType/queryUserFeedbackType"
 
     //添加用户意见反馈
-    const val API_INSERT_USER_FEEDBACK = "/djsoul-user/userFeedback/insertUserFeedback"
+    const val API_INSERT_USER_FEEDBACK = "/hamster-user/userFeedback/insertUserFeedback"
 
 
     //用户已读信息之后修改成已读状态
-    const val API_READ_STATUS_USER_FEEDBACK = "/djsoul-user/userFeedback/readStatusUserFeedback"
+    const val API_READ_STATUS_USER_FEEDBACK = "/hamster-user/userFeedback/readStatusUserFeedback"
 
 
-//    const val API_InsertUserFeedback = "/djsoul-user/userFeedback/insertUserFeedback"
-//    const val API_InsertUserFeedback = "/djsoul-user/userFeedback/insertUserFeedback"
-//    /djsoul-user/userFeedback/readStatusUserFeedback
+//    const val API_InsertUserFeedback = "/hamster-user/userFeedback/insertUserFeedback"
+//    const val API_InsertUserFeedback = "/hamster-user/userFeedback/insertUserFeedback"
+//    /hamster-user/userFeedback/readStatusUserFeedback
 
     //查询公会信息
-    const val API_GET_SELECT_FAMILY_INFO = "/djsoul-family/family/selectFamilyInfo"
+    const val API_GET_SELECT_FAMILY_INFO = "/hamster-family/family/selectFamilyInfo"
 
     //根据参数获取公会流水列表
-    const val API_GET_SELECT_QUERY_FAMILY_FLOWLIST = "/djsoul-family/flow/queryFamilyFlowList"
+    const val API_GET_SELECT_QUERY_FAMILY_FLOWLIST = "/hamster-family/flow/queryFamilyFlowList"
 
     //更新公会信息
-    const val API_GET_UPDATE_FAMILY_INFO = "/djsoul-family/family/updateFamilyInfo"
+    const val API_GET_UPDATE_FAMILY_INFO = "/hamster-family/family/updateFamilyInfo"
 
     //移出公会
-    const val API_GET_FAMILY_MOVE_OUT = "/djsoul-family/family/moveOut"
+    const val API_GET_FAMILY_MOVE_OUT = "/hamster-family/family/moveOut"
 
     //审核用户加入公会申请
-    const val API_GET_FAMILY_CHECK_USER_APPLY = "/djsoul-family/familyUserApply/checkUserApply"
+    const val API_GET_FAMILY_CHECK_USER_APPLY = "/hamster-family/familyUserApply/checkUserApply"
 
     //查询举报类型
-    const val API_QueryInformantType = "/djsoul-user/informantType/queryInformantType"
+    const val API_QueryInformantType = "/hamster-user/informantType/queryInformantType"
 
     //举报用户
-    const val API_REPORT_USER = "/djsoul-user/informantUser/insertInformantUser"
+    const val API_REPORT_USER = "/hamster-user/informantUser/insertInformantUser"
 
     //举报房间
-    const val API_REPORT_CHATROOM = "/djsoul-chatroom/informantChatRoom/insertInformantChatRoom"
+    const val API_REPORT_CHATROOM = "/hamster-chatroom/informantChatRoom/insertInformantChatRoom"
 
 
     //更新公会头像
-    const val API_GET_FAMILY_UPLOAD_ICON = "/djsoul-family/family/uploadFamilyIcon"
+    const val API_GET_FAMILY_UPLOAD_ICON = "/hamster-family/family/uploadFamilyIcon"
 
     //查询所有申请加入公会用户信息
     const val API_GET_FamilyUserApplyList =
-        "/djsoul-family/familyUserApply/selectFamilyUserApplyListByParameter"
+        "/hamster-family/familyUserApply/selectFamilyUserApplyListByParameter"
 
     //查询所有公会成员信息
-    const val API_GET_FAMILY_USER_LIST = "/djsoul-family/family/selectFamilyUserList"
+    const val API_GET_FAMILY_USER_LIST = "/hamster-family/family/selectFamilyUserList"
 
     //根据公会ID查询所有公会成员信息
     const val API_GET_FAMILY_USER_LIST_BY_ID =
-        "/djsoul-family/family/selectFamilyUserListByFamilyId"
+        "/hamster-family/family/selectFamilyUserListByFamilyId"
 
     const val API_QUERY_FAMILY_USER_LIST =
-        "/djsoul-family/family/pageQueryFamilyUserList"
+        "/hamster-family/family/pageQueryFamilyUserList"
 
 
     const val API_BATCH_TRANSFER_DIAMOND =
-        "/djsoul-user/userNum/batchTransferDiamond"
+        "/hamster-user/userNum/batchTransferDiamond"
 
 
     //商城列表
-    const val API_STORE_GOODS_LIST = "/djsoul-user/commodity/queryCommodityList"
+    const val API_STORE_GOODS_LIST = "/hamster-user/commodity/queryCommodityList"
 
     //购买装扮
-    const val API_BUY_DRESS_UP = "/djsoul-user/commodity/buyCommodity"
+    const val API_BUY_DRESS_UP = "/hamster-user/commodity/buyCommodity"
 
     //查询我的装扮
-    const val API_QUERY_MY_DRESS_UP = "/djsoul-user/userBag/myBag"
+    const val API_QUERY_MY_DRESS_UP = "/hamster-user/userBag/myBag"
 
     //佩戴装扮
-    const val API_WEAR_DRESS_UP = "/djsoul-user/commodity/wearedHeadwearOrCar"
+    const val API_WEAR_DRESS_UP = "/hamster-user/commodity/wearedHeadwearOrCar"
 
     //取消佩戴坐骑
-    const val API_CANCEL_WEAR_DRESS_UP = "/djsoul-user/commodity/cancelWearedHeadwearOrCar"
+    const val API_CANCEL_WEAR_DRESS_UP = "/hamster-user/commodity/cancelWearedHeadwearOrCar"
 
 
     //取消收藏
-    const val API_CANCEL_COLLECT = "/djsoul-user/userCollect/collectChatRoom"
+    const val API_CANCEL_COLLECT = "/hamster-user/userCollect/collectChatRoom"
 
     //我的关注
-    const val API_QUERY_MY_FOLLOW = "/djsoul-user/userAttention/getUserAttentionList"
+    const val API_QUERY_MY_FOLLOW = "/hamster-user/userAttention/getUserAttentionList"
 
     //我的访客
-    const val API_QUERY_MY_VISITOR = "/djsoul-user/visitor/queryUserVisitor"
+    const val API_QUERY_MY_VISITOR = "/hamster-user/visitor/queryUserVisitor"
 
 
     //萌新列表
-    const val API_QUERY_NEWBIE = "/djsoul-user/user/queryRecentlyRegisteredUserList"
+    const val API_QUERY_NEWBIE = "/hamster-user/user/queryRecentlyRegisteredUserList"
 
     //我的粉丝
-    const val API_QUERY_MY_FANS = "/djsoul-user/userAttention/getUserBeAttentionList"
+    const val API_QUERY_MY_FANS = "/hamster-user/userAttention/getUserBeAttentionList"
 
     //查询用户主页信息
-    const val API_QUERY_USER_PROFILE = "/djsoul-user/user/personalData"
+    const val API_QUERY_USER_PROFILE = "/hamster-user/user/personalData"
 
     //获取礼物tab列表
-    const val API_GET_GIFT_TABS = "/djsoul-user/giftTab/queryAll"
+    const val API_GET_GIFT_TABS = "/hamster-user/giftTab/queryAll"
 
     //根据tab id查询礼物列表
-    const val API_GET_GIFT_BY_ID = "/djsoul-user/giftInfo/queryGiftByTabId"
+    const val API_GET_GIFT_BY_ID = "/hamster-user/giftInfo/queryGiftByTabId"
 
     //编辑个人资料
-    const val API_EDIT_PROFILE = "/djsoul-user/user/editUserData"
+    const val API_EDIT_PROFILE = "/hamster-user/user/editUserData"
 
     //任务中心
-    const val API_TASK_CENTER = "/djsoul-task/taskInfo/selectTaskInfoList"
+    const val API_TASK_CENTER = "/hamster-task/taskInfo/selectTaskInfoList"
 
     //领取任务奖励
-    const val API_RECEIVE_TASK_REWARD = "/djsoul-task/taskInfo/receiveTaskReward"
+    const val API_RECEIVE_TASK_REWARD = "/hamster-task/taskInfo/receiveTaskReward"
 
 
     //我的钱包
-    const val API_MY_WALLET = "/djsoul-user/userNum/getMyMoneyBag"
+    const val API_MY_WALLET = "/hamster-user/userNum/getMyMoneyBag"
 
     //收益兑换
-    const val API_EXCHANGE_EARNS = "/djsoul-user/userNum/exchangeCoin"
+    const val API_EXCHANGE_EARNS = "/hamster-user/userNum/exchangeCoin"
 
     //钻石兑换
-    const val API_EXCHANGE_DIAMOND = "/djsoul-user/userNum/exchangeDiamond"
+    const val API_EXCHANGE_DIAMOND = "/hamster-user/userNum/exchangeDiamond"
 
     //提现
-    const val API_WITHDRAW_ITEM = "/djsoul-payment/withdraw/withdrawDeposit"
+    const val API_WITHDRAW_ITEM = "/hamster-payment/withdraw/withdrawDeposit"
 
     //金币转账
-    const val API_TRANSFER_COIN = "/djsoul-user/userNum/transferCoin"
+    const val API_TRANSFER_COIN = "/hamster-user/userNum/transferCoin"
 
     //收益转账
-    const val API_TRANSFER_REWARD = "/djsoul-user/userNum/transferAccountBalance"
+    const val API_TRANSFER_REWARD = "/hamster-user/userNum/transferAccountBalance"
 
     //钻石转账
-    const val API_TRANSFER_DIAMOND = "/djsoul-user/userNum/transferDiamond"
+    const val API_TRANSFER_DIAMOND = "/hamster-user/userNum/transferDiamond"
 
 
     //根据用户展示id获取通用用户信息
-    const val API_QueryUserByDisplayIdResponse= "/djsoul-user/user/queryUserByDisplayIdResponse"
+    const val API_QueryUserByDisplayIdResponse= "/hamster-user/user/queryUserByDisplayIdResponse"
 
 
     //用户提现列表
-    const val API_WithDrawList = "/djsoul-payment/withdraw/withdrawList"
+    const val API_WithDrawList = "/hamster-payment/withdraw/withdrawList"
 
     //分页获取金币流水记录列表
-    const val API_FLOW_RECORD_COIN_LIST = "/djsoul-user/flowRecord/queryFlowRecordCoinPage"
+    const val API_FLOW_RECORD_COIN_LIST = "/hamster-user/flowRecord/queryFlowRecordCoinPage"
 
     //分页获取收益列表
-    const val API_FLOW_RECORD_EARNS_LIST = "/djsoul-user/flowRecord/queryFlowRecordProfitPage"
+    const val API_FLOW_RECORD_EARNS_LIST = "/hamster-user/flowRecord/queryFlowRecordProfitPage"
 
     //分页获取钻石流水记录列表
-    const val API_FLOW_RECORD_DIAMOND_LIST = "/djsoul-user/flowRecord/queryFlowRecordDiamondPage"
+    const val API_FLOW_RECORD_DIAMOND_LIST = "/hamster-user/flowRecord/queryFlowRecordDiamondPage"
 
     //获取用户魅力等级列表
-    const val API_QUERY_USER_CHARM = "/djsoul-user/grade/queryUserCharm"
+    const val API_QUERY_USER_CHARM = "/hamster-user/grade/queryUserCharm"
 
     //获取用户财富等级列表
-    const val API_QUERY_USER_CONSUME = "/djsoul-user/grade/queryUserConsume"
+    const val API_QUERY_USER_CONSUME = "/hamster-user/grade/queryUserConsume"
 
     //绑定支付宝
-    const val API_BIND_ALIPAY = "/djsoul-user/authentication/accountBinding"
+    const val API_BIND_ALIPAY = "/hamster-user/authentication/accountBinding"
 
     //获取我的页面里面新消息状态
-    const val API_QUERY_MESSAGE_STATUS = "/djsoul-user/user/queryNewMessageStatus"
+    const val API_QUERY_MESSAGE_STATUS = "/hamster-user/user/queryNewMessageStatus"
 
     //查询所有礼物
-    const val API_QUERY_ALL_GIFT = "/djsoul-user/giftInfo/queryGiftInfoNotBox"
+    const val API_QUERY_ALL_GIFT = "/hamster-user/giftInfo/queryGiftInfoNotBox"
 
     //设置/取消公会管理员
-    const val API_FAMILY_SETTING_MANAGER = "/djsoul-family/family/setFamilyAdmin"
+    const val API_FAMILY_SETTING_MANAGER = "/hamster-family/family/setFamilyAdmin"
 
-    const val API_POINT_EXCHANGED = "/djsoul-user/userCallingExternal/redeemPointsForDiamonds"
+    const val API_POINT_EXCHANGED = "/hamster-user/userCallingExternal/redeemPointsForDiamonds"
 
-    const val API_POINT_ACCOUNT_INFO = "/djsoul-user/userCallingExternal/selectUserIntegralByPhone"
+    const val API_POINT_ACCOUNT_INFO = "/hamster-user/userCallingExternal/selectUserIntegralByPhone"
 
-    const val API_POINT_RECORD = "/djsoul-user/userCallingExternal/redeemPointsRecords"
+    const val API_POINT_RECORD = "/hamster-user/userCallingExternal/redeemPointsRecords"
 
     //获取cp关系列表
-    const val API_GET_RELATION_LIST = "/djsoul-user/user-relationship/list"
+    const val API_GET_RELATION_LIST = "/hamster-user/user-relationship/list"
 
     //获取cp关系排名
-    const val API_GET_RELATION_RANKING = "/djsoul-user/user-relationship/ranking"
+    const val API_GET_RELATION_RANKING = "/hamster-user/user-relationship/ranking"
 
+    //获取领养仓鼠&仓鼠果园-松果银行列表
+    const val API_HAMSTER_MARKET_QUERY_MARKET_LIST = "/hamster-center/hamsterMarket/queryMarketList"
+
+    //分页获取采集记录列表 即松果/松子/钻石 转入转出
+    const val API_QUERY_COLLECT_RECORD_LIST = "/hamster-center/hamsterMarket/queryColletRecordList"
+
+    //获取用户当前每日可获得松果
+    const val API_HAMSTER_MARKET_QUERY_DAY_INCOME = "/hamster-center/hamsterMarket/queryDayIncome"
+
+    //领取松果
+    const val API_HAMSTER_MARKET_RECEIVE_PINE_CONE = "/hamster-center/hamsterMarket/receivePinecone"
 }

@@ -1,6 +1,5 @@
 package com.kissspace.mine.adapter
 
-import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.text.TextUtils
 import android.view.View
@@ -9,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.text.color
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ResourceUtils
@@ -16,17 +16,16 @@ import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.kissspace.util.dp
 import com.kissspace.common.config.Constants
-import com.kissspace.common.model.PersonCar
-import com.kissspace.common.model.GoodsListBean
-import com.kissspace.common.model.UserInfoBean
-import com.kissspace.common.model.UserProfileBean
+import com.kissspace.common.model.*
 import com.kissspace.common.util.formatNumCoin
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.widget.UserLevelIconView
 import com.kissspace.module_mine.R
 import com.kissspace.util.loadImage
-import com.kissspace.util.loadImageCircle
 import com.kissspace.util.orZero
+import com.kissspace.util.resToColor
+import androidx.core.text.buildSpannedString
+import com.blankj.utilcode.util.StringUtils
 
 
 object MineBindingAdapter {
@@ -124,13 +123,15 @@ object MineBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("followBtnState", requireAll = false)
-    fun followBtnState(imageView: ImageView, isFollow: Boolean) {
-        imageView.setImageResource(if (isFollow) R.mipmap.mine_icon_btn_unfollow else R.mipmap.mine_icon_btn_follow)
+    fun followBtnState(textView: TextView, isFollow: Boolean) {
+        textView.setBackgroundResource(if (isFollow) com.kissspace.module_common.R.drawable.common_shape_blue_deep_normal_45 else  com.kissspace.module_common.R.drawable.common_shape_blue_normal_45)
+        textView.text = (if (isFollow) "取消关注" else "+ 关注")
     }
+
     @JvmStatic
     @BindingAdapter("followBtnStateText", requireAll = false)
     fun followBtnStateText(textView: TextView, follow: Boolean?) {
-        textView.text =  ( if(follow!=null&&follow)"已关注" else "+ 关注")
+        textView.text = (if (follow != null && follow) "已关注" else "+ 关注")
     }
 
     @JvmStatic
@@ -262,7 +263,7 @@ object MineBindingAdapter {
     @BindingAdapter("profileSex", requireAll = false)
     fun profileSex(textView: TextView, userInfo: UserProfileBean?) {
         userInfo?.let {
-            textView.text = if(it.sex == Constants.SEX_FEMALE) "女" else "男"
+            textView.text = if (it.sex == Constants.SEX_FEMALE) "女" else "男"
         }
     }
 
@@ -288,9 +289,15 @@ object MineBindingAdapter {
     @JvmStatic
     @BindingAdapter("incomeColor", requireAll = false)
     fun incomeColor(textView: TextView, incomeNum: String) {
-        textView.setTextColor(if(!TextUtils.isEmpty(incomeNum)&&incomeNum.startsWith("+")) ContextCompat.getColor(textView.context,
-            com.kissspace.module_common.R.color.color_ui_sub_main) else ContextCompat.getColor(textView.context,
-            com.kissspace.module_common.R.color.color_ui_main_text))
+        textView.setTextColor(
+            if (!TextUtils.isEmpty(incomeNum) && incomeNum.startsWith("+")) ContextCompat.getColor(
+                textView.context,
+                com.kissspace.module_common.R.color.color_ui_sub_main
+            ) else ContextCompat.getColor(
+                textView.context,
+                com.kissspace.module_common.R.color.color_ui_main_text
+            )
+        )
     }
 
 
@@ -327,9 +334,14 @@ object MineBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("sexSet", requireAll = false)
-    fun sexSet(textView : TextView, sex: String?) {
-        textView.setBackgroundResource(if(sex == Constants.SEX_MALE) R.drawable.shape_gender_man else R.drawable.shape_gender)
-        textView.setCompoundDrawablesRelativeWithIntrinsicBounds(if(sex == Constants.SEX_MALE) com.kissspace.module_common.R.mipmap.common_ic_flag_male else com.kissspace.module_common.R.mipmap.common_ic_flag_female,0,0,0)
+    fun sexSet(textView: TextView, sex: String?) {
+        textView.setBackgroundResource(if (sex == Constants.SEX_MALE) R.drawable.shape_gender_man else R.drawable.shape_gender)
+        textView.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            if (sex == Constants.SEX_MALE) com.kissspace.module_common.R.mipmap.common_ic_flag_male else com.kissspace.module_common.R.mipmap.common_ic_flag_female,
+            0,
+            0,
+            0
+        )
     }
 
     @JvmStatic
@@ -357,5 +369,74 @@ object MineBindingAdapter {
                 layout.addView(image)
             }
         }
+    }
+
+    /**
+     * 我的仓库-仓鼠果园/松果银行
+     */
+
+    @JvmStatic
+    @BindingAdapter("wareHouseCommodityIcon", requireAll = false)
+    fun wareHouseCommodityIcon(imageView: ImageView, commodityIcon: String) {
+        imageView.loadImage(commodityIcon, com.kissspace.module_common.R.mipmap.common_app_logo)
+    }
+
+    @JvmStatic
+    @BindingAdapter("wareHouseDayIncome", requireAll = false)
+    fun wareHouseDayIncome(textView: TextView, dayIncome: Int) {
+        textView.text = buildSpannedString {
+            color(com.kissspace.module_common.R.color.color_999999.resToColor()) {
+                append("每天可以产出\n")
+            }
+            color(com.kissspace.module_common.R.color.color_FDC120.resToColor()) {
+                append("" + dayIncome)
+            }
+            color(com.kissspace.module_common.R.color.color_999999.resToColor()) {
+                append("松果")
+            }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("wareHouseTimeLimit", requireAll = false)
+    fun wareHouseTimeLimit(textView: TextView, timeLimit: Int) {
+        textView.text = "剩余天数: " + timeLimit + " 天"
+    }
+
+    @JvmStatic
+    @BindingAdapter("recordsCoinNumber", requireAll = false)
+    fun recordsCoinNumber(textView: TextView, coinNumber: Int) {
+        textView.text = "" + coinNumber
+        textView.setTextColor(
+            if (coinNumber > 0) ContextCompat.getColor(
+                textView.context,
+                com.kissspace.module_common.R.color.color_FDC120
+            ) else ContextCompat.getColor(
+                textView.context,
+                com.kissspace.module_common.R.color.color_FE5F55
+            )
+        )
+    }
+
+    @JvmStatic
+    @BindingAdapter("flowKindCoinType", requireAll = false)
+    fun flowKindCoinType(textView: TextView, coinType: String) {
+        var s = ""
+        when (coinType) {
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_ALL -> s = StringUtils.getString(R.string.coinType_all)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_001 -> s = StringUtils.getString(R.string.coinType_001)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_002 -> s = StringUtils.getString(R.string.coinType_002)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_003 -> s = StringUtils.getString(R.string.coinType_003)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_004 -> s = StringUtils.getString(R.string.coinType_004)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_005 -> s = StringUtils.getString(R.string.coinType_005)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_006 -> s = StringUtils.getString(R.string.coinType_006)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_007 -> s = StringUtils.getString(R.string.coinType_007)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_008 -> s = StringUtils.getString(R.string.coinType_008)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_009 -> s = StringUtils.getString(R.string.coinType_009)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_010 -> s = StringUtils.getString(R.string.coinType_010)
+            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_011 -> s = StringUtils.getString(R.string.coinType_011)
+
+        }
+        textView.text = s
     }
 }

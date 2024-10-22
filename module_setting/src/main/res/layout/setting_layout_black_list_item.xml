@@ -9,13 +9,14 @@
             type="com.kissspace.common.model.BlackListBean" />
     </data>
 
+    <!--app:bl_gradient_angle="45"
+        app:bl_gradient_centerColor="#CC1D1E30"
+        app:bl_gradient_endColor="#2D1D42"
+        app:bl_gradient_startColor="#401375-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        app:bl_gradient_angle="45"
-        app:bl_gradient_centerColor="#CC1D1E30"
-        app:bl_gradient_endColor="#2D1D42"
-        app:bl_gradient_startColor="#401375">
+        >
 
         <ImageView
             android:id="@+id/iv_avatar"

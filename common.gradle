@@ -460,6 +460,8 @@ project.ext {
                     extension.api 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
                     extension.api 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
                     extension.api 'de.hdodenhof:circleimageview:3.0.1'
+                    extension.api 'com.github.ljphawk:SwipeMenuLayout:1.05'
+
 
                     extension.debugImplementation 'com.squareup.leakcanary:leakcanary-android:3.0-alpha-1'
                     extension.compileOnly fileTree(dir: "../app/libs", include: ["*.aar"])

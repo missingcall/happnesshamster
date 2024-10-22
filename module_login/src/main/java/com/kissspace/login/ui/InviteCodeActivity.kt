@@ -1,35 +1,26 @@
 package com.kissspace.login.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.ToastUtils
 import com.didi.drouter.annotation.Router
-import com.drake.brv.utils.bindingAdapter
-import com.drake.brv.utils.divider
-import com.drake.brv.utils.linear
-import com.drake.brv.utils.setup
 import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
-import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setTitleBarListener
-import com.kissspace.common.model.UserAccountBean
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.parseIntent
 import com.kissspace.login.viewmodel.LoginViewModel
 import com.kissspace.module_login.R
-import com.kissspace.module_login.databinding.LoginActivityChooseAccoutBinding
 import com.kissspace.module_login.databinding.LoginActivityInviteCodeBinding
 import com.kissspace.network.result.collectData
-import com.kissspace.util.fromJson
 import com.kissspace.util.toast
 
 /**
  *@author: adan
  *@date: 2023/4/6
- *@Description: 选择账号
+ *@Description:
  */
 @Router(path = RouterPath.PATH_INPUT_INVITE_CODE)
 class InviteCodeActivity :

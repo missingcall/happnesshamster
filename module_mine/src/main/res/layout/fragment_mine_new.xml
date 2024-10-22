@@ -28,20 +28,19 @@
                     android:id="@+id/title_bar"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:leftIcon="@null"
                     app:barStyle="transparent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:leftIcon="@null" />
 
-              <!--  <ImageView
-                    android:id="@+id/iv_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:paddingTop="8dp"
-                    android:src="@mipmap/mine_icon_settings"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />-->
+                <!--  <ImageView
+                      android:id="@+id/iv_edit"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginEnd="16dp"
+                      android:paddingTop="8dp"
+                      android:src="@mipmap/mine_icon_settings"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintTop_toTopOf="parent" />-->
 
 
                 <!--
@@ -353,28 +352,62 @@
                     android:background="@drawable/shape_wallet_bg"
                     app:layout_constraintTop_toBottomOf="@id/tv_follow_tip">
 
-                    <androidx.viewpager.widget.ViewPager
+                    <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/vp_wallet"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layout_constraintTop_toBottomOf="@id/tl_pine" />
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tl_pine"
+                    <com.angcyo.tablayout.DslTabLayout
+                        android:id="@+id/dtl_wallet"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dp_50"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
                         app:layout_constraintLeft_toLeftOf="parent"
-
                         app:layout_constraintTop_toTopOf="parent"
-                        app:tabIndicator="@mipmap/icon_tab_indicator"
-                        app:tabIndicatorColor="#FDC120"
-                        app:tabIndicatorFullWidth="false"
-                        app:tabSelectedTextColor="@color/white"
-                        app:tabTextColor="@color/color_ui_sub_text"
 
-                        />
+                        app:tab_deselect_color="@color/color_999999"
+                        app:tab_draw_indicator="true"
+                        app:tab_enable_text_bold="true"
+                        app:tab_indicator_drawable="@mipmap/icon_tab_indicator"
+                        app:tab_indicator_height="6dp"
+                        app:tab_indicator_style="STYLE_BOTTOM"
+                        app:tab_indicator_width="16dp"
+                        app:tab_orientation="HORIZONTAL"
+                        app:tab_select_color="@color/white"
+                        app:tab_text_max_size="17sp"
+                        app:tab_text_min_size="15sp" >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="松果"
+                            android:textSize="11sp"
+                            app:bl_corners_radius="10dp"
+                            app:layout_tab_weight="0.15" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="松子"
+                            android:textSize="11sp"
+                            app:bl_corners_radius="10dp"
+                            app:layout_tab_weight="0.15" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="钻石"
+                            android:textSize="11sp"
+                            app:bl_corners_radius="10dp"
+                            app:layout_tab_weight="0.15" />
+                    </com.angcyo.tablayout.DslTabLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -436,9 +469,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintLeft_toLeftOf="@id/cl_receive_bg"
                     app:layout_constraintRight_toRightOf="@id/cl_receive_bg"
-                    app:layout_constraintTop_toBottomOf="@id/cl_receive_bg"/>
+                    app:layout_constraintTop_toBottomOf="@id/cl_receive_bg"
+                    app:spanCount="4"
+                    tools:itemCount="12"
+                    tools:listitem="@layout/mine_item_inlet" />
 
                 <!--
                                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -505,167 +542,167 @@
                                     &lt;!&ndash;android:text="立即充值"&ndash;&gt;
                                 </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-              <!--  <LinearLayout
-                    android:id="@+id/layout_function"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@mipmap/bg_function"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/cl_receive_bg"
-                    app:layout_constraintRight_toRightOf="@id/cl_receive_bg"
-                    app:layout_constraintTop_toBottomOf="@id/cl_receive_bg">
+                <!--  <LinearLayout
+                      android:id="@+id/layout_function"
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="12dp"
+                      android:background="@mipmap/bg_function"
+                      android:orientation="vertical"
+                      android:padding="12dp"
+                      app:layout_constraintBottom_toBottomOf="parent"
+                      app:layout_constraintLeft_toLeftOf="@id/cl_receive_bg"
+                      app:layout_constraintRight_toRightOf="@id/cl_receive_bg"
+                      app:layout_constraintTop_toBottomOf="@id/cl_receive_bg">
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="其他功能"
-                        android:textColor="@color/color_ui_main_text"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="其他功能"
+                          android:textColor="@color/color_ui_main_text"
+                          android:textSize="14sp"
+                          android:textStyle="bold" />
 
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutAccountSafe"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelIcon="@mipmap/mine_ic_account_safe"
-                        app:mineInletView_labelText="账户安全" />
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutAccountSafe"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelIcon="@mipmap/mine_ic_account_safe"
+                          app:mineInletView_labelText="账户安全" />
 
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutInviteFriends"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelText="邀请好友" />
-                    &lt;!&ndash; app:mineInletView_labelIcon="@mipmap/mine_ic_invite_friends"&ndash;&gt;
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutInviteFriends"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:visibility="gone"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelText="邀请好友" />
+                      &lt;!&ndash; app:mineInletView_labelIcon="@mipmap/mine_ic_invite_friends"&ndash;&gt;
 
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutStore"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelIcon="@mipmap/mine_ic_mine_grade"
-                        app:mineInletView_labelText="我的等级" />
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutStore"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelIcon="@mipmap/mine_ic_mine_grade"
+                          app:mineInletView_labelText="我的等级" />
 
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutActionCenter"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelIcon="@mipmap/mine_ic_activity"
-                        app:mineInletView_labelText="活动中心 " />
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutActionCenter"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:visibility="visible"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelIcon="@mipmap/mine_ic_activity"
+                          app:mineInletView_labelText="活动中心 " />
 
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutTaskCenter"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelIcon="@mipmap/mine_ic_task"
-                        app:mineInletView_labelText="任务中心" />
-
-
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutFeedback"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelIcon="@mipmap/mine_ic_feedback"
-                        app:mineInletView_labelText="意见反馈 " />
-
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutCustomerService"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelIcon="@mipmap/mine_ic_customer_service"
-                        app:mineInletView_labelText="联系客服 " />
-
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutAboutUs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelIcon="@mipmap/mine_ic_about_us"
-                        app:mineInletView_labelText="关于我们" />
-
-                    &lt;!&ndash;            <com.kissspace.mine.widget.MineInletView&ndash;&gt;
-                    &lt;!&ndash;                android:id="@+id/clCharge"&ndash;&gt;
-                    &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;
-                    &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;
-                    &lt;!&ndash;                app:mineInletView_labelText="新人充值超实惠"&ndash;&gt;
-                    &lt;!&ndash;                app:mineInletView_labelColor="#D54EDC"&ndash;&gt;
-                    &lt;!&ndash;                app:mineInletView_arrow="@mipmap/mine_icon_arrow_recharge"&ndash;&gt;
-                    &lt;!&ndash;                goneUnless="@{m.isShowFirstRecharge}"&ndash;&gt;
-                    &lt;!&ndash;                />&ndash;&gt;
-
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutGrade"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelText="我的等级" />
-
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutVistor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelText="我的访客" />
-
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutRoom"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelText="我的房间" />
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutTaskCenter"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:visibility="visible"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelIcon="@mipmap/mine_ic_task"
+                          app:mineInletView_labelText="任务中心" />
 
 
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutFamily"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelText="我的公会" />
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutFeedback"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelIcon="@mipmap/mine_ic_feedback"
+                          app:mineInletView_labelText="意见反馈 " />
 
-                    &lt;!&ndash;                <com.kissspace.mine.widget.MineInletView&ndash;&gt;
-                    &lt;!&ndash;                    android:id="@+id/layoutTaskCenter"&ndash;&gt;
-                    &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;
-                    &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;
-                    &lt;!&ndash;                    app:mineInletView_labelText="任务中心 "&ndash;&gt;
-                    &lt;!&ndash;                    app:mineInletView_labelColor="@color/color_ui_main_text"&ndash;&gt;
-                    &lt;!&ndash;                    android:visibility="gone"&ndash;&gt;
-                    &lt;!&ndash;                    />&ndash;&gt;
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutCustomerService"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelIcon="@mipmap/mine_ic_customer_service"
+                          app:mineInletView_labelText="联系客服 " />
+
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutAboutUs"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelIcon="@mipmap/mine_ic_about_us"
+                          app:mineInletView_labelText="关于我们" />
+
+                      &lt;!&ndash;            <com.kissspace.mine.widget.MineInletView&ndash;&gt;
+                      &lt;!&ndash;                android:id="@+id/clCharge"&ndash;&gt;
+                      &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;
+                      &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;
+                      &lt;!&ndash;                app:mineInletView_labelText="新人充值超实惠"&ndash;&gt;
+                      &lt;!&ndash;                app:mineInletView_labelColor="#D54EDC"&ndash;&gt;
+                      &lt;!&ndash;                app:mineInletView_arrow="@mipmap/mine_icon_arrow_recharge"&ndash;&gt;
+                      &lt;!&ndash;                goneUnless="@{m.isShowFirstRecharge}"&ndash;&gt;
+                      &lt;!&ndash;                />&ndash;&gt;
+
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutGrade"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:visibility="gone"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelText="我的等级" />
+
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutVistor"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:visibility="gone"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelText="我的访客" />
+
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutRoom"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:visibility="gone"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelText="我的房间" />
 
 
-                    &lt;!&ndash;                <com.kissspace.mine.widget.MineInletView&ndash;&gt;
-                    &lt;!&ndash;                    android:id="@+id/layoutCustomerService"&ndash;&gt;
-                    &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;
-                    &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;
-                    &lt;!&ndash;                    app:mineInletView_labelText="在线客服 "&ndash;&gt;
-                    &lt;!&ndash;                    app:mineInletView_labelColor="@color/color_ui_main_text"&ndash;&gt;
-                    &lt;!&ndash;                    />&ndash;&gt;
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutFamily"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:visibility="gone"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelText="我的公会" />
 
-                    <com.kissspace.mine.widget.MineInletView
-                        android:id="@+id/layoutSettings"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:mineInletView_labelColor="@color/color_ui_main_text"
-                        app:mineInletView_labelText="系统设置 " />
+                      &lt;!&ndash;                <com.kissspace.mine.widget.MineInletView&ndash;&gt;
+                      &lt;!&ndash;                    android:id="@+id/layoutTaskCenter"&ndash;&gt;
+                      &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;
+                      &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;
+                      &lt;!&ndash;                    app:mineInletView_labelText="任务中心 "&ndash;&gt;
+                      &lt;!&ndash;                    app:mineInletView_labelColor="@color/color_ui_main_text"&ndash;&gt;
+                      &lt;!&ndash;                    android:visibility="gone"&ndash;&gt;
+                      &lt;!&ndash;                    />&ndash;&gt;
 
 
-                </LinearLayout>-->
+                      &lt;!&ndash;                <com.kissspace.mine.widget.MineInletView&ndash;&gt;
+                      &lt;!&ndash;                    android:id="@+id/layoutCustomerService"&ndash;&gt;
+                      &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;
+                      &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;
+                      &lt;!&ndash;                    app:mineInletView_labelText="在线客服 "&ndash;&gt;
+                      &lt;!&ndash;                    app:mineInletView_labelColor="@color/color_ui_main_text"&ndash;&gt;
+                      &lt;!&ndash;                    />&ndash;&gt;
+
+                      <com.kissspace.mine.widget.MineInletView
+                          android:id="@+id/layoutSettings"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:visibility="gone"
+                          app:mineInletView_labelColor="@color/color_ui_main_text"
+                          app:mineInletView_labelText="系统设置 " />
+
+
+                  </LinearLayout>-->
 
                 <!--<View
                     android:layout_width="wrap_content"

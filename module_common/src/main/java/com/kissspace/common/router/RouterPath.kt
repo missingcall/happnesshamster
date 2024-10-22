@@ -29,6 +29,9 @@ object RouterPath {
     //验证码登录
     const val PATH_LOGIN_PHONE_CODE = PATH_BASE + "login/phone_code"
 
+    //注册
+    const val PATH_ACCOUNT_CREATE = PATH_BASE + "login/account_create"
+
     //输入验证码
     const val PATH_INPUT_SMS_CODE = PATH_BASE + "login/input_sms_code"
 
@@ -216,9 +219,14 @@ object RouterPath {
     //添加意见反馈记录
     const val PATH_ADD_FEEDBACK = PATH_BASE + "feedback_add"
 
-    //我的等级
+    //我的等级 (原财富等级,现平台等级)
     const val PATH_MY_LEVEL = PATH_BASE + "mine_level"
 
+    //邀请好友
+    const val PATH_INVITE = PATH_BASE + "mine_invite"
+
+    //我的仓库
+    const val PATH_MY_WAREHOUSE = PATH_BASE + "mine_warehouse"
 
     const val PATH_TEENAGER_DESCRIBE = PATH_BASE + "mine_teenager_describe"
 
@@ -277,4 +285,7 @@ object RouterPath {
     const val PATH_POINT_EXCHANGE = PATH_BASE + "point_exchange"
 
     const val PATH_POINT_RECORD = PATH_BASE + "point_record"
+
+    //转入转出记录
+    const val PATH_TRANSFER_RECORDS = PATH_BASE + "transfer_records"
 }

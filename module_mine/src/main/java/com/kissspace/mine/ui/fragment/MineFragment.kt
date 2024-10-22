@@ -13,8 +13,12 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BaseObservable
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.angcyo.tablayout.delegate2.ViewPager2Delegate
 import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.setup
 import com.kissspace.common.base.BaseFragment
@@ -59,6 +63,7 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
         // mBinding.tvHour.text = MMKVProvider.userHour.toString() +"h"
 
         initRecyclerView()
+        initWallet()
 
         mBinding.ivCopy.safeClick {
             copyClip(mBinding.tvUserId.text.toString())
@@ -259,6 +264,37 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
 //        initCircleAnim(mBinding.conLike)
     }
 
+    private fun initWallet() {
+        mBinding.vpWallet.adapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount() = 3
+
+            override fun createFragment(position: Int) =
+                when (position) {
+                    0 -> MineWalletFragment.newInstance("001")
+                    1 -> MineWalletFragment.newInstance("002")
+                    else -> MineWalletFragment.newInstance("003")
+                }
+        }
+        ViewPager2Delegate.install(mBinding.vpWallet, mBinding.dtlWallet)
+
+        //待领取松果
+        queryDayIncome()
+
+        mBinding.btnReceive.safeClick {
+            mViewModel.receivePinecone(onSuccess = {
+                ToastUtils.showLong("领取成功")
+                //刷新待领取
+                queryDayIncome()
+            })
+        }
+    }
+
+    private fun queryDayIncome() {
+        mViewModel.queryDayIncome(onSuccess = {
+            mBinding.tvToBeCollectedNum.text = it
+        })
+    }
+
     private fun initRecyclerView() {
         val data = mutableListOf<MineInletItem>()
         data.add(MineInletItem(R.mipmap.mine_ic_account_information, "个人信息"))
@@ -277,24 +313,29 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
         mBinding.recyclerView.grid(4).setup {
             addType<MineInletItem> { R.layout.mine_item_inlet }
             onBind {
+                val clInlet = findView<ConstraintLayout>(R.id.cl_inlet)
                 val tvInlet = findView<TextView>(R.id.tv_inlet)
+                val ivInlet = findView<ImageView>(R.id.iv_inlet)
                 val model = getModel<MineInletItem>()
                 tvInlet.text = model.title
-                tvInlet.setDrawable(model.icon, Gravity.TOP)
-                tvInlet.safeClick {
+                ivInlet.setImageResource(model.icon)
+                clInlet.safeClick {
                     when (model.title) {
-                        "个人信息" -> LogUtils.d("个人信息")
-                        "我的房间" -> LogUtils.d("我的房间")
-                        "我的等级" -> LogUtils.d("我的等级")
-                        "我的仓库" -> LogUtils.d("我的仓库")
-                        "任务中心" -> LogUtils.d("任务中心")
+                        "个人信息" -> jump(RouterPath.PATH_USER_PROFILE, "userId" to MMKVProvider.userId)
+                        "我的房间" -> jumpRoom(roomType = Constants.ROOM_TYPE_PARTY)
+                        "我的等级" -> jump(RouterPath.PATH_MY_LEVEL)
+                        "我的仓库" -> jump(RouterPath.PATH_MY_WAREHOUSE)
+                        "任务中心" -> jump(RouterPath.PATH_TASK_CENTER_LIST)
                         "活动中心" -> LogUtils.d("活动中心")
-                        "装扮商城" -> LogUtils.d("装扮商城")
-                        "邀请好友" -> LogUtils.d("邀请好友")
-                        "黑名单" -> LogUtils.d("黑名单")
-                        "打招呼" -> LogUtils.d("打招呼")
-                        "意见反馈" -> LogUtils.d("意见反馈")
-                        "设置" -> LogUtils.d("设置")
+                        "装扮商城" -> jump(RouterPath.PATH_STORE)
+                        "邀请好友" -> jump(RouterPath.PATH_INVITE)
+                        "黑名单" -> jump(RouterPath.PATH_BLACK_LIST)
+                        "打招呼" -> jump(RouterPath.PATH_SAY_HI_SETTING)
+                        "意见反馈" -> jump(
+                            RouterPath.PATH_FEEDBACK_TYPE_LIST,
+                            "showFeedBack" to mViewModel.feedBackNewMessage.value.orFalse()
+                        )
+                        "设置" -> jump(RouterPath.PATH_SETTING)
                     }
                 }
 

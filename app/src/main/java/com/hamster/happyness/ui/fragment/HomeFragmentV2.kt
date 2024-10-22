@@ -1,4 +1,4 @@
- package com.hamster.happyness.ui.fragment
+package com.hamster.happyness.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -36,18 +36,21 @@ class HomeFragmentV2 : BaseFragment(R.layout.fragment_main_explore) {
     private val mTabList = mutableListOf<String>()
 
     override fun initView(savedInstanceState: Bundle?) {
-         mBinding.lifecycleOwner = this
-         mBinding.ivExploreSearch.safeClick {
-                 jump(RouterPath.PATH_SEARCH)
-         }
+        mBinding.lifecycleOwner = this
+        mBinding.ivExploreSearch.safeClick {
+            jump(RouterPath.PATH_SEARCH)
+        }
         mBinding.titleBar.setMarginStatusBar()
 
         mBinding.tvAchievementRank.safeClick {
-            val url =
+/*            val url =
                 getH5Url(
                     Constants.H5.roomRankUrl,
                     true
                 ) + "&fixedHeight=${BarUtils.getStatusBarHeight()}"
+            jump(RouterPath.PATH_WEBVIEW, "url" to url)*/
+
+            val url = "http://192.168.0.131:7456/web-mobile/web-mobile/index.html"
             jump(RouterPath.PATH_WEBVIEW, "url" to url)
         }
         initViewPager()
@@ -56,13 +59,12 @@ class HomeFragmentV2 : BaseFragment(R.layout.fragment_main_explore) {
     override fun createDataObserver() {
         super.createDataObserver()
         scopeLife {
-            mViewModel.tagListEvent.collect{
+            mViewModel.tagListEvent.collect {
                 addTab(it)
             }
         }
         mViewModel.getExploreFlags()
     }
-
 
 
     private fun initViewPager() {

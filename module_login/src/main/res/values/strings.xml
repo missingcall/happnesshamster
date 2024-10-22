@@ -41,6 +41,9 @@
     <string name="login_input_invite_code">请输入邀请码</string>
     <string name="login_sign_up_now">立即注册</string>
 
-
-
+    <string name="login_account_create">账号注册</string>
+    <string name="login_account_create_hint">为了提高账号安全，请设置不小于8位数字与字母的密码</string>
+    <string name="login_password">登录密码</string>
+    <string name="login_hint_input_password">请输入登录密码</string>
+    <string name="login_confirm">确认</string>
 </resources>

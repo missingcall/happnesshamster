@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kissspace.common.widget.AutoMoveTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:singleLine="true"
+    android:paddingTop="5dp"
+    android:paddingLeft="10dp"
+    android:paddingBottom="5dp"
+    android:textColor="#999999"
+    android:textSize="10sp"
+    android:drawableRight="@mipmap/common_icon_gray_right"
+    app:bl_corners_radius="45dp"
+    app:bl_solid_color="@color/color_32363B"
+    android:gravity="center"
+    />
