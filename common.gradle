@@ -384,6 +384,7 @@ project.ext {
                         extension.implementation extension.project(path: ':module_webview')
                         extension.implementation extension.project(path: ':module_pay')
                         extension.implementation extension.project(path: ':module_dynamic')
+                        extension.implementation extension.project(path: ':module_ui')
                     }
                     break
                 case "module_login":

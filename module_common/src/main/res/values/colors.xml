@@ -188,6 +188,9 @@
     <color name="color_D46ACD">#D46ACD</color>
     <color name="color_F626DE">#F626DE</color>
 
+    <color name="color_1B0753">#1B0753</color>
+    #
+
 
     <color name="color_ui_main_bg">#FFF8F5FA</color>
     <color name="color_ui_main_text">@color/white</color>

@@ -1,21 +1,31 @@
  package com.hamster.happyness.ui.fragment
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.text.SpannableString
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.angcyo.tablayout.DslTabLayout
+import com.angcyo.tablayout.TabGradientCallback
 import com.angcyo.tablayout.delegate2.ViewPager2Delegate
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.SizeUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.kissspace.mine.widget.FirstChargeDialog
 import com.kissspace.pay.utils.PayUtils
 import com.hamster.happyness.R
@@ -94,6 +104,64 @@ class PartyV2Fragment : BaseLazyFragment(R.layout.fragment_main_party_v2) {
                 }
             }
         }
+
+
+        mBinding.tabLayout.observeIndexChange(config = {
+        }, action = {fromIndex: Int, toIndex: Int, reselect: Boolean, fromUser: Boolean->
+            ToastUtils.showShort("${fromIndex}   ${toIndex}    ${reselect}    ${fromUser}")
+        })
+
+
+       /* mBinding.tabLayout.configTabLayoutConfig {
+            tabGradientCallback= object :TabGradientCallback(){
+                override fun onGradientColor(
+                    view: View?,
+                    startColor: Int,
+                    endColor: Int,
+                    percent: Float
+                ) {
+
+                    if (percent == 1.0f){
+                            for (i in 0 until mBinding.tabLayout.childCount){
+                                (mBinding.tabLayout[i] as TextView).let {
+
+                                    val text = it.text
+                                    val spannableString = SpannableString(text)
+                                    // 创建渐变Shader
+                                    val startColor = Color.parseColor("#6699FD") // 渐变起始颜色
+                                    val endColor = Color.parseColor("#6699FD") // 済变结束颜色
+
+                                    val shader = LinearGradient(
+                                        0f, 0f, 0f, it.height.toFloat(),
+                                        startColor, endColor,Shader.TileMode.MIRROR
+                                    )
+                                    it.paint.shader = shader
+                                    it.text = spannableString
+
+
+                                }
+                            }
+
+                        (view as? TextView)?.let {
+                            val text = it.text
+                            val spannableString = SpannableString(text)
+                            // 创建渐变Shader
+                            val startColor = Color.parseColor("#9C4AFA") // 渐变起始颜色
+                            val endColor = Color.parseColor("#6699FD") // 済变结束颜色
+
+                            val shader = LinearGradient(
+                                0f, 0f, 0f, it.height.toFloat(),
+                                startColor, endColor,Shader.TileMode.MIRROR
+                            )
+                            it.paint.shader = shader
+                            it.text = spannableString
+                        }
+                    }
+
+                }
+            }
+        }*/
+
         ViewPager2Delegate.install(mBinding.viewPager, mBinding.tabLayout)
     }
 
