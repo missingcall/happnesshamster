@@ -29,6 +29,7 @@
     <string name="setting_phone_log_off">注销账号</string>
     <string name="setting_login_password">设置密码</string>
     <string name="setting_forget_password">修改密码</string>
+    <string name="setting_find_password">找回密码</string>
     <string name="setting_bind_phone_number">手机号绑定</string>
     <string name="setting_bind_phone_number_hint">请输入手机号码</string>
     <string name="setting_sms_code">验证码</string>

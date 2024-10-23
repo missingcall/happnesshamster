@@ -15,6 +15,7 @@ import com.kissspace.common.http.sendSms
 import com.kissspace.common.http.verificationCode
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.RouterPath.PATH_FORGET_PASSWORD
+import com.kissspace.common.router.RouterPath.PATH_FORGET_PASSWORD_STEP_1
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.countDown
 import com.kissspace.common.util.customToast
@@ -92,7 +93,7 @@ class LoginPswFragment : BaseFragment(R.layout.login_fragment_phone_code_login) 
         }
 
         mBinding.tvForgetPassword.safeClick {
-            jump(PATH_FORGET_PASSWORD)
+            jump(PATH_FORGET_PASSWORD_STEP_1)
         }
 
 

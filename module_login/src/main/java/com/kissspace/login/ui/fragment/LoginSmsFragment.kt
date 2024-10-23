@@ -110,7 +110,7 @@ class LoginSmsFragment : BaseFragment(R.layout.login_fragment_sms_login) {
         }
 
         mBinding.tvForgetPassword.safeClick {
-            jump(PATH_FORGET_PASSWORD)
+            jump(RouterPath.PATH_FORGET_PASSWORD_STEP_1)
         }
 
 

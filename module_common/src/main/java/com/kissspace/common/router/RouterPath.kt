@@ -264,6 +264,12 @@ object RouterPath {
     //忘记密码
     const val PATH_FORGET_PASSWORD = PATH_BASE + "forget_password"
 
+    //找回密码step1
+    const val PATH_FORGET_PASSWORD_STEP_1 = PATH_BASE + "forget_password_step_1"
+
+    //找回密码step2
+    const val PATH_FORGET_PASSWORD_STEP_2 = PATH_BASE + "forget_password_step_2"
+
     //官方认证
     const val PATH_MINE_AUTH = PATH_BASE + "mine_auth"
 

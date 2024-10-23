@@ -49,4 +49,14 @@
     <string name="login_password">登录密码</string>
     <string name="login_hint_input_password">请输入登录密码</string>
     <string name="login_confirm">确认</string>
+
+    <string name="login_verify_by_phone">使用已注册的手机号验证</string>
+    <string name="login_find_password">找回密码</string>
+    <string name="login_phone_verified">注册手机号</string>
+    <string name="login_hint_input_mobile">请输入手机号</string>
+    <string name="login_next_step">下一步</string>
+    <string name="login_improve_account_security">为了提高账号安全 请设置不小于8位数字与字母的密码</string>
+    <string name="login_new_password">请输入新登录密码</string>
+    <string name="login_new_password_again">请再次输入新登录密码</string>
+    <string name="login_phone_num_incorrect_or_not_registered">手机号有误或未注册</string>
 </resources>
