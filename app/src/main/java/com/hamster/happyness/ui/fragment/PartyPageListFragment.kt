@@ -22,6 +22,7 @@ import com.hamster.happyness.databinding.FragmentPartyPageListBinding
 import com.hamster.happyness.viewmodel.PartyViewModel
 import com.kissspace.common.adapter.BannerAdapter
 import com.kissspace.common.base.BaseFragment
+import com.kissspace.common.base.BaseLazyFragment
 import com.kissspace.common.config.AppConfigKey
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
@@ -51,7 +52,7 @@ import com.youth.banner.listener.OnBannerListener
  * @Description: 派对列表fragment
  *
  */
-class PartyPageListFragment : BaseFragment(R.layout.fragment_party_page_list) {
+class PartyPageListFragment : BaseLazyFragment(R.layout.fragment_party_page_list) {
     private val mBinding by viewBinding<FragmentPartyPageListBinding>()
     private val mViewModel by viewModels<PartyViewModel>()
     private lateinit var mTageId: String
@@ -65,11 +66,19 @@ class PartyPageListFragment : BaseFragment(R.layout.fragment_party_page_list) {
         }
     }
 
+    override fun lazyInitView() {
+    }
+
+    override fun lazyLoadData() {
+
+    }
+
     override fun initView(savedInstanceState: Bundle?) {
         arguments?.let {
             mTageId = it.getString("tagId")!!
             position = it.getInt("position", 0)!!
         }
+
         initData()
         initRecyclerView()
     }

@@ -461,6 +461,7 @@ project.ext {
                     extension.api 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
                     extension.api 'de.hdodenhof:circleimageview:3.0.1'
                     extension.api 'com.github.ljphawk:SwipeMenuLayout:1.05'
+                    extension.api 'com.github.RuffianZhong:RWidgetHelper:androidx.v0.0.14'
 
 
                     extension.debugImplementation 'com.squareup.leakcanary:leakcanary-android:3.0-alpha-1'

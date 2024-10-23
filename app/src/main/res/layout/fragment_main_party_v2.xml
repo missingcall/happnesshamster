@@ -13,15 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
-       <com.hjq.bar.TitleBar
-           android:id="@+id/title_bar"
-           app:layout_constraintLeft_toLeftOf="parent"
-           app:layout_constraintTop_toTopOf="parent"
-           android:visibility="invisible"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-       />
+        <com.hjq.bar.TitleBar
+            android:id="@+id/title_bar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/refresh_layout"
@@ -56,6 +55,8 @@
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+
+
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>

@@ -2,6 +2,7 @@
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -22,6 +23,7 @@ import com.hamster.happyness.databinding.FragmentMainPartyBinding
 import com.hamster.happyness.databinding.FragmentMainPartyV2Binding
 import com.hamster.happyness.viewmodel.PartyViewModel
 import com.kissspace.common.base.BaseFragment
+import com.kissspace.common.base.BaseLazyFragment
 import com.kissspace.common.config.Constants
 import com.kissspace.common.router.jump
 import com.kissspace.common.ext.safeClick
@@ -42,17 +44,24 @@ import okhttp3.Route
 
  *
  */
-class PartyV2Fragment : BaseFragment(R.layout.fragment_main_party_v2) {
+class PartyV2Fragment : BaseLazyFragment(R.layout.fragment_main_party_v2) {
     private val mBinding by viewBinding<FragmentMainPartyV2Binding>()
     private val mViewModel by viewModels<PartyViewModel>()
     private val mTabList = mutableListOf<RoomTagListBean>()
+    override fun lazyInitView() {
+        initRefresh()
+        initViewPager()
+    }
+
+    override fun lazyLoadData() {
+        mViewModel.getHomeBanner()
+    }
+
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.titleBar.setMarginStatusBar()
         mBinding.m = mViewModel
         mBinding.lifecycleOwner = this
-        initRefresh()
-        initViewPager()
-        mViewModel.getHomeBanner()
+
     }
 
     private fun initRefresh() {
@@ -91,7 +100,7 @@ class PartyV2Fragment : BaseFragment(R.layout.fragment_main_party_v2) {
     override fun createDataObserver() {
         super.createDataObserver()
         collectData(mViewModel.tagListEvent, onSuccess = {
-            mBinding.refreshLayout.finishRefresh()
+           mBinding.refreshLayout.finishRefresh()
             addTab(it)
         }, onEmpty = {
 
@@ -111,7 +120,7 @@ class PartyV2Fragment : BaseFragment(R.layout.fragment_main_party_v2) {
     @SuppressLint("NotifyDataSetChanged")
     private fun addTab(tabList: List<RoomTagListBean>) {
         if(tabList.isNotEmpty()) {
-            mBinding.refreshLayout.setEnableRefresh(false)
+           mBinding.refreshLayout.setEnableRefresh(false)
         }
         if (areCollectionsDifferent(mTabList, tabList)) {
             mTabList.clear()

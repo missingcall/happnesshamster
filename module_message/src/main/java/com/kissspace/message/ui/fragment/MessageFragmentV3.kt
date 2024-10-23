@@ -119,6 +119,7 @@ class MessageFragmentV3 : BaseFragment(R.layout.fragment_message_v3) {
         } else {
            // mBinding.tvTitle.gravity = Gravity.CENTER
         }
+
         mBinding.ivClearMessage.safeClick {
             CommonConfirmDialog(
                 requireContext(), "忽略未读", "消息气泡会删除掉，但仍然保留消息"

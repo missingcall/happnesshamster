@@ -8,7 +8,6 @@
         <variable
             name="m"
             type="com.kissspace.common.model.LoveWallResponse" />
-
         <variable
             name="vm"
             type="com.kissspace.message.viewmodel.MessageViewModel" />
@@ -19,7 +18,6 @@
         android:id="@+id/llt_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/common_page_background"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,15 +26,18 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
-            <ImageView
+            <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/message_icon_title"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/message"
+                android:textSize="19sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="14dp"
+                />
 
             <ImageView
                 android:id="@+id/iv_clear_message"
@@ -71,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:src="@mipmap/message_icon_close"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,21 +84,21 @@
                 android:layout_height="wrap_content"
                 android:text="@string/message_close_notification"
                 android:textColor="@color/color_ui_main_text"
-                android:textSize="13sp"
+                android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_close"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_open_notification"
-                android:layout_width="77dp"
-                android:layout_height="36dp"
-                android:layout_marginEnd="16dp"
+                android:layout_width="49dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="13dp"
                 android:background="@drawable/common_shape_bg_gradient"
                 android:gravity="center"
                 android:text="@string/message_open_notification"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="9sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
