@@ -433,6 +433,8 @@ class WalletViewModel : BaseViewModel() {
             })
     }
 
+    //获取松果/松子/钻石余额
+    
 
 
 

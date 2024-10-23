@@ -182,4 +182,7 @@ sealed class Event {
     data class GiveGiftByCoinNet(var source: GiftSourceInfo,val tagName:String,val userTagId:String, var gift: GiftInfo) : Event()
     data class GiveGiftByCoinLocal(var tags:List<String>,var number:Int,var  giftInfo: GiftInfo,var giftType:String) : Event()
 //    data class GiveGiftByCoinLocal(var tags:List<String>,var number:Int,var  giftInfo: GiftInfo,val source:String) : Event()
+
+    //刷新钱包中松子/松果/钻石余额 以及 转入转出记录
+    object MsgRefreshWalletEvent : Event()
 }

@@ -5,11 +5,16 @@ import android.view.View
 import androidx.lifecycle.MediatorLiveData
 import com.kissspace.common.base.BaseViewModel
 import com.kissspace.common.model.NewMessageModel
+import com.kissspace.common.model.RoomTagListBean
 import com.kissspace.common.model.UserInfoBean
 import com.kissspace.common.util.customToast
 import com.kissspace.mine.http.MineApi
+import com.kissspace.network.exception.AppException
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
+import com.kissspace.network.result.ResultState
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 
 class MineViewModel : BaseViewModel() {
 
@@ -33,6 +38,9 @@ class MineViewModel : BaseViewModel() {
     //显示首充
     val isShowFirstRecharge = MediatorLiveData<Boolean>()
 
+/*    private val _refreshWalletEvent = MutableSharedFlow<ResultState<String>>()
+    val refreshWalletEvent = _refreshWalletEvent.asSharedFlow()*/
+
     fun queryNewMessageStatus(block: (NewMessageModel) -> Unit) {
         request<NewMessageModel>(
             MineApi.API_QUERY_MESSAGE_STATUS,
@@ -48,7 +56,7 @@ class MineViewModel : BaseViewModel() {
     /**
      * 待领取松果
      */
-    fun queryDayIncome( onSuccess: ((String?) -> Unit)?) {
+    fun queryDayIncome(onSuccess: ((String?) -> Unit)?) {
 
         request<String?>(MineApi.API_HAMSTER_MARKET_QUERY_DAY_INCOME,
             Method.GET,
@@ -63,7 +71,7 @@ class MineViewModel : BaseViewModel() {
     /**
      * 领取松果
      */
-    fun receivePinecone( onSuccess: ((String?) -> Unit)?) {
+    fun receivePinecone(onSuccess: ((String?) -> Unit)?, onError: ((AppException?) -> Unit)?) {
 
         request<String?>(MineApi.API_HAMSTER_MARKET_RECEIVE_PINE_CONE,
             Method.GET,
@@ -72,6 +80,7 @@ class MineViewModel : BaseViewModel() {
             },
             onError = {
                 customToast(it.message)
+                onError?.invoke(it)
             })
     }
 

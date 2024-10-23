@@ -26,27 +26,34 @@ import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setDrawable
 import com.kissspace.common.ext.setMarginStatusBar
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.http.getUserInfo
+import com.kissspace.common.model.RoomTagListBean
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
-import com.kissspace.common.util.ColorUtil
-import com.kissspace.common.util.copyClip
-import com.kissspace.common.util.getH5Url
-import com.kissspace.common.util.jumpRoom
+import com.kissspace.common.util.*
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.widget.CommonHintDialog
 import com.kissspace.mine.viewmodel.FamilyViewModel
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.FragmentMineNewBinding
+import com.kissspace.network.result.ResultState
+import com.kissspace.network.result.collectData
 import com.kissspace.util.logE
 import com.kissspace.util.orFalse
 import com.umeng.socialize.utils.CommonUtil
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlin.random.Random
 import kotlin.time.toDuration
 
 
 class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
+
+    private val _tagListEvent = MutableSharedFlow<ResultState<List<RoomTagListBean>>>()
+    val tagListEvent = _tagListEvent.asSharedFlow()
 
     private val mBinding by viewBinding<FragmentMineNewBinding>()
 
@@ -281,17 +288,24 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
         queryDayIncome()
 
         mBinding.btnReceive.safeClick {
+            //需判断仓鼠状态
+
             mViewModel.receivePinecone(onSuccess = {
+                //TODO 仓鼠健康则领取成功并播放采集动画
                 ToastUtils.showLong("领取成功")
-                //刷新钱包数据 包括松果余额/转入转出记录/待领取松果
+                //刷新钱包数据 包括松果余额(钱包)/转入转出记录/待领取松果
                 refreshWallet()
+            } , onError = {
+                //若仓鼠在濒死中（未喂食进入复活期）
+                ToastUtils.showLong("领取失败，请先领养仓鼠")
+//                refreshWallet()//测试刷新数据
             })
         }
     }
 
     private fun refreshWallet() {
         queryDayIncome()
-
+        FlowBus.post(Event.MsgRefreshWalletEvent)
     }
 
     private fun queryDayIncome() {

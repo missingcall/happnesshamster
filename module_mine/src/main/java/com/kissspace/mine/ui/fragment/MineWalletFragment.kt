@@ -8,9 +8,13 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.didi.drouter.api.DRouter
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.config.Constants
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.model.*
+import com.kissspace.common.provider.IRoomProvider
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.widget.MarqueeFactory
@@ -45,10 +49,13 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         type = arguments?.getString("type")!!
-        marqueeFactory = SimpleNoticeMF(context)
+
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        marqueeFactory = SimpleNoticeMF(context)
+        mBinding.mtvTransfer.setMarqueeFactory(marqueeFactory)
+
         when (type) {
             "001" -> mBinding.iconNuts.setImageResource(R.mipmap.icon_pine_cone)
             "002" -> mBinding.iconNuts.setImageResource(R.mipmap.icon_pine_nut)
@@ -59,10 +66,19 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
     }
 
     private fun initData() {
+        getMoney()
+
         when (type) {
             //松果转入转出查询
             "001" -> {
                 mViewModel.queryCollectRecordList("", "", 0, 5, onSuccess = {
+                    //重置跑马灯状态
+                    list.clear()
+                    if (mBinding.mtvTransfer.isFlipping){
+                        mBinding.mtvTransfer.stopFlipping()
+                    }
+
+
                     list.add("松果转入/转出记录")
                     var s = ""
                     for (record in it?.records!!) {
@@ -84,7 +100,7 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
                         list.add(s + " :   " + record.coinNumber)
                     }
 
-                    mBinding.mtvTransfer.setMarqueeFactory(marqueeFactory)
+
                     marqueeFactory?.setData(list)
                     mBinding.mtvTransfer.startFlipping()
 
@@ -94,6 +110,9 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
                         jump(RouterPath.PATH_TRANSFER_RECORDS)
                     }
                 })
+
+                //获取松果余额
+
 
             }
             //TODO 松子转入转出查询 最好的情况就是原接口加个参数type 请求到的就是松果/松子/钻石
@@ -115,6 +134,28 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
         super.onResume()
         if (!mBinding.mtvTransfer.isFlipping) {
             mBinding.mtvTransfer.startFlipping()
+        }
+    }
+
+    override fun createDataObserver() {
+        super.createDataObserver()
+
+        FlowBus.observerEvent<Event.MsgRefreshWalletEvent>(this) {
+            initData()
+        }
+    }
+
+    private fun getMoney() {
+        mViewModel.getMyMoneyBag {
+            it?.let {
+                mViewModel.walletModel.value = it
+                mBinding.iconNutsNum.text =  when (type) {
+                    "001" -> mViewModel.walletModel.value?.coin.toString()
+                    "002" -> mViewModel.walletModel.value?.accountBalance.toString()
+                    else -> mViewModel.walletModel.value?.diamond.toString()
+                }
+
+            }
         }
     }
 
