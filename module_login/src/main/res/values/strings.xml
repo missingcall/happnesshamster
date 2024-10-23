@@ -7,6 +7,8 @@
     <string name="login_get_sms_code">获取验证码</string>
     <string name="login_login">手机登录/注册</string>
     <string name="login_login_password">密码登录</string>
+    <string name="login_forget_password">忘记密码?</string>
+    <string name="login_login_sms">验证码登录</string>
     <string name="login_please_input_sms_code">请输入短信验证码</string>
     <string name="login_input_sms_code_tips">验证码已发送至 +86 %1$s</string>
     <string name="login_edit_profile_title">完善个人信息</string>
@@ -33,6 +35,7 @@
     <string name="login_phone_number">手机号</string>
     <string name="login_input_mobile">请输入手机号</string>
     <string name="login_input_verify">请输入验证码</string>
+    <string name="login_input_password">请输入密码</string>
     <string name="login_input_nickname">请输入昵称</string>
     <string name="login_receive_identity_code">获取验证码</string>
     <string name="login_sign_in_now">立即登录</string>

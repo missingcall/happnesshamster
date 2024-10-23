@@ -83,6 +83,16 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
                         }
                         list.add(s + " :   " + record.coinNumber)
                     }
+
+                    mBinding.mtvTransfer.setMarqueeFactory(marqueeFactory)
+                    marqueeFactory?.setData(list)
+                    mBinding.mtvTransfer.startFlipping()
+
+                    marqueeFactory?.setOnItemClickListener { _, _ ->
+                        //                ToastUtils.showShort(holder.data)
+                        //跳转转入转出记录页面
+                        jump(RouterPath.PATH_TRANSFER_RECORDS)
+                    }
                 })
 
             }
@@ -92,15 +102,7 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
             //TODO 钻石转入转出查询
             else -> LogUtils.d("000")
         }
-        mBinding.mtvTransfer.setMarqueeFactory(marqueeFactory)
-        marqueeFactory?.setData(list)
-        mBinding.mtvTransfer.startFlipping()
 
-        marqueeFactory?.setOnItemClickListener { _, _ ->
-            //                ToastUtils.showShort(holder.data)
-            //跳转转入转出记录页面
-            jump(RouterPath.PATH_TRANSFER_RECORDS)
-        }
 
     }
 

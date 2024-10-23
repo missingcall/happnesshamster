@@ -418,8 +418,8 @@ class WalletViewModel : BaseViewModel() {
     //钱包记录 最近5条
     fun queryCollectRecordList(startTime: String?,endTime: String?, pageNum: Int, pageSize: Int, onSuccess: ((CollectRecordModel?) -> Unit)?) {
         val param = mutableMapOf<String, Any?>()
-        param["startTime"] = ""
-        param["endTime"] = ""
+        param["startTime"] = startTime
+        param["endTime"] = endTime
         param["pageNum"] = pageNum
         param["pageSize"] = pageSize
         request<CollectRecordModel?>(MineApi.API_QUERY_COLLECT_RECORD_LIST,

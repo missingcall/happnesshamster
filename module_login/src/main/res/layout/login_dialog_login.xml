@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bl_corners_radius="20dp"
+        app:bl_solid_color="#cc0C0411"
+        android:paddingBottom="40dp"
+        >
+
+        <com.angcyo.tablayout.DslTabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_70"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorHeight="0dp"
+            app:tabSelectedTextColor="@color/white"
+            app:tab_deselect_color="@color/color_ui_sub_text_middle"
+            app:tab_draw_indicator="true"
+            app:tab_enable_text_bold="true"
+            app:tab_indicator_drawable="@mipmap/login_bg_tab"
+            app:tab_indicator_style="STYLE_TOP"
+            app:tab_item_is_equ_width="true"
+            app:tab_orientation="HORIZONTAL"
+            app:tab_select_color="@color/color_ui_main_text"
+            app:tab_text_max_size="16sp"
+            app:tab_text_min_size="15sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/login_login_password"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/login_login_sms"
+                android:textSize="16sp" />
+
+        </com.angcyo.tablayout.DslTabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

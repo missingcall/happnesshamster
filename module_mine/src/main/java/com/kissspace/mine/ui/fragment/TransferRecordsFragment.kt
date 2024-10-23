@@ -5,6 +5,7 @@ import android.text.format.DateFormat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.blankj.utilcode.util.LogUtils
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.github.gzuliyujiang.calendarpicker.CalendarPicker
@@ -83,11 +84,11 @@ class TransferRecordsFragment : BaseFragment(R.layout.mine_fragment_transfer_rec
         picker.setSelectedDate(mStartTimeLong)
         picker.setOnSingleDatePickListener { }
         picker.setOnRangeDatePickListener { startDate, endDate ->
-            val dateFormat = DateFormat()
             mStartTime = DateFormat.format("yyyy-MM-dd HH:mm:ss", startDate).toString()
             mEndTime = DateFormat.format("yyyy-MM-dd HH:mm:ss", endDate).toString()
             mBinding.btnDateStart.text = mStartTime
             mBinding.btnDateEnd.text = (mEndTime)
+
         }
         picker.show()
     }

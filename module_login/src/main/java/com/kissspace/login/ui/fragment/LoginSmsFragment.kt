@@ -1,75 +1,64 @@
-package com.kissspace.login.ui
+package com.kissspace.login.ui.fragment
 
 import android.Manifest
 import android.os.Bundle
-import android.os.TokenWatcher
-import android.text.Editable
-import androidx.activity.viewModels
-import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.blankj.utilcode.util.LogUtils
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.didi.drouter.annotation.Router
-import com.kissspace.common.base.BaseActivity
-import com.kissspace.common.binding.dataBinding
-import com.kissspace.common.ext.*
+import com.kissspace.common.base.BaseFragment
+import com.kissspace.common.ext.safeClick
+import com.kissspace.common.ext.setTitleBarListener
 import com.kissspace.common.http.sendSms
 import com.kissspace.common.http.verificationCode
 import com.kissspace.common.router.RouterPath
-import com.kissspace.common.router.RouterPath.PATH_INPUT_SMS_CODE
+import com.kissspace.common.router.RouterPath.PATH_FORGET_PASSWORD
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.countDown
 import com.kissspace.common.util.customToast
+import com.kissspace.login.http.LoginApi
 import com.kissspace.login.viewmodel.LoginViewModel
 import com.kissspace.module_login.R
-import com.kissspace.module_login.databinding.LoginActivityAccountCreateBinding
-import com.kissspace.module_login.databinding.LoginActivityPhoneCodeLoginBinding
+import com.kissspace.module_login.databinding.LoginActivityPasswordBinding
+import com.kissspace.module_login.databinding.LoginFragmentPhoneCodeLoginBinding
+import com.kissspace.module_login.databinding.LoginFragmentSmsLoginBinding
+import com.kissspace.network.net.Method
+import com.kissspace.network.net.request
 import com.kissspace.network.result.collectData
 import com.kissspace.util.addAfterTextChanged
-import com.kissspace.util.logD
 import com.kissspace.util.toJson
-import com.luck.picture.lib.permissions.PermissionUtil
 import com.permissionx.guolindev.PermissionX
 import kotlinx.coroutines.Job
 
 /**
- *
- * @Author: nicko
- * @CreateDate: 2022/11/17
- * @Description: 手机验证码登录页面
- *
+ * @Describe 密码登录
  */
-@Router(path = RouterPath.PATH_ACCOUNT_CREATE)
-class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_create) {
-    private val mBinding by dataBinding<LoginActivityAccountCreateBinding>()
+class LoginSmsFragment : BaseFragment(R.layout.login_fragment_sms_login) {
+    private val mBinding by viewBinding<LoginFragmentSmsLoginBinding>()
     private val mViewModel by viewModels<LoginViewModel>()
 
     var mCountDown: Job? = null
 
+    companion object {
+        fun newInstance(): LoginSmsFragment {
+            return LoginSmsFragment()
+        }
+    }
+
     override fun initView(savedInstanceState: Bundle?) {
-        setTitleBarListener(mBinding.titleBar)
         mBinding.vm = mViewModel
-        mBinding.ivClearPhone.setOnClickListener {
+        mBinding.ivClear.setOnClickListener {
             mBinding.xetPhone.setText("")
         }
-
-        mBinding.ivClearPsw.setOnClickListener {
-            mBinding.xetPassword.setText("")
-        }
-
         mBinding.xetPhone.setSeparator(" ")
         mBinding.xetPhone.setPattern(intArrayOf(3, 4, 4))
         mBinding.xetPhone.addAfterTextChanged {
 //            mViewModel.phoneIconState.set(it?.isNotEmpty())
             mViewModel.getCodeBtnState.set(it?.length == 13)
         }
-        mBinding.etVerify.addAfterTextChanged {
-            mViewModel.btnEnable.set(it?.length == 6 && mBinding.xetPhone.text?.length == 13 && mBinding.xetInvite.length() == 6)
-        }
-
-        mBinding.xetInvite.addAfterTextChanged {
-            mViewModel.btnEnable.set(it?.length == 6 && mBinding.xetPhone.text?.length == 13 && mBinding.xetInvite.length() == 6)
+        mBinding.xetVerify.addAfterTextChanged {
+            mViewModel.btnEnable.set(it?.length == 6 && mBinding.xetPhone.text?.length == 13)
         }
 
 
@@ -85,7 +74,7 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
                     if (allGranted) {
                         if (mViewModel.getCodeBtnState.get()!!) {
                             val phoneNumber = mBinding.xetPhone.text.toString().trim()
-                            sendSms(phoneNumber.replace(" ", ""), "3") {
+                            sendSms(phoneNumber.replace(" ", ""), "2") {
                                 customToast(
                                     StringUtils.getString(
                                         R.string.login_input_sms_code_tips,
@@ -101,28 +90,35 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
                 }
         }
 
-        mBinding.tvConfirm.safeClick {
+        mBinding.tvLogin.safeClick {
             if (mBinding.xetPhone.text.toString().isEmpty()) {
-                customToast("请输入验证码")
+                customToast("请输入手机号")
                 return@safeClick
             }
-            showLoading("正在注册")
+            showLoading("正在登录")
             verificationCode(
                 mBinding.xetPhone.text.toString().replace(" ", ""),
-                mBinding.etVerify.text.toString(),
-                "3",
+                mBinding.xetVerify.text.toString(),
+                "2",
                 onError = {
                     hideLoading()
                 }) {
-                mViewModel.createAccount(
-                    mBinding.xetPhone.text.toString().replace(" ", ""),
-                    mBinding.etVerify.text.toString(),
-                    mBinding.xetInvite.text.toString()
+                mViewModel.requestUserListByPhone(
+                    mBinding.xetPhone.text.toString().replace(" ", "")
                 )
             }
         }
 
+        mBinding.tvForgetPassword.safeClick {
+            jump(PATH_FORGET_PASSWORD)
+        }
 
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mCountDown?.cancel()
     }
 
     override fun createDataObserver() {
@@ -130,7 +126,7 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
         collectData(mViewModel.token, onSuccess = {
             hideLoading()
             mViewModel.loginIm(it, onSuccess = {
-                finish()
+                activity?.finish()
             })
         }, onError = {
             hideLoading()
@@ -163,15 +159,14 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
             hideLoading()
         }, onEmpty = {
             hideLoading()
-        })
+            //填写邀请码
+            jump(
+                RouterPath.PATH_INPUT_INVITE_CODE,
 
-        collectData(mViewModel.createAccounts, onSuccess = {
-            mViewModel.requestUserListByPhone(it.mobile)
+                "phone" to mBinding.xetPhone.text.toString().trim().replace(" ", ""),
+                "smsCode" to mBinding.xetVerify.text.toString().trim().replace(" ", "")
+            )
 
-        }, onError = {
-            hideLoading()
-        }, onEmpty = {
-            hideLoading()
         })
     }
 
@@ -185,10 +180,4 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
             mCountDown?.cancel()
         })
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mCountDown?.cancel()
-    }
-
 }

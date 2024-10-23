@@ -283,10 +283,15 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
         mBinding.btnReceive.safeClick {
             mViewModel.receivePinecone(onSuccess = {
                 ToastUtils.showLong("领取成功")
-                //刷新待领取
-                queryDayIncome()
+                //刷新钱包数据 包括松果余额/转入转出记录/待领取松果
+                refreshWallet()
             })
         }
+    }
+
+    private fun refreshWallet() {
+        queryDayIncome()
+
     }
 
     private fun queryDayIncome() {
@@ -425,4 +430,9 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
     }
 
     data class MineInletItem(var icon: Int, var title: String = "") : BaseObservable()
+
+    override fun createDataObserver() {
+        super.createDataObserver()
+
+    }
 }

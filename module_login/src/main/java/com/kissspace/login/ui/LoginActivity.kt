@@ -27,6 +27,7 @@ import com.kissspace.common.util.mmkv.isLogin
 import com.kissspace.login.umeng.QuickLoginManager
 import com.kissspace.login.umeng.callback.QuickLoginCallback
 import com.kissspace.login.viewmodel.LoginViewModel
+import com.kissspace.login.widget.LoginDialog
 import com.kissspace.login.widget.PrivacyDialog
 import com.kissspace.module_login.R
 import com.kissspace.module_login.databinding.LoginActivityLoginBinding
@@ -69,7 +70,8 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
         initAgreement()
         mBinding.tvLogin.setOnClickListener {
             if (mBinding.cbAgree.isChecked) {
-                jump(RouterPath.PATH_LOGIN_PHONE_CODE)
+//                jump(RouterPath.PATH_LOGIN_PHONE_CODE)
+                LoginDialog.newInstance().show(supportFragmentManager)
             } else {
                 customToast("请勾选同意后登录")
             }
