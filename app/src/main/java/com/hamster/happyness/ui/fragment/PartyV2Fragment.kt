@@ -67,6 +67,13 @@ class PartyV2Fragment : BaseLazyFragment(R.layout.fragment_main_party_v2) {
         mViewModel.getHomeBanner()
     }
 
+    override fun lazyClickListener() {
+        super.lazyClickListener()
+        mBinding.tvSearch.safeClick {
+            jump(RouterPath.PATH_SEARCH)
+        }
+    }
+
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.titleBar.setMarginStatusBar()
         mBinding.m = mViewModel
@@ -105,11 +112,6 @@ class PartyV2Fragment : BaseLazyFragment(R.layout.fragment_main_party_v2) {
             }
         }
 
-
-        mBinding.tabLayout.observeIndexChange(config = {
-        }, action = {fromIndex: Int, toIndex: Int, reselect: Boolean, fromUser: Boolean->
-            ToastUtils.showShort("${fromIndex}   ${toIndex}    ${reselect}    ${fromUser}")
-        })
 
 
        /* mBinding.tabLayout.configTabLayoutConfig {

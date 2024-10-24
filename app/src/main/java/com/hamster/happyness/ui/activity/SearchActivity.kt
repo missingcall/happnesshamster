@@ -87,7 +87,7 @@ class SearchActivity : com.kissspace.common.base.BaseActivity(R.layout.app_activ
         }
 
         mBinding.ivClear.safeClick {
-            CommonConfirmDialog(this@SearchActivity, "是否清空所有搜索记录？") {
+            CommonConfirmDialog(this@SearchActivity, title = "", subTitle = "是否清空所有搜索记录？") {
                 if (this) {
                     MMKVProvider.searchContent = ""
                     mBinding.flowlayout.removeAllViewsInLayout()
@@ -139,6 +139,8 @@ class SearchActivity : com.kissspace.common.base.BaseActivity(R.layout.app_activ
             R.mipmap.app_search_choose_user,
             false
         )
+
+
         mBinding.customTabLayout.addTabItem(test1)
         mBinding.customTabLayout.addTabItem(test2)
     }

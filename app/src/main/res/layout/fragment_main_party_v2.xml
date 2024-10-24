@@ -28,6 +28,7 @@
             app:layout_constraintTop_toBottomOf="@+id/title_bar"
             >
             <com.ruffian.library.widget.RTextView
+                android:id="@+id/tvSearch"
                 android:layout_width="174dp"
                 android:layout_height="37dp"
                 android:textSize="12sp"

@@ -105,7 +105,7 @@ class SearchRoomFragment : BaseFragment(R.layout.app_fragment_search) {
                 if (mBinding.rvList.bindingAdapter.models?.size == it.chatRoomResponsePage.total) {
                     mBinding.pageRefreshLayout.finishLoadMoreWithNoMoreData()
                 }else{
-                    mBinding.pageRefreshLayout.setNoMoreData(false);
+                    mBinding.pageRefreshLayout.setNoMoreData(false)
                 }
             }
         }

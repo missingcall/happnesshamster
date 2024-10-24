@@ -40,7 +40,7 @@ class ClearEditText : AppCompatEditText {
 
     private fun init(context: Context) {
         //实例化右边的清除图片 如果要投入使用最好不要写死，需要后续封装，通过自定义属性设置
-        mLeftDrawable = ResourcesCompat.getDrawable(resources, R.mipmap.common_icon_search, null)
+        mLeftDrawable = ResourcesCompat.getDrawable(resources, R.drawable.common_search_new, null)
         mClearDrawable =
             ResourcesCompat.getDrawable(resources, R.mipmap.common_icon_search_delete, null)
         addTextChangedListener(object : TextWatcher {
@@ -67,7 +67,7 @@ class ClearEditText : AppCompatEditText {
     }
 
     private fun setLeftDrawable() {
-        mLeftDrawable!!.setBounds(0, 0, ConvertUtils.dp2px(25f), ConvertUtils.dp2px(26f))
+        mLeftDrawable!!.setBounds(0, 0, ConvertUtils.dp2px(16f), ConvertUtils.dp2px(16f))
         setCompoundDrawables(
             mLeftDrawable, null, null, null
         )
