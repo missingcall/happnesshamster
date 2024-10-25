@@ -25,7 +25,7 @@ object Api {
     const val API_SUBMIT_INVITATION_CODE= "/hamster-user/invitationCodeReward/submit"
 
     //搜索
-    const val API_SEARCH_CONTENT = "/hamster-search/search/search/home"
+    const val API_SEARCH_CONTENT = "/hamster-user/search/search/home"
 
     //实名认证
     const val API_IDENTITY_AUTH_VIEW = "/hamster-user/authentication/insertUserAuthentication"
