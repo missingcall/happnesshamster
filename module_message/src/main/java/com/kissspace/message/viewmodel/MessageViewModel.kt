@@ -62,16 +62,21 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
     private val _updateRecentEvent = MutableSharedFlow<ResultState<List<ChatListModel>>>()
     val updateRecentEvent = _updateRecentEvent.asSharedFlow()
 
+
+    //banner消息event
     private val _bannerEvent = MutableSharedFlow<ResultState<LoveWallResponse>>()
     val bannerEvent = _bannerEvent.asSharedFlow()
 
 
+    //系统消息event
     private val _systemMessageEvent = MutableSharedFlow<ResultState<SystemMessageResponse>>()
     val systemMessageEvent = _systemMessageEvent.asSharedFlow()
 
 
     private val _dynamicMessageCountEvent = MutableSharedFlow<ResultState<DynamicMessageNotice>>()
     val dynamicMessageCountEvent = _dynamicMessageCountEvent.asSharedFlow()
+
+
 
     private val recentContactObserver = Observer<List<RecentContact>> {
         if (it != null && it.isNotEmpty()) {
@@ -81,13 +86,13 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
         }
     }
 
-    fun getMessageMenu():MutableList<ItemMessageMenu>{
-         val messageList : MutableList<ItemMessageMenu> = ArrayList()
+    fun getMessageMenu(): MutableList<ItemMessageMenu> {
+        val messageList: MutableList<ItemMessageMenu> = ArrayList()
         return messageList.apply {
             add(ItemMessageMenu("真爱墙", R.mipmap.message_menu_icon1))
-            add(ItemMessageMenu("系统通知",R.mipmap.message_menu_icon2))
-            add(ItemMessageMenu("互动消息",R.mipmap.message_menu_icon3))
-            add(ItemMessageMenu("任务消息",R.mipmap.message_menu_icon4))
+            add(ItemMessageMenu("系统通知", R.mipmap.message_menu_icon2))
+            add(ItemMessageMenu("互动消息", R.mipmap.message_menu_icon3))
+            add(ItemMessageMenu("任务消息", R.mipmap.message_menu_icon4))
         }
     }
 
@@ -96,7 +101,6 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
         super.onCreate(owner)
         NIMClient.getService(MsgServiceObserve::class.java)
             .observeRecentContact(recentContactObserver, true)
-
     }
 
 
@@ -108,13 +112,16 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
 
 
     fun requestSystemMessage() {
-//        val param = mutableMapOf<String, Any?>()
-//        param["pageNum"] = 1
-//        param["pageSize"] = 1
-//        param["os"] = "android"
-//        request(MessageApi.API_SYSTEM_MESSAGE, Method.GET, param, state = _systemMessageEvent)
+        val param = mutableMapOf<String, Any?>()
+        param["pageNum"] = 1
+        param["pageSize"] = 1
+        param["os"] = "android"
+        request(MessageApi.API_SYSTEM_MESSAGE, Method.GET, param, state = _systemMessageEvent)
     }
 
+    /**
+     * 请求banner信息
+     */
     fun requestBannerData() {
         val param = mutableMapOf<String, Any?>()
         param["recodeType"] = "002"
@@ -158,6 +165,7 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
         )
     }
 
+
     private fun parseData(list: List<RecentContact>, isUpdate: Boolean) {
         val chatList = mutableListOf<ChatListModel>()
         val accounts = list.map { it.contactId }
@@ -169,7 +177,7 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
                     result: List<NimUserInfo>?,
                     exception: Throwable?
                 ) {
-                    if (result != null&&result.isNotEmpty()) {
+                    if (result != null && result.isNotEmpty()) {
                         list.forEachIndexed { index, recentContact ->
                             val extension = parseUserExtension(result[index].extension)
                             val model = ChatListModel(
@@ -198,7 +206,7 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
     }
 
     fun updateUnReadCount() {
-        if(NIMClient.getStatus() == StatusCode.LOGINED) {
+        if (NIMClient.getStatus() == StatusCode.LOGINED) {
             unReadCount.set(NIMClient.getService(MsgService::class.java).totalUnreadCount + MMKVProvider.systemMessageUnReadCount)
         }
     }

@@ -31,5 +31,4 @@ class ChatActivity : com.kissspace.common.base.BaseActivity(R.layout.message_act
     }
 
 
-
 }
