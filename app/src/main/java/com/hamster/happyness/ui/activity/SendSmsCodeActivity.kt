@@ -1,4 +1,4 @@
- package com.hamster.happyness.ui.activity
+package com.hamster.happyness.ui.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.didi.drouter.annotation.Router
-import com.kissspace.util.toast
 import com.hamster.happyness.R
 import com.hamster.happyness.databinding.AppLayoutBindPhoneNumberBinding
 import com.kissspace.common.ext.*
@@ -23,10 +22,8 @@ import com.kissspace.common.http.verificationCode
 import com.kissspace.common.router.jump
 import com.kissspace.common.router.parseIntent
 import com.kissspace.common.util.mmkv.MMKVProvider
-import com.kissspace.util.addAfterTextChanged
+import com.kissspace.util.*
 import kotlinx.coroutines.Job
-import com.kissspace.util.logE
-import com.kissspace.util.orZero
 
 /**
  *
@@ -49,8 +46,8 @@ class SendSmsCodeActivity :
     private val transferCoin by parseIntent<Double>(defaultValue = 0.0)
 
     private var smsType: String? = null
-
     private var bindPhoneStepCount: Int? = null
+    private var phoneNumberReal: String? = ""
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
@@ -69,26 +66,31 @@ class SendSmsCodeActivity :
         mBinding.etCode.addAfterTextChanged {
             mViewModel.verificationCode.value = it.toString()
         }
+
         when (type) {
             CancelAccount -> {
                 smsType = "4"
                 mBinding.tvConfirm.text = "注销"
                 mBinding.etPhoneNumber.isEnabled = false
-                mBinding.etPhoneNumber.setText(MMKVProvider.userPhone)
+                mBinding.etPhoneNumber.setText(mobileEncrypt(MMKVProvider.userPhone))
+                phoneNumberReal = MMKVProvider.userPhone
                 mBinding.titleBar.title = "注销账号"
             }
 
             BindPhone -> {
                 if (bindPhoneStepCount == 0) {
                     smsType = "11"
-                    mBinding.etPhoneNumber.setText(MMKVProvider.userPhone)
+                    mBinding.etPhoneNumber.setText(mobileEncrypt(MMKVProvider.userPhone))
+                    phoneNumberReal = MMKVProvider.userPhone
                     mBinding.etPhoneNumber.isEnabled = false
                 } else {
                     smsType = "6"
                     mBinding.etPhoneNumber.setText("")
+                    mBinding.etPhoneNumber.hint = "请输入新手机号"
+                    mBinding.tvPhoneBindNow.text = getString(com.kissspace.module_setting.R.string.setting_security_new_phone)
                     mBinding.etCode.setText("")
                     mBinding.etPhoneNumber.isEnabled = true
-                    mBinding.llRoot.requestFocus()
+                    mBinding.etPhoneNumber.requestFocus()
                     finishCountDown()
                 }
                 mBinding.titleBar.title = "手机号码绑定"
@@ -107,7 +109,7 @@ class SendSmsCodeActivity :
             }
         }
         mBinding.tvGetCode.safeClick {
-            sendSms(mViewModel.phoneNumber.value.toString(), smsType.orEmpty()) {
+            sendSms(phoneNumberReal ?: mViewModel.phoneNumber.value.toString(), smsType.orEmpty()) {
                 //倒计时60秒
                 mCountDown = countDown(60, reverse = false, scope = lifecycleScope, onTick = {
                     mBinding.tvGetCode.text = "${it}s"
@@ -123,12 +125,12 @@ class SendSmsCodeActivity :
             when (type) {
                 CancelAccount -> {
                     verificationCode(
-                        mBinding.etPhoneNumber.text.toString(),
+                        phoneNumberReal ?: mBinding.etPhoneNumber.text.toString(),
                         mBinding.etCode.text.toString(),
                         smsType.orEmpty()
                     ) {
                         mViewModel.cancelAccount(
-                            mBinding.etPhoneNumber.text.toString(),
+                            phoneNumberReal ?: mBinding.etPhoneNumber.text.toString(),
                             mBinding.etCode.text.toString()
                         ) {
                             toast("注销成功")
@@ -141,7 +143,7 @@ class SendSmsCodeActivity :
                 BindPhone -> {
                     if (bindPhoneStepCount == 0) {
                         verificationCode(
-                            mBinding.etPhoneNumber.text.toString(),
+                            phoneNumberReal ?: mBinding.etPhoneNumber.text.toString(),
                             mBinding.etCode.text.toString(),
                             smsType.orEmpty()
                         ) {
@@ -165,7 +167,7 @@ class SendSmsCodeActivity :
 
                 TransferAccount -> {
                     mViewModel.transferVerification(
-                        mBinding.etPhoneNumber.text.toString(),
+                        phoneNumberReal ?: mBinding.etPhoneNumber.text.toString(),
                         mBinding.etCode.text.toString(),
                         smsType.orEmpty()
                     ) {

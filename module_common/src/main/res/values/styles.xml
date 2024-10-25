@@ -15,6 +15,7 @@
     <style name="NumberTextStyle">
         <item name="android:fontFamily">@font/dinpo</item>
     </style>
+
     <style name="Theme.CustomBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
@@ -49,7 +50,7 @@
         <item name="android:background">@drawable/common_bg_red_dot</item>
     </style>
 
-    <style name="RedDotStyle_socialize" parent="android:Widget" >
+    <style name="RedDotStyle_socialize" parent="android:Widget">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">10dp</item>
         <item name="android:gravity">center</item>
@@ -85,6 +86,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/color_FFFD62</item>
     </style>
+
     <style name="DJSTextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -127,7 +129,7 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
     </style>
 
-    <style name="commonTopBar" parent="android:Widget" >
+    <style name="commonTopBar" parent="android:Widget">
         <item name="android:layout_height">@dimen/common_topBar_height</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="titleColor">@color/color_ui_main_text</item>
@@ -140,7 +142,7 @@
         <item name="leftIcon">@mipmap/common_icon_back_white</item>
     </style>
 
-    <style name="indication" parent="android:Widget" >
+    <style name="indication" parent="android:Widget">
         <item name="android:layout_height">@dimen/common_topBar_height</item>
         <item name="tab_deselect_color">@color/color_ui_sub_text_light</item>
         <item name="tab_draw_indicator">true</item>
@@ -167,6 +169,7 @@
         <item name="bl_solid_color">#FFA76AF8</item>
 
     </style>
+
     <style name="confirm" parent="android:Widget">
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center</item>
@@ -214,4 +217,45 @@
         <attr name="outlineColor" format="color" />
         <attr name="inlineColor" format="color" />
     </declare-styleable>
+
+    <style name="SupperTextStyleItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">53dp</item>
+        <item name="sLeftTextSize">14sp</item>
+        <item name="sDividerLineType">none</item>
+        <item name="sLeftTextColor">@color/white</item>
+        <item name="sRightIconRes">@mipmap/common_icon_gray_right</item>
+        <item name="sRightTextColor">@color/white</item>
+        <item name="sRightTextSize">14dp</item>
+        <item name="sBackgroundDrawableRes">@drawable/common_bg_black23_radius15</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+    </style>
+
+    <style name="commonSettingItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">58dp</item>
+        <item name="android:background">@drawable/common_bg_black23_radius15</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+
+    </style>
+
+    <!--底部确认按钮-->
+    <style name="commonBottomConfirmationItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">72dp</item>
+        <item name="android:background">@drawable/common_btn_selector_blue_radius15</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginBottom">34dp</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+
+
+    </style>
 </resources>

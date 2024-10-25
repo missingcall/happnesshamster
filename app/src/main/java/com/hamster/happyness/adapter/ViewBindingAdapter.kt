@@ -18,6 +18,7 @@ import com.kissspace.common.util.handleSchema
 import com.kissspace.module_room.R
 import com.kissspace.util.loadImage
 import com.kissspace.util.loadImageCircle
+import com.kissspace.util.logE
 
 object ViewBindingAdapter {
     @JvmStatic

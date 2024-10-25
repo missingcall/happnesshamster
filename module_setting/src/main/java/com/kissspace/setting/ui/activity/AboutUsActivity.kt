@@ -15,6 +15,7 @@ import com.kissspace.common.util.getH5Url
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.module_setting.R
 import com.kissspace.module_setting.databinding.SettingActivityAboutUsBinding
+import com.kissspace.util.appName
 import com.kissspace.util.appVersionName
 import com.kissspace.util.isAppDebug
 import com.kissspace.util.logE
@@ -36,58 +37,42 @@ class AboutUsActivity : com.kissspace.common.base.BaseActivity(R.layout.setting_
     override fun initView(savedInstanceState: Bundle?) {
         setTitleBarListener(mBinding.titleBar)
         if (isAppDebug) {
-            val props = Properties();
-            try {
-                props.load(applicationContext.assets.open("version.properties"))
-                val version = props.getProperty("VERSION_TEST_CODE")
-                logE("version$version")
-                mBinding.tvVersions.text = "测试版本号(${version})"
-                when (BaseUrlConfig.BASEURL_RELEASE) {
-                    BaseUrlConfig.BASEURL_RELEASE -> {
-                        mBinding.tvVersions.text =
-                            java.lang.StringBuilder(mBinding.tvVersions.text).append("正式")
-                    }
 
-//                    BaseUrlConfig.BASEURL_PRE -> {
-//                        mBinding.tvVersions.text =
-//                            java.lang.StringBuilder(mBinding.tvVersions.text).append("预发")
-//                    }
-
-//                    BaseUrlConfig.BASEURL_TEST -> {
-//                        mBinding.tvVersions.text =
-//                            java.lang.StringBuilder(mBinding.tvVersions.text).append("测试")
-//                    }
+            mBinding.tvLabel.text = appName
+            mBinding.tvVersions.text = "测试版本号(${appVersionName})"
+            when (BaseUrlConfig.BASEURL_RELEASE) {
+                BaseUrlConfig.BASEURL_RELEASE -> {
+                    mBinding.tvVersions.text =
+                        java.lang.StringBuilder(mBinding.tvVersions.text).append("正式")
                 }
-            } catch (e: IOException) {
-                e.printStackTrace()
-                logE("---" + e.message)
             }
         } else {
+            mBinding.tvLabel.text = appName
             mBinding.tvVersions.text = "当前版本：${appVersionName}"
         }
 
-        mBinding.layoutPrivacyUrl.safeClick {
+        mBinding.stvPrivacyUrl.safeClick {
             jump(
                 RouterPath.PATH_WEBVIEW,
                 "url" to getH5Url(Constants.H5.privacyUrl),
                 "showTitle" to true
             )
         }
-        mBinding.layoutUserAgreement.safeClick {
+        mBinding.stvUserAgreement.safeClick {
             jump(
                 RouterPath.PATH_WEBVIEW,
                 "url" to getH5Url(Constants.H5.userAgreementUrl),
                 "showTitle" to true
             )
         }
-        mBinding.layoutUserActionAgreement.safeClick {
+        mBinding.stvUserActionAgreement.safeClick {
             jump(
                 RouterPath.PATH_WEBVIEW,
                 "url" to getH5Url(Constants.H5.userActionAgreementUrl),
                 "showTitle" to true
             )
         }
-        mBinding.layoutCommunityRule.safeClick {
+        mBinding.stvCommunityRule.safeClick {
             jump(
                 RouterPath.PATH_WEBVIEW,
                 "url" to getH5Url(Constants.H5.anchorRulUrl),
@@ -95,7 +80,7 @@ class AboutUsActivity : com.kissspace.common.base.BaseActivity(R.layout.setting_
             )
         }
 
-        mBinding.layoutPartyRule.safeClick {
+        mBinding.stvPartyRule.safeClick {
             jump(
                 RouterPath.PATH_WEBVIEW,
                 "url" to getH5Url(Constants.H5.liveRoomRulUrl),
@@ -103,7 +88,7 @@ class AboutUsActivity : com.kissspace.common.base.BaseActivity(R.layout.setting_
             )
         }
 
-        mBinding.layoutBroadRule.safeClick {
+        mBinding.stvBroadRule.safeClick {
             jump(
                 RouterPath.PATH_WEBVIEW,
                 "url" to getH5Url(Constants.H5.applicationRulUrl),

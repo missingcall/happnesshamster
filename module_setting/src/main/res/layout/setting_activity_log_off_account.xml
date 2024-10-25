@@ -6,7 +6,7 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -23,28 +23,36 @@
             app:title="注销账号" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_setting_request_log_off_account"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
             android:text="@string/setting_request_log_off_account"
             android:textColor="@color/white"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:textSize="16sp" />
-
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_bar" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/ll_tips1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp">
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting_request_log_off_account">
 
             <View
                 android:layout_width="6dp"
                 android:layout_height="6dp"
-                app:bl_corners_radius="6dp"
                 android:layout_marginTop="5dp"
+                app:bl_corners_radius="6dp"
                 app:bl_solid_color="@color/white" />
 
             <TextView
@@ -52,23 +60,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:text="@string/setting_log_off_account_tips1"
-                android:textColor="@color/white"
-                android:textSize="13sp" />
+                android:textColor="@color/color_FE5F55"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/ll_tips2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp">
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_tips1">
 
             <View
                 android:layout_width="6dp"
                 android:layout_height="6dp"
-                app:bl_corners_radius="6dp"
                 android:layout_marginTop="5dp"
+                app:bl_corners_radius="6dp"
                 app:bl_solid_color="@color/white" />
 
             <TextView
@@ -77,22 +89,26 @@
                 android:layout_marginStart="6dp"
                 android:text="@string/setting_log_off_account_tips2"
                 android:textColor="@color/white"
-                android:textSize="13sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/ll_tips3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp">
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_tips2">
 
             <View
                 android:layout_width="6dp"
                 android:layout_height="6dp"
-                app:bl_corners_radius="6dp"
                 android:layout_marginTop="5dp"
+                app:bl_corners_radius="6dp"
                 app:bl_solid_color="@color/white" />
 
             <TextView
@@ -101,23 +117,27 @@
                 android:layout_marginStart="6dp"
                 android:text="@string/setting_log_off_account_tips3"
                 android:textColor="@color/white"
-                android:textSize="13sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/ll_tips4"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp">
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_tips3">
 
             <View
                 android:layout_width="6dp"
                 android:layout_height="6dp"
-                app:bl_corners_radius="6dp"
                 android:layout_marginTop="5dp"
+                app:bl_corners_radius="6dp"
                 app:bl_solid_color="@color/white" />
 
             <TextView
@@ -126,21 +146,44 @@
                 android:layout_marginStart="6dp"
                 android:text="@string/setting_log_off_account_tips4"
                 android:textColor="@color/white"
-                android:textSize="13sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
+        <CheckBox
+            android:id="@+id/cb_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="12dp"
+            android:buttonTint="@color/color_5A60FF"
+            android:shadowColor="@color/color_5A60FF"
+            app:layout_constraintBottom_toTopOf="@id/tv_submit"
+            app:layout_constraintLeft_toLeftOf="@id/tv_setting_request_log_off_account" />
+
+        <TextView
+            android:id="@+id/tv_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/cb_agree"
+            app:layout_constraintLeft_toRightOf="@id/cb_agree"
+            app:layout_constraintTop_toTopOf="@id/cb_agree"
+            android:text="1111"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            />
+
         <TextView
             android:id="@+id/tv_submit"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="33dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
+            style="@style/commonBottomConfirmationItem"
             commonBtnState="@{true}"
+            android:gravity="center"
             android:text="@string/setting_log_off_account_submit"
             android:textColor="@color/white"
-            android:textSize="16sp" />
-    </LinearLayout>
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

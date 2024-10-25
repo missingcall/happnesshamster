@@ -10,7 +10,7 @@
     <string name="common_take_photo">拍照</string>
     <string name="common_open_album">从相册中选择</string>
     <string name="common_my_room_title">选择房间</string>
-    <string name="common_identity_auth_tips">根据相关法律法规，在使用直播、提现服务之前需要填写身份信息进行实名认证； 请您填写真实有效的身份信息，请您明确，实名信息将会被作为身份识别.判定您的趣玩账号使用归属权的依据； 您所提交的身份信息，我们将会严密保管，不会被用于其他用途； 同一个身份证最多认证10个趣玩账号。</string>
+    <string name="common_identity_auth_tips">*请填写真实有效的身份信息，否则无法使用部分服务\n*若身份信息填写错误，请联系客服处理</string>
     <string name="common_biometric_authentic_tip">拍摄您本人人脸，请确保正对手机，光线充足</string>
     <string name="common_room_party">派对房</string>
     <string name="common_room_video">游戏房</string>

@@ -2,9 +2,7 @@
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ContextWrapper
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +10,6 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -119,29 +116,24 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
         mBinding.tabHome.setOnClickListener {
             if(index == 0) return@setOnClickListener
             mBinding.viewPager.setCurrentItem(0, false)
-            bottomTabStyleChange(false)
         }
 
         mBinding.tabSquare.setOnClickListener {
             if(index == 1) return@setOnClickListener
             mBinding.viewPager.setCurrentItem(1, false)
-            bottomTabStyleChange(false)
         }
 
         mBinding.tabDynamic.setOnClickListener {
             if(index == 2) return@setOnClickListener
             mBinding.viewPager.setCurrentItem(2, false)
-            bottomTabStyleChange(true)
         }
         mBinding.tabMessage.setOnClickListener {
             if(index == 3) return@setOnClickListener
             mBinding.viewPager.setCurrentItem(3, false)
-            bottomTabStyleChange(false)
         }
         mBinding.tabMine.setOnClickListener {
             if(index == 4) return@setOnClickListener
             mBinding.viewPager.setCurrentItem(4, false)
-            bottomTabStyleChange(false)
         }
     }
 
@@ -410,35 +402,5 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             }
         })
     }
-
-
-    /**
-     *  @param isSlectPart 是否选中party tab
-     */
-    private fun bottomTabStyleChange(isSlectPart:Boolean){
-        if (isSlectPart){
-            mBinding.appSelectExplore.setImageResource(R.mipmap.app_ic_home_purple)
-            mBinding.appSelectSquare.setImageResource(R.mipmap.app_ic_company_purple)
-            mBinding.appSelectParty.setImageResource(R.mipmap.app_ic_party_purple)
-            mBinding.appSelectMessage.setImageResource(R.mipmap.app_ic_message_purple)
-            mBinding.appSelectMine.setImageResource(R.mipmap.app_ic_mine_purple)
-            mBinding.bottomBar.setBackgroundColor(ContextCompat.getColor(this,
-                com.kissspace.module_common.R.color.color_1B0753))
-
-        }else{
-            mBinding.appSelectExplore.setImageResource(R.drawable.app_select_home)
-            mBinding.appSelectSquare.setImageResource(R.drawable.app_select_company)
-            mBinding.appSelectParty.setImageResource(R.drawable.app_select_party)
-            mBinding.appSelectMessage.setImageResource(R.drawable.app_select_message)
-            mBinding.appSelectMine.setImageResource(R.drawable.app_select_mine)
-            mBinding.bottomBar.setBackgroundColor(ContextCompat.getColor(this,
-                com.kissspace.module_common.R.color.color_262A2E))
-
-
-
-        }
-
-    }
-
 }
 

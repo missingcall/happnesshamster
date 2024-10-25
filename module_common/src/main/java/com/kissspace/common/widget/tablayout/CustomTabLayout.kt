@@ -40,7 +40,8 @@ class CustomTabLayout : RelativeLayout {
     private var tabItemTextDefaultSize: Float = 12 * Resources.getSystem().displayMetrics.density
 
 
-    private var indicatorDefaultDrawable: Drawable = resources.getDrawable(R.drawable.common_custom_tablayout_default_indicator_bg)
+    private var indicatorDefaultDrawable: Drawable =
+        resources.getDrawable(R.drawable.common_custom_tablayout_default_indicator_bg)
 
 
     private val mTabList = mutableListOf<CustomTabLayoutBean>()
@@ -93,28 +94,30 @@ class CustomTabLayout : RelativeLayout {
     private fun initTab(itemView: View, tabBean: CustomTabLayoutBean) {
         itemView.layoutParams = mItemParam
         val textView = itemView.findViewById<TextView>(R.id.text)
+        val imageView = itemView.findViewById<ImageView>(R.id.image_default_indicator)
         val chooseView = itemView.findViewById<ConstraintLayout>(R.id.con_choose)
-
+        val imageTitle = itemView.findViewById<ImageView>(R.id.image_choose_title)
         val textChooseTitle = itemView.findViewById<TextView>(R.id.text_choose_title)
-        textChooseTitle.text =tabBean.text
-
-
         textView.text = tabBean.text
         textView.setTextColor(tabItemTextDefaultColor)
-
-/*        if (tabBean.selectDrawable > 0) {
+        imageView.setImageDrawable(indicatorDefaultDrawable)
+        if (tabBean.selectDrawable > 0) {
+            imageTitle.setImageResource(tabBean.selectDrawable)
             textChooseTitle.visibility = View.GONE
+            imageTitle.visibility = View.VISIBLE
         } else {
             textChooseTitle.visibility = View.VISIBLE
             textChooseTitle.text = tabBean.text
-        }*/
-
+            imageTitle.visibility = View.GONE
+        }
         if (tabBean.isSelected) {
-            textView.visibility = View.GONE
             chooseView.visibility = View.VISIBLE
+            textView.visibility = View.GONE
+            imageView.visibility = View.GONE
         } else {
-            textView.visibility = View.VISIBLE
             chooseView.visibility = View.GONE
+            textView.visibility = View.VISIBLE
+            imageView.visibility = View.VISIBLE
         }
     }
 
@@ -123,20 +126,27 @@ class CustomTabLayout : RelativeLayout {
         for (i in 0 until mRootView.childCount) {
             val itemView = mRootView.getChildAt(i)
             val textView = itemView.findViewById<TextView>(R.id.text)
+            val imageView = itemView.findViewById<ImageView>(R.id.image_default_indicator)
             val chooseView = itemView.findViewById<ConstraintLayout>(R.id.con_choose)
+            val imageTitle = itemView.findViewById<ImageView>(R.id.image_choose_title)
             textView.text = mTabList[i].text
             textView.setTextColor(tabItemTextDefaultColor)
+            imageView.setImageDrawable(indicatorDefaultDrawable)
+            imageTitle.setImageResource(mTabList[i].selectDrawable)
             chooseView.visibility = View.GONE
             textView.visibility = View.VISIBLE
+            imageView.visibility = View.VISIBLE
         }
     }
 
     private fun clickItem() {
         val itemView = mRootView.getChildAt(mCurrentIndex)
         val textView = itemView.findViewById<TextView>(R.id.text)
+        val imageView = itemView.findViewById<ImageView>(R.id.image_default_indicator)
         val chooseView = itemView.findViewById<ConstraintLayout>(R.id.con_choose)
         chooseView.visibility = View.VISIBLE
         textView.visibility = View.GONE
+        imageView.visibility = View.GONE
     }
 
     fun onTabLayoutPageSelected(position: Int) {
