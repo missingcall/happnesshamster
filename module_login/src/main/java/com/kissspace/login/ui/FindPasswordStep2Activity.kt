@@ -13,6 +13,7 @@ import com.kissspace.common.http.verificationCode
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.util.countDown
 import com.kissspace.common.util.customToast
+import com.kissspace.common.util.loginOut
 import com.kissspace.login.http.LoginApi
 import com.kissspace.login.viewmodel.ForgetPasswordViewModel
 import com.kissspace.module_login.R
@@ -58,7 +59,7 @@ class FindPasswordStep2Activity : BaseActivity(R.layout.login_activity_find_pass
         val param = mutableMapOf<String, Any?>("password" to mViewModel.password.get().toString())
         request<Int>(LoginApi.API_RESET_LOGIN_PASSWORD, Method.POST, param, onSuccess = {
             customToast("设置成功")
-            finish()
+            loginOut()
         }, onError = {
             customToast(it.errorMsg)
         })

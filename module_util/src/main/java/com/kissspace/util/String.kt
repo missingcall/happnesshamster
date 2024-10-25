@@ -45,14 +45,13 @@ fun String.isIP(): Boolean = PatternsCompat.IP_ADDRESS.matcher(this).matches()
 fun String.isWebUrl(): Boolean = PatternsCompat.WEB_URL.matcher(this).matches()
 
 
-
 fun addParameter(url: String, parameterName: String, newValue: String): Uri {
     LogUtils.e("url:origin--$url")
-    return if(url.lastIndexOf("?")==-1){
+    return if (url.lastIndexOf("?") == -1) {
         Uri.parse("$url?$parameterName=$newValue")
-    }else{
-        (!url.contains("?$parameterName")&&!url.contains("&$parameterName")).let {
-            Uri.parse(if(it) "$url&$parameterName=$newValue" else url)
+    } else {
+        (!url.contains("?$parameterName") && !url.contains("&$parameterName")).let {
+            Uri.parse(if (it) "$url&$parameterName=$newValue" else url)
         }
     }.apply {
         LogUtils.e("url:changed--$this")
@@ -67,14 +66,14 @@ fun addParameter(uri: Uri, parameterName: String, newValue: String): Uri {
     builder.clearQuery()
     var isChanged = false
     uri.queryParameterNames.forEach { parameter ->
-            if (parameter == parameterName) {
-                isChanged = true
-                builder.appendQueryParameter(parameter, newValue)
-            } else {
-                builder.appendQueryParameter(parameter,  uri.getQueryParameter(parameter))
-            }
+        if (parameter == parameterName) {
+            isChanged = true
+            builder.appendQueryParameter(parameter, newValue)
+        } else {
+            builder.appendQueryParameter(parameter, uri.getQueryParameter(parameter))
+        }
     }
-    if(!isChanged){
+    if (!isChanged) {
         builder.appendQueryParameter(parameterName, newValue)
     }
     return builder.build()
@@ -112,9 +111,51 @@ fun Double.toNumberString(
 
 
 fun String.md516(): String = this.encryptMD5().let {
-       it.substring(it.length-24)
+    it.substring(it.length - 24)
 }
 
 fun String.ellipsizeString(size: Int): String {
     return if (this.length <= size) this else this.substring(0, size - 1) + "..."
+}
+
+/**
+ * 手机号码前三后四脱敏
+ */
+fun mobileEncrypt(mobile: String): String? {
+    return if (mobile.isEmpty() || mobile.length != 11) {
+        mobile.replace("(\\w{3})\\w*(\\w{4})".toRegex(), "$1****$2")
+    } else mobile.replace("(\\w{3})\\w*(\\w{4})".toRegex(), "$1****$2")
+}
+
+/**
+ * 身份证号脱敏
+ */
+fun identityEncrypt(identity: String): String? {
+    var str = ""
+    if (identity.isEmpty() || identity.length != 18) {
+        str = identity
+    } else {
+        var sign = ""
+        for (i in 0 until identity.length - 7) {
+            sign += "*"
+        }
+        str = identity.replace("(\\w{3})\\w*(\\w{4})".toRegex(), "$1${sign}$2")
+    }
+    return str
+}
+
+/**
+ * 姓名脱敏
+ */
+fun desensitizedName(fullName: String): String? {
+    var name = ""
+    if (!fullName.isNullOrEmpty() && fullName.length > 1) {
+        name = fullName.substring(0, 1)
+        for (i in 1 until fullName.length) {
+            name += "*"
+        }
+    } else {
+        name = fullName
+    }
+    return name
 }

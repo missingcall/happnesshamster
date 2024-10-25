@@ -47,20 +47,20 @@ class TeenagerModeActivity : com.kissspace.common.base.BaseActivity(R.layout.set
         mViewModel.mStepCount.value = stepCount
         stepCount = intent?.getIntExtra("stepCount", 0).orZero()
         initCode()
-        mViewModel.teenagerHint.value = String.format(resources.getString(R.string.setting_teenager_hint),MMKVProvider.wechatPublicAccount)
+        mViewModel.teenagerHint.value = String.format(resources.getString(R.string.setting_teenager_hint), MMKVProvider.wechatPublicAccount)
         when (mViewModel.mStepCount.value) {
             0 -> {
                 mBinding.title.text = "输入密码"
                 mBinding.textSubmit.text = "下一步"
                 mBinding.tvTips.text = "启动青少年模式，需先设置独立密码"
-                mBinding.tvHint.visibility= View.GONE
+                mBinding.tvHint.visibility = View.GONE
             }
             1 -> {
                 mBinding.title.text = "确认密码"
                 mBinding.textSubmit.text = "进入青少年模式"
                 mBinding.tvTips.text = "启动青少年模式，需先设置独立密码"
                 mBinding.phoneCode.setText("")
-                mBinding.tvHint.visibility= View.GONE
+                mBinding.tvHint.visibility = View.GONE
             }
             2 -> {
                 mBinding.title.text = "已开启青少年模式"
@@ -69,7 +69,7 @@ class TeenagerModeActivity : com.kissspace.common.base.BaseActivity(R.layout.set
                 mBinding.phoneCode.setText("")
                 mBinding.titleBar.leftIcon = null
                 mBinding.titleBar.setOnTitleBarListener(null)
-                mBinding.tvHint.visibility= View.VISIBLE
+                mBinding.tvHint.visibility = View.GONE
             }
         }
 
@@ -104,7 +104,7 @@ class TeenagerModeActivity : com.kissspace.common.base.BaseActivity(R.layout.set
                         //toast("关闭青少年模式成功")
                         logE("青少年模式关闭成功")
                         getUserInfo(onSuccess = {
-                            logE("adolescent"+it.adolescent)
+                            logE("adolescent" + it.adolescent)
                             MMKVProvider.adolescent = it.adolescent
                             jump(RouterPath.PATH_MAIN, "index" to 0)
                             finish()
@@ -126,7 +126,7 @@ class TeenagerModeActivity : com.kissspace.common.base.BaseActivity(R.layout.set
         mBinding.phoneCode.setOnVCodeCompleteListener(object : com.kissspace.common.widget.phonecode.IPhoneCode.OnVCodeInputListener {
             override fun vCodeComplete(verificationCode: String?) {
                 mViewModel.btnEnable.value = verificationCode?.length == 4
-                logE("mViewModel.mStepCount.value"+mViewModel.mStepCount.value)
+                logE("mViewModel.mStepCount.value" + mViewModel.mStepCount.value)
                 logE("verificationCode$verificationCode")
                 when (mViewModel.mStepCount.value) {
                     0 -> {
@@ -149,11 +149,19 @@ class TeenagerModeActivity : com.kissspace.common.base.BaseActivity(R.layout.set
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        return if (event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_DEL || event.keyCode == KeyEvent.KEYCODE_BACK && mViewModel.mStepCount.value != 2) {
+        /*return if (event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_DEL || event.keyCode == KeyEvent.KEYCODE_BACK && mViewModel.mStepCount.value != 2) {
             super.dispatchKeyEvent(event)
         } else {
             true
+        }*/
+        return if (mViewModel.mStepCount.value == 2) {
+            if (event.keyCode == KeyEvent.KEYCODE_BACK) {
+                true
+            } else super.dispatchKeyEvent(event)
+        } else {
+            super.dispatchKeyEvent(event)
         }
+
     }
 
     companion object {

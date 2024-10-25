@@ -20,221 +20,67 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="76dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="20dp"
         android:src="@mipmap/common_app_logo" />
 
     <TextView
-        android:id="@+id/tv_versions"
+        android:id="@+id/tvLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="20dp"
         android:textColor="@color/white"
-        android:textSize="12sp" />
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/tvVersions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textColor="@color/color_ui_sub_text"
+        android:textSize="15sp" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_privacy_url"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:background="@color/color_1A000000">
+    <com.allen.library.SuperTextView
+        android:id="@+id/stvPrivacyUrl"
+        style="@style/SupperTextStyleItem"
+        android:layout_marginTop="20dp"
+        app:sLeftTextString="@string/setting_about_us_privacy" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/setting_about_us_privacy"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.allen.library.SuperTextView
+        android:id="@+id/stvUserAgreement"
+        style="@style/SupperTextStyleItem"
+        android:layout_marginTop="7dp"
+        app:sLeftTextString="@string/setting_about_us_user" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:src="@mipmap/setting_icon_arrow_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.allen.library.SuperTextView
+        android:id="@+id/stvUserActionAgreement"
+        style="@style/SupperTextStyleItem"
+        android:layout_marginTop="7dp"
+        android:visibility="gone"
+        app:sLeftTextString="@string/setting_about_us_user_behavior" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.allen.library.SuperTextView
+        android:id="@+id/stvCommunityRule"
+        style="@style/SupperTextStyleItem"
+        android:layout_marginTop="7dp"
+        android:visibility="gone"
+        app:sLeftTextString="@string/setting_about_us_anchor" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginStart="16dp"
-        android:background="@color/color_494B70" />
+    <com.allen.library.SuperTextView
+        android:id="@+id/stvPartyRule"
+        style="@style/SupperTextStyleItem"
+        android:layout_marginTop="7dp"
+        android:visibility="gone"
+        app:sLeftTextString="@string/setting_about_us_live" />
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_user_agreement"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/color_1A000000">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/setting_about_us_user"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:src="@mipmap/setting_icon_arrow_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginStart="16dp"
-        android:background="@color/color_494B70" />
+    <com.allen.library.SuperTextView
+        android:id="@+id/stvBroadRule"
+        style="@style/SupperTextStyleItem"
+        android:layout_marginTop="7dp"
+        android:visibility="gone"
+        app:sLeftTextString="@string/setting_about_us_permission" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_user_action_agreement"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/color_1A000000">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/setting_about_us_user_behavior"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:src="@mipmap/setting_icon_arrow_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginStart="16dp"
-        android:background="@color/color_494B70" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_community_rule"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/color_1A000000">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/setting_about_us_anchor"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:src="@mipmap/setting_icon_arrow_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginStart="16dp"
-        android:background="@color/color_494B70" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_party_rule"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/color_1A000000">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/setting_about_us_live"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:src="@mipmap/setting_icon_arrow_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginStart="16dp"
-        android:background="@color/color_494B70" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_broad_rule"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/color_1A000000">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/setting_about_us_permission"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:src="@mipmap/setting_icon_arrow_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

@@ -88,7 +88,7 @@
             android:id="@+id/xet_phone"
             android:layout_width="200dp"
             android:layout_height="0dp"
-            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginLeft="11dp"
             android:background="@null"
             android:gravity="center|left"
             android:hint="@string/login_input_mobile"
@@ -102,6 +102,7 @@
             app:layout_constraintBottom_toBottomOf="@id/ll_phone"
             app:layout_constraintLeft_toRightOf="@id/tv_phone_number"
             app:layout_constraintTop_toTopOf="@id/ll_phone"
+            app:layout_constraintRight_toRightOf="parent"
             tools:ignore="RtlHardcoded" />
 
         <ImageView
@@ -110,7 +111,8 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/login_icon_clear"
             app:layout_constraintBottom_toBottomOf="@id/tv_phone_number"
-            app:layout_constraintEnd_toEndOf="@id/xet_phone"
+            app:layout_constraintEnd_toEndOf="@id/ll_phone"
+            android:layout_marginEnd="20dp"
             app:layout_constraintTop_toTopOf="@id/tv_phone_number" />
 
 
@@ -153,13 +155,14 @@
             android:hint="@string/login_hint_input_password"
             android:imeOptions="actionNext"
             android:inputType="number"
+            android:layout_marginLeft="11dp"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="@color/white"
             android:textColorHint="@color/color_AAAAAA"
             android:textSize="@dimen/sp_17"
             app:layout_constraintBottom_toBottomOf="@id/ll_password"
-            app:layout_constraintLeft_toLeftOf="@id/xet_phone"
+            app:layout_constraintLeft_toRightOf="@id/tv_phone_password"
             app:layout_constraintTop_toTopOf="@id/ll_password" />
 
         <ImageView
@@ -168,7 +171,8 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/login_icon_clear"
             app:layout_constraintBottom_toBottomOf="@id/tv_phone_password"
-            app:layout_constraintEnd_toEndOf="@id/xet_password"
+            app:layout_constraintEnd_toEndOf="@id/ll_password"
+            android:layout_marginRight="20dp"
             app:layout_constraintTop_toTopOf="@id/tv_phone_password" />
 
         <LinearLayout

@@ -12,7 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <com.hjq.bar.TitleBar
             android:id="@+id/title_bar"
@@ -30,27 +30,23 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_top"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:paddingBottom="16dp"
-            app:bl_corners_radius="8dp"
-            app:bl_solid_color="@color/color_1A000000"
+            android:id="@+id/cl_name"
+            style="@style/commonSettingItem"
+            android:layout_marginTop="22dp"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_bar">
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginLeft="16dp"
                 android:background="@null"
-                android:text="姓名"
-                android:textColor="@color/color_33FFFFFF"
-                android:textSize="16sp"
+                android:text="真实姓名"
+                android:textColor="@color/color_5A60FF"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,9 +54,8 @@
                 android:id="@+id/et_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="0.5dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="15dp"
                 android:background="@null"
                 android:hint="请输入真实姓名"
                 android:textColor="@color/white"
@@ -68,42 +63,39 @@
                 android:textCursorDrawable="@drawable/common_edit_cursor"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_name"
-                app:layout_constraintLeft_toRightOf="@+id/tv_id_number"
+                app:layout_constraintLeft_toRightOf="@+id/tv_name"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_name"
-                app:layout_constraintVertical_bias="1.0"
                 tools:text="" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
-                android:id="@+id/view1"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="12dp"
-                android:background="@color/color_33E5E5E5"
-                app:layout_constraintLeft_toRightOf="@+id/tv_name"
-                app:layout_constraintTop_toBottomOf="@+id/et_name" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_num"
+            style="@style/commonSettingItem"
+            android:layout_marginTop="7dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_name">
 
             <TextView
                 android:id="@+id/tv_id_number"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
-                android:text="证件号码 "
-                android:textColor="@color/color_33FFFFFF"
-                android:textSize="16sp"
+                android:background="@null"
+                android:text="证件号码"
+                android:textColor="@color/color_5A60FF"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view1" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/et_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16sp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="15dp"
                 android:background="@null"
                 android:hint="请输入证件号码"
                 android:textColor="@color/white"
@@ -113,35 +105,70 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_id_number"
                 app:layout_constraintLeft_toRightOf="@+id/tv_id_number"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_id_number" />
-
-
+                app:layout_constraintTop_toTopOf="@+id/tv_id_number"
+                tools:text="" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/tv_confirm"
-            commonBtnState="@{m.isIdentityAuthEnable()}"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginRight="16dp"
-            android:gravity="center"
-            android:text="确定"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/cl_top" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_status"
+            style="@style/commonSettingItem"
+            android:layout_marginTop="7dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_num">
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:background="@null"
+                android:text="认证状态"
+                android:textColor="@color/color_5A60FF"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_status_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:text="未认证"
+                android:textColor="@color/color_FE5F55"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_status"
+                app:layout_constraintLeft_toRightOf="@id/tv_status"
+                app:layout_constraintTop_toTopOf="@id/tv_status" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="22dp"
             android:text="@string/common_identity_auth_tips"
-            android:textColor="@color/color_80FFFFFF"
+            android:textColor="@color/color_FE5F55"
             android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/cl_status"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            />
+
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            style="@style/commonBottomConfirmationItem"
+            commonBtnState="@{m.isIdentityAuthEnable()}"
+            android:gravity="center"
+            android:text="开始认证"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_confirm" />
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
