@@ -2,12 +2,12 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.ruffian.library.widget.RConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@mipmap/common_icon_search_bg">
+        android:layout_height="34dp"
+        app:background_normal="@color/color_232323"
+        app:corner_radius="19dp"
+        >
 
         <com.kissspace.common.widget.ClearEditText
             android:id="@+id/et_search"
@@ -27,7 +27,7 @@
             android:textStyle="bold"
             android:textColorHint="@color/color_CCC7CC"
             android:background="@null"
-            android:textSize="13sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/cancel"
@@ -39,8 +39,9 @@
             android:layout_marginRight="16dp"
             android:text="取消"
             android:textColor="@color/color_6C74FB"
+            android:visibility="gone"
             android:textSize="15sp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.ruffian.library.widget.RConstraintLayout>
 
 </layout>

@@ -12,31 +12,31 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_100"
+        android:layout_height="105dp"
         android:id="@+id/layout"
-        android:layout_marginBottom="@dimen/dp_12"
-        android:paddingEnd="@dimen/dp_16"
         tools:ignore="RtlSymmetry">
 
 
         <View
             android:id="@+id/view"
-            app:layout_constraintDimensionRatio="343:88"
-            android:background="@mipmap/bg_explore_item_list"
+            android:background="@mipmap/ui_img_party_item_bg"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0" />
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="11dp"
+            android:layout_height="84dp" />
 
         <ImageView
+            android:id="@+id/imgHeadBg"
             android:background="@drawable/app_white_circle"
-            app:layout_constraintLeft_toLeftOf="@id/view"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toTopOf="@id/view"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/view"
-            android:layout_width="0dp"
+            android:layout_marginStart="11dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="90dp"
             android:layout_height="0dp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -47,10 +47,11 @@
             android:layout_margin="@dimen/dp_2"
             app:civ_border_width="2dp"
             app:civ_border_color="#7B4B9A"
-            app:layout_constraintBottom_toBottomOf="@id/view"
-            app:layout_constraintTop_toTopOf="@id/view"
-            app:layout_constraintLeft_toLeftOf="@id/view"
-            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="@+id/imgHeadBg"
+            app:layout_constraintEnd_toEndOf="@+id/imgHeadBg"
+            app:layout_constraintTop_toTopOf="@+id/imgHeadBg"
+            app:layout_constraintBottom_toBottomOf="@+id/imgHeadBg"
+            android:layout_width="75dp"
             android:layout_height="0dp" />
 
         <ImageView
@@ -63,10 +64,12 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@mipmap/app_icon_party_list_lock"
-            android:visibility="visible"
+            android:visibility="gone"
+
              />
 
         <TextView
+
             app:layout_constraintRight_toLeftOf="@id/iv_lock"
             android:ellipsize="end"
             android:layout_marginTop="10dp"
@@ -81,7 +84,7 @@
             android:text="@{m.roomTitle}"
             tools:text="[歌王大赛]今晚八点歌王花落谁家今晚八点歌王花落谁家"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="17sp" />
 
         <ImageView
             app:layout_constraintLeft_toLeftOf="@id/iv_hot_item_user_desc"
@@ -90,33 +93,73 @@
             android:layout_width="wrap_content"
             loadImageNoPlace="@{m.roomTagUrl}"
             tools:src="@mipmap/app_ic_hot_user_flag_male_god"
+            android:visibility="gone"
+
+
             android:layout_height="23dp" />
 
 
         <TextView
-            android:layout_marginEnd="@dimen/dp_12"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/layout_members"
-            app:layout_constraintBottom_toBottomOf="@id/layout_members"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             roomHeat="@{m.chatRoomHeat}"
             android:gravity="center"
             tools:text="1.8w"
             android:textColor="@color/white"
-            android:textSize="12sp"
-            app:drawableStartCompat="@mipmap/app_ic_hot" />
+            android:textSize="11sp"
+            app:drawableStartCompat="@mipmap/ui_img_party_hot"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            android:layout_marginBottom="9dp"
+            android:layout_marginEnd="15dp"
+            android:drawablePadding="5dp"
+            />
 
+
+        <FrameLayout
+            android:id="@+id/flTag"
+            app:layout_constraintStart_toStartOf="@+id/iv_hot_item_user_desc"
+            app:layout_constraintTop_toBottomOf="@+id/iv_hot_item_user_desc"
+            android:layout_width="134dp"
+            android:layout_height="13dp"
+            android:layout_marginTop="5dp"
+            android:background="@mipmap/ui_img_tag_bg">
+
+            <ImageView
+                android:layout_width="21dp"
+                android:layout_height="13dp"
+                android:layout_marginStart="6dp"/>
+
+        </FrameLayout>
+
+
+
+
+        <com.ruffian.library.widget.RView
+            android:id="@+id/rvViewHold"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            app:background_normal="#F42BFF"
+            app:corner_radius="11dp"
+            app:layout_constraintStart_toStartOf="@+id/flTag"
+            app:layout_constraintTop_toBottomOf="@+id/flTag"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
+        
         <LinearLayout
             android:layout_marginBottom="@dimen/dp_10"
             android:id="@id/layout_members"
-            app:layout_constraintLeft_toLeftOf="@id/iv_hot_item_user_desc"
-            app:layout_constraintBottom_toBottomOf="@id/iv_hot_item_user_icon"
             roomListMicMembers="@{m}"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="22dp"
             android:orientation="horizontal"
-            android:gravity="center"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rvViewHold"
+            app:layout_constraintStart_toEndOf="@+id/rvViewHold"
+            android:layout_marginStart="7dp"
+            android:gravity="center"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
