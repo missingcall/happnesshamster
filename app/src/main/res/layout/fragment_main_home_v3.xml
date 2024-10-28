@@ -1,29 +1,482 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="m"
-            type="com.hamster.happyness.viewmodel.PartyViewModel" />
+            name="hvm"
+            type="com.hamster.happyness.viewmodel.HomeViewModel" />
+
+        <variable
+            name="mvm"
+            type="com.kissspace.mine.viewmodel.MineViewModel" />
+
+        <variable
+            name="wvm"
+            type="com.kissspace.mine.viewmodel.WalletViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.hjq.bar.TitleBar
-            android:id="@+id/title_bar"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
+                <com.hjq.bar.TitleBar
+                    android:id="@+id/titleBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="29dp"
+                    android:visibility="invisible"
+                    app:barStyle="transparent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="59dp"
+                    android:layout_height="59dp"
+                    android:layout_marginStart="15dp"
+                    android:src="@color/design_default_color_on_primary"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/titleBar"
+                    app:loadCircleImage="@{mvm.userInfo.profilePath}" />
+
+                <TextView
+                    android:id="@+id/tvNickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@{mvm.userInfo.nickname}"
+                    android:textColor="@color/color_ui_main_text"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/ivAvatar"
+                    app:layout_constraintTop_toTopOf="@id/ivAvatar" />
+
+                <TextView
+                    android:id="@+id/tvId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="UID:"
+                    android:textColor="@color/color_ui_main_text"
+                    android:textSize="10sp"
+                    app:layout_constraintLeft_toLeftOf="@id/tvNickname"
+                    app:layout_constraintTop_toBottomOf="@id/tvNickname" />
+
+                <TextView
+                    android:id="@+id/tvUserId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@{mvm.userInfo.displayId}"
+                    android:textColor="@color/color_ui_main_text"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tvId"
+                    app:layout_constraintLeft_toRightOf="@id/tvId"
+                    app:layout_constraintTop_toTopOf="@id/tvId" />
+
+                <ImageView
+                    android:id="@+id/ivCopy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="4dp"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:src="@mipmap/mine_ic_copy"
+                    app:layout_constraintBottom_toBottomOf="@id/tvUserId"
+                    app:layout_constraintLeft_toRightOf="@id/tvUserId"
+                    app:layout_constraintTop_toTopOf="@id/tvUserId" />
+
+                <TextView
+                    android:id="@+id/tvPlatformLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:background="@drawable/common_shape_blue_normal_45"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:text='@{String.valueOf(mvm.userInfo.charmTotal)+"级"}'
+                    android:textColor="@color/color_ui_main_text"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+                    app:layout_constraintLeft_toLeftOf="@id/ivAvatar"
+                    app:layout_constraintRight_toRightOf="@id/ivAvatar"
+                    tools:text="45级" />
+
+                <ProgressBar
+                    android:id="@+id/pbExp"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="110dp"
+                    android:layout_height="5dp"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="80"
+                    android:progressDrawable="@drawable/home_bg_progress"
+                    app:layout_constraintBottom_toBottomOf="@id/tvPlatformLevel"
+                    app:layout_constraintLeft_toRightOf="@id/tvPlatformLevel" />
+
+                <ImageView
+                    android:id="@+id/ivLevelDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:src="@mipmap/icon_home_describe"
+                    app:layout_constraintBottom_toBottomOf="@id/pbExp"
+                    app:layout_constraintLeft_toRightOf="@id/pbExp"
+                    app:layout_constraintTop_toTopOf="@id/pbExp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="15dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    app:bl_corners_radius="59dp"
+                    app:bl_stroke_color="@color/color_5A60FF"
+                    app:bl_stroke_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ivAvatar">
+
+                    <TextView
+                        android:id="@+id/tvDailyCome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="每天可获得"
+                        android:textColor="@color/color_ui_sub_text_middle"
+                        android:textSize="11sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tvDailyComeNum"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/ivDailyComeDescription"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ivDailyComeDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+
+                        android:src="@mipmap/icon_home_describe"
+                        app:layout_constraintBottom_toBottomOf="@id/tvDailyCome"
+                        app:layout_constraintLeft_toRightOf="@id/tvDailyCome"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tvDailyCome" />
+
+                    <TextView
+                        android:id="@+id/tvDailyComePercent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="(100%)"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toRightOf="@id/tvDailyComeNum"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ivDailyComeDescription" />
+
+                    <TextView
+                        android:id="@+id/tvDailyComeNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLength="9"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toRightOf="@id/ivDailyComeIcon"
+                        app:layout_constraintRight_toLeftOf="@id/tvDailyComePercent"
+                        app:layout_constraintTop_toBottomOf="@id/ivDailyComeDescription" />
+
+                    <ImageView
+                        android:id="@+id/ivDailyComeIcon"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@mipmap/icon_pine_cone"
+                        app:layout_constraintBottom_toBottomOf="@id/tvDailyComeNum"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/tvDailyComeNum"
+                        app:layout_constraintTop_toTopOf="@id/tvDailyComeNum" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/ivBg"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/common_bg_dialog"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivAvatar"
+
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="88dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ivBg"
+                    tools:itemCount="12"
+                    tools:listitem="@layout/rv_item_home_game_quick_entry" />
+
+
+                <ImageView
+                    android:id="@+id/ivPineCone"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_marginTop="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/icon_pine_cone"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/tvPineConeBalance"
+                    app:layout_constraintTop_toBottomOf="@id/recycler_view" />
+
+                <TextView
+                    android:id="@+id/tvPineConeBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:text="123"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/ivPineCone"
+                    app:layout_constraintLeft_toRightOf="@id/ivPineCone"
+                    app:layout_constraintRight_toLeftOf="@id/ivPineNut"
+                    app:layout_constraintTop_toTopOf="@id/ivPineCone" />
+
+                <ImageView
+                    android:id="@+id/ivPineNut"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_marginLeft="22dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/icon_pine_nut"
+                    app:layout_constraintLeft_toRightOf="@id/tvPineConeBalance"
+                    app:layout_constraintRight_toLeftOf="@id/tvPineNutBalance"
+                    app:layout_constraintTop_toBottomOf="@id/recycler_view"
+                    app:layout_constraintTop_toTopOf="@id/ivPineCone" />
+
+                <TextView
+                    android:id="@+id/tvPineNutBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:text="123"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/ivPineCone"
+                    app:layout_constraintLeft_toRightOf="@id/ivPineNut"
+                    app:layout_constraintRight_toLeftOf="@id/ivBalanceDescription"
+                    app:layout_constraintTop_toTopOf="@id/ivPineCone" />
+
+                <ImageView
+                    android:id="@+id/ivBalanceDescription"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="26dp"
+                    android:src="@mipmap/icon_home_describe"
+                    app:layout_constraintBottom_toBottomOf="@id/ivPineCone"
+                    app:layout_constraintLeft_toRightOf="@id/tvPineNutBalance"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ivPineCone" />
+
+
+                <ImageView
+                    android:id="@+id/ivHamsterDevelopmentBg"
+                    android:layout_width="308dp"
+                    android:layout_height="308dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/app_layer_list_hamster"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivPineCone"
+
+                    />
+
+
+                <ImageView
+                    android:id="@+id/ivHamsterDevelopment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="210dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/app_icon_hamster"
+                    app:layout_constraintBottom_toBottomOf="@id/ivHamsterDevelopmentBg"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ivHamsterDevelopmentBg" />
+
+                <com.hamster.happyness.widget.WaveLoadingView
+                    android:id="@+id/wlvClean"
+                    android:layout_width="59dp"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivHamsterDevelopmentBg"
+                    app:wlv_borderColor="#7464FF"
+                    app:wlv_borderWidth="2dp"
+                    app:wlv_progressValue="30"
+                    app:wlv_round_rectangle="true"
+                    app:wlv_round_rectangle_x_and_y="10"
+                    app:wlv_shapeType="rectangle"
+                    app:wlv_titleBottom="清洁度"
+                    app:wlv_titleBottomColor="@color/white"
+                    app:wlv_titleBottomSize="9sp"
+                    app:wlv_titleCenter="40%"
+                    app:wlv_titleCenterColor="@android:color/white"
+                    app:wlv_titleCenterSize="11sp"
+                    app:wlv_triangle_direction="north"
+                    app:wlv_waveAmplitude="50"
+                    app:wlv_waveColor="#7464FF" />
+
+                <com.hamster.happyness.widget.WaveLoadingView
+                    android:id="@+id/wlvFood"
+                    android:layout_width="59dp"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="25dp"
+                    app:layout_constraintBottom_toBottomOf="@id/wlvClean"
+                    app:layout_constraintLeft_toRightOf="@id/wlvClean"
+                    app:layout_constraintTop_toBottomOf="@id/ivHamsterDevelopmentBg"
+                    app:wlv_borderColor="#FF9D60"
+                    app:wlv_borderWidth="2dp"
+                    app:wlv_progressValue="30"
+                    app:wlv_round_rectangle="true"
+                    app:wlv_round_rectangle_x_and_y="10"
+                    app:wlv_shapeType="rectangle"
+                    app:wlv_titleBottom="饱食度"
+                    app:wlv_titleBottomColor="@color/white"
+                    app:wlv_titleBottomSize="9sp"
+                    app:wlv_titleCenter="40%"
+                    app:wlv_titleCenterColor="@android:color/white"
+                    app:wlv_titleCenterSize="11sp"
+                    app:wlv_triangle_direction="north"
+                    app:wlv_waveAmplitude="50"
+                    app:wlv_waveColor="#FF9D60" />
+
+                <ImageView
+                    android:id="@+id/iv_cleanliness"
+                    android:layout_width="36dp"
+                    android:layout_height="39dp"
+                    android:layout_marginRight="-18dp"
+                    android:src="@mipmap/app_icon_home_cleanliness"
+                    app:layout_constraintBottom_toBottomOf="@id/wlvClean"
+                    app:layout_constraintRight_toLeftOf="@id/wlvClean" />
+
+                <ImageView
+                    android:id="@+id/iv_satiety"
+                    android:layout_width="36dp"
+                    android:layout_height="39dp"
+                    android:layout_marginRight="-15dp"
+                    android:src="@mipmap/app_icon_home_satiety"
+                    app:layout_constraintBottom_toBottomOf="@id/wlvFood"
+                    app:layout_constraintRight_toLeftOf="@id/wlvFood" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clSkin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    app:layout_constraintBottom_toTopOf="@id/clQuest"
+                    app:layout_constraintRight_toRightOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvSkin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="37dp"
+                        android:gravity="center"
+                        android:text="皮肤"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ivSkin"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@mipmap/app_icon_home_skin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/tvSkin"
+                        app:layout_constraintTop_toTopOf="parent"
+
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clQuest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvQuest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="37dp"
+                        android:gravity="center"
+                        android:text="任务"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ivQuest"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@mipmap/app_icon_home_quest"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/tvQuest"
+                        app:layout_constraintTop_toTopOf="parent"
+
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

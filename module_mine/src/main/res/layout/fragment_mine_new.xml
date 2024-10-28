@@ -379,7 +379,7 @@
                         app:tab_orientation="HORIZONTAL"
                         app:tab_select_color="@color/white"
                         app:tab_text_max_size="17sp"
-                        app:tab_text_min_size="15sp" >
+                        app:tab_text_min_size="15sp">
 
                         <TextView
                             android:layout_width="0dp"

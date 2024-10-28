@@ -39,4 +39,9 @@ object Api {
     //获取全服广播
     const val API_HOME_QUERY_MESSAGE = "/hamster-chatroom/largeScreenInteractionMessage/queryCurrentMessage"
 
+    //首页游戏快捷入口
+    const val API_GAME_QUICK_ENTER = "/hamster-user/game/gameList"
+
+
+
 }
