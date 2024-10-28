@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,7 +14,7 @@
         android:id="@+id/layout_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/common_page_background">
+        >
 
         <LinearLayout
             android:id="@+id/root"
@@ -138,7 +139,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
 
         <com.kissspace.common.widget.AnimationView
             android:id="@+id/gift_view"

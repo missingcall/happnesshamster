@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
@@ -28,6 +29,7 @@ import com.kissspace.module_mine.databinding.MineItemTaskDayCenterBinding
 import com.kissspace.module_mine.databinding.MineItemTaskNewpeopleCenterBinding
 import com.kissspace.util.loadImage
 import com.kissspace.util.logE
+import com.ruffian.library.widget.RTextView
 
 /**
  * @Author gaohangbo
@@ -63,10 +65,16 @@ class TaskFragment : BaseFragment(R.layout.mine_fragment_task_day) {
                 initDayTask(it.dailyTaskInfoList)
             } else if (taskType.equals("NEW_PEOPLE")) {
                 initNewPeopleTask(it.noviceTaskInfoList)
+            } else{
+                // TODO: 仓鼠任务
             }
         })
     }
 
+    /**
+     *  初始化新人任务列表
+     *
+     */
     private fun initNewPeopleTask(noviceTaskInfoList: List<NoviceTaskInfo>) {
         mBinding.rvTask.linear().setup {
             addType<NoviceTaskInfo>(R.layout.mine_item_task_newpeople_center)
@@ -79,18 +87,17 @@ class TaskFragment : BaseFragment(R.layout.mine_fragment_task_day) {
                         //	任务状态 001 未完成 002 待领取奖励 003 已完成
                         when (model.finishStatus) {
                             TASK_NOT_FINISH -> {
-                                viewBinding.tvButton.text = "做任务"
-                                //viewBinding.tvButton.setBackgroundResource(R.mipmap.mine_task_bg_go)
+                                viewBinding.tvButton.isEnabled = true
+                                viewBinding.tvButton.text = "前往"
                             }
                             TASK_WAIT_TO_REWARD -> {
                                 viewBinding.tvButton.isEnabled = true
-                                viewBinding.tvButton.text = "领奖励"
-                                //viewBinding.tvButton.setBackgroundResource(R.mipmap.mine_task_bg_claim_rewards)
+                                viewBinding.tvButton.text = "领取奖励"
+
                             }
                             TASK_FINISH -> {
                                 viewBinding.tvButton.isEnabled = false
-                                viewBinding.tvButton.text = "已领取"
-                                //viewBinding.tvButton.setBackgroundResource(R.mipmap.mine_task_bg_completed)
+                                viewBinding.tvButton.text = "已完成"
                             }
                         }
                         setBtnBg(viewBinding.tvButton,model.finishStatus)
@@ -127,7 +134,7 @@ class TaskFragment : BaseFragment(R.layout.mine_fragment_task_day) {
                     getReceiveTaskReward(model.taskId) {
                         taskType = arguments?.getString("taskType")
                         mViewModel.requestTaskList(onSuccess = {
-                            val tvButton = findView<TextView>(R.id.tv_button)
+                            val tvButton = findView<RTextView>(R.id.tv_button)
                             tvButton.isEnabled = false
                             tvButton.text = "已完成"
                             setBtnBg(tvButton, TASK_FINISH)
@@ -155,18 +162,20 @@ class TaskFragment : BaseFragment(R.layout.mine_fragment_task_day) {
                         //	任务状态 001 未完成 002 待领取奖励 003 已完成
                         when (model.finishStatus) {
                             TASK_NOT_FINISH -> {
-                                viewBinding.tvButton.text="做任务"
-                                //viewBinding.tvButton.setBackgroundResource(R.mipmap.mine_task_bg_go)
+                                viewBinding.tvButton.isEnabled = true
+                                viewBinding.tvButton.text = "前往"
+
                             }
                             TASK_WAIT_TO_REWARD -> {
                                 viewBinding.tvButton.isEnabled = true
-                                viewBinding.tvButton.text="领奖励"
-                                //viewBinding.tvButton.setBackgroundResource(R.mipmap.mine_task_bg_claim_rewards)
+                                viewBinding.tvButton.text = "领取奖励"
+
+
                             }
                             TASK_FINISH -> {
                                 viewBinding.tvButton.isEnabled = false
-                                viewBinding.tvButton.text="已完成"
-//                                viewBinding.tvButton.setBackgroundResource(R.mipmap.mine_task_bg_completed)
+                                viewBinding.tvButton.text = "已完成"
+
                             }
                         }
                         setBtnBg(viewBinding.tvButton,model.finishStatus)
@@ -202,7 +211,7 @@ class TaskFragment : BaseFragment(R.layout.mine_fragment_task_day) {
                 val model = getModel<DailyTaskInfo>()
                 if (model.finishStatus == TASK_WAIT_TO_REWARD) {
                     getReceiveTaskReward(model.taskId) {
-                        val tvButton = findView<TextView>(R.id.tv_button)
+                        val tvButton = findView<RTextView>(R.id.tv_button)
                         tvButton.isEnabled = false
                         tvButton.text = "已完成"
                         setBtnBg(tvButton,TASK_FINISH)
@@ -227,23 +236,31 @@ class TaskFragment : BaseFragment(R.layout.mine_fragment_task_day) {
         textView.text = text
     }
 
-    private fun setBtnBg(view: TextView, status:String){
+    private fun setBtnBg(view: RTextView, status:String){
         //做任务
         when(status) {
             TASK_NOT_FINISH -> {
-                view.setTextColor(Color.WHITE)
-                view.setBackgroundResource(com.kissspace.module_common.R.drawable.common_shape_sub_main_28)
+
+                view.helper.apply {
+                    setTextColorNormal(ContextCompat.getColor(requireActivity() ,com.kissspace.module_common.R.color.white))
+                    setBackgroundColorNormal(ContextCompat.getColor(requireActivity(), com.kissspace.module_common.R.color.color_36398A))
+                }
+
             }
 
             //领取奖励
             TASK_WAIT_TO_REWARD -> {
-                view.setTextColor(Color.WHITE)
-                view.setBackgroundResource(com.kissspace.module_common.R.drawable.common_shape_bg_gradient)
+                view.helper.apply {
+                    setTextColorNormal(ContextCompat.getColor(requireActivity() ,com.kissspace.module_common.R.color.white))
+                    setBackgroundColorNormal(ContextCompat.getColor(requireActivity(), com.kissspace.module_common.R.color.color_5A60FF))
+                }
             }
             //已完成
             TASK_FINISH -> {
-                view.setTextColor(resources.getColor(com.kongzue.dialogx.R.color.black50))
-                view.setBackgroundResource(com.kissspace.module_common.R.drawable.common_shape_bg_gray_28)
+                view.helper.apply {
+                    setTextColorNormal(ContextCompat.getColor(requireActivity() ,com.kissspace.module_common.R.color.color_949499))
+                    setBackgroundColorNormal(ContextCompat.getColor(requireActivity(), com.kissspace.module_common.R.color.color_2C2C2C))
+                }
             }
         }
 

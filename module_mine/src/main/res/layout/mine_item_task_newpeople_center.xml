@@ -11,31 +11,24 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        app:bl_corners_radius="8dp"
-        app:bl_solid_color="@color/white"
-        android:paddingStart="@dimen/dp_12"
-        android:paddingEnd="@dimen/dp_12"
-        android:layout_marginStart="@dimen/dp_16"
-        android:layout_marginEnd="@dimen/dp_16"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="6dp"
 
-        android:layout_height="56dp">
+        android:layout_height="68dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_task"
             loadImageWithDefault="@{m.taskIcon}"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="15dp"/>
 
         <TextView
             android:id="@+id/tv_task"
             android:layout_width="0dp"
             android:textColor="@color/color_ui_main_text"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             app:layout_constraintWidth_default="wrap"
@@ -47,12 +40,11 @@
             app:layout_constraintRight_toLeftOf="@+id/tv_button"
             app:layout_constraintLeft_toRightOf="@+id/iv_task"
             app:layout_constraintTop_toTopOf="@id/iv_task"
-            android:layout_marginTop="-3dp"
             tools:text="完善资料" />
 
         <TextView
             android:id="@+id/tv_task_progress"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="@color/color_ui_main_text"
@@ -77,7 +69,7 @@
             style="@style/DJSSubTextView"
             android:layout_marginStart="2dp"
             android:textSize="11sp"
-            android:textColor="@color/color_FFFD62"
+            android:textColor="@color/color_949499"
             app:layout_constraintLeft_toRightOf="@+id/iv_gift"
             app:layout_constraintBottom_toBottomOf="@+id/iv_gift"
             app:layout_constraintTop_toTopOf="@+id/iv_gift"
@@ -99,7 +91,7 @@
             style="@style/DJSSubTextView"
             android:layout_marginStart="2dp"
             android:textSize="11sp"
-            android:textColor="@color/color_FFFD62"
+            android:textColor="@color/color_949499"
             app:layout_constraintLeft_toRightOf="@+id/iv_gift1"
             app:layout_constraintBottom_toBottomOf="@+id/iv_gift"
             app:layout_constraintTop_toTopOf="@+id/iv_gift"
@@ -107,17 +99,18 @@
 
 
 
-        <TextView
-            android:background="@drawable/common_shape_bg_gradient"
+        <com.ruffian.library.widget.RTextView
             android:id="@+id/tv_button"
-            android:layout_width="54dp"
-            android:layout_height="@dimen/dp_28"
+            android:layout_width="71dp"
+            android:layout_height="26dp"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="12sp"
+            app:corner_radius="13dp"
+            app:text_color_normal="@color/white"
+            android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="15dp"
             tools:text="前往" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

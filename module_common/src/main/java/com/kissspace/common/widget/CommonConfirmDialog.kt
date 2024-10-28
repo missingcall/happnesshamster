@@ -63,8 +63,8 @@ class CommonConfirmDialog(
                 mTitle.text = titleSpannableString
             }
         }else{
-            mSubTitle.visibility = View.GONE
-            mTitle.visibility = View.GONE
+            mSubTitle.visibility = View.INVISIBLE
+            mTitle.visibility = View.INVISIBLE
             mContent.visibility = View.VISIBLE
             mContent.text = title
         }

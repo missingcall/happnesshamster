@@ -26,15 +26,16 @@ class TaskCenterListActivity : com.kissspace.common.base.BaseActivity(R.layout.m
         mBinding.titleBar.rightView.setOnClickListener {
             jump(RouterPath.PATH_MY_DRESS_UP)
         }
-        addTab()
         mBinding.viewPager.apply {
             adapter = object : FragmentStateAdapter(this@TaskCenterListActivity) {
-                override fun getItemCount(): Int = 2
+                override fun getItemCount(): Int = 3
                 override fun createFragment(position: Int): Fragment =
                     if (position == 0) {
                         TaskFragment.newInstance("NEW_PEOPLE")
-                    } else {
+                    } else if (position == 1) {
                         TaskFragment.newInstance("DAY")
+                    }else{
+                        TaskFragment.newInstance("Hamster")
                     }
 
                 override fun getItemId(position: Int): Long = position.toLong()
@@ -43,28 +44,6 @@ class TaskCenterListActivity : com.kissspace.common.base.BaseActivity(R.layout.m
         }
         ViewPager2Delegate.install(mBinding.viewPager, mBinding.tabLayout)
         mBinding.viewPager.offscreenPageLimit=2
-    }
-
-    private fun addTab() {
-//        mBinding.customTabLayout.setOnTabChangedListener {
-//            mBinding.viewPager.currentItem = it
-//        }
-//        mBinding.customTabLayout.setViewPager(mBinding.viewPager)
-//        val test1 = CustomTabLayoutBean(
-//            "新人任务",
-//            0,
-//            R.mipmap.mine_task_center_new_people_task,
-//            true
-//        )
-//
-//        val test2 = CustomTabLayoutBean(
-//            "每日任务",
-//            1,
-//            R.mipmap.mine_task_center_daily_task,
-//            false
-//        )
-//        mBinding.customTabLayout.addTabItem(test1)
-//        mBinding.customTabLayout.addTabItem(test2)
     }
 
 }
