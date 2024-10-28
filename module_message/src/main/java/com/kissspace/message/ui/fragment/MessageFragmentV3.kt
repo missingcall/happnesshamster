@@ -114,7 +114,8 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         }
         //清空消息
         mBinding.ivClearMessage.safeClick {
-            jump(RouterPath.PATH_CHAT, "account" to "djs6713bc03e4b037d1ecfce6dc", "userId" to "6713bc03e4b037d1ecfce6dc")
+        jump(RouterPath.PATH_GIFT_MAIL)
+        //   jump(RouterPath.PATH_CHAT, "account" to "djs6713bc03e4b037d1ecfce6dc", "userId" to "6713bc03e4b037d1ecfce6dc")
          /*   CommonConfirmDialog(
                 requireContext(), "忽略未读", "消息气泡会删除掉，但仍然保留消息"
             ) {

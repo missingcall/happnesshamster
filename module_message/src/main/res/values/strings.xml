@@ -23,4 +23,9 @@
         <string name="message_un_read_count">(%1$s)</string>
         <string name="message_follow_room">跟随</string>
         <string name="message_system">系统消息</string>
+
+        <string name="message_gift_email">礼物邮件</string>
+        <string name="message_gift_delete_read">删除已读</string>
+        <string name="message_gift_all_receive">一键领取</string>
+
 </resources>

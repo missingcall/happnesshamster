@@ -151,7 +151,11 @@ class SplashActivity : BaseActivity(R.layout.login_activity_splash) {
     private fun goLogin() {
         job?.cancel()
         removeRunnable(this)
-        jump(RouterPath.PATH_LOGIN)
+        if (MMKVProvider.loginResult==null){
+            jump(RouterPath.PATH_LOGIN)
+        }else{
+            jump(RouterPath.PATH_MAIN)
+        }
         finish()
     }
 

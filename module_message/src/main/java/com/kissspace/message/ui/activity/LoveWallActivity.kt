@@ -25,7 +25,6 @@ class LoveWallActivity : com.kissspace.common.base.BaseActivity(R.layout.message
     private val mBinding by viewBinding<MessageActivityLoveWallBinding>()
 
     override fun initView(savedInstanceState: Bundle?) {
-
         mBinding.titleBar.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(titleBar: TitleBar?) {
                 finish()
