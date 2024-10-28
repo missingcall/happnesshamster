@@ -194,6 +194,10 @@ object RouterPath {
 
     const val PATH_LOVE_WALL = PATH_BASE + "love_wall"
 
+    // 礼物邮件
+    const val PATH_GIFT_MAIL = PATH_BASE + "gift_mail"
+
+
     //关注列表
     const val PATH_MY_FOLLOW = PATH_BASE + "mine_follow"
 

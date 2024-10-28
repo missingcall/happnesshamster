@@ -28,6 +28,11 @@
         <activity android:name="com.kissspace.message.ui.activity.MessageTaskActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity android:name="com.kissspace.message.ui.activity.GiftMgsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
