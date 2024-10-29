@@ -150,9 +150,9 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
             it?.let {
                 mViewModel.walletModel.value = it
                 mBinding.iconNutsNum.text =  when (type) {
-                    "001" -> mViewModel.walletModel.value?.coin.toString()
+                    "001" -> mViewModel.walletModel.value?.diamond.toString()
                     "002" -> mViewModel.walletModel.value?.accountBalance.toString()
-                    else -> mViewModel.walletModel.value?.diamond.toString()
+                    else -> mViewModel.walletModel.value?.coin.toString()
                 }
 
             }
