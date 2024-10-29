@@ -11,6 +11,9 @@ import com.hamster.happyness.databinding.FragmentMainHomeV3Binding
 import com.hamster.happyness.http.Api
 import com.hamster.happyness.viewmodel.GameQuickEnterModel
 import com.hamster.happyness.viewmodel.HomeViewModel
+import com.hamster.happyness.widget.CapacityDescriptionDialog
+import com.hamster.happyness.widget.DevelopmentDescriptionDialog
+import com.hamster.happyness.widget.HomeFeedDialog
 
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.ext.safeClick
@@ -19,6 +22,7 @@ import com.kissspace.common.http.getUserInfo
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.*
+import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.network.net.Method
@@ -39,20 +43,47 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         mBinding.lifecycleOwner = this
 
         initRecyclerView()
+        initData()
+        refreshUserinfo()
+        queryDayIncome()
+        initWalletBalance()
+
+        mBinding.ivAvatar.safeClick {
+            jump(RouterPath.PATH_USER_PROFILE, "userId" to MMKVProvider.userId)
+        }
 
         mBinding.ivCopy.safeClick {
             copyClip(mBinding.tvUserId.text.toString())
         }
 
-        //等级说明
-        mBinding.ivLevelDescription.safeClick {
-            jump(RouterPath.PATH_MY_LEVEL)
-        }
-
         //产能说明
         mBinding.ivDailyComeDescription.safeClick {
-
+            CapacityDescriptionDialog.newInstance().show(childFragmentManager)
         }
+
+        //养成说明
+        mBinding.ivBalanceDescription.safeClick {
+            DevelopmentDescriptionDialog.newInstance().show(childFragmentManager)
+        }
+
+        //喂食弹窗
+        mBinding.ivSatiety.safeClick {
+            HomeFeedDialog.newInstance().show(childFragmentManager)
+        }
+        mBinding.wlvFood.safeClick {
+            HomeFeedDialog.newInstance().show(childFragmentManager)
+        }
+
+
+
+
+
+
+
+        //等级说明
+        /*   mBinding.ivLevelDescription.safeClick {
+               jump(RouterPath.PATH_MY_LEVEL)
+           }*/
 
 
     }
@@ -65,10 +96,6 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
     override fun onResume() {
         super.onResume()
-        initData()
-        refreshUserinfo()
-        queryDayIncome()
-        initWalletBalance()
 
     }
 
@@ -100,9 +127,9 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         //请求首页游戏接口
         val param = mutableMapOf<String, Any?>()
         request<MutableList<GameQuickEnterModel.Game>>(Api.API_GAME_QUICK_ENTER, Method.GET, param, onSuccess = {
-            mBinding.recyclerView.mutable.addAll(it)
+            mBinding.recyclerView.addModels(it)
         }, onError = {
-
+            customToast("onError")
             //TODO 测试数据
             var game1: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
                 gameId = "1",
@@ -129,11 +156,14 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
                 "大逃杀4"
             )
-            mBinding.recyclerView.mutable.add(game1)
-            mBinding.recyclerView.mutable.add(game2)
-            mBinding.recyclerView.mutable.add(game3)
-            mBinding.recyclerView.mutable.add(game4)
-            mBinding.recyclerView.mutable.add(game5)
+            var list : MutableList<GameQuickEnterModel.Game> = mutableListOf()
+            list.add(game1)
+            list.add(game2)
+            list.add(game3)
+            list.add(game4)
+            list.add(game5)
+
+            mBinding.recyclerView.addModels(list)
         })
     }
 

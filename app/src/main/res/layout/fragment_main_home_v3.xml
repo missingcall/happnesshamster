@@ -98,7 +98,7 @@
                     app:layout_constraintLeft_toRightOf="@id/tvUserId"
                     app:layout_constraintTop_toTopOf="@id/tvUserId" />
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/tvPlatformLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,9 +113,9 @@
                     app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
                     app:layout_constraintLeft_toLeftOf="@id/ivAvatar"
                     app:layout_constraintRight_toRightOf="@id/ivAvatar"
-                    tools:text="45级" />
+                    tools:text="45级" />-->
 
-                <ProgressBar
+               <!-- <ProgressBar
                     android:id="@+id/pbExp"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="110dp"
@@ -125,9 +125,9 @@
                     android:progress="80"
                     android:progressDrawable="@drawable/home_bg_progress"
                     app:layout_constraintBottom_toBottomOf="@id/tvPlatformLevel"
-                    app:layout_constraintLeft_toRightOf="@id/tvPlatformLevel" />
+                    app:layout_constraintLeft_toRightOf="@id/tvPlatformLevel" />-->
 
-                <ImageView
+               <!-- <ImageView
                     android:id="@+id/ivLevelDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                     android:src="@mipmap/icon_home_describe"
                     app:layout_constraintBottom_toBottomOf="@id/pbExp"
                     app:layout_constraintLeft_toRightOf="@id/pbExp"
-                    app:layout_constraintTop_toTopOf="@id/pbExp" />
+                    app:layout_constraintTop_toTopOf="@id/pbExp" />-->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
@@ -164,8 +164,8 @@
 
                     <ImageView
                         android:id="@+id/ivDailyComeDescription"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
                         android:layout_marginLeft="5dp"
 
                         android:src="@mipmap/icon_home_describe"
@@ -298,8 +298,8 @@
 
                 <ImageView
                     android:id="@+id/ivBalanceDescription"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="26dp"
                     android:src="@mipmap/icon_home_describe"
                     app:layout_constraintBottom_toBottomOf="@id/ivPineCone"
@@ -335,148 +335,148 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/ivHamsterDevelopmentBg" />
 
-                <com.hamster.happyness.widget.WaveLoadingView
-                    android:id="@+id/wlvClean"
-                    android:layout_width="59dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginBottom="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivHamsterDevelopmentBg"
-                    app:wlv_borderColor="#7464FF"
-                    app:wlv_borderWidth="2dp"
-                    app:wlv_progressValue="30"
-                    app:wlv_round_rectangle="true"
-                    app:wlv_round_rectangle_x_and_y="10"
-                    app:wlv_shapeType="rectangle"
-                    app:wlv_titleBottom="清洁度"
-                    app:wlv_titleBottomColor="@color/white"
-                    app:wlv_titleBottomSize="9sp"
-                    app:wlv_titleCenter="40%"
-                    app:wlv_titleCenterColor="@android:color/white"
-                    app:wlv_titleCenterSize="11sp"
-                    app:wlv_triangle_direction="north"
-                    app:wlv_waveAmplitude="50"
-                    app:wlv_waveColor="#7464FF" />
 
-                <com.hamster.happyness.widget.WaveLoadingView
-                    android:id="@+id/wlvFood"
-                    android:layout_width="59dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="25dp"
-                    app:layout_constraintBottom_toBottomOf="@id/wlvClean"
-                    app:layout_constraintLeft_toRightOf="@id/wlvClean"
-                    app:layout_constraintTop_toBottomOf="@id/ivHamsterDevelopmentBg"
-                    app:wlv_borderColor="#FF9D60"
-                    app:wlv_borderWidth="2dp"
-                    app:wlv_progressValue="30"
-                    app:wlv_round_rectangle="true"
-                    app:wlv_round_rectangle_x_and_y="10"
-                    app:wlv_shapeType="rectangle"
-                    app:wlv_titleBottom="饱食度"
-                    app:wlv_titleBottomColor="@color/white"
-                    app:wlv_titleBottomSize="9sp"
-                    app:wlv_titleCenter="40%"
-                    app:wlv_titleCenterColor="@android:color/white"
-                    app:wlv_titleCenterSize="11sp"
-                    app:wlv_triangle_direction="north"
-                    app:wlv_waveAmplitude="50"
-                    app:wlv_waveColor="#FF9D60" />
-
-                <ImageView
-                    android:id="@+id/iv_cleanliness"
-                    android:layout_width="36dp"
-                    android:layout_height="39dp"
-                    android:layout_marginRight="-18dp"
-                    android:src="@mipmap/app_icon_home_cleanliness"
-                    app:layout_constraintBottom_toBottomOf="@id/wlvClean"
-                    app:layout_constraintRight_toLeftOf="@id/wlvClean" />
-
-                <ImageView
-                    android:id="@+id/iv_satiety"
-                    android:layout_width="36dp"
-                    android:layout_height="39dp"
-                    android:layout_marginRight="-15dp"
-                    android:src="@mipmap/app_icon_home_satiety"
-                    app:layout_constraintBottom_toBottomOf="@id/wlvFood"
-                    app:layout_constraintRight_toLeftOf="@id/wlvFood" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clSkin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    app:layout_constraintBottom_toTopOf="@id/clQuest"
-                    app:layout_constraintRight_toRightOf="parent">
-
-                    <TextView
-                        android:id="@+id/tvSkin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="37dp"
-                        android:gravity="center"
-                        android:text="皮肤"
-                        android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/ivSkin"
-                        android:layout_width="37dp"
-                        android:layout_height="37dp"
-                        android:layout_marginRight="5dp"
-                        android:src="@mipmap/app_icon_home_skin"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/tvSkin"
-                        app:layout_constraintTop_toTopOf="parent"
-
-                        />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clQuest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="2dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent">
-
-                    <TextView
-                        android:id="@+id/tvQuest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="37dp"
-                        android:gravity="center"
-                        android:text="任务"
-                        android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/ivQuest"
-                        android:layout_width="37dp"
-                        android:layout_height="37dp"
-                        android:layout_marginRight="5dp"
-                        android:src="@mipmap/app_icon_home_quest"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/tvQuest"
-                        app:layout_constraintTop_toTopOf="parent"
-
-                        />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <com.hamster.happyness.widget.WaveLoadingView
+            android:id="@+id/wlvClean"
+            android:layout_width="59dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:wlv_borderColor="#7464FF"
+            app:wlv_borderWidth="2dp"
+            app:wlv_progressValue="30"
+            app:wlv_round_rectangle="true"
+            app:wlv_round_rectangle_x_and_y="10"
+            app:wlv_shapeType="rectangle"
+            app:wlv_titleBottom="清洁度"
+            app:wlv_titleBottomColor="@color/white"
+            app:wlv_titleBottomSize="9sp"
+            app:wlv_titleCenter="40%"
+            app:wlv_titleCenterColor="@android:color/white"
+            app:wlv_titleCenterSize="11sp"
+            app:wlv_triangle_direction="north"
+            app:wlv_waveAmplitude="50"
+            app:wlv_waveColor="#7464FF" />
+
+        <com.hamster.happyness.widget.WaveLoadingView
+            android:id="@+id/wlvFood"
+            android:layout_width="59dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="25dp"
+            app:layout_constraintBottom_toBottomOf="@id/wlvClean"
+            app:layout_constraintLeft_toRightOf="@id/wlvClean"
+            app:wlv_borderColor="#FF9D60"
+            app:wlv_borderWidth="2dp"
+            app:wlv_progressValue="30"
+            app:wlv_round_rectangle="true"
+            app:wlv_round_rectangle_x_and_y="10"
+            app:wlv_shapeType="rectangle"
+            app:wlv_titleBottom="饱食度"
+            app:wlv_titleBottomColor="@color/white"
+            app:wlv_titleBottomSize="9sp"
+            app:wlv_titleCenter="40%"
+            app:wlv_titleCenterColor="@android:color/white"
+            app:wlv_titleCenterSize="11sp"
+            app:wlv_triangle_direction="north"
+            app:wlv_waveAmplitude="50"
+            app:wlv_waveColor="#FF9D60" />
+
+        <ImageView
+            android:id="@+id/ivCleanliness"
+            android:layout_width="36dp"
+            android:layout_height="39dp"
+            android:layout_marginRight="-18dp"
+            android:src="@mipmap/app_icon_home_cleanliness"
+            app:layout_constraintBottom_toBottomOf="@id/wlvClean"
+            app:layout_constraintRight_toLeftOf="@id/wlvClean" />
+
+        <ImageView
+            android:id="@+id/ivSatiety"
+            android:layout_width="36dp"
+            android:layout_height="39dp"
+            android:layout_marginRight="-15dp"
+            android:src="@mipmap/app_icon_home_satiety"
+            app:layout_constraintBottom_toBottomOf="@id/wlvFood"
+            app:layout_constraintRight_toLeftOf="@id/wlvFood" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clSkin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            app:layout_constraintBottom_toTopOf="@id/clQuest"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/tvSkin"
+                android:layout_width="wrap_content"
+                android:layout_height="37dp"
+                android:gravity="center"
+                android:text="皮肤"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivSkin"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/app_icon_home_skin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tvSkin"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clQuest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/tvQuest"
+                android:layout_width="wrap_content"
+                android:layout_height="37dp"
+                android:gravity="center"
+                android:text="任务"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivQuest"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/app_icon_home_quest"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tvQuest"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.82" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@mipmap/common_bg_dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="35:41"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@mipmap/common_icon_dialog_close"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_vertical" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="仓鼠怎么养？"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toTopOf="@id/tvDescribe1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDescribe1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="15dp"
+            android:gravity="left"
+            android:text="1、使用松果直接饲养仓鼠，您将成为它们最好的朋友，可以喂养它们，和它们一起玩耍"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/tvDescribe2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvDescribe2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="15dp"
+            android:gravity="left"
+            android:text="2、每隔几个小时，它们就会感到饥饿，您需要使用松果喂养它们；及时的清洁喂养，能使仓鼠保持健康"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/tvDescribe3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDescribe1" />
+
+        <TextView
+            android:id="@+id/tvDescribe3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="15dp"
+            android:gravity="left"
+            android:text="3、如果饱食度或清洁度将为0，仓鼠将无法参与各种玩法，您需要在7日内花费松果将它复活，否则将永远失去您的仓鼠"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/clImage"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDescribe2" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/common_bg_black23_radius15"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDescribe3">
+
+            <ImageView
+                android:id="@+id/ivQuest"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@mipmap/app_icon_home_satiety"
+                app:layout_constraintBottom_toTopOf="@id/tvQuest"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/ivProgress"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+
+                />
+
+            <TextView
+                android:id="@+id/tvQuest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="饲养仓鼠"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/ivQuest"
+                app:layout_constraintRight_toRightOf="@id/ivQuest"
+                app:layout_constraintTop_toBottomOf="@id/ivQuest" />
+
+            <ImageView
+                android:id="@+id/ivProgress"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@mipmap/app_icon_home_cleanliness"
+                app:layout_constraintBottom_toBottomOf="@id/ivQuest"
+                app:layout_constraintLeft_toRightOf="@id/tvQuest"
+                app:layout_constraintRight_toLeftOf="@id/ivOutput"
+                app:layout_constraintTop_toTopOf="@id/ivQuest"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清洁仓鼠"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:textStyle="bold"
+
+                app:layout_constraintBottom_toBottomOf="@id/tvQuest"
+                app:layout_constraintLeft_toLeftOf="@id/ivProgress"
+                app:layout_constraintRight_toRightOf="@id/ivProgress"
+                app:layout_constraintTop_toTopOf="@id/tvQuest" />
+
+            <ImageView
+                android:id="@+id/ivOutput"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@mipmap/app_icon_home_reborn"
+                app:layout_constraintBottom_toBottomOf="@id/ivQuest"
+                app:layout_constraintLeft_toRightOf="@id/ivProgress"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ivQuest"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tvOutput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="复活仓鼠"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tvQuest"
+                app:layout_constraintLeft_toLeftOf="@id/ivOutput"
+                app:layout_constraintRight_toRightOf="@id/ivOutput"
+                app:layout_constraintTop_toTopOf="@id/tvQuest" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
