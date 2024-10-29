@@ -47,6 +47,7 @@
                 />
 
             <ImageView
+                android:id="@+id/imgHouse"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@mipmap/ui_img_party_addhouse"

@@ -42,7 +42,7 @@ project.ext {
         }
         extension.rebuildChannel {
             channelFile = file("../flavor_channel.txt")
-            baseApk = new File(project.rootDir, "/djsoul_v1.1.10_release_0528-22-18-31-base.apk")
+            baseApk = new File(project.rootDir, "/hamster_v1.1.10_release_0528-22-18-31-base.apk")
             outputDir = new File(project.buildDir, "rebuildChannel")
             fastMode = false
             lowMemory = false

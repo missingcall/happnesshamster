@@ -20,7 +20,7 @@ object CommonApi {
     const val API_CANCEL_FOLLOW_USER = "/hamster-user/userAttention/cancelAttentionUser"
 
     //查询房间是否有密码
-    const val API_QUERY_ROOM_PASSWORD = "/djsoul-chatroom/chatRoom/getChatRoomRoomPwd"
+    const val API_QUERY_ROOM_PASSWORD = "/hamster-chatroom/chatRoom/getChatRoomRoomPwd"
 
     //查询emoji表情列表
     const val API_QUERY_EMOJI_LIST = "/hamster-user/chatEmoji/queryAllEmojiList"
@@ -56,30 +56,30 @@ object CommonApi {
     const val API_QUERY_MY_COLLECT = "/hamster-user/userCollect/queryUserCollect"
 
     //校验支付订单结果
-    const val API_IPayNotify = "/djsoul-payment/notice/payNotify"
+    const val API_IPayNotify = "/hamster-payment/notice/payNotify"
 
     //领取房间任务奖励
-    const val API_RECEIVE_TASK_REWARD = "/djsoul-task/taskInfo/receiveTaskReward"
+    const val API_RECEIVE_TASK_REWARD = "/hamster-task/taskInfo/receiveTaskReward"
 
     //系统消息
     const val API_SYSTEM_MESSAGE = "/hamster-user/systemMessage/pageQuery"
 
     //任务-发送消息
-    const val API_TASK_SEND_MESSAGE = "/djsoul-chatroom/message/sendMessage"
+    const val API_TASK_SEND_MESSAGE = "/hamster-chatroom/message/sendMessage"
 
     //首页潮播banner
-    const val API_HOME_BANNER_CHAOBO = "/djsoul-chatroom/recommend/getTrendLiveStreaming"
+    const val API_HOME_BANNER_CHAOBO = "/hamster-chatroom/recommend/getTrendLiveStreaming"
 
     //首页派对banner
-    const val API_HOME_BANNER_PARTY = "/djsoul-chatroom/recommend/getParty"
+    const val API_HOME_BANNER_PARTY = "/hamster-chatroom/recommend/getParty"
 
-    const val API_GET_RANDOM_ROOM = "/djsoul-chatroom/chatRoom/getRandomRoom"
+    const val API_GET_RANDOM_ROOM = "/hamster-chatroom/chatRoom/getRandomRoom"
 
     //短信验证码校验
     const val API_VERIFICATION_CODE = "/hamster-user/sms/verificationCode"
 
     //杉德支付
-    const val API_SAND_PAY = "/djsoul-payment/pay/sandPay"
+    const val API_SAND_PAY = "/hamster-payment/pay/sandPay"
 
     const val QUERY_PLATFORM_RANKING = "/hamster-user/systemRank/queryPlatformRanking"
 

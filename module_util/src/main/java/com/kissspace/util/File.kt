@@ -8,7 +8,7 @@ import java.io.File
 import java.io.IOException
 import java.math.BigDecimal
 
-const val ApkName = "djsoul.apk"
+const val ApkName = "hamster.apk"
 inline val fileSeparator: String get() = File.separator
 inline val apkFileDir: String get() = application.getExternalFilesDir(AppFileHelper.DOWNLOAD_PATH)?.absolutePath.toString()
 

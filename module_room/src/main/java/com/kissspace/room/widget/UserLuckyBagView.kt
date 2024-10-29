@@ -146,7 +146,7 @@ class UserLuckyBagView : LinearLayout {
             type = Constants.TypeFaceRecognition,
             value = Constants.FaceRecognitionType.CONSUMPTION.type.toString()
         )
-        request<GiftMessage>("/djsoul-user/giftInfo/giveGiftForSomebody", Method.POST, param,
+        request<GiftMessage>("/hamster-user/giftInfo/giveGiftForSomebody", Method.POST, param,
             onSuccess = {
                 getUserInfo(onSuccess = {})
                 handleGiftMessage(it,null)
