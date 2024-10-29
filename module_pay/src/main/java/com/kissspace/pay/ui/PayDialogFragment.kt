@@ -64,7 +64,7 @@ class PayDialogFragment : BaseDialogFragment<PayDialogPayBinding>(PayDialogPayBi
         //支付类型
         mBinding.rvPayType.isNestedScrollingEnabled = false
 
-        mBinding.rvPayType.grid(2).setup {
+        mBinding.rvPayType.linear().setup {
             addType<WalletRechargeList>(com.kissspace.module_common.R.layout.common_item_pay_type)
             singleMode = true
             onBind {

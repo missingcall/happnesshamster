@@ -122,7 +122,7 @@ public class QuickStartGameViewModel extends BaseGameViewModel {
 
         RequestBody body = RequestBody.create(req, MediaType.get("application/json; charset=utf-8"));
         Request request = new Request.Builder()
-                .url(BaseUrlConfig.BASEURL_RELEASE+"/djsoul-game/sudMGP/login")
+                .url(BaseUrlConfig.BASEURL_RELEASE+"/hamster-game/sudMGP/login")
                 .post(body)
                 .addHeader("Authorization", MMKVProvider.INSTANCE.getLoginResult().getTokenHead() + MMKVProvider.INSTANCE.getLoginResult().getToken())
                 .addHeader("channel", appendChannel(activity))

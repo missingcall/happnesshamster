@@ -17,7 +17,7 @@ import com.kissspace.module_common.R
  */
 class CommonConfirmDialog(
     context: Context,
-    private val title: String,
+    private val title: String = "",
     private val subTitle: String = "",
     private val positiveString: String? = null,
     private val negativeString: String? = null,
@@ -30,7 +30,7 @@ class CommonConfirmDialog(
     private var mSubTitle: TextView
     private var mPositive: TextView
     private var mNegative: TextView
-    private var mContent: TextView
+   // private var mContent: TextView
 
 
     init {
@@ -39,7 +39,7 @@ class CommonConfirmDialog(
         mSubTitle = findViewById(R.id.tv_sub_title)
         mPositive = findViewById(R.id.tv_positive)
         mNegative = findViewById(R.id.tv_negative)
-        mContent = findViewById(R.id.tv_content)
+     //   mContent = findViewById(R.id.tv_content)
         init()
     }
 
@@ -55,18 +55,24 @@ class CommonConfirmDialog(
 
     private fun init() {
         setCancelable(cancelable)
-        mSubTitle.text = subTitle
-        if (subTitle.isNotEmpty()){
-            mSubTitle.visibility = View.VISIBLE
+
+        if (title.isNotBlank()){
+            mTitle.visibility=View.VISIBLE
             mTitle.text = title
-            titleSpannableString?.let {
-                mTitle.text = titleSpannableString
-            }
         }else{
-            mSubTitle.visibility = View.INVISIBLE
-            mTitle.visibility = View.INVISIBLE
-            mContent.visibility = View.VISIBLE
-            mContent.text = title
+            mTitle.visibility=View.GONE
+        }
+
+
+        if (subTitle.isNotBlank()){
+            mSubTitle.visibility = View.VISIBLE
+
+            mSubTitle.text = subTitle
+           /* titleSpannableString?.let {
+                mTitle.text = titleSpannableString
+            }*/
+        }else{
+            mSubTitle.visibility = View.GONE
         }
 
 //        negativeString?.let {

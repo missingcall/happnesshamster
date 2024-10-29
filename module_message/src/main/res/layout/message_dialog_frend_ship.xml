@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:bl_corners_topRadius="12dp"
-    app:bl_solid_color="#2B2244">
+    app:bl_solid_color="@color/white">
 
     <TextView
         android:id="@+id/tv_black"
@@ -13,13 +13,13 @@
         android:layout_height="57dp"
         android:gravity="center"
         android:text="@string/message_chat_black_list"
-        android:textColor="@color/common_white"
+        android:textColor="@color/color_313133"
         android:textSize="16sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/white10" />
+        android:background="@color/color_E5E5E5" />
 
     <TextView
         android:id="@+id/tv_report"
@@ -27,6 +27,6 @@
         android:layout_height="57dp"
         android:gravity="center"
         android:text="@string/message_chat_report"
-        android:textColor="@color/common_white"
+        android:textColor="@color/color_313133"
         android:textSize="16sp" />
 </LinearLayout>

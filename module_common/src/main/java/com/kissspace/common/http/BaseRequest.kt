@@ -221,7 +221,7 @@ fun LifecycleOwner.uploadAudio(
     param: File, onSuccess: ((String) -> Unit) = {}, onError: (AppException) -> Unit = {}
 ): AndroidScope {
     return scopeNetLife {
-        val result = Post<String>("/djsoul-user/oss/file/uploadAudio") {
+        val result = Post<String>("/hamster-user/oss/file/uploadAudio") {
             param("audio", param)
         }.await()
         onSuccess(result)
@@ -236,7 +236,7 @@ fun LifecycleOwner.uploadPicture(
     onSuccess: ((MutableList<String>) -> Unit) = {},
 ): AndroidScope {
     return scopeNetLife {
-        val result = Post<MutableList<String>>("/djsoul-user/oss/file/batchUploadImage") {
+        val result = Post<MutableList<String>>("/hamster-user/oss/file/batchUploadImage") {
             for (file in param) {
                 param("images", file)
             }
@@ -355,7 +355,7 @@ fun LifecycleOwner.createPayOrder(
         type = TypeFaceRecognition,
         value = Constants.FaceRecognitionType.CHARGE.type.toString()
     )
-    return request<String>(url = "/djsoul-payment/pay/createPayOrder",
+    return request<String>(url = "/hamster-payment/pay/createPayOrder",
         Method.POST,
         param,
         onSuccess = {

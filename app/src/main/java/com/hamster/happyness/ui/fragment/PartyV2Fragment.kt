@@ -72,6 +72,12 @@ class PartyV2Fragment : BaseLazyFragment(R.layout.fragment_main_party_v2) {
         mBinding.tvSearch.safeClick {
             jump(RouterPath.PATH_SEARCH)
         }
+
+        mBinding.imgHouse.safeClick {
+            jumpRoom(roomType = Constants.ROOM_TYPE_PARTY)
+        }
+
+
     }
 
     override fun initView(savedInstanceState: Bundle?) {

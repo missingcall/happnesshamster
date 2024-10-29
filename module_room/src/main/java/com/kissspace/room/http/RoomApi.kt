@@ -9,218 +9,218 @@ package com.kissspace.room.http
  */
 object RoomApi {
     //用户上麦
-    const val API_UP_MIC = "/djsoul-chatroom/microphone/getMicrophone"
+    const val API_UP_MIC = "/hamster-chatroom/microphone/getMicrophone"
 
     //用户下麦
-    const val API_QUIT_MIC = "/djsoul-chatroom/microphone/leaveMicrophone"
+    const val API_QUIT_MIC = "/hamster-chatroom/microphone/leaveMicrophone"
 
     //创建房间
-    const val API_CREATE_ROOM = "/djsoul-chatroom/chatRoom/createPersonChatRoom"
+    const val API_CREATE_ROOM = "/hamster-chatroom/chatRoom/createPersonChatRoom"
 
     //加入房间
-    const val API_JOIN_ROOM = "/djsoul-chatroom/chatRoom/getIntoRoom"
+    const val API_JOIN_ROOM = "/hamster-chatroom/chatRoom/getIntoRoom"
 
     //刷新房间
-    const val API_REFRESH_ROOM = "/djsoul-chatroom/chatRoom/refreshIntoRoom"
+    const val API_REFRESH_ROOM = "/hamster-chatroom/chatRoom/refreshIntoRoom"
 
     //获取礼物tab列表
-    const val API_GET_GIFT_TABS = "/djsoul-user/giftTab/queryAll"
+    const val API_GET_GIFT_TABS = "/hamster-user/giftTab/queryAll"
 
-    //http://120.55.183.144:8201/djsoul-chatroom/config/queryLuckyBagList?tagId=100
+    //http://120.55.183.144:8201/hamster-chatroom/config/queryLuckyBagList?tagId=100
     //根据tab id查询礼物列表
-    const val API_GET_GIFT_BY_ID = "/djsoul-user/giftInfo/queryGiftByTabId"
+    const val API_GET_GIFT_BY_ID = "/hamster-user/giftInfo/queryGiftByTabId"
 
     //根据tab id查询带哎礼物列表
-    const val API_GET_FD_GIFT_BY_ID = "/djsoul-chatroom/config/queryLuckyBagList"
+    const val API_GET_FD_GIFT_BY_ID = "/hamster-chatroom/config/queryLuckyBagList"
 
     //送礼接口
-    const val API_SEND_GIFT = "/djsoul-user/giftInfo/giveGiftForSomebody"
+    const val API_SEND_GIFT = "/hamster-user/giftInfo/giveGiftForSomebody"
 
     //获取麦位列表用户
-    const val API_GET_ON_MIC_USERS = "/djsoul-chatroom/microphone/getOnMicrophoneUser"
+    const val API_GET_ON_MIC_USERS = "/hamster-chatroom/microphone/getOnMicrophoneUser"
 
     //锁麦
-    const val API_LOCK_MIC = "/djsoul-chatroom/microphone/lockMicrophone"
+    const val API_LOCK_MIC = "/hamster-chatroom/microphone/lockMicrophone"
 
     //解锁麦
-    const val API_UNLOCK_MIC = "/djsoul-chatroom/microphone/unlockMicrophone"
+    const val API_UNLOCK_MIC = "/hamster-chatroom/microphone/unlockMicrophone"
 
     //设置房间密码
-    const val API_SET_PASSWORD = "/djsoul-chatroom/chatRoom/updatePassword"
+    const val API_SET_PASSWORD = "/hamster-chatroom/chatRoom/updatePassword"
 
     //获取房间排麦用户列表
-    const val API_GET_MIC_QUEUE_LIST = "/djsoul-chatroom/microphone/queryMicrophoneWaitingQueue"
+    const val API_GET_MIC_QUEUE_LIST = "/hamster-chatroom/microphone/queryMicrophoneWaitingQueue"
 
     //获取房间可修改信息
-    const val API_GET_ROOM_INFO = "/djsoul-chatroom/chatRoom/queryChatRoomById"
+    const val API_GET_ROOM_INFO = "/hamster-chatroom/chatRoom/queryChatRoomById"
 
     //修改房间信息
-    const val API_UPDATE_ROOM_INFO = "/djsoul-chatroom/chatRoom/UpdateChatRoom"
+    const val API_UPDATE_ROOM_INFO = "/hamster-chatroom/chatRoom/UpdateChatRoom"
 
     //抱上麦
-    const val API_INVITE_MIC = "/djsoul-chatroom/microphone/inviteUserToMicrophone"
+    const val API_INVITE_MIC = "/hamster-chatroom/microphone/inviteUserToMicrophone"
 
     //抱下麦
-    const val API_KICK_MIC = "/djsoul-chatroom/microphone/kickOutUserFromMicrophone"
+    const val API_KICK_MIC = "/hamster-chatroom/microphone/kickOutUserFromMicrophone"
 
     //取消排麦
-    const val API_CANCEL_QUEUE = "/djsoul-chatroom/microphone/cancelMicrophoneWaiting"
+    const val API_CANCEL_QUEUE = "/hamster-chatroom/microphone/cancelMicrophoneWaiting"
 
     //获取房间在线用户列表
-    const val API_GET_ROOM_ONLINE_USER = "/djsoul-user/onlineUsers/queryOnlineUserList"
+    const val API_GET_ROOM_ONLINE_USER = "/hamster-user/onlineUsers/queryOnlineUserList"
 
     //设置用户身份
-    const val API_UPDATE_USER_ROLE = "/djsoul-chatroom/chatRoomRole/insertChatRoomRole"
+    const val API_UPDATE_USER_ROLE = "/hamster-chatroom/chatRoomRole/insertChatRoomRole"
 
     //取消用户管理员身份
-    const val API_CANCEL_MANAGER = "/djsoul-chatroom/chatRoomRole/updateChatRoomRole"
+    const val API_CANCEL_MANAGER = "/hamster-chatroom/chatRoomRole/updateChatRoomRole"
 
     //关闭密码房
-    const val API_CLOSE_PASSWORD = "/djsoul-chatroom/chatRoom/closePassword"
+    const val API_CLOSE_PASSWORD = "/hamster-chatroom/chatRoom/closePassword"
 
     //设置房间背景
-    const val API_SETTING_ROOM_BACKGROUND = "/djsoul-chatroom/chatRoom/setBackground"
+    const val API_SETTING_ROOM_BACKGROUND = "/hamster-chatroom/chatRoom/setBackground"
 
     //获取背包礼物列表
-    const val API_GET_PACK_GIFT_LIST = "/djsoul-user/giftBag/queryGiftBagByUserId"
+    const val API_GET_PACK_GIFT_LIST = "/hamster-user/giftBag/queryGiftBagByUserId"
 
     //禁麦
-    const val API_BAN_MIC = "/djsoul-chatroom/chatRoom/forbiddenMike"
+    const val API_BAN_MIC = "/hamster-chatroom/chatRoom/forbiddenMike"
 
     //取消禁麦
-    const val API_CANCEL_BAB_MIC = "/djsoul-chatroom/chatRoom/cancelForbiddenMike"
+    const val API_CANCEL_BAB_MIC = "/hamster-chatroom/chatRoom/cancelForbiddenMike"
 
     //禁言
-    const val API_BAN_CHAT = "/djsoul-chatroom/chatRoom/chatRoomMuted"
+    const val API_BAN_CHAT = "/hamster-chatroom/chatRoom/chatRoomMuted"
 
     //获取用户资料卡信息
-    const val API_GET_USER_PROFILE_INFO = "/djsoul-user/user/getUserCard"
+    const val API_GET_USER_PROFILE_INFO = "/hamster-user/user/getUserCard"
 
     //获取预言列表
-    const val API_GET_PREDICTION_LIST = "/djsoul-game/integralGuess/getIntegralGuessInRoom"
+    const val API_GET_PREDICTION_LIST = "/hamster-game/integralGuess/getIntegralGuessInRoom"
 
     //获取参加过的预言记录列表
-    const val API_GET_PREDICTION_HISTORY = "/djsoul-game/integralGuess/getIntegralGuessBetHistory"
+    const val API_GET_PREDICTION_HISTORY = "/hamster-game/integralGuess/getIntegralGuessBetHistory"
 
     //创建预言
-    const val API_CREATE_PREDICTION = "/djsoul-game/integralGuess/createIntegralGuess"
+    const val API_CREATE_PREDICTION = "/hamster-game/integralGuess/createIntegralGuess"
 
     //中止投注
-    const val API_STOP_PREDICTION = "/djsoul-game/integralGuess/stopBet"
+    const val API_STOP_PREDICTION = "/hamster-game/integralGuess/stopBet"
 
     //结算竞猜
-    const val API_SETTLE_PREDICTION = "/djsoul-game/integralGuess/settleGuess"
+    const val API_SETTLE_PREDICTION = "/hamster-game/integralGuess/settleGuess"
 
     //删除竞猜
-    const val API_DELETE_PREDICTION = "/djsoul-game/integralGuess/deleteGuess"
+    const val API_DELETE_PREDICTION = "/hamster-game/integralGuess/deleteGuess"
 
     //下注
-    const val API_PREDICTION_BET = "/djsoul-game/integralGuess/bet"
+    const val API_PREDICTION_BET = "/hamster-game/integralGuess/bet"
 
     //积分广场列表
     const val API_PREDICTION_SQUARE_LIST =
-        "/djsoul-game/integralGuess/getIntegralGuessInProgressInSquare"
+        "/hamster-game/integralGuess/getIntegralGuessInProgressInSquare"
 
     //积分竞猜排行榜
-    const val API_PREDICTION_RANKING = "/djsoul-game/integralGuess/getIntegralRanking"
+    const val API_PREDICTION_RANKING = "/hamster-game/integralGuess/getIntegralRanking"
 
     //查询用户是否收藏了房间
-    const val API_IS_COLLECT_ROOM = "/djsoul-user/userCollect/queryCollectChatRoom"
+    const val API_IS_COLLECT_ROOM = "/hamster-user/userCollect/queryCollectChatRoom"
 
     //收藏房间
-    const val API_COLLECT_ROOM = "/djsoul-user/userCollect/collectChatRoom"
+    const val API_COLLECT_ROOM = "/hamster-user/userCollect/collectChatRoom"
 
     //收藏歌曲
-    const val API_COLLECT_MUSIC = "/djsoul-user/userCollect/collectMusic"
+    const val API_COLLECT_MUSIC = "/hamster-user/userCollect/collectMusic"
 
     //收藏歌曲列表
-    const val API_COLLECT_MUSIC_LIST = "/djsoul-user/userCollect/queryUserCollectMusic"
+    const val API_COLLECT_MUSIC_LIST = "/hamster-user/userCollect/queryUserCollectMusic"
 
     //获取房间任务列表
     const val API_GET_TASK_REWARD_LIST =
-        "/djsoul-task/taskInfo/selectTaskInfoListForChatroomIntegral"
+        "/hamster-task/taskInfo/selectTaskInfoListForChatroomIntegral"
 
-    const val API_HOME_QUERY_MESSAGE= "/djsoul-chatroom/largeScreenInteractionMessage/queryCurrentMessage"
+    const val API_HOME_QUERY_MESSAGE= "/hamster-chatroom/largeScreenInteractionMessage/queryCurrentMessage"
 
     //获取所有积分
     const val API_GET_ALL_INTEGRAL =
-        "/djsoul-task/taskInfo/batchReceiveTaskReward"
+        "/hamster-task/taskInfo/batchReceiveTaskReward"
 
     //房间排行榜
-    const val API_ROOM_RANK_USER = "/djsoul-user/systemRank/queryChatRoomRanking"
+    const val API_ROOM_RANK_USER = "/hamster-user/systemRank/queryChatRoomRanking"
 
     //清除麦位魅力值
-    const val API_CLEAR_CHARM_VALUE = "/djsoul-chatroom/microphone/clearCharmValue"
+    const val API_CLEAR_CHARM_VALUE = "/hamster-chatroom/microphone/clearCharmValue"
 
     //开积分盲盒
-    const val API_OPEN_INTEGRAL_BOX = "/djsoul-user/mysteryBox/openPointsMysteryBox"
+    const val API_OPEN_INTEGRAL_BOX = "/hamster-user/mysteryBox/openPointsMysteryBox"
 
     //锁定礼物
-    const val API_GIFT_LOCK = "/djsoul-user/giftBag/lockGift"
+    const val API_GIFT_LOCK = "/hamster-user/giftBag/lockGift"
 
     //根据id查询竞猜
-    const val API_GET_PREDICTION_BY_ID = "/djsoul-game/integralGuess/getIntegralGuessById"
+    const val API_GET_PREDICTION_BY_ID = "/hamster-game/integralGuess/getIntegralGuessById"
 
     //魅力值开关
-    const val API_SWITCH_INCOME = "/djsoul-chatroom/chatRoom/onOffChatRoomCharm"
+    const val API_SWITCH_INCOME = "/hamster-chatroom/chatRoom/onOffChatRoomCharm"
 
     //踢出房间
-    const val API_KICK_OUT_USER = "/djsoul-chatroom/chatRoom/kickOutOfTheRoom"
+    const val API_KICK_OUT_USER = "/hamster-chatroom/chatRoom/kickOutOfTheRoom"
 
     //开始OBS直播
-    const val API_START_OBS_LIVESTREAM = "/djsoul-chatroom/chatRoom/startTheLiveBroadcast"
+    const val API_START_OBS_LIVESTREAM = "/hamster-chatroom/chatRoom/startTheLiveBroadcast"
 
     //结束obs直播
-    const val API_STOP_OBS_LIVESTREAM = "/djsoul-chatroom/chatRoom/endthelivebroadcast"
+    const val API_STOP_OBS_LIVESTREAM = "/hamster-chatroom/chatRoom/endthelivebroadcast"
 
     //设置直播横竖屏
-    const val API_UPDATE_SCREEN_DIRECTION = "/djsoul-chatroom/chatRoom/updateScreenStatus"
+    const val API_UPDATE_SCREEN_DIRECTION = "/hamster-chatroom/chatRoom/updateScreenStatus"
 
     //查询浇水奖池状态
-    const val API_QUERY_WATER_GAME_POOL = "/djsoul-game/giftPoolConfig/queryUsingGiftPool"
+    const val API_QUERY_WATER_GAME_POOL = "/hamster-game/giftPoolConfig/queryUsingGiftPool"
 
     //退出房间
-    const val API_EXIT_ROOM = "/djsoul-chatroom/chatRoom/exitChatRoom"
+    const val API_EXIT_ROOM = "/hamster-chatroom/chatRoom/exitChatRoom"
 
     //退出房间
-    const val API_SHARE_CHAT_ROOM = "/djsoul-chatroom/chatRoom/shareChatRoom"
+    const val API_SHARE_CHAT_ROOM = "/hamster-chatroom/chatRoom/shareChatRoom"
 
     //获取麦位的魅力值
-    const val API_CHARM_IN_MIC = "/djsoul-chatroom/microphone/selectUserCharmValue"
+    const val API_CHARM_IN_MIC = "/hamster-chatroom/microphone/selectUserCharmValue"
 
     //房间心跳
-    const val API_ROOM_HEART_BEAT = "/djsoul-chatroom/chatRoom/heartbeat"
+    const val API_ROOM_HEART_BEAT = "/hamster-chatroom/chatRoom/heartbeat"
 
     //查询房间背景
-    const val API_QUERY_ROOM_BACKGROUND = "/djsoul-chatroom/chatRoom/queryRoomBackgroundList"
+    const val API_QUERY_ROOM_BACKGROUND = "/hamster-chatroom/chatRoom/queryRoomBackgroundList"
 
     //房间流水
-    const val API_ROOM_INCOME = "/djsoul-chatroom/chatRoom/getRoomFlowTotal"
+    const val API_ROOM_INCOME = "/hamster-chatroom/chatRoom/getRoomFlowTotal"
 
     //房间流水-周榜
-    const val API_ROOM_INCOME_WEEK = "/djsoul-chatroom/chatRoom/getRoomThisWeekFlowTotal"
+    const val API_ROOM_INCOME_WEEK = "/hamster-chatroom/chatRoom/getRoomThisWeekFlowTotal"
 
     //发起pk
-    const val API_START_PK = "/djsoul-chatroom/chatRoom/initiateRoomPKInitialization"
+    const val API_START_PK = "/hamster-chatroom/chatRoom/initiateRoomPKInitialization"
 
     //pk送礼列表
-    const val API_USER_IN_PK = "/djsoul-chatroom/chatRoom/roomPkContributionList"
+    const val API_USER_IN_PK = "/hamster-chatroom/chatRoom/roomPkContributionList"
 
     // 结束PK
-    const val API_END_PK = "/djsoul-chatroom/chatRoom/endRoomPk"
+    const val API_END_PK = "/hamster-chatroom/chatRoom/endRoomPk"
 
     //搜索
-    const val API_SEARCH_CONTENT = "/djsoul-search/search/search/home"
+    const val API_SEARCH_CONTENT = "/hamster-search/search/search/home"
 
     // 加入房间黑名单
-    const val API_BAN_USER_IN_ROOM = "/djsoul-chatroom/chatRoom/setChatRoomBlackList"
+    const val API_BAN_USER_IN_ROOM = "/hamster-chatroom/chatRoom/setChatRoomBlackList"
 
     // 取消房间黑名单
-    const val API_CANCEL_BAN_USER_IN_ROOM = "/djsoul-chatroom/chatRoom/cancelChatRoomBlackList"
+    const val API_CANCEL_BAN_USER_IN_ROOM = "/hamster-chatroom/chatRoom/cancelChatRoomBlackList"
 
     //房间黑名单列表
-    const val API_ROOM_BLACK_LIST = "/djsoul-chatroom/chatRoom/chatRoomBlackList"
+    const val API_ROOM_BLACK_LIST = "/hamster-chatroom/chatRoom/chatRoomBlackList"
 
     //发送全服广播
-    const val API_SEND_BROADCAST_MESSAGE = "/djsoul-chatroom/largeScreenInteractionMessage/send"
+    const val API_SEND_BROADCAST_MESSAGE = "/hamster-chatroom/largeScreenInteractionMessage/send"
 }

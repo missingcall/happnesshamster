@@ -80,10 +80,10 @@ object AppConfigKey {
     const val ROOM_ACTIVE_ICON_CONFIG = "room_gameicon"
 
     //游戏配置
-    const val ROOM_ACTIVE_PATH_CONFIG = "/djsoul-chatroom/config/queryGameConfigList"
-    //http://223.4.18.2:8201/djsoul-chatroom/config/queryGameConfigList
+    const val ROOM_ACTIVE_PATH_CONFIG = "/hamster-chatroom/config/queryGameConfigList"
+    //http://223.4.18.2:8201/hamster-chatroom/config/queryGameConfigList
     //微信配置
-    const val WECHAT_APP_INFO = "/djsoul-chatroom/config/wechat_app_info"
+    const val WECHAT_APP_INFO = "/hamster-chatroom/config/wechat_app_info"
     //允许聊天的最低财富等级
     const val CHAT_MIN_LEVEL = "chat_min_level"
 }

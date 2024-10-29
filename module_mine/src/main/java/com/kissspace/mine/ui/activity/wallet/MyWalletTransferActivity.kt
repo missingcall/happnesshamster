@@ -434,7 +434,7 @@ class MyWalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_tran
             //只有金币才显示对应的手续费
             scopeNetLife {
                 val data =
-                    Get<List<TransferRecord>>("/djsoul-user/flowRecord/queryFlowRecordCoinRecent") {
+                    Get<List<TransferRecord>>("/hamster-user/flowRecord/queryFlowRecordCoinRecent") {
                         param("coinType", "002")
                         param("flowKind", "002")
                     }.await()

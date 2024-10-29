@@ -22,17 +22,20 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_3D3D3D"
-            android:textSize="16sp"
+            android:textColor="@color/color_313133"
+            android:textSize="17sp"
+            android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="忽略未读"
+            android:layout_marginTop="20dp"
             android:visibility="gone"
+            tools:visibility="visible"
             />
 
 
-        <TextView
+ <!--       <TextView
             android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,16 +44,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone"
             android:layout_marginTop="15dp"
-            tools:text="忽略未读"/>
+            tools:text="忽略未读"/>-->
 
         <TextView
             android:id="@+id/tv_sub_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
-            android:textColor="@color/color_3D3D3D"
+            android:textColor="@color/color_949499"
             android:layout_marginBottom="28dp"
             android:textSize="15sp"
             tools:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

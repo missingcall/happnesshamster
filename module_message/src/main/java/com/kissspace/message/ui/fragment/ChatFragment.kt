@@ -413,7 +413,8 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
     }
 
     private fun checkChatPermission(): Boolean {
-        return if (mBinding.recyclerView.mutable.isEmpty()) {
+        return true
+      /*  return if (mBinding.recyclerView.mutable.isEmpty()) {
             val user = mViewModel.mineUserInfo.get()
             val levelEnable = user?.consumeLevel.orZero() >= MMKVProvider.userChatMinLevel
             if (user?.family == true) {
@@ -426,7 +427,7 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
                     return false
                 }
             }
-        } else true
+        } else true*/
     }
 
     private fun initClickEvents() {

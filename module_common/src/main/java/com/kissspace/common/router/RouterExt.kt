@@ -66,7 +66,7 @@ fun jump(
 
 fun jumpToFamily(){
     request<FamilyDetailInfoModel?>(
-        "/djsoul-family/family/selectFamilyInfo",
+        "/hamster-family/family/selectFamilyInfo",
         Method.GET,
         onSuccess = {
             if (it != null) {

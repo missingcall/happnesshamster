@@ -147,7 +147,7 @@ class GiftToCpFragment : BaseDialogFragment<MineGiftToCpBinding>(MineGiftToCpBin
             value = Constants.FaceRecognitionType.CONSUMPTION.type.toString()
         )
         showLoading()
-        request<GiftMessage>("/djsoul-user/giftInfo/giveGiftForSomebody", Method.POST, param,
+        request<GiftMessage>("/hamster-user/giftInfo/giveGiftForSomebody", Method.POST, param,
             onSuccess = {
                 handleGiftMessage(it, invoke = {
                         gift, nickName, userIcon ->
