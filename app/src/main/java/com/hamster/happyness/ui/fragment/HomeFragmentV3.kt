@@ -37,9 +37,6 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.lifecycleOwner = this
-        mBinding.ivExploreSearch.safeClick {
-            jump(RouterPath.PATH_SEARCH)
-        }
 
     }
 

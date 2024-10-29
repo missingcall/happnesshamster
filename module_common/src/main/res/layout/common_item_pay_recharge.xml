@@ -16,6 +16,9 @@
         android:layout_height="wrap_content"
         app:clIsSelected="@{m.isSelected}"
         android:layout_marginTop="6dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/common_wallet_item_exchange_selector">
 
         <TextView

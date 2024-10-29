@@ -95,8 +95,8 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_2"
-                        app:bl_corners_radius="8dp"
-                        app:bl_solid_color="@color/color_1A000000"
+                        app:bl_corners_radius="11dp"
+                        app:bl_solid_color="#232323"
                         app:maxWordsNum="200" />
 
                     <TextView
@@ -125,18 +125,19 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_3"/>
 
-                    <TextView
+                    <com.ruffian.library.widget.RTextView
                         android:id="@+id/tv_confirm"
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="41dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="39dp"
                         android:layout_marginRight="16dp"
-                        android:background="@drawable/common_button_enable_selector"
+                        app:background_normal="#5A60FF"
+                        app:corner_radius="22dp"
                         android:gravity="center"
                         android:text="确认提交"
                         android:enabled="@{m.isUploadEnable()}"
-                        android:textColor="@drawable/common_button_color_selector"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintTop_toBottomOf="@+id/mPreviewImageView" />
 

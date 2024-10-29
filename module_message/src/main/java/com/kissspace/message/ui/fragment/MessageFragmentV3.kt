@@ -31,6 +31,7 @@ import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
+import com.kissspace.common.http.getSelectPayChannelList
 import com.kissspace.common.model.ChatListModel
 import com.kissspace.common.provider.IRoomProvider
 import com.kissspace.common.router.RouterPath
@@ -42,6 +43,7 @@ import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.message.viewmodel.MessageViewModel
 import com.kissspace.network.result.collectData
 import com.kissspace.common.model.ItemMessageMenu
+import com.kissspace.common.provider.IPayProvider
 import com.kissspace.message.widget.ChatDialog
 import com.uc.crashsdk.export.LogType.addType
 import kotlinx.coroutines.launch
@@ -114,9 +116,9 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         }
         //清空消息
         mBinding.ivClearMessage.safeClick {
-        jump(RouterPath.PATH_GIFT_MAIL)
-        //   jump(RouterPath.PATH_CHAT, "account" to "djs6713bc03e4b037d1ecfce6dc", "userId" to "6713bc03e4b037d1ecfce6dc")
-         /*   CommonConfirmDialog(
+       // jump(RouterPath.PATH_GIFT_MAIL)
+           jump(RouterPath.PATH_CHAT, "account" to "djs671f66e6e4b037d1ecfce93c", "userId" to "671f66e6e4b037d1ecfce93c")
+          /*  CommonConfirmDialog(
                 requireContext(), "忽略未读", "消息气泡会删除掉，但仍然保留消息"
             ) {
                 if (this) {
@@ -127,6 +129,10 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
                     }
                 }
             }.show()*/
+            /*getSelectPayChannelList { list ->
+                DRouter.build(IPayProvider::class.java).getService()
+                    .showPayDialogFragment(childFragmentManager, list)
+            }*/
         }
     }
 

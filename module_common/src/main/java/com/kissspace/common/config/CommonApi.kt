@@ -35,7 +35,7 @@ object CommonApi {
     const val API_QUERY_USER_PROFILE = "/hamster-user/user/personalData"
 
     //用户充值列表
-    const val API_SelectPayChannelList = "/djsoul-payment/pay/selectPayChannelList"
+    const val API_SelectPayChannelList = "/hamster-payment/pay/selectPayChannelList"
 
     //发送验证码
     const val API_SendSms = "/hamster-user/sms/sendCode"
