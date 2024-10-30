@@ -12,8 +12,11 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class WalletModel(
+    //账户余额(松子)
     val accountBalance: Double? = null,
+    //	虚拟币数目(金币)
     val coin: Double? = null,
+    //钻石(松果)
     val diamond: Double? = null,
     //	身份（001-普通用户，002-主播，003-公会长）
     val identity: String,

@@ -520,6 +520,18 @@ public class WaveLoadingView extends View {
         invalidate();
     }
 
+    public void setAllColor(int color) {
+        setBorderColor(color);
+        setWaveColor(color);
+        setWaveBgColor(color);
+        updateWaveShader();
+        invalidate();
+    }
+
+    public int getAllColor() {
+        return mBorderPaint.getColor();
+    }
+
     public int getBorderColor() {
         return mBorderPaint.getColor();
     }

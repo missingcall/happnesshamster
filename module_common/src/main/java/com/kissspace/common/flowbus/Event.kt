@@ -63,7 +63,7 @@ sealed class Event {
     data class MsgPDEvent(var data: PDModel) : Event()
 
     //系统通知
-    object  MsgSystemEvent : Event()
+    object MsgSystemEvent : Event()
 
     //公会消息
     object MsgFamilyEvent : Event()
@@ -130,7 +130,8 @@ sealed class Event {
     data class RoomGuideEvent(var position: Int? = 0, var isJump: Boolean) : Event()
 
     //微信h5支付结果
-    data class WxPayResult(var payStatus:Int? = 0) : Event()
+    data class WxPayResult(var payStatus: Int? = 0) : Event()
+
     /**
      * 本地音浪变化
      */
@@ -142,12 +143,14 @@ sealed class Event {
     data class RemoteSoundLevelUpdateEvent(var soundLevels: HashMap<String, Float>?) : Event()
 
     data class OpenUserInfoDialog(var userId: String) : Event()
+
     /**
      * 显示幸运礼物
      */
     object ShowLuckyGiftEvent : Event()
 
     object PhoneInCome : Event()
+
     /**
      * 幸运抽奖的礼物
      */
@@ -164,25 +167,33 @@ sealed class Event {
 
 
     //星际庄园游戏
-    data class H5InterstellarEvent(var content:String) : Event()
+    data class H5InterstellarEvent(var content: String) : Event()
 
     //糖果城堡
-    data class H5CandyInterstellarEvent(var content:String) : Event()
+    data class H5CandyInterstellarEvent(var content: String) : Event()
 
-    data class H5EventInterstellarEvent(var content:String) : Event()
+    data class H5EventInterstellarEvent(var content: String) : Event()
 
-    data class DragonEventInterstellarEvent(var content:String) : Event()
+    data class DragonEventInterstellarEvent(var content: String) : Event()
 
     //通知权限是否开启
-    object NotificationEventOpen  : Event()
+    object NotificationEventOpen : Event()
 
     object CPChanged : Event()
 
     //赠送福袋
-    data class GiveGiftByCoinNet(var source: GiftSourceInfo,val tagName:String,val userTagId:String, var gift: GiftInfo) : Event()
-    data class GiveGiftByCoinLocal(var tags:List<String>,var number:Int,var  giftInfo: GiftInfo,var giftType:String) : Event()
+    data class GiveGiftByCoinNet(var source: GiftSourceInfo, val tagName: String, val userTagId: String, var gift: GiftInfo) : Event()
+    data class GiveGiftByCoinLocal(var tags: List<String>, var number: Int, var giftInfo: GiftInfo, var giftType: String) : Event()
 //    data class GiveGiftByCoinLocal(var tags:List<String>,var number:Int,var  giftInfo: GiftInfo,val source:String) : Event()
 
     //刷新钱包中松子/松果/钻石余额 以及 转入转出记录
     object MsgRefreshWalletEvent : Event()
+
+    //喂食清洗 合并事件
+    object FeedingOrCleaningEvent : Event()
+    //喂食
+    object FeedingEvent : Event()
+
+    //清洗
+    object CleaningEvent : Event()
 }

@@ -8,16 +8,14 @@ import com.kissspace.common.base.BaseViewModel
 import com.kissspace.common.config.CommonApi
 import com.kissspace.common.config.Constants
 import com.kissspace.common.config.Constants.TypeFaceRecognition
-import com.kissspace.common.model.wallet.CollectRecordModel
-import com.kissspace.common.model.wallet.WalletDetailModel
-import com.kissspace.common.model.wallet.WalletExchangeRecodeListModel
-import com.kissspace.common.model.wallet.WalletModel
+import com.kissspace.common.model.wallet.*
 import com.kissspace.common.util.DJSLiveData
 import com.kissspace.common.util.customToast
 import com.kissspace.common.util.format.Format
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.util.setApplicationValue
 import com.kissspace.mine.http.MineApi
+import com.kissspace.network.exception.AppException
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
 import com.kissspace.util.isNotEmptyBlank
@@ -142,11 +140,14 @@ class WalletViewModel : BaseViewModel() {
         }
     }
 
+    //coin 金币
     val coin = MediatorLiveData<String>().apply {
         addSource(walletModel) { walletModel ->
             setValue(Format.E_EE.format(walletModel.coin.orZero()))
         }
     }
+
+    //diamond 松果
     var diamond = MediatorLiveData<String>().apply {
         // java.lang.IllegalArgumentException: Cannot format given Object as a Number
         addSource(walletModel) { walletModel ->
@@ -155,6 +156,8 @@ class WalletViewModel : BaseViewModel() {
         }
     }
 
+
+    //accountBalance 松子
     var accountBalance = MediatorLiveData<String>().apply {
         addSource(walletModel) { walletModel ->
             setValue(
@@ -179,17 +182,30 @@ class WalletViewModel : BaseViewModel() {
         }
     }
 
+    //获取当前仓鼠信息
+    var hmsInfoModel = ObservableField<HmsInfoModel>()
 
-    //我的钱包首页
-    fun getMyMoneyBag(block: ((WalletModel?) -> Unit)?) {
-        val param = mutableMapOf<String, Any?>()
-        request<WalletModel>(MineApi.API_MY_WALLET, Method.GET, param, onSuccess = {
-            block?.invoke(it)
-        })
-    }
+    var cultivationPanelModel = ObservableField<CultivationPanelModel>()
+
+    var revivePanelModel = ObservableField<RevivePanelModel>()
+
+    //清洁度
+    var cleanliness = ObservableField<Int>()
+
+    //饱食度
+    var satiety = ObservableField<Int>()
+
+    //仓鼠状态 （001 正常 002 濒死 003 已死亡 004 已到期）
+    var hamsterStatus = ObservableField<String>()
 
     //提现
-    fun withDrawNumber(withdrawCoin: Double, withdrawType: Int,withdrawalPaymentType: Int, block: ((Boolean?) -> Unit)?,error: ((String?) -> Unit)?) {
+    fun withDrawNumber(
+        withdrawCoin: Double,
+        withdrawType: Int,
+        withdrawalPaymentType: Int,
+        block: ((Boolean?) -> Unit)?,
+        error: ((String?) -> Unit)?
+    ) {
         val param = mutableMapOf<String, Any?>()
         param["os"] = Constants.OperationSystem
         param["withdrawCoin"] = withdrawCoin
@@ -202,7 +218,7 @@ class WalletViewModel : BaseViewModel() {
         request<Boolean>(MineApi.API_WITHDRAW_ITEM, Method.POST, param, onSuccess = {
             block?.invoke(it)
         }, onError = {
-           error?.invoke(it.message)
+            error?.invoke(it.message)
         })
     }
 
@@ -365,7 +381,7 @@ class WalletViewModel : BaseViewModel() {
     }
 
     //杉德（支付宝）支付
-    fun sandPay(sandPayChannelCode:String,payChannelType:String,payProductId: String, block: ((String) -> Unit)?) {
+    fun sandPay(sandPayChannelCode: String, payChannelType: String, payProductId: String, block: ((String) -> Unit)?) {
         val param = mutableMapOf<String, Any?>()
         val jsonObject = JSONObject()
 //        jsonObject.put("cardNo","6228480038740595475")
@@ -389,13 +405,13 @@ class WalletViewModel : BaseViewModel() {
         )
     }
 
-    fun sandWechatPay(sandPayChannelCode:String,payChannelType:String,payProductId: String, block: ((String) -> Unit)?) {
+    fun sandWechatPay(sandPayChannelCode: String, payChannelType: String, payProductId: String, block: ((String) -> Unit)?) {
         val param = mutableMapOf<String, Any?>()
         val jsonObject = JSONObject()
-        jsonObject.put("wx_app_id","wx7d77111f5fbb8e45")
-        jsonObject.put("gh_ori_id","gh_99ba4bfcf8b3")
-        jsonObject.put("path_url","pages/zf/index?")
-        jsonObject.put("miniProgramType","2")
+        jsonObject.put("wx_app_id", "wx7d77111f5fbb8e45")
+        jsonObject.put("gh_ori_id", "gh_99ba4bfcf8b3")
+        jsonObject.put("path_url", "pages/zf/index?")
+        jsonObject.put("miniProgramType", "2")
         param["payExtra"] = jsonObject.toString()
         param["os"] = Constants.OperationSystem
         // param["sandPayChannelCode"] = "05030001"
@@ -415,8 +431,17 @@ class WalletViewModel : BaseViewModel() {
      * 电报仓鼠 钱包- 松果/松子/钻石
      */
 
+    //我的钱包
+    fun getMyMoneyBag(block: ((WalletModel?) -> Unit)?) {
+        val param = mutableMapOf<String, Any?>()
+        request<WalletModel>(MineApi.API_MY_WALLET, Method.GET, param, onSuccess = {
+            walletModel.value = it
+            block?.invoke(it)
+        })
+    }
+
     //钱包记录 最近5条
-    fun queryCollectRecordList(startTime: String?,endTime: String?, pageNum: Int, pageSize: Int, onSuccess: ((CollectRecordModel?) -> Unit)?) {
+    fun queryCollectRecordList(startTime: String?, endTime: String?, pageNum: Int, pageSize: Int, onSuccess: ((CollectRecordModel?) -> Unit)?) {
         val param = mutableMapOf<String, Any?>()
         param["startTime"] = startTime
         param["endTime"] = endTime
@@ -433,10 +458,61 @@ class WalletViewModel : BaseViewModel() {
             })
     }
 
-    //获取松果/松子/钻石余额
-    
+    //获取仓鼠养成培养消费面板
+    fun queryCultivationPanel(block: ((CultivationPanelModel?) -> Unit)?) {
+        val param = mutableMapOf<String, Any?>()
+        request<CultivationPanelModel>(MineApi.API_HAMSTER_CULTIVATE_QUERY_CULTIVATION_PANEL, Method.GET, param, onSuccess = {
+            cultivationPanelModel.set(it)
+            block?.invoke(it)
+        }, onError = {
+            customToast(it.message)
+        }
+        )
+    }
+
+    //获取仓鼠养成培养消费面板
+    fun queryRevivePanel(block: ((RevivePanelModel?) -> Unit)?) {
+        val param = mutableMapOf<String, Any?>()
+        request<RevivePanelModel>(MineApi.API_HAMSTER_CULTIVATE_QUERY_REVIVEPANEL, Method.GET, param, onSuccess = {
+            revivePanelModel.set(it)
+            block?.invoke(it)
+        }, onError = {
+            customToast(it.message)
+        }
+        )
+    }
+
+    //获取当前仓鼠信息
+    fun hmsInfo(onSuccess: ((HmsInfoModel?) -> Unit)?,onError: ((AppException?) -> Unit)?) {
+        val param = mutableMapOf<String, Any?>()
+        request<HmsInfoModel>(MineApi.API_HAMSTER_CULTIVATION_HMSINFO, Method.GET, param, onSuccess = {
+            hmsInfoModel.set(it)
+            onSuccess?.invoke(it)
+        }, onError = {
+            customToast(it.message)
+            onError?.invoke(it)
+        }
+        )
+    }
+
+    //喂养仓鼠
+    fun improveSatiety(onSuccess: ((Boolean) -> Unit) = {}) {
+        request<Boolean>(MineApi.API_HAMSTER_CULTIVATE_IMPROVE_SATIETY, Method.GET, onSuccess = {
+            onSuccess.invoke(it)
+        }, onError = {
+            customToast(it.message)
+        })
+    }
 
 
+    //清洗仓鼠
+    fun improveCleanliness(onSuccess: ((Boolean) -> Unit) = {}) {
+        request<Boolean>(MineApi.API_HAMSTER_CULTIVATE_IMPROVE_CLEANLINESS, Method.GET, onSuccess = {
+            onSuccess.invoke(it)
+        }, onError = {
+            customToast(it.message)
+        })
+    }
 
 
 }

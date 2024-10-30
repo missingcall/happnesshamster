@@ -1,13 +1,11 @@
 package com.kissspace.mine.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.didi.drouter.annotation.Router
 import com.kissspace.util.toast
-import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.router.jump
 import com.kissspace.common.router.parseIntent
 import com.kissspace.common.ext.safeClick

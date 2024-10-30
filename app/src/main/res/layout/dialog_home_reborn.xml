@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:text="喂养仓鼠"
+            android:text="复活仓鼠"
             android:textColor="@color/white"
             android:textSize="26sp"
             android:textStyle="bold"
@@ -79,7 +79,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
-            android:src="@mipmap/app_icon_home_satiety"
+            android:src="@mipmap/app_icon_home_reborn"
             app:layout_constraintBottom_toBottomOf="@id/ivCircleBg"
             app:layout_constraintLeft_toLeftOf="@id/ivCircleBg"
             app:layout_constraintRight_toRightOf="@id/ivCircleBg"
@@ -93,62 +93,37 @@
             android:layout_marginTop="6dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/common_bg_black23_radius15"
+            android:paddingTop="21dp"
+            android:paddingBottom="21dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivCircleBg">
 
-            <ProgressBar
-                android:id="@+id/pbProgress"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="11dp"
-                android:layout_marginLeft="11dp"
-                android:layout_marginRight="11dp"
-                android:layout_marginBottom="14dp"
-                android:layout_weight="1"
-                android:max="100"
-                android:progress="@{vm.hmsInfoModel.satiety}"
-                android:progressDrawable="@drawable/app_bg_progress_exp"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-            <TextView
-                android:id="@+id/tvCurrent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:text='@{"当前" + String.valueOf(vm.hmsInfoModel.satiety) + "%"}'
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/pbProgress"
-                app:layout_constraintLeft_toLeftOf="@id/pbProgress"
-                app:layout_constraintTop_toTopOf="parent" />
-
+            <!--TODO 饱食度恢复字段需替换-->
             <TextView
                 android:id="@+id/tvTarget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="3dp"
-                android:text='@{"恢复至" + String.valueOf(vm.cultivationPanelModel.satiety.promote + vm.hmsInfoModel.satiety) + "%"}'
+                android:text='@{"饱食度恢复至" + String.valueOf(vm.revivePanelModel.exchangeRate) + "%"}'
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/pbProgress"
-                app:layout_constraintRight_toRightOf="@id/pbProgress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tvAvailable"
-            availableFood="@{vm}"
+            availableReborn="@{vm}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="27dp"
             android:gravity="center"
-
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
@@ -159,7 +134,7 @@
 
         <Button
             android:id="@+id/btnConfirmLeft"
-            feedingPropConfirmation="@{vm.cultivationPanelModel}"
+            rebornConeConfirmation="@{vm.revivePanelModel}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -178,7 +153,7 @@
 
         <Button
             android:id="@+id/btnConfirmRight"
-            feedingPineConeConfirmation="@{vm.cultivationPanelModel}"
+            rebornNutConfirmation="@{vm.revivePanelModel}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

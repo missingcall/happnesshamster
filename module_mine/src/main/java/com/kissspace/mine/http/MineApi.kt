@@ -220,4 +220,21 @@ object MineApi {
 
     //领取松果
     const val API_HAMSTER_MARKET_RECEIVE_PINE_CONE = "/hamster-center/hamsterMarket/receivePinecone"
+
+    //获取仓鼠养成培养消费面板
+    const val API_HAMSTER_CULTIVATE_QUERY_CULTIVATION_PANEL = "/hamster-center/hamsters/cultivate/queryCultivationPanel"
+
+    //获取当前仓鼠信息
+    const val API_HAMSTER_CULTIVATION_HMSINFO = "/hamster-center/hamsters/cultivate/hmsInfo"
+
+    //喂养仓鼠
+    const val API_HAMSTER_CULTIVATE_IMPROVE_SATIETY = "/hamster-center/hamsters/cultivate/improveSatiety"
+
+    //清洗仓鼠
+    const val API_HAMSTER_CULTIVATE_IMPROVE_CLEANLINESS = "/hamster-center/hamsters/cultivate/improveCleanliness"
+
+    //获取仓鼠复活消费面板
+    const val API_HAMSTER_CULTIVATE_QUERY_REVIVEPANEL = "/hamster-center/hamsters/cultivate/queryRevivePanel"
+
+
 }

@@ -1,23 +1,25 @@
 package com.hamster.happyness.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.blankj.utilcode.util.ColorUtils
 import com.drake.brv.utils.*
 import com.hamster.happyness.R
 import com.hamster.happyness.databinding.FragmentMainHomeV3Binding
 import com.hamster.happyness.http.Api
 import com.hamster.happyness.viewmodel.GameQuickEnterModel
 import com.hamster.happyness.viewmodel.HomeViewModel
-import com.hamster.happyness.widget.CapacityDescriptionDialog
-import com.hamster.happyness.widget.DevelopmentDescriptionDialog
-import com.hamster.happyness.widget.HomeFeedDialog
+import com.hamster.happyness.widget.*
 
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setMarginStatusBar
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.http.getUserInfo
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
@@ -47,6 +49,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         refreshUserinfo()
         queryDayIncome()
         initWalletBalance()
+        getHamsterStatus()
 
         mBinding.ivAvatar.safeClick {
             jump(RouterPath.PATH_USER_PROFILE, "userId" to MMKVProvider.userId)
@@ -66,31 +69,15 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             DevelopmentDescriptionDialog.newInstance().show(childFragmentManager)
         }
 
-        //喂食弹窗
-        mBinding.ivSatiety.safeClick {
-            HomeFeedDialog.newInstance().show(childFragmentManager)
-        }
-        mBinding.wlvFood.safeClick {
-            HomeFeedDialog.newInstance().show(childFragmentManager)
-        }
-
-
-
-
-
-
-
-        //等级说明
-        /*   mBinding.ivLevelDescription.safeClick {
-               jump(RouterPath.PATH_MY_LEVEL)
-           }*/
-
 
     }
 
     override fun createDataObserver() {
         super.createDataObserver()
 
+        FlowBus.observerEvent<Event.FeedingOrCleaningEvent>(this) {
+            getHamsterStatus()
+        }
 
     }
 
@@ -120,6 +107,94 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     private fun queryDayIncome() {
         mMineViewModel.queryDayIncome(onSuccess = {
             mBinding.tvDailyComeNum.text = it
+        })
+    }
+
+    //获取松鼠状态
+    private fun getHamsterStatus() {
+
+        mWalletViewModel.hmsInfo(onSuccess = {
+            when (it?.hamsterStatus) {
+                //（001 正常 002 濒死 003 已死亡 004 已到期）
+                "001" ,"002"-> {
+                    if (it?.cleanliness!! in 0..29) {
+                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF1A16)
+                    } else if (it.satiety!! in 30..60) {
+                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF8C5C)
+                    } else if (it.satiety!! in 60..90) {
+                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_8C28FF)
+                    } else {
+                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_5A60FF)
+                    }
+
+                    if (it?.satiety!! in 0..29) {
+                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF1A16)
+                    } else if (it.satiety!! in 30..60) {
+                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF8C5C)
+                    } else if (it.satiety!! in 60..90) {
+                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_8C28FF)
+                    } else {
+                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_5A60FF)
+                    }
+
+                    mBinding.wlvClean.progressValue = it!!.cleanliness
+                    mBinding.wlvFood.progressValue = it.satiety
+
+                    mBinding.wlvClean.centerTitle = it.cleanliness.toString() + "%"
+                    mBinding.wlvFood.centerTitle = it.satiety.toString() + "%"
+
+                    //喂食弹窗
+                    mBinding.ivSatiety.safeClick {
+                        HomeFeedDialog.newInstance().show(childFragmentManager)
+                    }
+                    mBinding.wlvFood.safeClick {
+                        HomeFeedDialog.newInstance().show(childFragmentManager)
+                    }
+
+                    //清洁弹窗
+                    mBinding.ivCleanliness.safeClick {
+                        HomeCleanDialog.newInstance().show(childFragmentManager)
+                    }
+                    mBinding.wlvClean.safeClick {
+                        HomeCleanDialog.newInstance().show(childFragmentManager)
+                    }
+                }
+                "003" -> {
+
+                    mBinding.ivSatiety.safeClick {
+                        HomeRebornDialog.newInstance().show(childFragmentManager)
+                    }
+                    mBinding.wlvFood.safeClick {
+                        HomeRebornDialog.newInstance().show(childFragmentManager)
+                    }
+                    mBinding.ivCleanliness.safeClick {
+                        HomeRebornDialog.newInstance().show(childFragmentManager)
+                    }
+                    mBinding.wlvClean.safeClick {
+                        HomeRebornDialog.newInstance().show(childFragmentManager)
+                    }
+                }
+                "004" ->{
+
+                }
+
+            }
+
+
+        }, onError = {
+            //TODO 测试 仓鼠不存在 或者请求失败
+            mBinding.ivSatiety.safeClick {
+                HomeRebornDialog.newInstance().show(childFragmentManager)
+            }
+            mBinding.wlvFood.safeClick {
+                HomeRebornDialog.newInstance().show(childFragmentManager)
+            }
+            mBinding.ivCleanliness.safeClick {
+                HomeRebornDialog.newInstance().show(childFragmentManager)
+            }
+            mBinding.wlvClean.safeClick {
+                HomeRebornDialog.newInstance().show(childFragmentManager)
+            }
         })
     }
 
@@ -156,7 +231,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
                 "大逃杀4"
             )
-            var list : MutableList<GameQuickEnterModel.Game> = mutableListOf()
+            var list: MutableList<GameQuickEnterModel.Game> = mutableListOf()
             list.add(game1)
             list.add(game2)
             list.add(game3)

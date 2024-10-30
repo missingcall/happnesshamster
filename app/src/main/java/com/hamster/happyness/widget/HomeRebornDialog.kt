@@ -13,6 +13,7 @@ import com.angcyo.tablayout.delegate2.ViewPager2Delegate
 import com.blankj.utilcode.util.SpanUtils
 import com.hamster.happyness.databinding.DialogHomeCapacityDescriptionBinding
 import com.hamster.happyness.databinding.DialogHomeFeedBinding
+import com.hamster.happyness.databinding.DialogHomeRebornBinding
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
@@ -34,7 +35,7 @@ import com.kissspace.module_login.databinding.LoginDialogLoginBinding
 /**
  * 底部弹窗-产能说明
  */
-class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedBinding::inflate, Gravity.BOTTOM) {
+class HomeRebornDialog : BaseDialogFragment<DialogHomeRebornBinding>(DialogHomeRebornBinding::inflate, Gravity.BOTTOM) {
     private val mViewModel by activityViewModels<WalletViewModel>()
 
     //数据绑定有问题,dialog单独建
@@ -42,14 +43,14 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
 //    private var type: String? = null
 
     companion object {
-        fun newInstance(/*type: String*/) = HomeFeedDialog().apply {
+        fun newInstance(/*type: String*/) = HomeRebornDialog().apply {
 //            arguments = bundleOf("type" to type)
         }
     }
 
 
     override fun getLayoutId(): Int {
-        return com.hamster.happyness.R.layout.dialog_home_feed
+        return com.hamster.happyness.R.layout.dialog_home_reborn
     }
 
     @SuppressLint("SetTextI18n")
@@ -79,8 +80,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
 
         }
 
-        //TODO 需要配置消耗道具字段
-        mViewModel.queryCultivationPanel {
+        mViewModel.queryRevivePanel {
 
         }
 

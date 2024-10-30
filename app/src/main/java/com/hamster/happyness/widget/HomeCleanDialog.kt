@@ -12,6 +12,7 @@ import coil.load
 import com.angcyo.tablayout.delegate2.ViewPager2Delegate
 import com.blankj.utilcode.util.SpanUtils
 import com.hamster.happyness.databinding.DialogHomeCapacityDescriptionBinding
+import com.hamster.happyness.databinding.DialogHomeCleanBinding
 import com.hamster.happyness.databinding.DialogHomeFeedBinding
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
@@ -34,7 +35,7 @@ import com.kissspace.module_login.databinding.LoginDialogLoginBinding
 /**
  * 底部弹窗-产能说明
  */
-class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedBinding::inflate, Gravity.BOTTOM) {
+class HomeCleanDialog : BaseDialogFragment<DialogHomeCleanBinding>(DialogHomeCleanBinding::inflate, Gravity.BOTTOM) {
     private val mViewModel by activityViewModels<WalletViewModel>()
 
     //数据绑定有问题,dialog单独建
@@ -42,14 +43,14 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
 //    private var type: String? = null
 
     companion object {
-        fun newInstance(/*type: String*/) = HomeFeedDialog().apply {
+        fun newInstance(/*type: String*/) = HomeCleanDialog().apply {
 //            arguments = bundleOf("type" to type)
         }
     }
 
 
     override fun getLayoutId(): Int {
-        return com.hamster.happyness.R.layout.dialog_home_feed
+        return com.hamster.happyness.R.layout.dialog_home_clean
     }
 
     @SuppressLint("SetTextI18n")
@@ -64,7 +65,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
         }
 
         mBinding.btnConfirmLeft.safeClick {
-            mViewModel.improveSatiety(onSuccess = {
+            mViewModel.improveCleanliness(onSuccess = {
                 //喂食成功 刷新Dialog进度条,刷新HomeFragment喂食度
                 FlowBus.post(Event.FeedingOrCleaningEvent)
             })
@@ -72,7 +73,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
         }
 
         mBinding.btnConfirmRight.safeClick {
-            mViewModel.improveSatiety(onSuccess = {
+            mViewModel.improveCleanliness(onSuccess = {
                 //喂食成功 刷新Dialog进度条,刷新HomeFragment喂食度
                 FlowBus.post(Event.FeedingOrCleaningEvent)
             })

@@ -1,28 +1,18 @@
 package com.kissspace.setting.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.blankj.utilcode.util.LogUtils
 import com.didi.drouter.annotation.Router
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.config.Constants
 import com.kissspace.common.router.jump
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setTitleBarListener
-import com.kissspace.common.flowbus.Event
-import com.kissspace.common.flowbus.FlowBus
-import com.kissspace.common.http.checkUserPermission
-import com.kissspace.common.model.wallet.WalletModel
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.util.*
-import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.module_setting.R
 import com.kissspace.module_setting.databinding.SettingActivitySettingBinding
-import com.kissspace.network.net.Method
-import com.kissspace.network.net.request
-import com.kissspace.setting.http.SettingApi
 import com.kissspace.util.clearAllCache
 import com.kissspace.util.getTotalCacheSize
 
