@@ -233,6 +233,9 @@ object MineApi {
     //清洗仓鼠
     const val API_HAMSTER_CULTIVATE_IMPROVE_CLEANLINESS = "/hamster-center/hamsters/cultivate/improveCleanliness"
 
+    //复活仓鼠
+    const val API_HAMSTER_CULTIVATE_REVIVE = "/hamster-center/hamsters/cultivate/revive"
+
     //获取仓鼠复活消费面板
     const val API_HAMSTER_CULTIVATE_QUERY_REVIVEPANEL = "/hamster-center/hamsters/cultivate/queryRevivePanel"
 

@@ -483,13 +483,12 @@ class WalletViewModel : BaseViewModel() {
     }
 
     //获取当前仓鼠信息
-    fun hmsInfo(onSuccess: ((HmsInfoModel?) -> Unit)?,onError: ((AppException?) -> Unit)?) {
+    fun hmsInfo(onSuccess: ((HmsInfoModel?) -> Unit)?, onError: ((AppException?) -> Unit)?) {
         val param = mutableMapOf<String, Any?>()
         request<HmsInfoModel>(MineApi.API_HAMSTER_CULTIVATION_HMSINFO, Method.GET, param, onSuccess = {
             hmsInfoModel.set(it)
             onSuccess?.invoke(it)
         }, onError = {
-            customToast(it.message)
             onError?.invoke(it)
         }
         )
@@ -508,6 +507,17 @@ class WalletViewModel : BaseViewModel() {
     //清洗仓鼠
     fun improveCleanliness(onSuccess: ((Boolean) -> Unit) = {}) {
         request<Boolean>(MineApi.API_HAMSTER_CULTIVATE_IMPROVE_CLEANLINESS, Method.GET, onSuccess = {
+            onSuccess.invoke(it)
+        }, onError = {
+            customToast(it.message)
+        })
+    }
+
+    //复活仓鼠
+    fun cultivateRevive(payType: String, onSuccess: ((Boolean) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+        param["payType"] = payType
+        request<Boolean>(MineApi.API_HAMSTER_CULTIVATE_REVIVE, Method.GET, param, onSuccess = {
             onSuccess.invoke(it)
         }, onError = {
             customToast(it.message)

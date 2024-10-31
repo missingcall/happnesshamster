@@ -190,10 +190,12 @@ sealed class Event {
     object MsgRefreshWalletEvent : Event()
 
     //喂食清洗 合并事件
-    object FeedingOrCleaningEvent : Event()
+    object HamsterFeedingOrCleaningEvent : Event()
     //喂食
-    object FeedingEvent : Event()
+    object HamsterFeedingEvent : Event()
 
     //清洗
-    object CleaningEvent : Event()
+    object HamsterCleaningEvent : Event()
+    //复活仓鼠
+    object HamsterReviveEvent : Event()
 }

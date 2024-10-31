@@ -1,7 +1,6 @@
 package com.hamster.happyness.ui.fragment
 
 import android.os.Bundle
-import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -52,7 +51,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         getHamsterStatus()
 
         mBinding.ivAvatar.safeClick {
-            jump(RouterPath.PATH_USER_PROFILE, "userId" to MMKVProvider.userId)
+            ChangeAccountDialog.newInstance().show(childFragmentManager)
         }
 
         mBinding.ivCopy.safeClick {
@@ -75,10 +74,15 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     override fun createDataObserver() {
         super.createDataObserver()
 
-        FlowBus.observerEvent<Event.FeedingOrCleaningEvent>(this) {
+        //喂食,清洗仓鼠事件
+        FlowBus.observerEvent<Event.HamsterFeedingOrCleaningEvent>(this) {
             getHamsterStatus()
         }
 
+        //复活仓鼠事件
+        FlowBus.observerEvent<Event.HamsterReviveEvent>(this) {
+            getHamsterStatus()
+        }
     }
 
     override fun onResume() {
@@ -116,7 +120,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         mWalletViewModel.hmsInfo(onSuccess = {
             when (it?.hamsterStatus) {
                 //（001 正常 002 濒死 003 已死亡 004 已到期）
-                "001" ,"002"-> {
+                "001", "002" -> {
                     if (it?.cleanliness!! in 0..29) {
                         mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF1A16)
                     } else if (it.satiety!! in 30..60) {
@@ -174,7 +178,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                         HomeRebornDialog.newInstance().show(childFragmentManager)
                     }
                 }
-                "004" ->{
+                "004" -> {
 
                 }
 

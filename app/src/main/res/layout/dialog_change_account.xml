@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/color_232323">
+
+
+        <com.kissspace.common.widget.CircleImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="59dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="37dp"
+            android:src="@color/design_default_color_on_primary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/ivAvatar"
+            app:layout_constraintRight_toRightOf="@id/ivAvatar"
+            app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
+
+        <TextView
+            android:id="@+id/tvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="UID:"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="10sp"
+            app:layout_constraintLeft_toLeftOf="@id/ivAvatar"
+            app:layout_constraintRight_toLeftOf="@id/tvUserId"
+            app:layout_constraintTop_toBottomOf="@id/tvNickname"
+
+            />
+
+        <TextView
+            android:id="@+id/tvUserId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvId"
+            app:layout_constraintLeft_toRightOf="@id/tvId"
+            app:layout_constraintRight_toLeftOf="@id/ivCopy"
+            app:layout_constraintTop_toTopOf="@id/tvId" />
+
+        <ImageView
+            android:id="@+id/ivCopy"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:src="@mipmap/mine_ic_copy"
+            app:layout_constraintBottom_toBottomOf="@id/tvUserId"
+            app:layout_constraintLeft_toRightOf="@id/tvUserId"
+            app:layout_constraintRight_toRightOf="@id/ivAvatar"
+            app:layout_constraintTop_toTopOf="@id/tvUserId" />
+
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginRight="17dp"
+            android:background="@color/color_D8D8D8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvId" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/viewLine"
+            tools:itemCount="3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:listitem="@layout/layout_change_account_list_item" />
+
+        <Button
+            android:id="@+id/con_add"
+            style="@style/commonBottomConfirmationItem"
+            android:layout_width="0dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="12dp"
+            android:paddingTop="17dp"
+            android:paddingBottom="17dp"
+            android:text="创建新身份"
+            app:layout_constraintTop_toBottomOf="@id/recycler"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -86,6 +86,12 @@ class SettingActivity : BaseActivity(R.layout.setting_activity_setting) {
             jump(RouterPath.PATH_ABOUT_US)
         }
 
+        //退出登录
+        mBinding.tvLoginOut.setOnClickListener {
+            CommonConfirmDialog(this, title = "确定要退出登录？") {
+                if (this) loginOut()
+            }.show()
+        }
 
     }
 

@@ -124,8 +124,9 @@ class LoginSmsFragment : BaseFragment(R.layout.login_fragment_sms_login) {
     override fun createDataObserver() {
         super.createDataObserver()
         collectData(mViewModel.token, onSuccess = {
-            hideLoading()
+
             mViewModel.loginIm(it, onSuccess = {
+                hideLoading()
                 activity?.finish()
             })
         }, onError = {
@@ -134,7 +135,6 @@ class LoginSmsFragment : BaseFragment(R.layout.login_fragment_sms_login) {
         })
 
         collectData(mViewModel.accounts, onSuccess = {
-            hideLoading()
 
             when (it.size) {
                 1 -> {
@@ -145,7 +145,7 @@ class LoginSmsFragment : BaseFragment(R.layout.login_fragment_sms_login) {
                         userAccountBean.token
                     )
                 }
-
+                //多于一个身份时直接登录最近的那个
                 else -> {
                     val userAccountBean = it[0]
                     mViewModel.loginByUserId(

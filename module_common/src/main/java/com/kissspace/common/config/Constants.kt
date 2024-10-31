@@ -649,6 +649,19 @@ object Constants {
         }
     }
 
+    /**
+     * 	复活支付类型：001：松果支付；002：松子支付；
+     */
+    class CultivatePayType {
+        companion object {
+
+            const val PINE_CONE = "001"; //松果支付
+            const val PINE_NUT = "002"; //松子支付
+
+
+        }
+    }
+
 
     var sendSmsType: Pair<String?, String?>? = null
 

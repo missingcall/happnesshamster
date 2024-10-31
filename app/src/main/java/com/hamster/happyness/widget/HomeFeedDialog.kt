@@ -1,35 +1,14 @@
 package com.hamster.happyness.widget
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.os.Bundle
 import android.view.Gravity
-import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import coil.load
-import com.angcyo.tablayout.delegate2.ViewPager2Delegate
-import com.blankj.utilcode.util.SpanUtils
-import com.hamster.happyness.databinding.DialogHomeCapacityDescriptionBinding
 import com.hamster.happyness.databinding.DialogHomeFeedBinding
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
-import com.kissspace.common.model.immessage.GiftInfo
-import com.kissspace.common.router.RouterPath
-import com.kissspace.common.router.jump
-import com.kissspace.common.ui.BosonFriendDialog
-import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.widget.BaseDialogFragment
-import com.kissspace.login.ui.fragment.LoginPswFragment
-import com.kissspace.login.ui.fragment.LoginSmsFragment
-import com.kissspace.mine.viewmodel.UserProfileViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
-import com.kissspace.mine.widget.FamilyNoticeDialog
-import com.kissspace.module_common.R
-import com.kissspace.module_common.databinding.CommonDialogBosomFriendBinding
-import com.kissspace.module_login.databinding.LoginDialogLoginBinding
 
 /**
  * 底部弹窗-产能说明
@@ -66,7 +45,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
         mBinding.btnConfirmLeft.safeClick {
             mViewModel.improveSatiety(onSuccess = {
                 //喂食成功 刷新Dialog进度条,刷新HomeFragment喂食度
-                FlowBus.post(Event.FeedingOrCleaningEvent)
+                FlowBus.post(Event.HamsterFeedingOrCleaningEvent)
             })
 
         }
@@ -74,7 +53,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
         mBinding.btnConfirmRight.safeClick {
             mViewModel.improveSatiety(onSuccess = {
                 //喂食成功 刷新Dialog进度条,刷新HomeFragment喂食度
-                FlowBus.post(Event.FeedingOrCleaningEvent)
+                FlowBus.post(Event.HamsterFeedingOrCleaningEvent)
             })
 
         }
