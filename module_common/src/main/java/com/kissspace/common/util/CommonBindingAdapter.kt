@@ -28,18 +28,22 @@ object CommonBindingAdapter {
     @JvmStatic
     @BindingAdapter("colorEnable", requireAll = false)
     fun colorEnable(textView: TextView, isEnable: Boolean) {
-        textView.setTextColor(if(isEnable){ColorUtils.getColor(R.color.color_ui_main_text)}else ColorUtils.getColor(R.color.color_ui_sub_text_middle))
+        textView.setTextColor(
+            if (isEnable) {
+                ColorUtils.getColor(R.color.color_ui_main_text)
+            } else ColorUtils.getColor(R.color.color_ui_sub_text_middle)
+        )
     }
 
     @JvmStatic
     @BindingAdapter(value = ["imageUrl", "imageRadius"])
     fun loadImage(imageView: ImageView, imageUrl: String?, imageRadius: Float = 0f) {
 //        imageView.loadImage(imageUrl, radius = imageRadius)
-        imageUrlDefault(imageView,imageUrl,imageRadius)
+        imageUrlDefault(imageView, imageUrl, imageRadius)
     }
 
     @JvmStatic
-    @BindingAdapter("loadImageCircle",requireAll = false)
+    @BindingAdapter("loadImageCircle", requireAll = false)
     fun loadImageCircle(imageView: ImageView, imageUrl: String?) {
         imageView.loadImageCircle(imageUrl)
     }
@@ -47,8 +51,8 @@ object CommonBindingAdapter {
     @JvmStatic
     @BindingAdapter(value = ["imageUrlDefault", "imageRadius"])
     fun imageUrlDefault(imageView: ImageView, imageUrl: String?, imageRadius: Float = 0f) {
-        var  options = RequestOptions().placeholder(com.kissspace.module_util.R.drawable.common_ic_default)
-        if(imageRadius>0){
+        var options = RequestOptions().placeholder(com.kissspace.module_util.R.drawable.common_ic_default)
+        if (imageRadius > 0) {
             options = options.transform(RoundedCorners(imageRadius.toInt()))
         }
         GlideApp.with(imageView)
@@ -85,7 +89,7 @@ object CommonBindingAdapter {
     @JvmStatic
     @BindingAdapter("loadImageWithDefault", requireAll = false)
     fun loadImageWithDefault(imageView: ImageView, imageUrl: String?) {
-        loadImage(imageView,imageUrl)
+        loadImage(imageView, imageUrl)
 //        imageView.loadImageWithDefault(imageUrl)
     }
 
@@ -188,7 +192,7 @@ object CommonBindingAdapter {
         } else {
             textView.setTextColor(ColorUtils.getColor(R.color.color_AAAAAA))
         }
-        textView.setBackgroundResource(R.drawable.common_btn_selector_blue_radius15)
+        textView.setBackgroundResource(R.drawable.common_btn_selector_blue_black_radius15)
         textView.isEnabled = enable
     }
 
@@ -225,7 +229,7 @@ object CommonBindingAdapter {
     @JvmStatic
     @BindingAdapter("alphaByEnable", requireAll = false)
     fun alphaByEnable(view: View, enable: Boolean?) {
-        view.alpha = if(view.isEnabled&&enable != false) 1f else 0.5f
+        view.alpha = if (view.isEnabled && enable != false) 1f else 0.5f
     }
 
     @JvmStatic
@@ -268,20 +272,20 @@ object CommonBindingAdapter {
 
     @JvmStatic
     @BindingAdapter(value = ["animationUrl", "animationLoop"])
-    fun loadAnimation(animationView: AnimationView,  animationUrl: String?,animationLoop: Boolean?) {
-         if(animationUrl.isNullOrEmpty()){
-             animationView.visibility = View.GONE
-             animationView?.onDestroy()
-         }else{
-             animationView.visibility = View.VISIBLE
-             animationView.play(animationUrl, if(animationLoop!=null&&animationLoop)  Int.MAX_VALUE else 1)
-         }
+    fun loadAnimation(animationView: AnimationView, animationUrl: String?, animationLoop: Boolean?) {
+        if (animationUrl.isNullOrEmpty()) {
+            animationView.visibility = View.GONE
+            animationView?.onDestroy()
+        } else {
+            animationView.visibility = View.VISIBLE
+            animationView.play(animationUrl, if (animationLoop != null && animationLoop) Int.MAX_VALUE else 1)
+        }
     }
 
     @JvmStatic
     @BindingAdapter("imageViewSelected", requireAll = false)
     fun imageViewSelected(imageView: ImageView, imageViewSelected: Boolean) {
-        imageView.isSelected=imageViewSelected
+        imageView.isSelected = imageViewSelected
     }
 
     @JvmStatic
@@ -295,5 +299,4 @@ object CommonBindingAdapter {
     fun showWalletType(textView: TextView, text: String?) {
         textView.text = text
     }
-
 }

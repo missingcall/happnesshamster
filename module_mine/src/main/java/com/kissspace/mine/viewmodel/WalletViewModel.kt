@@ -3,7 +3,6 @@ package com.kissspace.mine.viewmodel
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.tencent.bugly.crashreport.biz.UserInfoBean
 import com.kissspace.common.base.BaseViewModel
 import com.kissspace.common.config.CommonApi
 import com.kissspace.common.config.Constants
@@ -21,6 +20,7 @@ import com.kissspace.network.net.request
 import com.kissspace.util.isNotEmptyBlank
 import com.kissspace.util.logE
 import com.kissspace.util.orZero
+import com.tencent.bugly.crashreport.biz.UserInfoBean
 import org.json.JSONObject
 
 /**

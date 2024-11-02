@@ -1,6 +1,7 @@
- package com.hamster.happyness.adapter
+package com.hamster.happyness.adapter
 
 import android.graphics.Color
+import android.opengl.Visibility
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -14,6 +15,7 @@ import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.SpanUtils
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
+import com.kissspace.common.model.InfoListModel
 import com.kissspace.common.model.RoomListBannerBean
 import com.kissspace.common.model.RoomListBean
 import com.kissspace.common.model.wallet.CultivationPanelModel
@@ -26,7 +28,7 @@ import com.kissspace.util.loadImage
 import com.kissspace.util.loadImageCircle
 import com.kissspace.util.logD
 
- object ViewBindingAdapter {
+object ViewBindingAdapter {
     @JvmStatic
     @BindingAdapter("isShowBeautyId")
     fun isShowBeautyId(imageView: ImageView, isShow: Boolean) {
@@ -72,7 +74,7 @@ import com.kissspace.util.logD
             onBind {
                 val model = getModel<RoomListBannerBean>()
                 val imageView = findView<ImageView>(com.hamster.happyness.R.id.iv_banner)
-                imageView.loadImage(model.url,com.hamster.happyness.R.mipmap.app_party_banner_rank_bg,8f,8f,8f,8f)
+                imageView.loadImage(model.url, com.hamster.happyness.R.mipmap.app_party_banner_rank_bg, 8f, 8f, 8f, 8f)
             }
             onFastClick(R.id.root) {
                 val model = getModel<RoomListBannerBean>()
@@ -120,9 +122,22 @@ import com.kissspace.util.logD
         }
     }
 
-     /**
-      * 可用喂食道具
-      */
+    /**
+     * 可用松果
+     */
+    @JvmStatic
+    @BindingAdapter("availablePineCones", requireAll = false)
+    fun availablePineCones(textView: TextView, vm: WalletViewModel) {
+        val spanStringAvailable = SpanUtils().append("我可用的")
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_small)
+            .append(vm.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+        textView.text = spanStringAvailable
+    }
+
+    /**
+     * 可用喂食道具
+     */
     @JvmStatic
     @BindingAdapter("availableFood", requireAll = false)
     fun availableFood(textView: TextView, vm: WalletViewModel) {
@@ -135,32 +150,32 @@ import com.kissspace.util.logD
         textView.text = spanStringAvailable
     }
 
-     /**
-      * 可用清洁道具
-      */
-     @JvmStatic
-     @BindingAdapter("availableClean", requireAll = false)
-     fun availableClean(textView: TextView, vm: WalletViewModel) {
-         val spanStringAvailable = SpanUtils().append("我可用的")
-             .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness_small)
-             .append(vm.hmsInfoModel.get()?.cleanliness.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
-             .append(vm.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-             .create()
-         textView.text = spanStringAvailable
-     }
+    /**
+     * 可用清洁道具
+     */
+    @JvmStatic
+    @BindingAdapter("availableClean", requireAll = false)
+    fun availableClean(textView: TextView, vm: WalletViewModel) {
+        val spanStringAvailable = SpanUtils().append("我可用的")
+            .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness_small)
+            .append(vm.hmsInfoModel.get()?.cleanliness.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
+            .append(vm.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+        textView.text = spanStringAvailable
+    }
 
-     @JvmStatic
-     @BindingAdapter("availableReborn", requireAll = false)
-     fun availableReborn(textView: TextView, vm: WalletViewModel) {
-         val spanStringAvailable = SpanUtils().append("我可用的")
-             .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_reborn_small)
-             .append(vm.revivePanelModel.get()?.pineCone.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
-             .append(vm.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-             .create()
-         textView.text = spanStringAvailable
-     }
+    @JvmStatic
+    @BindingAdapter("availableReborn", requireAll = false)
+    fun availableReborn(textView: TextView, vm: WalletViewModel) {
+        val spanStringAvailable = SpanUtils().append("我可用的")
+            .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_reborn_small)
+            .append(vm.revivePanelModel.get()?.pineCone.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
+            .append(vm.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+        textView.text = spanStringAvailable
+    }
 
 
     /**
@@ -192,62 +207,100 @@ import com.kissspace.util.logD
 
     }
 
-     /**
-      * 道具清洗-确认
-      */
-     @JvmStatic
-     @BindingAdapter("cleaningPropConfirmation", requireAll = false)
-     fun cleaningPropConfirmation(button: Button, cultivationPanelModel: CultivationPanelModel?) {
-         val spanString = SpanUtils()
-             .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness_small)
-             .append(cultivationPanelModel?.cleanliness?.prop.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-             .append("\n确认清洁")
-             .create()
-         button.text = spanString
-     }
+    /**
+     * 道具清洗-确认
+     */
+    @JvmStatic
+    @BindingAdapter("cleaningPropConfirmation", requireAll = false)
+    fun cleaningPropConfirmation(button: Button, cultivationPanelModel: CultivationPanelModel?) {
+        val spanString = SpanUtils()
+            .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness_small)
+            .append(cultivationPanelModel?.cleanliness?.prop.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append("\n确认清洁")
+            .create()
+        button.text = spanString
+    }
 
-     /**
-      * 松果清洗-确认
-      */
-     @JvmStatic
-     @BindingAdapter("cleaningPineConeConfirmation", requireAll = false)
-     fun cleaningPineConeConfirmation(button: Button, cultivationPanelModel: CultivationPanelModel?) {
-         val spanString = SpanUtils()
-             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
-             .append(cultivationPanelModel?.cleanliness?.consumption.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-             .append("\n确认清洁")
-             .create()
-         button.text = spanString
+    /**
+     * 松果清洗-确认
+     */
+    @JvmStatic
+    @BindingAdapter("cleaningPineConeConfirmation", requireAll = false)
+    fun cleaningPineConeConfirmation(button: Button, cultivationPanelModel: CultivationPanelModel?) {
+        val spanString = SpanUtils()
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
+            .append(cultivationPanelModel?.cleanliness?.consumption.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append("\n确认清洁")
+            .create()
+        button.text = spanString
 
-     }
+    }
 
 
-     /**
-      * 松果重生-确认
-      */
-     @JvmStatic
-     @BindingAdapter("rebornConeConfirmation", requireAll = false)
-     fun rebornConeConfirmation(button: Button, revivePanelModel: RevivePanelModel?) {
-         val spanString = SpanUtils()
-             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
-             .append(revivePanelModel?.pineCone.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-             .append("\n确定复活")
-             .create()
-         button.text = spanString
-     }
+    /**
+     * 松果重生-确认
+     */
+    @JvmStatic
+    @BindingAdapter("rebornConeConfirmation", requireAll = false)
+    fun rebornConeConfirmation(button: Button, revivePanelModel: RevivePanelModel?) {
+        val spanString = SpanUtils()
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
+            .append(revivePanelModel?.pineCone.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append("\n确定复活")
+            .create()
+        button.text = spanString
+    }
 
-     /**
-      * 松子重生-确认
-      */
-     @JvmStatic
-     @BindingAdapter("rebornNutConfirmation", requireAll = false)
-     fun rebornNutConfirmation(button: Button, revivePanelModel: RevivePanelModel?) {
-         val spanString = SpanUtils()
-             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_nut)
-             .append(revivePanelModel?.pineNuts.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-             .append("\n确定复活")
-             .create()
-         button.text = spanString
+    /**
+     * 松子重生-确认
+     */
+    @JvmStatic
+    @BindingAdapter("rebornNutConfirmation", requireAll = false)
+    fun rebornNutConfirmation(button: Button, revivePanelModel: RevivePanelModel?) {
+        val spanString = SpanUtils()
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_nut)
+            .append(revivePanelModel?.pineNuts.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append("\n确定复活")
+            .create()
+        button.text = spanString
+    }
 
-     }
+    /**
+     * 皮肤状态 (已拥有，未解锁，已使用)
+     */
+    @JvmStatic
+    @BindingAdapter("setSkinStatus", requireAll = false)
+    fun setSkinStatus(imageView: ImageView, record: InfoListModel.Record) {
+        //已解锁
+        if (record.unlockStatus) {
+            //已配带
+            if (record.wearStatus) {
+                imageView.visibility = View.VISIBLE
+                imageView.loadImage(com.hamster.happyness.R.mipmap.app_icon_home_wear)
+            } else {
+                imageView.visibility = View.INVISIBLE
+            }
+        } else {
+            imageView.visibility = View.VISIBLE
+            imageView.loadImage(com.hamster.happyness.R.mipmap.app_icon_home_lock)
+
+        }
+
+    }
+
+    /**
+     * 皮肤购买弹窗 确认
+     */
+    @JvmStatic
+    @BindingAdapter("skinPurchase", requireAll = false)
+    fun skinPurchase(button: Button, record: InfoListModel.Record) {
+        val spanString = SpanUtils()
+            .append("确认购买 ")
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_small)
+            .append(record.price.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+        button.text = spanString
+    }
+
+
 }

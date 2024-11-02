@@ -46,7 +46,7 @@ object Constants {
     const val GIFT_TAB_ID_PACKAGE = "100001"
 
 
-    const val PageSize = 10
+    const val PageSize = 20
 
     /**
      * 支付成功
@@ -661,6 +661,7 @@ object Constants {
 
         }
     }
+
 
 
     var sendSmsType: Pair<String?, String?>? = null

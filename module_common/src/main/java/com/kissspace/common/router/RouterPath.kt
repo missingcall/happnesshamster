@@ -298,4 +298,7 @@ object RouterPath {
 
     //转入转出记录
     const val PATH_TRANSFER_RECORDS = PATH_BASE + "transfer_records"
+
+    //仓鼠皮肤
+    const val PATH_HAMSTER_SKIN = PATH_BASE + "hamster_skin"
 }

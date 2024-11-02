@@ -17,7 +17,7 @@ data class WalletModel(
     //	虚拟币数目(金币)
     val coin: Double? = null,
     //钻石(松果)
-    val diamond: Double? = null,
+    var diamond: Double? = null,
     //	身份（001-普通用户，002-主播，003-公会长）
     val identity: String,
     val isBindAliPay: Boolean,

@@ -47,7 +47,6 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         initData()
         refreshUserinfo()
         queryDayIncome()
-        initWalletBalance()
         getHamsterStatus()
 
         mBinding.ivAvatar.safeClick {
@@ -68,6 +67,15 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             DevelopmentDescriptionDialog.newInstance().show(childFragmentManager)
         }
 
+        //皮肤
+        mBinding.clSkin.safeClick {
+            jump(RouterPath.PATH_HAMSTER_SKIN)
+        }
+
+        //皮肤
+        mBinding.clQuest.safeClick {
+            jump(RouterPath.)
+        }
 
     }
 
@@ -87,15 +95,13 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
     override fun onResume() {
         super.onResume()
-
+        initWalletBalance()
     }
 
     private fun initWalletBalance() {
         mWalletViewModel.getMyMoneyBag {
             it?.let {
                 mWalletViewModel.walletModel.value = it
-                mBinding.tvPineConeBalance.text = mWalletViewModel.walletModel.value?.diamond.toString()
-                mBinding.tvPineNutBalance.text = mWalletViewModel.walletModel.value?.accountBalance.toString()
 
             }
         }
@@ -208,7 +214,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         request<MutableList<GameQuickEnterModel.Game>>(Api.API_GAME_QUICK_ENTER, Method.GET, param, onSuccess = {
             mBinding.recyclerView.addModels(it)
         }, onError = {
-            customToast("onError")
+
             //TODO 测试数据
             var game1: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
                 gameId = "1",

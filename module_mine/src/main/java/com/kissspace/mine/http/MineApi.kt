@@ -164,7 +164,7 @@ object MineApi {
 
 
     //根据用户展示id获取通用用户信息
-    const val API_QueryUserByDisplayIdResponse= "/hamster-user/user/queryUserByDisplayIdResponse"
+    const val API_QueryUserByDisplayIdResponse = "/hamster-user/user/queryUserByDisplayIdResponse"
 
 
     //用户提现列表
@@ -239,5 +239,12 @@ object MineApi {
     //获取仓鼠复活消费面板
     const val API_HAMSTER_CULTIVATE_QUERY_REVIVEPANEL = "/hamster-center/hamsters/cultivate/queryRevivePanel"
 
+    //用户查看饰品头像皮肤首页
+    const val API_HAMSTER_ACCESSORIES_INFO_LIST = "/hamster-user/accessories/infoList"
 
+    //用户佩戴皮肤
+    const val API_HAMSTER_ACCESSORIES_WEAR_SKIN = "/hamster-user/accessories/wearSkin"
+
+    //用户解锁皮肤
+    const val API_HAMSTER_ACCESSORIES_UNLOCK_SKIN = "/hamster-user/accessories/unlockSkin"
 }

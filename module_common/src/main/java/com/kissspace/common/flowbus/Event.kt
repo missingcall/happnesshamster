@@ -198,4 +198,10 @@ sealed class Event {
     object HamsterCleaningEvent : Event()
     //复活仓鼠
     object HamsterReviveEvent : Event()
+
+    //皮肤使用成功
+    object WearSkinEvent : Event()
+
+    //皮肤解锁购买成功
+    object UnLockSkinEvent : Event()
 }
