@@ -37,7 +37,7 @@
                     app:barStyle="transparent"
                     app:leftIcon="@mipmap/common_icon_back_white"
                     app:lineVisible="false"
-                    app:titleColor="@color/color_FFFD62"
+                    app:titleColor="@color/common_white"
                     app:titleSize="18sp" />
 
                 <ImageView
@@ -126,6 +126,7 @@
                     app:stackFromEnd="true" />
             </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
+            <!--底部Option View-->
             <com.kissspace.message.widget.ChatPanelView
                 android:id="@+id/chat_panel"
                 android:layout_width="match_parent"

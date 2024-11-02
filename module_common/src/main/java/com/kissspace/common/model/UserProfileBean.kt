@@ -21,7 +21,7 @@ data class UserProfileBean(
     val consumeLevel: Int = 0,
     val displayId: String,
     val beautifulId: String = "",
-    val giftWall: List<CommonGiftInfo>,
+    val giftWall: List<CommonGiftInfo> = mutableListOf(),
     val nickname: String,
     val auditingNickname: String = "",
     val accid: String,

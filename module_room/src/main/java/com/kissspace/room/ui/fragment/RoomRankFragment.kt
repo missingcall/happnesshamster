@@ -13,6 +13,7 @@ import com.angcyo.tablayout.delegate2.ViewPager2Delegate
 import com.kongzue.dialogx.dialogs.CustomDialog
 import com.kongzue.dialogx.interfaces.OnBindView
 import com.kissspace.common.base.BaseFragment
+import com.kissspace.common.ext.safeClick
 import com.kissspace.module_room.R
 import com.kissspace.module_room.databinding.RoomFragmentRankBinding
 import com.kissspace.room.viewmodel.LiveViewModel

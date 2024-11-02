@@ -122,17 +122,10 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
                     }
                 }
             }
-
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putLong("lastReadFlagPosition", lastReadFlagTime)
-    }
-
-    private var lastReadFlagTime = -1L
-
+    //处理消息已读回执
     private val  messageReceiptObserver = Observer<List<MessageReceipt>> {
         if (!isAdded) {
             return@Observer
@@ -152,7 +145,6 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
             }
         }
     }
-
 
     //处理图片与语音消息接收，监听附件下载成功后再插入消息
     private val messageStatusObserver = Observer<IMMessage> {
@@ -204,6 +196,19 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
         }
     }
 
+
+
+
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putLong("lastReadFlagPosition", lastReadFlagTime)
+    }
+
+    private var lastReadFlagTime = -1L
+
+
     companion object {
         fun newInstance(friendAccount: String, friendUserId: String, isFromDialog: Boolean) =
             ChatFragment().apply {
@@ -243,6 +248,9 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
         )
     }
 
+    /**
+     * titleBar初始化
+     */
     private fun initTitleBar() {
 //        if (isFromDialog) {
 //            mBinding.root.setBackgroundResource(R.drawable.message_bg_corner)
@@ -287,63 +295,36 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
 
     }
 
-    private fun registerObserver() {
-        NIMClient.getService(MsgServiceObserve::class.java)
-            .observeReceiveMessage(receiveMessageObserver, true)
-        NIMClient.getService(MsgServiceObserve::class.java)
-            .observeMsgStatus(messageStatusObserver, true)
-        NIMClient.getService(MsgServiceObserve::class.java)
-            .observeMessageReceipt(messageReceiptObserver, true)
-
-    }
 
 
-    private fun initAudio() {
-        audioPlayer.onPlayListener = object : OnPlayListener {
-            override fun onPrepared() {
-            }
 
-            override fun onCompletion() {
-                val data =
-                    mBinding.recyclerView.bindingAdapter.mutable[clickItemPosition] as ChatModel
-                data.isPlayAudioAnimation = false
-                data.notifyChange()
-            }
 
-            override fun onInterrupt() {
-            }
 
-            override fun onError(error: String?) {
-            }
-
-            override fun onPlaying(curPosition: Long) {
-            }
-
-        }
-    }
-
+    /**
+     * 初始化聊天RecyclerView
+     */
     private fun initRecyclerView() {
         //查询历史消息
         mBinding.recyclerView.linear().setup {
             addType<ChatModel> {
                 when (messageType) {
-                    Constants.ChatMessageType.TYPE_CONTENT -> {
+                    Constants.ChatMessageType.TYPE_CONTENT -> { //文本
                         if (this.isReceive) R.layout.message_layout_chat_item_content_left else R.layout.message_layout_chat_item_content_right
                     }
 
-                    Constants.ChatMessageType.TYPE_PICTURE -> {
+                    Constants.ChatMessageType.TYPE_PICTURE -> {//图片
                         if (this.isReceive) R.layout.message_layout_chat_item_picture_left else R.layout.message_layout_chat_item_picture_right
                     }
 
-                    Constants.ChatMessageType.TYPE_AUDIO -> {
+                    Constants.ChatMessageType.TYPE_AUDIO -> {//音频
                         if (this.isReceive) R.layout.message_layout_chat_item_audio_left else R.layout.message_layout_chat_item_audio_right
                     }
 
-                    Constants.ChatMessageType.TYPE_GIFT -> {
+                    Constants.ChatMessageType.TYPE_GIFT -> {//礼物
                         if (this.isReceive) R.layout.message_layout_chat_item_gift_left else R.layout.message_layout_chat_item_gift_right
                     }
 
-                    Constants.ChatMessageType.TYPE_EMOJI -> {
+                    Constants.ChatMessageType.TYPE_EMOJI -> {//表情
                         if (this.isReceive) R.layout.message_layout_chat_item_emoji_left else R.layout.message_layout_chat_item_emoji_right
                     }
                 }
@@ -402,6 +383,9 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
         }.models = mutableListOf()
     }
 
+    /**
+     * 初始化下拉刷新
+     */
     private fun initRefreshLayout() {
         mBinding.smartRefreshLayout.apply {
             setEnableLoadMore(false)
@@ -412,6 +396,9 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
         }
     }
 
+    /**
+     * 判断聊天权限
+     */
     private fun checkChatPermission(): Boolean {
         return true
       /*  return if (mBinding.recyclerView.mutable.isEmpty()) {
@@ -430,6 +417,9 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
         } else true*/
     }
 
+    /**
+     * 点击时间初始化
+     */
     private fun initClickEvents() {
         mBinding.chatPanel.setOnChatPanelCallBack(this, friendUserId, object : OnChatPanelCallBack {
             override fun onSendTextMessage(text: String) {
@@ -510,6 +500,9 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
         }
     }
 
+    /**
+     * 初始化键盘输入
+     */
     private fun initSoftInput() {
         if (isFromDialog) {
 //            (parentFragment as DialogFragment).setWindowSoftInput(
@@ -539,7 +532,6 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
 
     override fun createDataObserver() {
         super.createDataObserver()
-
         collectData(mViewModel.getEmojiListEvent, onSuccess = { listBeans ->
             var list = ArrayList<ChatEmojiListBean>()
             listBeans.forEach {
@@ -607,6 +599,9 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
     }
 
 
+    /**
+     * 插入消息
+     */
     private fun insertMessage(message: ChatModel) {
         message.picture?.let {
             imageList.add(message.picture!!)
@@ -615,22 +610,11 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
         mBinding.recyclerView.scrollToBottom()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        NIMClient.getService(MsgService::class.java)
-            .clearUnreadCount(mViewModel.friendUserInfo.get()?.accid, SessionTypeEnum.P2P)
-        stopAudio()
-        (requireActivity() as com.kissspace.common.base.BaseActivity).unRegisterActivityTouchEvent(
-            this
-        )
-        NIMClient.getService(MsgServiceObserve::class.java)
-            .observeReceiveMessage(receiveMessageObserver, false)
-        NIMClient.getService(MsgServiceObserve::class.java)
-            .observeMsgStatus(messageStatusObserver, false)
-        NIMClient.getService(MsgServiceObserve::class.java)
-            .observeMessageReceipt(messageReceiptObserver, false)
-    }
 
+
+    /**
+     * 停止播放
+     */
     private fun stopAudio() {
         if (audioPlayer.isPlaying) {
             audioPlayer.stop()
@@ -655,6 +639,9 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
     override fun onTouchEvent(event: MotionEvent) {
     }
 
+    /**
+     * 触摸事件处理
+     */
     override fun onDispatchTouchEvent(ev: MotionEvent) {
         if (ev.action == MotionEvent.ACTION_DOWN && !isClickThisArea(
                 mBinding.chatPanel, ev
@@ -664,6 +651,10 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
         }
     }
 
+
+    /**
+     * 浏览图片
+     */
     private fun previewPicture(
         modelPosition: Int,
         target: View?,
@@ -683,4 +674,75 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
             .start()
     }
 
+    /**
+     * 初始化音频事件监听
+     */
+    private fun initAudio() {
+        audioPlayer.onPlayListener = object : OnPlayListener {
+            override fun onPrepared() {
+            }
+
+            override fun onCompletion() {
+                val data =
+                    mBinding.recyclerView.bindingAdapter.mutable[clickItemPosition] as ChatModel
+                data.isPlayAudioAnimation = false
+                data.notifyChange()
+            }
+
+            override fun onInterrupt() {
+            }
+
+            override fun onError(error: String?) {
+            }
+
+            override fun onPlaying(curPosition: Long) {
+            }
+
+        }
+    }
+
+
+    /**
+     * 注册云信消息监听
+     */
+    private fun registerObserver() {
+        /*
+        * 注册/ 注销消息接收观察者。
+        *  通知的消息列表中的消息不一定全是接收的消息，也有可能是自己发出去，比如其他端发的消息漫游过来，
+        * 或者调用MsgService. saveMessageToLocal(IMMessage, boolean)后，notify参数设置为true，通知出来的消息。
+        * */
+        NIMClient.getService(MsgServiceObserve::class.java)
+            .observeReceiveMessage(receiveMessageObserver, true)
+        /*
+        * 注册/ 注销消息状态变化观察者
+        * */
+
+        NIMClient.getService(MsgServiceObserve::class.java)
+            .observeMsgStatus(messageStatusObserver, true)
+        /*
+        * 注册/ 注销消息已读回执观察者
+        * */
+        NIMClient.getService(MsgServiceObserve::class.java)
+            .observeMessageReceipt(messageReceiptObserver, true)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //清除未读
+        NIMClient.getService(MsgService::class.java)
+            .clearUnreadCount(mViewModel.friendUserInfo.get()?.accid, SessionTypeEnum.P2P)
+        stopAudio()
+
+        (requireActivity() as com.kissspace.common.base.BaseActivity).unRegisterActivityTouchEvent(
+            this
+        )
+        NIMClient.getService(MsgServiceObserve::class.java)
+            .observeReceiveMessage(receiveMessageObserver, false)
+
+
+        NIMClient.getService(MsgServiceObserve::class.java)
+            .observeMsgStatus(messageStatusObserver, false)
+        NIMClient.getService(MsgServiceObserve::class.java)
+            .observeMessageReceipt(messageReceiptObserver, false)
+    }
 }

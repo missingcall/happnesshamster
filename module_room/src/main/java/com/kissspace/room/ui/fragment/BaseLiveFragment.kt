@@ -140,7 +140,7 @@ abstract class BaseLiveFragment(layoutId: Int) : BaseFragment(layoutId),
         updateUnReadCount()
     }
 
-
+    //聊天室状态观察者
     private val onLineStateObserver = Observer<ChatRoomStatusChangeData> {
         if (it.status == StatusCode.NET_BROKEN) {
             customToast("网络断开，请检查网络")
@@ -331,6 +331,9 @@ abstract class BaseLiveFragment(layoutId: Int) : BaseFragment(layoutId),
     }
 
 
+    /**
+     * 刷新房间
+     */
     private fun refreshMicUsers() {
         val param = mutableMapOf<String, Any?>()
         param["crId"] = getRoomInfo().crId
@@ -405,6 +408,9 @@ abstract class BaseLiveFragment(layoutId: Int) : BaseFragment(layoutId),
     }
 
 
+    /**
+     * 获取历史消息
+     */
     private fun requestHistoryMessage() {
         //因为查询的是当前房间和系统房间的消息，所以要按照时间戳排序
         RoomServiceManager.historyMessage.sortBy { t -> t.time }
@@ -414,6 +420,9 @@ abstract class BaseLiveFragment(layoutId: Int) : BaseFragment(layoutId),
     }
 
 
+    /**
+     * 解析历史消息
+     */
     private fun parseHistoryMessage(messages: MutableList<ChatRoomMessage>) {
         val messageList = mutableListOf<RoomChatMessageModel>()
         messages.forEach {
@@ -463,6 +472,9 @@ abstract class BaseLiveFragment(layoutId: Int) : BaseFragment(layoutId),
     }
 
 
+    /**
+     * 注册云信消息监听
+     */
     private fun registerMessageObserver() {
         //注册IM消息监听
         NIMClient.getService(ChatRoomServiceObserver::class.java).observeReceiveMessage(this, true)
@@ -475,8 +487,12 @@ abstract class BaseLiveFragment(layoutId: Int) : BaseFragment(layoutId),
             .observeMsgStatus(messageStatusObserver, true)
         NIMClient.getService(ChatRoomServiceObserver::class.java)
             .observeOnlineStatus(onLineStateObserver, true)
+
     }
 
+    /**
+     * 初始化ActionBar
+     */
     private fun initActionBar() {
         getActionBarView().setMarginStatusBar()
         getActionBarView().initData(getRoomInfo())
@@ -564,10 +580,15 @@ abstract class BaseLiveFragment(layoutId: Int) : BaseFragment(layoutId),
         }
     }
 
+
+
     private fun getMicRecyclerPKInfightingLayoutManager(): GridLayoutManager =
         GridLayoutManager(requireContext(), 2)
 
 
+    /**
+     *  初始化底部聊天RecyclerView
+     */
     private fun initChatRecyclerView() {
         //添加一条系统消息
         val systemMessage = RoomChatMessageModel(

@@ -37,6 +37,7 @@ import com.kissspace.module_message.R
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
 import com.kissspace.network.result.ResultState
+import com.kissspace.util.customToast
 import com.kissspace.util.isNotEmpty
 import com.kissspace.util.logE
 import com.netease.nimlib.sdk.StatusCode
@@ -143,6 +144,7 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
                     result: List<RecentContact>?,
                     exception: Throwable?
                 ) {
+
                     logE("有多少条回话---${result?.size}")
                     if (!result.isNullOrEmpty()) {
                         parseData(result, false)
@@ -165,7 +167,10 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
         )
     }
 
-
+    /**
+     * RecentContact数据解析为 ChatListModel
+     * @param isUpdate 是否为更新
+     */
     private fun parseData(list: List<RecentContact>, isUpdate: Boolean) {
         val chatList = mutableListOf<ChatListModel>()
         val accounts = list.map { it.contactId }

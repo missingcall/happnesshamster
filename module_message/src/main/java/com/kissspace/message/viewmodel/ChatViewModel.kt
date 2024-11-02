@@ -77,7 +77,11 @@ class ChatViewModel : BaseViewModel() {
                 onSuccess = { that ->
                     friendUserInfo.set(that)
                     queryMessage(account, true)
+                }, onError = {
+
                 })
+        }, onError = {
+
         })
     }
 
