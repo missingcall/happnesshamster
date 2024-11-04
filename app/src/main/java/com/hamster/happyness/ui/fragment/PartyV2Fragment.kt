@@ -65,6 +65,7 @@ class PartyV2Fragment : BaseLazyFragment(R.layout.fragment_main_party_v2) {
 
     override fun lazyLoadData() {
         mViewModel.getHomeBanner()
+        mViewModel.getRoomTagList()
     }
 
     override fun lazyClickListener() {
@@ -84,7 +85,6 @@ class PartyV2Fragment : BaseLazyFragment(R.layout.fragment_main_party_v2) {
         mBinding.titleBar.setMarginStatusBar()
         mBinding.m = mViewModel
         mBinding.lifecycleOwner = this
-
     }
 
     private fun initRefresh() {
@@ -173,10 +173,10 @@ class PartyV2Fragment : BaseLazyFragment(R.layout.fragment_main_party_v2) {
         ViewPager2Delegate.install(mBinding.viewPager, mBinding.tabLayout)
     }
 
-    override fun createDataObserver() {
-        super.createDataObserver()
+    override fun lazyDataChangeListener() {
+        super.lazyDataChangeListener()
         collectData(mViewModel.tagListEvent, onSuccess = {
-           mBinding.refreshLayout.finishRefresh()
+            mBinding.refreshLayout.finishRefresh()
             addTab(it)
         }, onEmpty = {
 
@@ -187,9 +187,7 @@ class PartyV2Fragment : BaseLazyFragment(R.layout.fragment_main_party_v2) {
         FlowBus.observerEvent<Event.RefreshChangeAccountEvent>(this) {
             mBinding.refreshLayout.autoRefresh()
         }
-        mViewModel.getRoomTagList()
     }
-
 
     var index = 0
 
