@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.hamster.happyness.viewmodel.HamsterViewModel" />
+
+        <variable
+            name="wvm"
+            type="com.kissspace.mine.viewmodel.WalletViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.82" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@mipmap/common_bg_dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="350:465"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="-26dp" />
+
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@mipmap/common_icon_dialog_close"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_vertical" />
+
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            loadImageNoPlace="@{m.record.icon}"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintBottom_toTopOf="@id/tvAvailable"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintVertical_chainStyle="packed" />
+
+
+        <TextView
+            android:id="@+id/tvAvailable"
+            availablePineCones="@{wvm}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/btnConfirm"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivIcon" />
+
+
+        <Button
+            android:id="@+id/btnConfirm"
+            style="@style/commonSettingItem"
+            skinPurchase="@{m.record}"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/common_bg_blue"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/btnCancel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAvailable" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/commonSettingItem"
+            android:background="@drawable/common_btn_selector_black23_radius15_stroke2"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="33dp"
+            android:text="取消"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnConfirm" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

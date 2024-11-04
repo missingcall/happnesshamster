@@ -164,7 +164,7 @@ object MineApi {
 
 
     //根据用户展示id获取通用用户信息
-    const val API_QueryUserByDisplayIdResponse= "/hamster-user/user/queryUserByDisplayIdResponse"
+    const val API_QueryUserByDisplayIdResponse = "/hamster-user/user/queryUserByDisplayIdResponse"
 
 
     //用户提现列表
@@ -220,4 +220,31 @@ object MineApi {
 
     //领取松果
     const val API_HAMSTER_MARKET_RECEIVE_PINE_CONE = "/hamster-center/hamsterMarket/receivePinecone"
+
+    //获取仓鼠养成培养消费面板
+    const val API_HAMSTER_CULTIVATE_QUERY_CULTIVATION_PANEL = "/hamster-center/hamsters/cultivate/queryCultivationPanel"
+
+    //获取当前仓鼠信息
+    const val API_HAMSTER_CULTIVATION_HMSINFO = "/hamster-center/hamsters/cultivate/hmsInfo"
+
+    //喂养仓鼠
+    const val API_HAMSTER_CULTIVATE_IMPROVE_SATIETY = "/hamster-center/hamsters/cultivate/improveSatiety"
+
+    //清洗仓鼠
+    const val API_HAMSTER_CULTIVATE_IMPROVE_CLEANLINESS = "/hamster-center/hamsters/cultivate/improveCleanliness"
+
+    //复活仓鼠
+    const val API_HAMSTER_CULTIVATE_REVIVE = "/hamster-center/hamsters/cultivate/revive"
+
+    //获取仓鼠复活消费面板
+    const val API_HAMSTER_CULTIVATE_QUERY_REVIVEPANEL = "/hamster-center/hamsters/cultivate/queryRevivePanel"
+
+    //用户查看饰品头像皮肤首页
+    const val API_HAMSTER_ACCESSORIES_INFO_LIST = "/hamster-user/accessories/infoList"
+
+    //用户佩戴皮肤
+    const val API_HAMSTER_ACCESSORIES_WEAR_SKIN = "/hamster-user/accessories/wearSkin"
+
+    //用户解锁皮肤
+    const val API_HAMSTER_ACCESSORIES_UNLOCK_SKIN = "/hamster-user/accessories/unlockSkin"
 }

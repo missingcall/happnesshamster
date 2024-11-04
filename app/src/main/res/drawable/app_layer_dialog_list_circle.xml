@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@mipmap/app_bg_home_dialog_circle_3" />
+    <item android:drawable="@mipmap/app_bg_home_dialog_circle_2" />
+    <item android:drawable="@mipmap/app_bg_home_dialog_circle_1" />
+
+</layer-list>

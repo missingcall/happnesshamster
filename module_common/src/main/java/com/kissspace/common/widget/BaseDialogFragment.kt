@@ -41,8 +41,8 @@ abstract class BaseDialogFragment<DB : ViewDataBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.Theme_CustomDialogFragment)
-        if(isAppDebug)
-            Log.e("onAttach", "Dialog:"+this.javaClass.simpleName+" isadd:"+isAdded+ "tag:"+tag)
+        if (isAppDebug)
+            Log.e("onAttach", "Dialog:" + this.javaClass.simpleName + " isadd:" + isAdded + "tag:" + tag)
     }
 
     override fun onCreateView(
@@ -63,6 +63,8 @@ abstract class BaseDialogFragment<DB : ViewDataBinding>(
             attributes = attr
             if (gravity == Gravity.BOTTOM) {
                 setWindowAnimations(R.style.DialogBottomInAnimation)
+            } else if (gravity == Gravity.LEFT){
+                setWindowAnimations(R.style.DialogLeftInAnimation)
             }
         }
     }
@@ -86,13 +88,13 @@ abstract class BaseDialogFragment<DB : ViewDataBinding>(
     }
 
     fun showLoading(context: String = "加载中") {
-        if(requireActivity() is BaseActivity){
+        if (requireActivity() is BaseActivity) {
             (requireActivity() as BaseActivity).showLoading(context)
         }
     }
 
     fun hideLoading() {
-        if(requireActivity() is BaseActivity){
+        if (requireActivity() is BaseActivity) {
             (requireActivity() as BaseActivity).hideLoading()
         }
     }
@@ -100,7 +102,7 @@ abstract class BaseDialogFragment<DB : ViewDataBinding>(
     override fun dismiss() {
         try {
             dismissAllowingStateLoss()
-        }catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
@@ -111,7 +113,7 @@ abstract class BaseDialogFragment<DB : ViewDataBinding>(
                 return
             }
             show(manager, manager.djsUniqueTag)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }

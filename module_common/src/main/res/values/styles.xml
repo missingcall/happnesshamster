@@ -37,6 +37,11 @@
         <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
     </style>
 
+    <style name="DialogLeftInAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_left_out</item>
+    </style>
+
 
     <style name="RedDotStyle">
         <item name="android:layout_width">wrap_content</item>
@@ -247,7 +252,7 @@
     <style name="commonBottomConfirmationItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">72dp</item>
-        <item name="android:background">@drawable/common_btn_selector_blue_radius15</item>
+        <item name="android:background">@drawable/common_btn_selector_blue_black_radius15</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:layout_marginRight">15dp</item>

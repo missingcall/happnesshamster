@@ -122,19 +122,24 @@ class LoginPswFragment : BaseFragment(R.layout.login_fragment_phone_code_login) 
 
         collectData(mViewModel.accounts, onSuccess = {
             hideLoading()
-            if (it.size == 1) {
-                val userAccountBean = it[0]
-                mViewModel.loginByUserId(
-                    userAccountBean.userId,
-                    userAccountBean.tokenHead,
-                    userAccountBean.token
-                )
-            } else {
-                jump(
-                    RouterPath.PATH_CHOOSE_ACCOUNT,
-                    "accounts" to toJson(it),
-                    "phone" to mBinding.xetPhone.text.toString().trim().replace(" ", "")
-                )
+            when (it.size) {
+                1 -> {
+                    val userAccountBean = it[0]
+                    mViewModel.loginByUserId(
+                        userAccountBean.userId,
+                        userAccountBean.tokenHead,
+                        userAccountBean.token
+                    )
+                }
+                //多于一个身份时直接登录最近的那个
+                else -> {
+                    val userAccountBean = it[0]
+                    mViewModel.loginByUserId(
+                        userAccountBean.userId,
+                        userAccountBean.tokenHead,
+                        userAccountBean.token
+                    )
+                }
             }
         }, onError = {
             hideLoading()

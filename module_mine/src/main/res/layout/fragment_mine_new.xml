@@ -24,13 +24,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.hjq.bar.TitleBar
+                <TextView
                     android:id="@+id/title_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    app:barStyle="transparent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:leftIcon="@null" />
+                    app:layout_constraintLeft_toLeftOf="parent"/>
 
                 <!--  <ImageView
                       android:id="@+id/iv_edit"
@@ -54,7 +53,8 @@
                     imageUrl="@{m.userInfo.profilePath}"
                     android:layout_width="54dp"
                     android:layout_height="54dp"
-                    android:layout_margin="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="30dp"
                     android:padding="1dp"
                     android:src="@color/design_default_color_on_primary"
                     app:layout_constraintLeft_toLeftOf="parent"

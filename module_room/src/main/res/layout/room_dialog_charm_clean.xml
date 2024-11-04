@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -9,7 +10,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:tools="http://schemas.android.com/tools"
         android:theme="@style/Theme.Unicorn_live">
 
         <View
@@ -46,7 +46,6 @@
             android:layout_height="@dimen/dp_28" />
 
         <com.drake.brv.PageRefreshLayout
-            app:layout_constraintTop_toBottomOf="@id/tv_clean_all"
             android:id="@+id/page_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -54,7 +53,9 @@
             android:background="@color/common_transparent"
             app:empty_layout="@layout/common_view_empty"
             app:layout_constraintBottom_toBottomOf="@id/view_cover"
-            app:layout_constraintLeft_toLeftOf="parent">
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_clean_all"
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
