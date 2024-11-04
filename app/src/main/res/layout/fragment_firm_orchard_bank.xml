@@ -6,7 +6,7 @@
     <data>
         <variable
             name="m"
-            type="com.hamster.happyness.viewmodel.HamsterViewModel" />
+            type="com.kissspace.mine.viewmodel.WalletViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

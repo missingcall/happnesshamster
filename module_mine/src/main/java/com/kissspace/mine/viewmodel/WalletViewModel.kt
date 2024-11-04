@@ -7,6 +7,7 @@ import com.kissspace.common.base.BaseViewModel
 import com.kissspace.common.config.CommonApi
 import com.kissspace.common.config.Constants
 import com.kissspace.common.config.Constants.TypeFaceRecognition
+import com.kissspace.common.model.InfoListModel
 import com.kissspace.common.model.QueryMarketListItem
 import com.kissspace.common.model.wallet.*
 import com.kissspace.common.util.DJSLiveData
@@ -119,6 +120,9 @@ class WalletViewModel : BaseViewModel() {
 
     //提现数量内容
     var withDrawNumberContent = MutableLiveData<String>()
+
+    //获取领养仓鼠&仓鼠果园-松果银行列表
+    var queryMarketItem = MutableLiveData<QueryMarketListItem>()
 
     //提现数量
     var withDrawNumber = MutableLiveData<Double>()
@@ -533,6 +537,20 @@ class WalletViewModel : BaseViewModel() {
             onSuccess.invoke(it)
 
         }, onError = {
+        })
+    }
+
+    //获取领养仓鼠&仓鼠果园-松果银行列表
+    fun buy(goodsId: String?, money : Double?, number : Int?, onSuccess: ((Boolean) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+        param["goodsId"] = goodsId
+        param["money"] = money
+        param["number"] = number
+        request<Boolean>(MineApi.API_HAMSTER_MARKET_BUY, Method.POST, param, onSuccess = {
+            onSuccess.invoke(it)
+
+        }, onError = {
+            customToast(it.message)
         })
     }
 }

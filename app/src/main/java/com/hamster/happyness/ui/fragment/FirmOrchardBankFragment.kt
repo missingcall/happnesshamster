@@ -3,27 +3,17 @@ package com.hamster.happyness.ui.fragment
 import android.os.Bundle
 import android.widget.Button
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.blankj.utilcode.util.SpanUtils
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.setup
 import com.hamster.happyness.databinding.FragmentFirmOrchardBankBinding
+import com.hamster.happyness.widget.OrchardPurchaseDialog
 import com.kissspace.common.base.BaseFragment
-import com.kissspace.common.config.CommonApi
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.model.*
-import com.kissspace.common.util.mmkv.MMKVProvider
-import com.kissspace.mine.http.MineApi
-import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
-import com.kissspace.module_mine.R
-import com.kissspace.module_mine.databinding.MineFragmentWarehouseBinding
-import com.kissspace.network.net.Method
-import com.kissspace.network.net.request
-import com.kissspace.util.customToast
-import com.kissspace.util.toast
-import kotlinx.coroutines.flow.MutableSharedFlow
 
 /**
  *
@@ -34,7 +24,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
  */
 class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.fragment_firm_orchard_bank) {
     private val mBinding by viewBinding<FragmentFirmOrchardBankBinding>()
-    private val mViewModel by viewModels<WalletViewModel>()
+    private val mViewModel by activityViewModels<WalletViewModel>()
     private lateinit var type: String
 
     companion object {
@@ -70,11 +60,12 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
                 val model = getModel<QueryMarketListItem>()
                 val button = findView<Button>(com.hamster.happyness.R.id.btn)
                 button.safeClick {
+                    mViewModel.queryMarketItem.value = model
                     //001 商品可购买 002 商品已售磬 003 用户未解锁 004 用户已拥有(待激活) 005 用户已拥有(生效中)
                     when (model.goodsStatue) {
                         "001" -> {
                             //底部拉起说明详情并展示购买选项
-
+                            OrchardPurchaseDialog.newInstance().show(childFragmentManager)
                         }
                         "002" -> com.kissspace.common.util.customToast("已售罄")
                         "004" -> {

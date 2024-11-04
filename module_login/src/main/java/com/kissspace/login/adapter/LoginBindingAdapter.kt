@@ -26,13 +26,13 @@ object LoginBindingAdapter {
     @JvmStatic
     @BindingAdapter("userMaleBg", requireAll = false)
     fun userMaleBg(imageView: ImageView, sex: String? = Constants.SEX_MALE) {
-        imageView.setImageResource(if (sex == Constants.SEX_MALE) com.kissspace.module_common.R.drawable.common_shape_blue_15 else com.kissspace.module_common.R.drawable.common_shape_262a2e_normal_13)
+        imageView.setImageResource(if (sex == Constants.SEX_MALE) com.kissspace.module_common.R.drawable.common_shape_blue_15 else com.kissspace.module_common.R.drawable.common_shape_262a2e_normal_15)
     }
 
     @JvmStatic
     @BindingAdapter("userFemaleBg", requireAll = false)
     fun userFemaleBg(imageView: ImageView, sex: String? = Constants.SEX_MALE) {
-        imageView.setImageResource(if (sex == Constants.SEX_MALE) com.kissspace.module_common.R.drawable.common_shape_262a2e_normal_13 else com.kissspace.module_common.R.drawable.common_shape_blue_15)
+        imageView.setImageResource(if (sex == Constants.SEX_MALE) com.kissspace.module_common.R.drawable.common_shape_262a2e_normal_15 else com.kissspace.module_common.R.drawable.common_shape_blue_15)
     }
 
     @JvmStatic
