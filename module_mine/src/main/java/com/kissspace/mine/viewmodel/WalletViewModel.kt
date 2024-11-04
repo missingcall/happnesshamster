@@ -7,6 +7,7 @@ import com.kissspace.common.base.BaseViewModel
 import com.kissspace.common.config.CommonApi
 import com.kissspace.common.config.Constants
 import com.kissspace.common.config.Constants.TypeFaceRecognition
+import com.kissspace.common.model.QueryMarketListItem
 import com.kissspace.common.model.wallet.*
 import com.kissspace.common.util.DJSLiveData
 import com.kissspace.common.util.customToast
@@ -524,5 +525,14 @@ class WalletViewModel : BaseViewModel() {
         })
     }
 
+    //获取领养仓鼠&仓鼠果园-松果银行列表
+    fun queryMarketList(type: String, onSuccess: ((MutableList<QueryMarketListItem>) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+        param["type"] = type
+        request<MutableList<QueryMarketListItem>>(MineApi.API_HAMSTER_MARKET_QUERY_MARKET_LIST, Method.GET, param, onSuccess = {
+            onSuccess.invoke(it)
 
+        }, onError = {
+        })
+    }
 }

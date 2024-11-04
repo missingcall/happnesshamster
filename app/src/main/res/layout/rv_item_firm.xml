@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="m"
+            type="com.kissspace.common.model.QueryMarketListItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/common_shape_262a2e_normal_13">
+
+
+        <ImageView
+            android:id="@+id/ivCommodityIcon"
+            imageRadius="@{5f}"
+            imageUrl="@{m.commodityIcon}"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="11dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCommodityStatus"
+            tvCommodityStatus="@{m}"
+            android:layout_width="31dp"
+            android:layout_height="11dp"
+            android:textColor="@color/white"
+            android:textSize="8dp"
+            app:layout_constraintRight_toRightOf="@id/ivCommodityIcon"
+            app:layout_constraintTop_toTopOf="@id/ivCommodityIcon"
+
+            />
+
+
+        <TextView
+            android:id="@+id/tvCommodityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="@{m.commodityName}"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="bold"
+
+            app:layout_constraintBottom_toTopOf="@id/tvTimeLimit"
+            app:layout_constraintLeft_toRightOf="@id/ivCommodityIcon"
+
+            app:layout_constraintTop_toTopOf="@id/ivCommodityIcon" />
+
+        <TextView
+            android:id="@+id/tvTimeLimit"
+            text='@{"周期: " + String.valueOf(m.timeLimit)}'
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toTopOf="@id/tvDayIncome"
+            app:layout_constraintLeft_toLeftOf="@id/tvCommodityName"
+            app:layout_constraintTop_toBottomOf="@id/tvCommodityName" />
+
+        <TextView
+            android:id="@+id/tvDayIncome"
+            firmDayIncome="@{m.dayIncome}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCommodityIcon"
+            app:layout_constraintLeft_toLeftOf="@id/tvCommodityName"
+            app:layout_constraintTop_toBottomOf="@id/tvTimeLimit" />
+
+
+        <Button
+            android:id="@+id/btn"
+            btnFirmOrchard="@{m}"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="11dp"
+            android:background="@drawable/common_btn_selector_blue_deep_blue_radius45"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivCommodityIcon" />
+
+        <com.kissspace.common.widget.NiceImageView
+            android:id="@+id/nivBgMask"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility='@{m.goodsStatue == "002" ? View.VISIBLE : View.GONE}'
+            app:corner_radius="@dimen/dp_5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mask_color="@color/color_B3000000" />
+
+        <TextView
+            android:id="@+id/tv_sold_out"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="已售罄"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility='@{m.goodsStatue == "002" ? View.VISIBLE : View.GONE}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

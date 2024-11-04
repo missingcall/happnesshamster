@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BaseObservable
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -57,7 +58,7 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
 
     private val mBinding by viewBinding<FragmentMineNewBinding>()
 
-    private val mViewModel by viewModels<MineViewModel>()
+    private val mViewModel by activityViewModels<MineViewModel>()
 
     private val familyModel by viewModels<FamilyViewModel>()
 

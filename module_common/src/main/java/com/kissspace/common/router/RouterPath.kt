@@ -301,4 +301,7 @@ object RouterPath {
 
     //仓鼠皮肤
     const val PATH_HAMSTER_SKIN = PATH_BASE + "hamster_skin"
+
+    //仓鼠皮肤
+    const val PATH_FIRM = PATH_BASE + "hamster_firm"
 }
