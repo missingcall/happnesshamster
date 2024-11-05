@@ -1,11 +1,13 @@
 package com.kissspace.common.model
 
+import com.umeng.commonsdk.debug.D
+
 @kotlinx.serialization.Serializable
 class QueryMarketList : ArrayList<QueryMarketListItem>()
 
 @kotlinx.serialization.Serializable
 data class QueryMarketListItem(
-    val coinPrice: Int = 0,
+    val coinPrice: Double = 0.0,
     val commodityIcon: String = "",
     val commodityInfoId: String = "",
     val commodityMark: String = "",

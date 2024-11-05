@@ -204,4 +204,7 @@ sealed class Event {
 
     //皮肤解锁购买成功
     object UnLockSkinEvent : Event()
+
+    //果园购买成功
+    object OrchardPurchaseSuccessful : Event()
 }

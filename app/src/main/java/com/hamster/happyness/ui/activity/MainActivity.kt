@@ -31,6 +31,7 @@ import com.netease.nimlib.sdk.msg.MsgService
 import com.petterp.floatingx.assist.FxGravity
 import com.petterp.floatingx.assist.helper.ScopeHelper
 import com.hamster.happyness.R
+import com.hamster.happyness.ui.fragment.FirmFragment
 import com.hamster.happyness.ui.fragment.HomeFragmentV2
 import com.hamster.happyness.ui.fragment.HomeFragmentV3
 import com.hamster.happyness.ui.fragment.PartyV2Fragment
@@ -236,7 +237,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
 
     private fun initViewPager() {
         val fragments =
-            arrayOf(HomeFragmentV3(),CompanyFragmentV2(), PartyV2Fragment(), MessageFragmentV3(), MineFragment())
+            arrayOf(HomeFragmentV3(),FirmFragment(), PartyV2Fragment(), MessageFragmentV3(), MineFragment())
         mBinding.viewPager.apply {
             offscreenPageLimit = fragments.size
             isUserInputEnabled = false

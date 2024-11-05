@@ -22,16 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <!--     <androidx.core.widget.NestedScrollView
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent">
-
-                 <androidx.constraintlayout.widget.ConstraintLayout
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent">-->
-
-
         <TextView
             android:id="@+id/titleBar"
             android:layout_width="0dp"
@@ -97,54 +87,13 @@
             app:layout_constraintLeft_toRightOf="@id/tvUserId"
             app:layout_constraintTop_toTopOf="@id/tvUserId" />
 
-        <!--<TextView
-            android:id="@+id/tvPlatformLevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/common_shape_blue_normal_45"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:text='@{String.valueOf(mvm.userInfo.charmTotal)+"级"}'
-            android:textColor="@color/color_ui_main_text"
-            android:textSize="9sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
-            app:layout_constraintLeft_toLeftOf="@id/ivAvatar"
-            app:layout_constraintRight_toRightOf="@id/ivAvatar"
-            tools:text="45级" />-->
-
-        <!-- <ProgressBar
-             android:id="@+id/pbExp"
-             style="@android:style/Widget.ProgressBar.Horizontal"
-             android:layout_width="110dp"
-             android:layout_height="5dp"
-             android:layout_weight="1"
-             android:max="100"
-             android:progress="80"
-             android:progressDrawable="@drawable/home_bg_progress"
-             app:layout_constraintBottom_toBottomOf="@id/tvPlatformLevel"
-             app:layout_constraintLeft_toRightOf="@id/tvPlatformLevel" />-->
-
-        <!-- <ImageView
-             android:id="@+id/ivLevelDescription"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginLeft="2dp"
-             android:src="@mipmap/icon_home_describe"
-             app:layout_constraintBottom_toBottomOf="@id/pbExp"
-             app:layout_constraintLeft_toRightOf="@id/pbExp"
-             app:layout_constraintTop_toTopOf="@id/pbExp" />-->
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginRight="15dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            app:bl_corners_radius="59dp"
-            app:bl_stroke_color="@color/color_5A60FF"
-            app:bl_stroke_width="1dp"
+            android:background="@mipmap/app_bg_home_produce"
             app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/ivAvatar">

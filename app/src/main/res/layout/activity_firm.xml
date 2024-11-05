@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mvm"
+            type="com.kissspace.mine.viewmodel.MineViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/titleBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="59dp"
+            android:layout_height="59dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="30dp"
+            android:src="@color/design_default_color_on_primary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/titleBar"
+            app:loadCircleImage="@{mvm.userInfo.profilePath}" />
+
+        <TextView
+            android:id="@+id/tvNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{mvm.userInfo.nickname}"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/ivAvatar"
+            app:layout_constraintTop_toTopOf="@id/ivAvatar" />
+
+        <TextView
+            android:id="@+id/tvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="UID:"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="10sp"
+            app:layout_constraintLeft_toLeftOf="@id/tvNickname"
+            app:layout_constraintTop_toBottomOf="@id/tvNickname" />
+
+        <TextView
+            android:id="@+id/tvUserId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{mvm.userInfo.displayId}"
+            android:textColor="@color/color_ui_main_text"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvId"
+            app:layout_constraintLeft_toRightOf="@id/tvId"
+            app:layout_constraintTop_toTopOf="@id/tvId" />
+
+        <ImageView
+            android:id="@+id/ivCopy"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:src="@mipmap/mine_ic_copy"
+            app:layout_constraintBottom_toBottomOf="@id/tvUserId"
+            app:layout_constraintLeft_toRightOf="@id/tvUserId"
+            app:layout_constraintTop_toTopOf="@id/tvUserId" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clCapacity"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginRight="15dp"
+            android:background="@mipmap/app_bg_home_produce"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+            app:layout_constraintRight_toLeftOf="@id/clWareHouse"
+            app:layout_constraintTop_toTopOf="@id/ivAvatar">
+
+            <TextView
+                android:id="@+id/tvDailyCome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每天可获得"
+                android:textColor="@color/color_ui_sub_text_middle"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toTopOf="@id/tvDailyComeNum"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/ivDailyComeDescription"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <ImageView
+                android:id="@+id/ivDailyComeDescription"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/icon_home_describe"
+                app:layout_constraintBottom_toBottomOf="@id/tvDailyCome"
+                app:layout_constraintLeft_toRightOf="@id/tvDailyCome"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvDailyCome" />
+
+            <ImageView
+                android:id="@+id/ivDailyComeIcon"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/icon_pine_cone"
+                app:layout_constraintBottom_toBottomOf="@id/tvDailyComeNum"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tvDailyComeNum"
+                app:layout_constraintTop_toTopOf="@id/tvDailyComeNum" />
+
+            <TextView
+                android:id="@+id/tvDailyComeNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLength="9"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/ivDailyComeIcon"
+                app:layout_constraintRight_toLeftOf="@id/tvDailyComePercent"
+                app:layout_constraintTop_toBottomOf="@id/tvDailyCome" />
+
+            <TextView
+                android:id="@+id/tvDailyComePercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(100%)"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tvDailyComeNum"
+                app:layout_constraintLeft_toRightOf="@id/tvDailyComeNum"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvDailyComeNum" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clWareHouse"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginRight="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivAvatar">
+
+            <ImageView
+                android:id="@+id/ivFirmWareHouse"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:src="@mipmap/app_icon_firm_warehouse"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvWareHouse"
+                />
+
+            <TextView
+                android:id="@+id/tvWareHouse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/ivFirmWareHouse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="仓库"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="23dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/common_bg_dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
+
+
+        <com.angcyo.tablayout.DslTabLayout
+            android:id="@+id/dsl_tab_layout"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/common_bg_black23_radius15"
+            android:padding="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_bg"
+            app:tab_draw_indicator="true"
+            app:tab_enable_text_bold="true"
+            app:tab_indicator_drawable="@drawable/common_shape_indicator_383b44_10"
+            app:tab_indicator_height="MATCH_PARENT"
+            app:tab_indicator_radius="10dp"
+            app:tab_indicator_style="STYLE_CENTER"
+            app:tab_indicator_width="MATCH_PARENT"
+            app:tab_item_is_equ_width="true"
+            app:tab_orientation="HORIZONTAL"
+            app:tab_select_color="@color/white"
+            app:tab_text_max_size="13sp"
+            app:tab_text_min_size="11sp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="果园"
+                android:textSize="11sp"
+                app:bl_corners_radius="10dp"
+                app:layout_tab_weight="0.5" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="银行"
+                android:textSize="11sp"
+                app:bl_corners_radius="10dp"
+                app:layout_tab_weight="0.5" />
+        </com.angcyo.tablayout.DslTabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dsl_tab_layout"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="16dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
