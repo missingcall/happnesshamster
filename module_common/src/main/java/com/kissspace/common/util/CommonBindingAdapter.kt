@@ -178,7 +178,7 @@ object CommonBindingAdapter {
             textView.setBackgroundResource(R.drawable.common_shape_blue_15)
             textView.setTextColor(ColorUtils.getColor(R.color.white))
         } else {
-            textView.setBackgroundResource(R.drawable.common_shape_262a2e_normal_13)
+            textView.setBackgroundResource(R.drawable.common_shape_262a2e_normal_15)
             textView.setTextColor(ColorUtils.getColor(R.color.common_white80))
         }
         textView.isEnabled = enable

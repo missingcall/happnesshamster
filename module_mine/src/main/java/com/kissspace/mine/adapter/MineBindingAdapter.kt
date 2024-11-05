@@ -1,8 +1,10 @@
 package com.kissspace.mine.adapter
 
+import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.text.TextUtils
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -25,6 +27,8 @@ import com.kissspace.util.loadImage
 import com.kissspace.util.orZero
 import com.kissspace.util.resToColor
 import androidx.core.text.buildSpannedString
+import com.blankj.utilcode.util.ColorUtils
+import com.blankj.utilcode.util.SpanUtils
 import com.blankj.utilcode.util.StringUtils
 
 
@@ -124,7 +128,7 @@ object MineBindingAdapter {
     @JvmStatic
     @BindingAdapter("followBtnState", requireAll = false)
     fun followBtnState(textView: TextView, isFollow: Boolean) {
-        textView.setBackgroundResource(if (isFollow) com.kissspace.module_common.R.drawable.common_shape_blue_deep_normal_45 else  com.kissspace.module_common.R.drawable.common_shape_blue_normal_45)
+        textView.setBackgroundResource(if (isFollow) com.kissspace.module_common.R.drawable.common_shape_blue_deep_normal_45 else com.kissspace.module_common.R.drawable.common_shape_blue_normal_45)
         textView.text = (if (isFollow) "取消关注" else "+ 关注")
     }
 
@@ -396,6 +400,69 @@ object MineBindingAdapter {
             }
         }
     }
+
+
+    @JvmStatic
+    @BindingAdapter("firmDayIncome", requireAll = false)
+    fun firmDayIncome(textView: TextView, dayIncome: Int) {
+        textView.text = SpanUtils().append("日产: ")
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_little)
+            .append(dayIncome.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+
+    }
+
+    @JvmStatic
+    @BindingAdapter("tvCommodityStatus", requireAll = false)
+    fun tvCommodityStatus(textView: TextView, item: QueryMarketListItem) {
+        when (item.goodsStatue) {
+            "001" -> {
+                if (item.commodityMark == "") {
+                    textView.visibility = View.GONE
+                } else {
+                    //首发
+                    textView.visibility = View.VISIBLE
+                    textView.text = item.commodityMark
+                    textView.setBackgroundColor(Color.parseColor("#00AC13"))
+
+                }
+            }
+            "002" -> textView.visibility = View.GONE
+            "004" -> {
+                textView.visibility = View.VISIBLE
+                textView.setBackgroundColor(Color.parseColor("#FA3127"))
+                textView.text = "待激活"
+            }
+            "005" -> textView.visibility = View.GONE
+        }
+
+    }
+
+    @JvmStatic
+    @BindingAdapter("btnFirmOrchard", requireAll = false)
+    fun btnFirmOrchard(button: Button, item: QueryMarketListItem) {
+        //001 商品可购买 002 商品已售磬 003 用户未解锁 004 用户已拥有(待激活) 005 用户已拥有(生效中)
+        when (item.goodsStatue) {
+            "001" -> {
+                //支付类型 001 松果支付 002 松子支付 003 第三方支付
+                button.text = SpanUtils().append("购买 ")
+                    .appendImage(
+                        when (item.payType) {
+                            "001" -> R.mipmap.icon_pine_cone_little
+                            "002" -> R.mipmap.icon_pine_nut_little
+                            "003" -> R.mipmap.icon_hamster_coin_little
+                            else -> R.mipmap.icon_pine_cone_little
+                        }
+                    )
+                    .append(item.coinPrice.toString())
+                    .create()
+            }
+            "002" -> button.text = "已售罄"
+            "004" -> button.text = "去激活"
+            "005" -> button.text = "领取奖励"
+        }
+    }
+
 
     @JvmStatic
     @BindingAdapter("wareHouseTimeLimit", requireAll = false)

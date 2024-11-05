@@ -2,6 +2,7 @@ package com.kissspace.mine.ui.fragment
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.setup
@@ -10,6 +11,7 @@ import com.kissspace.common.config.CommonApi
 import com.kissspace.common.model.*
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.mine.http.MineApi
+import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineFragmentWarehouseBinding
 import com.kissspace.network.net.Method
@@ -26,7 +28,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
  */
 class WareHouseFragment : BaseFragment(R.layout.mine_fragment_warehouse) {
     private val mBinding by viewBinding<MineFragmentWarehouseBinding>()
-    val queryMarketListEvent = MutableSharedFlow<MutableList<QueryMarketListItem>>()
+    private val mViewModel by viewModels<WalletViewModel>()
     private lateinit var type: String
 
     companion object {
@@ -65,16 +67,10 @@ class WareHouseFragment : BaseFragment(R.layout.mine_fragment_warehouse) {
     }
 
     private fun initData() {
-        val param = mutableMapOf<String, Any?>()
-        param["type"] = type
-        request<MutableList<QueryMarketListItem>>(MineApi.API_HAMSTER_MARKET_QUERY_MARKET_LIST, Method.GET, param, onSuccess = {
-
+        mViewModel.queryMarketList(type, onSuccess = {
             mBinding.pageRefreshLayout.addData(it, isEmpty = {
                 it.isEmpty()
-            }
-            )
-
-        }, onError = {
+            })
         })
     }
 }

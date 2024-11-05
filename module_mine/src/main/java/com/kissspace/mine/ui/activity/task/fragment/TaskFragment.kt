@@ -67,6 +67,7 @@ class TaskFragment : BaseFragment(R.layout.mine_fragment_task_day) {
                 initNewPeopleTask(it.noviceTaskInfoList)
             } else{
                 // TODO: 仓鼠任务
+//                initHamsterTask(it.dailyTaskInfoList)
             }
         })
     }

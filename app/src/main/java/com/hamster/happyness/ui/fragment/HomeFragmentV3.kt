@@ -2,6 +2,7 @@ package com.hamster.happyness.ui.fragment
 
 import android.os.Bundle
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -34,8 +35,8 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
     private val mBinding by viewBinding<FragmentMainHomeV3Binding>()
     private val mHomeViewModel by viewModels<HomeViewModel>()
-    private val mMineViewModel by viewModels<MineViewModel>()
-    private val mWalletViewModel by viewModels<WalletViewModel>()
+    private val mMineViewModel by activityViewModels<MineViewModel>()
+    private val mWalletViewModel by activityViewModels<WalletViewModel>()
 
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.titleBar.setMarginStatusBar()
@@ -74,7 +75,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
         //皮肤
         mBinding.clQuest.safeClick {
-            jump(RouterPath.)
+            jump(RouterPath.PATH_TASK_CENTER_LIST)
         }
 
     }

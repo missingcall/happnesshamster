@@ -247,4 +247,8 @@ object MineApi {
 
     //用户解锁皮肤
     const val API_HAMSTER_ACCESSORIES_UNLOCK_SKIN = "/hamster-user/accessories/unlockSkin"
+
+    //购买商品
+    const val API_HAMSTER_MARKET_BUY = "/hamster-center/hamsterMarket/buy"
+
 }

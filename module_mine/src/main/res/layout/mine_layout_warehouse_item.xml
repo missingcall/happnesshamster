@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/common_shape_262a2e_normal_13">
+        android:background="@drawable/common_shape_262a2e_normal_15">
 
 
         <com.kissspace.common.widget.CircleImageView
