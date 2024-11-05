@@ -12,4 +12,4 @@
     android:background="@drawable/mine_report_item_selector"
     android:textColor="@color/white"
     tools:text="举报"
-    android:textSize="16sp"/>
+    android:textSize="12sp"/>

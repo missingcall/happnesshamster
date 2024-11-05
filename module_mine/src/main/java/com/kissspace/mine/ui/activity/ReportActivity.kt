@@ -120,7 +120,7 @@ class ReportActivity : BaseActivity(R.layout.mine_activity_report) {
         mBinding.mPreviewImageView.onDeleteListener = object : PreviewImageView.OnDeleteListener {
             override fun onDelete(url: String?) {
                 if (filePathList.contains(url)) {
-                    filePathList.remove(url);
+                    filePathList.remove(url)
                 }
                 mViewModel.selectImageCount.value = filePathList.size
             }

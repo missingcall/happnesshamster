@@ -74,7 +74,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
         //皮肤
         mBinding.clQuest.safeClick {
-            jump(RouterPath.)
+          //  jump(RouterPath.)
         }
 
     }

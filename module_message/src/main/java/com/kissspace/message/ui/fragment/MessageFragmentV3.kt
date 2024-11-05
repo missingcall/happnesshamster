@@ -68,6 +68,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
     private val mBinding by viewBinding<FragmentMessageV3Binding>()
     private val mViewModel by viewModels<MessageViewModel>()
     private lateinit var mRecentContactAdapter: BindingAdapter
+
     private var menuList: MutableList<ItemMessageMenu> = ArrayList()
 
     /**
@@ -79,11 +80,11 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
 
     @SuppressLint("UnsafeOptInUsageError")
     override fun initView(savedInstanceState: Bundle?) {
-        mBinding.vm = mViewModel
-        viewLifecycleOwner.lifecycle.addObserver(mViewModel)
     }
 
     override fun lazyInitView() {
+        mBinding.vm = mViewModel
+        viewLifecycleOwner.lifecycle.addObserver(mViewModel)
         initTitleBar()
         //initTopItemList()
         initRecyclerView()
@@ -114,11 +115,35 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
                 }
             }
         }
+        // jump(RouterPath.PATH_GIFT_MAIL)
+        //  jump(RouterPath.PATH_CHAT, "account" to "djs6719efc8e4b02a6942fa1289", "userId" to "6719efc8e4b02a6942fa1289")
+
+        /*getSelectPayChannelList { list ->
+            DRouter.build(IPayProvider::class.java).getService()
+                .showPayDialogFragment(childFragmentManager, list)
+        }*/
+
+
         //清空消息
         mBinding.ivClearMessage.safeClick {
-       // jump(RouterPath.PATH_GIFT_MAIL)
-           jump(RouterPath.PATH_CHAT, "account" to "djs6719efc8e4b02a6942fa1289", "userId" to "6719efc8e4b02a6942fa1289")
-          /*  CommonConfirmDialog(
+            CommonConfirmDialog(
+                requireContext(), "消息清空", "清空全部消息，消息将不在保留"
+            ) {
+                if (this) {
+                    NIMClient.getService(MsgService::class.java).clearMsgDatabase(true)
+                    NIMClient.getService(MsgService::class.java).clearAllUnreadCount()
+                    mRecentContactAdapter.mutable.clear()
+                    mRecentContactAdapter.notifyDataSetChanged()
+                    FlowBus.post(Event.RefreshUnReadMsgCount, delay = 100)
+                    showEmptyContent()
+
+                }
+            }.show()
+
+
+        }
+        mBinding.ivClearUnread.safeClick {
+            CommonConfirmDialog(
                 requireContext(), "忽略未读", "消息气泡会删除掉，但仍然保留消息"
             ) {
                 if (this) {
@@ -128,12 +153,12 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
                         it.notifyChange()
                     }
                 }
-            }.show()*/
-            /*getSelectPayChannelList { list ->
-                DRouter.build(IPayProvider::class.java).getService()
-                    .showPayDialogFragment(childFragmentManager, list)
-            }*/
+            }.show()
+
+
         }
+
+
     }
 
 
@@ -200,13 +225,17 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
 
 
 
+/*
+      collectData(mViewModel.dynamicMessageCountEvent, onSuccess = {
+          menuList[0].unReadCount = it.likeMessage
+          menuList[2].unReadCount = it.interactiveMessages
+          mBinding.rvList.adapter?.notifyItemChanged(0)
+          mBinding.rvList.adapter?.notifyItemChanged(2)
+      })
+*/
 
-//        collectData(mViewModel.dynamicMessageCountEvent, onSuccess = {
-////            menuList[0].unReadCount = it.likeMessage
-//            menuList[2].unReadCount = it.interactiveMessages
-//            mBinding.rvList.adapter?.notifyItemChanged(0)
-//            mBinding.rvList.adapter?.notifyItemChanged(2)
-//        })
+
+
 
         collectData(mViewModel.bannerEvent, onSuccess = {
             mBinding.banner.visibility = View.VISIBLE

@@ -51,7 +51,7 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
     var anchor: RecentContact? = null
 
     //未读消息数
-    val unReadCount = ObservableField(0)
+    //val unReadCount = ObservableField(0)
 
     private val _getListDataEvent = MutableSharedFlow<ResultState<MutableList<Any>>>()
     val getListDataEvent = _getListDataEvent.asSharedFlow()
@@ -82,8 +82,8 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
     private val recentContactObserver = Observer<List<RecentContact>> {
         if (it != null && it.isNotEmpty()) {
             parseData(it, true)
-            FlowBus.post(Event.RefreshUnReadMsgCount)
-            updateUnReadCount()
+            //FlowBus.post(Event.RefreshUnReadMsgCount)
+           // updateUnReadCount()
         }
     }
 
@@ -212,7 +212,7 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
 
     fun updateUnReadCount() {
         if (NIMClient.getStatus() == StatusCode.LOGINED) {
-            unReadCount.set(NIMClient.getService(MsgService::class.java).totalUnreadCount + MMKVProvider.systemMessageUnReadCount)
+          //  unReadCount.set(NIMClient.getService(MsgService::class.java).totalUnreadCount + MMKVProvider.systemMessageUnReadCount)
         }
     }
 

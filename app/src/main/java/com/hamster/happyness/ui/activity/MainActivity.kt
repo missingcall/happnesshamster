@@ -42,6 +42,7 @@ import com.kissspace.common.config.Constants
 import com.kissspace.common.router.jump
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.flowbus.FlowBus.observerEvent
 import com.kissspace.common.http.getAppConfigByKey
 import com.kissspace.common.router.RouterPath
@@ -58,10 +59,13 @@ import com.kissspace.util.apkAbsolutePath
 import com.kissspace.util.appVersionCode
 import com.kissspace.util.deleteDir
 import com.kissspace.util.immersiveStatusBar
+import com.kissspace.util.isNotEmpty
 import com.kissspace.util.loadImageWithDefault
 import com.kissspace.util.logE
 import com.kissspace.util.millis2String
 import com.kissspace.util.orZero
+import com.netease.nimlib.sdk.msg.MsgServiceObserve
+import com.netease.nimlib.sdk.msg.model.RecentContact
 import com.petterp.floatingx.listener.control.IFxScopeControl
 import java.io.File
 import java.text.DecimalFormat
@@ -92,6 +96,15 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             logE("IM自动重连")
         }
     }
+
+    private val recentContactObserver = Observer<List<RecentContact>> {
+        if (it != null && it.isNotEmpty()) {
+           // parseData(it, true)
+            FlowBus.post(Event.RefreshUnReadMsgCount)
+            // updateUnReadCount()
+        }
+    }
+
 
     @SuppressLint("MissingSuperCall")
     override fun onNewIntent(intent: Intent?) {
@@ -162,6 +175,12 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
         initConfig()
         NIMClient.getService(AuthServiceObserver::class.java)
             .observeOnlineStatus(onlineStatusObserver, true)
+
+
+        NIMClient.getService(MsgServiceObserve::class.java)
+            .observeRecentContact(recentContactObserver, true)
+
+
     }
 
     private fun initConfig() {
@@ -352,7 +371,14 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
         super.onDestroy()
         NIMClient.getService(AuthServiceObserver::class.java)
             .observeOnlineStatus(onlineStatusObserver, false)
+
+        NIMClient.getService(MsgServiceObserve::class.java)
+            .observeRecentContact(recentContactObserver, false)
+
         roomFloating?.cancel()
+
+
+
     }
 
     private fun showFloating(crId: String, cover: String) {

@@ -41,16 +41,23 @@
 
             <ImageView
                 android:id="@+id/iv_clear_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="5dp"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
                 android:src="@mipmap/message_icon_clean"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="52dp"/>
+
+            <ImageView
+                android:id="@+id/iv_clear_unread"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:src="@mipmap/message_icon_clean_unread"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="16dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -121,6 +128,7 @@
             android:layout_marginTop="12dp"
             />
 
+
         <com.drake.statelayout.StateLayout
             android:id="@+id/stateLayout"
             android:layout_width="match_parent"
@@ -141,6 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:overScrollMode="never" />
+
             </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
         </com.drake.statelayout.StateLayout>
