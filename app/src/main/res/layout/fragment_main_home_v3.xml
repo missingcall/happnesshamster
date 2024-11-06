@@ -38,13 +38,15 @@
             android:src="@color/design_default_color_on_primary"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@id/titleBar"
-            app:loadCircleImage="@{mvm.userInfo.profilePath}" />
+            imageRadius="@{10f}"
+            imageUrl="@{mvm.userInfo.profilePath}"
+            />
 
         <TextView
             android:id="@+id/tvNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:text="@{mvm.userInfo.nickname}"
             android:textColor="@color/color_ui_main_text"
             android:textSize="17sp"

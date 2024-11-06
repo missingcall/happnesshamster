@@ -540,13 +540,25 @@ class WalletViewModel : BaseViewModel() {
         })
     }
 
-    //获取领养仓鼠&仓鼠果园-松果银行列表
+    //购买商品
     fun buy(goodsId: String?, money : Double?, number : Int?, onSuccess: ((Boolean) -> Unit) = {}) {
         val param = mutableMapOf<String, Any?>()
         param["goodsId"] = goodsId
         param["money"] = money
         param["number"] = number
         request<Boolean>(MineApi.API_HAMSTER_MARKET_BUY, Method.POST, param, onSuccess = {
+            onSuccess.invoke(it)
+
+        }, onError = {
+            customToast(it.message)
+        })
+    }
+
+    //背包物品激活
+    fun activation( propId : String?, onSuccess: ((Boolean) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+        param["propId"] = propId
+        request<Boolean>(MineApi.API_HAMSTER_MARKET_ACTIVATION, Method.POST, param, onSuccess = {
             onSuccess.invoke(it)
 
         }, onError = {

@@ -120,7 +120,7 @@
     <color name="color_FAF2E4">#FAF2E4</color>
     <color name="color_146C74FB">#146C74FB</color>
     <color name="color_FFD74E">#FFD74E</color>
-    <color name="color_F91C5D">#F91C5D </color>
+    <color name="color_F91C5D">#F91C5D</color>
     <color name="color_50FFFD62">#80FFFD62</color>
     <color name="color_7B6F9F">#7B6F9F</color>
     <color name="color_92FFA0">#92FFA0</color>
@@ -220,7 +220,7 @@
     <color name="color_ui_dress_background">#2C1D3C</color>
 
 
-<!--   仓鼠 -->
+    <!--   仓鼠 -->
     <color name="color_D0D0D0">#D0D0D0</color>
     <color name="color_5ACBFF">#5ACBFF</color>
     <color name="color_5A60FF">#5A60FF</color>
@@ -249,7 +249,8 @@
     <color name="color_D8D8D8">#D8D8D8</color>
     <color name="color_313338">#313338</color>
 
-
+    <color name="color_979797">#979797</color>
+    <color name="color_F78000">#F78000</color>
 
 
 </resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.kissspace.mine.viewmodel.WalletViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/common_bg_dialog">
+
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@mipmap/common_icon_dialog_close"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rv"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="20dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="80dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ibBack" />
+
+        <Button
+            android:id="@+id/btn"
+            style="@style/commonBottomConfirmationItem"
+            android:background="@drawable/common_btn_selector_blue_deep_blue_radius15"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginBottom="10dp"
+            android:text="立即领取"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

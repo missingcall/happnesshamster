@@ -9,9 +9,12 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.setup
 import com.hamster.happyness.databinding.FragmentFirmOrchardBankBinding
+import com.hamster.happyness.widget.OrchardDailyRewardsDialog
 import com.hamster.happyness.widget.OrchardPurchaseDialog
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.ext.safeClick
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.model.*
 import com.kissspace.mine.viewmodel.WalletViewModel
 
@@ -64,16 +67,19 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
                     //001 商品可购买 002 商品已售磬 003 用户未解锁 004 用户已拥有(待激活) 005 用户已拥有(生效中)
                     when (model.goodsStatue) {
                         "001" -> {
-                            //底部拉起说明详情并展示购买选项
-                            OrchardPurchaseDialog.newInstance().show(childFragmentManager)
+
+                            OrchardPurchaseDialog.newInstance(1).show(childFragmentManager)
+                            //测试 底部拉起说明详情并展示购买选项
+//                            OrchardDailyRewardsDialog.newInstance().show(childFragmentManager)
                         }
                         "002" -> com.kissspace.common.util.customToast("已售罄")
                         "004" -> {
-                            //底部拉起说明详情并展示购买选项
-
+                            //底部拉起说明详情并展示激活选项
+                            OrchardPurchaseDialog.newInstance(2).show(childFragmentManager)
                         }
                         "005" -> {
                             //点击跳转领取页面
+                            OrchardDailyRewardsDialog.newInstance().show(childFragmentManager)
                         }
                     }
 
@@ -90,5 +96,17 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
                 it.isEmpty()
             })
         })
+    }
+
+    override fun createDataObserver() {
+        super.createDataObserver()
+
+        FlowBus.observerEvent<Event.OrchardPurchaseEvent>(this) {
+            mBinding.pageRefreshLayout.autoRefresh()
+        }
+
+        FlowBus.observerEvent<Event.OrchardActivationEvent>(this) {
+            mBinding.pageRefreshLayout.autoRefresh()
+        }
     }
 }

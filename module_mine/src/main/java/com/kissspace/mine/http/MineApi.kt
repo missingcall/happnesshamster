@@ -251,4 +251,7 @@ object MineApi {
     //购买商品
     const val API_HAMSTER_MARKET_BUY = "/hamster-center/hamsterMarket/buy"
 
+    //背包物品激活
+    const val API_HAMSTER_MARKET_ACTIVATION = "/hamster-center/hamsterMarket/activation"
+
 }

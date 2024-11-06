@@ -205,6 +205,9 @@ sealed class Event {
     //皮肤解锁购买成功
     object UnLockSkinEvent : Event()
 
-    //果园购买成功
-    object OrchardPurchaseSuccessful : Event()
+    //果园皮肤购买成功
+    object OrchardPurchaseEvent : Event()
+
+    //果园皮肤激活成功
+    object OrchardActivationEvent : Event()
 }

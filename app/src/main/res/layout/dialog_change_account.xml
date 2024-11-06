@@ -13,7 +13,7 @@
         android:background="@color/color_232323">
 
 
-        <com.kissspace.common.widget.CircleImageView
+        <ImageView
             android:id="@+id/ivAvatar"
             android:layout_width="59dp"
             android:layout_height="59dp"
@@ -22,6 +22,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:bl_corners_topRadius="10dp"
             />
 
         <TextView
