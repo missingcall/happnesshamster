@@ -13,11 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.ruffian.library.widget.RConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
-            android:background="@mipmap/room_bg_dialog_room_info">
+            app:background_normal="@color/white"
+            app:corner_radius="13dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="22dp"
+            >
 
             <TextView
                 android:id="@+id/tv_title"
@@ -25,8 +29,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/room_info_title"
-                android:textColor="@color/white"
-                android:textSize="17sp"
+                android:textColor="@color/color_313133"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,8 +43,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/room_cover"
-                android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textColor="@color/color_313133"
+                android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -58,8 +62,8 @@
                 android:id="@+id/iv_poster"
                 imageRadius="@{6f}"
                 imageUrl="@{vm.cover}"
-                android:layout_width="84dp"
-                android:layout_height="84dp"
+                android:layout_width="78dp"
+                android:layout_height="78dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="@id/iv_poster_title"
@@ -84,13 +88,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/room_name"
-                android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textColor="@color/color_313133"
+                android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/iv_poster"
                 app:layout_constraintTop_toBottomOf="@id/iv_poster" />
 
-            <EditText
+            <com.ruffian.library.widget.REditText
                 android:id="@+id/edit_room_name"
                 android:layout_width="0dp"
                 android:layout_height="36dp"
@@ -104,11 +108,12 @@
                 android:maxLength="20"
                 android:paddingStart="8dp"
                 android:paddingEnd="50dp"
+                app:border_color_normal="#E5E5E5"
+                app:border_width_normal="1dp"
+                app:corner_radius="6dp"
                 android:text="@={vm.roomInfo.roomTitle}"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                app:bl_corners_radius="6dp"
-                app:bl_solid_color="@color/color_1A000000"
+                android:textColor="@color/color_313133"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/iv_poster"
                 app:layout_constraintTop_toBottomOf="@id/tv_room_name" />
@@ -118,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text='@{""+vm.nameTextLength}'
-                android:textColor="@color/color_80FFFFFF"
+                android:textColor="@color/color_313133"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@id/edit_room_name"
                 app:layout_constraintEnd_toStartOf="@id/tv_name_max_length"
@@ -130,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="/20"
-                android:textColor="@color/color_80FFFFFF"
+                android:textColor="@color/color_80000000"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@id/edit_room_name"
                 app:layout_constraintEnd_toEndOf="@id/edit_room_name"
@@ -142,13 +147,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/room_notice"
-                android:textColor="@color/white"
+                android:textColor="@color/color_313133"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/edit_room_name"
                 app:layout_constraintTop_toBottomOf="@id/edit_room_name" />
 
-            <EditText
+            <com.ruffian.library.widget.REditText
                 android:id="@+id/edit_room_notice"
                 android:layout_width="0dp"
                 android:layout_height="107dp"
@@ -160,10 +165,11 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@={vm.roomInfo.roomAffiche}"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                app:bl_corners_radius="6dp"
-                app:bl_solid_color="@color/color_1A000000"
+                android:textColor="@color/color_313133"
+                android:textSize="12sp"
+                app:border_color_normal="#E5E5E5"
+                app:border_width_normal="1dp"
+                app:corner_radius="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_room_notice"
                 app:layout_constraintTop_toBottomOf="@id/tv_room_notice" />
@@ -175,7 +181,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text='@{""+vm.noticeTextLength}'
-                android:textColor="@color/color_80FFFFFF"
+                android:textColor="@color/color_313133"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toStartOf="@id/tv_notice_max_length"
                 app:layout_constraintTop_toTopOf="@id/tv_notice_max_length" />
@@ -187,16 +193,19 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="/500"
-                android:textColor="@color/color_80FFFFFF"
+                android:textColor="@color/color_80000000"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@id/edit_room_notice"
                 app:layout_constraintEnd_toEndOf="@id/edit_room_notice" />
 
-            <TextView
+            <com.ruffian.library.widget.RTextView
                 android:id="@+id/submit"
                 style="@style/RoomCommonFullButton"
                 android:layout_width="0dp"
-                commonBtnState="@{true}"
+                app:background_normal="@array/button_color_bg"
+                app:gradient_orientation="LEFT_RIGHT"
+                app:gradient_type="linear"
+                app:corner_radius="21dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
@@ -204,6 +213,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_room_notice" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.ruffian.library.widget.RConstraintLayout>
     </FrameLayout>
 </layout>

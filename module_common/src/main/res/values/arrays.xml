@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="button_color_bg">
+        <item>@color/color_936DDE</item>
+        <item>@color/color_6C74FB</item>
+    </integer-array>
+
+</resources>

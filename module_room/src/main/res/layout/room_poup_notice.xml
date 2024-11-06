@@ -5,15 +5,15 @@
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <com.ruffian.library.widget.RRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="308dp"
         android:orientation="vertical"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
         android:layout_marginTop="0dp"
-        android:paddingBottom="20dp"
-        android:background="@mipmap/room_bg_notice_popup"
+        app:background_normal="@color/white"
+        app:corner_radius="15dp"
         >
 
         <TextView
@@ -24,7 +24,7 @@
             android:text="@string/room_notice"
             android:layout_marginTop="22dp"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/color_313133"
             android:textSize="16sp" />
 
         <androidx.core.widget.NestedScrollView
@@ -38,11 +38,11 @@
                 android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="20dp"
-                android:textColor="@color/white"
+                android:layout_marginStart="17dp"
+                android:layout_marginEnd="17dp"
+                android:textColor="@color/color_636366"
                 android:textSize="13sp" />
 
         </androidx.core.widget.NestedScrollView>
-    </RelativeLayout>
+    </com.ruffian.library.widget.RRelativeLayout>
 </LinearLayout>
