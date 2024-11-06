@@ -330,11 +330,11 @@ project.ext {
                             buildConfigField ("String","BASE_URL","\"http://121.40.238.170:8201\"")
                             buildConfigField ("String","H5_BASE_URl","\"http://120.55.183.144\"")
                             //即构
-                            buildConfigField ("Long","ZEGO_APP_ID","1832722667L")
+                            buildConfigField ("Long","ZEGO_APP_ID","2141286342L")
 
                             //网易云信
-                            buildConfigField ("String","NETEASE_APP_KEY","\"0c4738b037e8121de02f2d8d5d659819\"")
-                            buildConfigField ("String","NETEASE_APP_Secret","\"de8878c7ea5b\"")
+                            buildConfigField ("String","NETEASE_APP_KEY","\"afa8b840dcabf60ad0b40664d29cb53c\"")
+                            buildConfigField ("String","NETEASE_APP_Secret","\"a112aa02872d\"")
 
                             buildConfigField ("String","YiDun_APP_BusinessId","\"a527eb233d3b450abdea1f310b4bcbc0\"")
                             buildConfigField ("String","YiDun_Control_Id","\"YD00021795252943\"")
