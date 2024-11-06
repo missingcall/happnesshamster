@@ -4,25 +4,27 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.setup
 import com.hamster.happyness.databinding.FragmentFirmOrchardBankBinding
-import com.hamster.happyness.widget.OrchardDailyRewardsDialog
+import com.hamster.happyness.widget.BankPurchaseDialog
 import com.hamster.happyness.widget.OrchardPurchaseDialog
 import com.kissspace.common.base.BaseFragment
+import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
-import com.kissspace.common.model.*
+import com.kissspace.common.model.QueryMarketListItem
+import com.kissspace.common.router.RouterPath
+import com.kissspace.common.router.jump
 import com.kissspace.mine.viewmodel.WalletViewModel
 
 /**
  *
  * @Author: nicko
  * @CreateDate: 2023/1/6 15:40
- * @Description: 我的收藏fragment
+ * @Description: 商行-果园
  *
  */
 class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.fragment_firm_orchard_bank) {
@@ -57,37 +59,60 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
     }
 
     private fun initRecyclerView() {
-        mBinding.recyclerView.grid(2).setup {
-            addType<QueryMarketListItem> { com.hamster.happyness.R.layout.rv_item_firm }
-            onBind {
-                val model = getModel<QueryMarketListItem>()
-                val button = findView<Button>(com.hamster.happyness.R.id.btn)
-                button.safeClick {
-                    mViewModel.queryMarketItem.value = model
-                    //001 商品可购买 002 商品已售磬 003 用户未解锁 004 用户已拥有(待激活) 005 用户已拥有(生效中)
-                    when (model.goodsStatue) {
-                        "001" -> {
 
-                            OrchardPurchaseDialog.newInstance(1).show(childFragmentManager)
-                            //测试 底部拉起说明详情并展示购买选项
-//                            OrchardDailyRewardsDialog.newInstance().show(childFragmentManager)
+        if (type == Constants.FirmCommodityTypes.BASIC_HAMSTER){
+            mBinding.recyclerView.grid(2).setup {
+                addType<QueryMarketListItem> { com.hamster.happyness.R.layout.rv_item_firm_orchard }
+                onBind {
+                    val model = getModel<QueryMarketListItem>()
+                    val button = findView<Button>(com.hamster.happyness.R.id.btn)
+                    button.safeClick {
+                        mViewModel.queryMarketItem.value = model
+                        //001 商品可购买 002 商品已售磬 003 用户未解锁 004 用户已拥有(待激活) 005 用户已拥有(生效中)
+                        when (model.goodsStatue) {
+                            "001" -> {
+
+                                OrchardPurchaseDialog.newInstance(1).show(childFragmentManager)
+                                //测试 底部拉起说明详情并展示购买选项
+//                            jump(RouterPath.PATH_ORCHARD_DAILY_REWARDS)
+                            }
+                            "002" -> com.kissspace.common.util.customToast("已售罄")
+                            "004" -> {
+                                //底部拉起说明详情并展示激活选项
+                                OrchardPurchaseDialog.newInstance(2).show(childFragmentManager)
+                            }
+                            "005" -> {
+                                //点击跳转领取页面
+                                jump(RouterPath.PATH_ORCHARD_DAILY_REWARDS)
+                            }
                         }
-                        "002" -> com.kissspace.common.util.customToast("已售罄")
-                        "004" -> {
-                            //底部拉起说明详情并展示激活选项
-                            OrchardPurchaseDialog.newInstance(2).show(childFragmentManager)
-                        }
-                        "005" -> {
-                            //点击跳转领取页面
-                            OrchardDailyRewardsDialog.newInstance().show(childFragmentManager)
-                        }
+
                     }
 
+
                 }
+            }.models = mutableListOf()
 
+        }else {
+            mBinding.recyclerView.grid(2).setup {
+                addType<QueryMarketListItem> { com.hamster.happyness.R.layout.rv_item_firm_bank }
+                onBind {
+                    val model = getModel<QueryMarketListItem>()
+                    val button = findView<Button>(com.hamster.happyness.R.id.btn)
+                    button.safeClick {
+                        mViewModel.queryMarketItem.value = model
+                        //001 商品可购买 002 商品已售磬 003 用户未解锁 004 用户已拥有(待激活) 005 用户已拥有(生效中)
+                        when (model.goodsStatue) {
+                            "001" -> BankPurchaseDialog.newInstance().show(childFragmentManager)
+                            "002" -> com.kissspace.common.util.customToast("已售罄")
 
-            }
-        }.models = mutableListOf()
+                        }
+
+                    }
+                }
+            }.models = mutableListOf()
+
+        }
     }
 
     private fun initData() {

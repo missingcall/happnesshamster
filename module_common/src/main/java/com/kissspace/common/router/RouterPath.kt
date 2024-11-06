@@ -232,6 +232,9 @@ object RouterPath {
     //我的仓库
     const val PATH_MY_WAREHOUSE = PATH_BASE + "mine_warehouse"
 
+    //商行-果园-领取每日奖励
+    const val PATH_ORCHARD_DAILY_REWARDS = PATH_BASE + "orchard_daily_rewards"
+
     const val PATH_TEENAGER_DESCRIBE = PATH_BASE + "mine_teenager_describe"
 
     //青少年模式

@@ -9,6 +9,7 @@ import com.hamster.happyness.R
 import com.hamster.happyness.databinding.ActivityFirmBinding
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.binding.dataBinding
+import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.router.RouterPath
@@ -32,8 +33,8 @@ class FirmFragment : BaseFragment(R.layout.activity_firm) {
             override fun getItemCount(): Int = 2
 
             override fun createFragment(position: Int) = when(position) {
-                0 -> FirmOrchardBankFragment.newInstance("001")
-                else -> FirmOrchardBankFragment.newInstance("003")
+                0 -> FirmOrchardBankFragment.newInstance(Constants.FirmCommodityTypes.BASIC_HAMSTER)
+                else -> FirmOrchardBankFragment.newInstance(Constants.FirmCommodityTypes.HAMSTER_BANK)
             }
         }
 

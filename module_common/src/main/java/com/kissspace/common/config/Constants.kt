@@ -650,6 +650,19 @@ object Constants {
     }
 
     /**
+     * 	商品类型(001-基础仓鼠&仓鼠庄园,003-仓鼠银行)
+     */
+    class FirmCommodityTypes {
+        companion object {
+
+            const val BASIC_HAMSTER = "001"; //001-基础仓鼠&仓鼠庄园
+            const val HAMSTER_BANK = "003"; //003-仓鼠银行
+
+
+        }
+    }
+
+    /**
      * 	复活支付类型：001：松果支付；002：松子支付；
      */
     class CultivatePayType {

@@ -37,7 +37,7 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
                 tools:itemCount="10"
-                tools:listitem="@layout/rv_item_firm" />
+                tools:listitem="@layout/rv_item_firm_orchard" />
         </com.drake.brv.PageRefreshLayout>
 
 
