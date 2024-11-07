@@ -254,4 +254,7 @@ object MineApi {
     //背包物品激活
     const val API_HAMSTER_MARKET_ACTIVATION = "/hamster-center/hamsterMarket/activation"
 
+    //获取皮肤信息(基础仓鼠)
+    const val API_HAMSTER_MARKET_QUERY_BASE_INFO_LIST = "/hamster-center/hamsterMarket/queryBaseInfoList"
+
 }

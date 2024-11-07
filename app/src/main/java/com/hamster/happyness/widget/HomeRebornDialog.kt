@@ -47,7 +47,7 @@ class HomeRebornDialog : BaseDialogFragment<DialogHomeRebornBinding>(DialogHomeR
             mViewModel.cultivateRevive(onSuccess = {
                 //复活成功,刷新HomeFragment喂食度
                 FlowBus.post(Event.HamsterReviveEvent)
-            }, payType = Constants.CultivatePayType.PINE_CONE)
+            }, payType = Constants.HamsterPayType.PINE_CONE)
 
         }
 
@@ -55,7 +55,7 @@ class HomeRebornDialog : BaseDialogFragment<DialogHomeRebornBinding>(DialogHomeR
             mViewModel.cultivateRevive(onSuccess = {
                 //复活成功,刷新HomeFragment喂食度
                 FlowBus.post(Event.HamsterReviveEvent)
-            },payType = Constants.CultivatePayType.PINE_NUT)
+            },payType = Constants.HamsterPayType.PINE_NUT)
 
         }
 

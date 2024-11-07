@@ -8,6 +8,7 @@
         <variable
             name="m"
             type="com.kissspace.mine.viewmodel.WalletViewModel" />
+
     </data>
 
 
@@ -59,11 +60,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvTimeLimit"
+            android:id="@+id/tvWindInterest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text='@{"收益周期"+String.valueOf(m.queryMarketItem.timeLimit) +"天"}'
+            android:text='@{"每日采集"+String.valueOf(m.queryMarketItem.windInterest) +"%"}'
             android:textColor="@color/white"
             android:textSize="11sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -82,61 +83,32 @@
 
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTimeLimit" />
+            app:layout_constraintTop_toBottomOf="@id/tvWindInterest" />
 
-        <TextView
-            android:id="@+id/tvSkinSelection"
+
+        <com.hamster.happyness.widget.NumberView
+            android:id="@+id/nvCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:text="仓鼠皮肤"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/ivCommodityIcon"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivCommodityIcon" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clSkinSelection"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginRight="15dp"
-            android:paddingTop="7dp"
-            android:paddingBottom="7dp"
-            android:visibility="gone"
-            app:layout_constraintLeft_toLeftOf="@id/tvSkinSelection"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSkinSelection">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/rv_item_basic_hamster_skin" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            android:layout_marginTop="10dp"
+            app:text_color="@color/white"
+            />
+        
         <TextView
             android:id="@+id/tvDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:text="详情描述"
+            android:layout_marginLeft="15dp"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="@id/tvSkinSelection"
-            app:layout_constraintTop_toBottomOf="@id/clSkinSelection" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nvCount" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clDetails"
@@ -156,11 +128,11 @@
                 loadImageNoPlace="@{m.queryMarketItem.description}"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
+                android:scaleType="fitXY"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
-                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -194,11 +166,11 @@
 
             <ImageView
                 android:id="@+id/ivConditions"
-                ivConditions="@{m.queryMarketItem.payType}"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
+                ivConditions="@{m.queryMarketItem.payType}"
                 android:layout_marginBottom="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -247,10 +219,10 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/btnConfirm"
-            app:layout_constraintTop_toBottomOf="@id/clConditions" />
+            app:layout_constraintTop_toBottomOf="@id/clConditions"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <Button
             android:id="@+id/btnConfirm"
@@ -258,17 +230,18 @@
             android:layout_height="58dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="15dp"
-            android:background="@drawable/common_bg_blue"
+            android:background="@drawable/common_btn_selector_blue_deep_blue_radius15"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="购买"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/btnCancel"
             app:layout_constraintLeft_toRightOf="@id/btnCancel"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btnCancel" />
+            app:layout_constraintTop_toTopOf="@id/btnCancel"
+            app:layout_constraintBottom_toBottomOf="@id/btnCancel"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

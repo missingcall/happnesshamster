@@ -5,8 +5,6 @@ import androidx.annotation.StringDef
 import androidx.lifecycle.ViewModel
 import com.kissspace.common.http.getAppConfigByKey
 import com.kissspace.common.model.RoomTagListBean
-import com.kissspace.common.util.mmkv.MMKVProvider
-import com.kissspace.module_common.BuildConfig
 
 /**
  *
@@ -650,13 +648,28 @@ object Constants {
     }
 
     /**
-     * 	复活支付类型：001：松果支付；002：松子支付；
+     * 	商品类型(001-基础仓鼠&仓鼠庄园,003-仓鼠银行)
      */
-    class CultivatePayType {
+    class FirmCommodityTypes {
         companion object {
 
-            const val PINE_CONE = "001"; //松果支付
-            const val PINE_NUT = "002"; //松子支付
+            const val BASIC_HAMSTER = "001"; //001-基础仓鼠&仓鼠庄园
+            const val HAMSTER_BANK = "003"; //003-仓鼠银行
+
+
+        }
+    }
+
+    /**
+     * 	支付类型：001：松果支付；002：松子支付；
+     */
+    class HamsterPayType {
+        companion object {
+
+            const val PINE_CONE = "001"//松果支付
+            const val PINE_NUT = "002" //松子支付
+            const val THREE_PARTY = "003" //三方支付
+            const val MEDAL = "004" //勋章支付
 
 
         }

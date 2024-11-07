@@ -401,13 +401,28 @@ object MineBindingAdapter {
         }
     }
 
-
+    /**
+     * 商行-果园 日产
+     */
     @JvmStatic
-    @BindingAdapter("firmDayIncome", requireAll = false)
-    fun firmDayIncome(textView: TextView, dayIncome: Int) {
+    @BindingAdapter("firmDayIncomeOrchard", requireAll = false)
+    fun firmDayIncomeOrchard(textView: TextView, dayIncome: Int) {
         textView.text = SpanUtils().append("日产: ")
             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_little)
             .append(dayIncome.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+
+    }
+
+    /**
+     * 商行-银行 收益
+     */
+    @JvmStatic
+    @BindingAdapter("firmDayIncomeBank", requireAll = false)
+    fun firmDayIncomeBank(textView: TextView, dayIncome: Int) {
+        textView.text = SpanUtils().append("额外赠")
+            .append(dayIncome.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_little)
             .create()
 
     }
@@ -461,8 +476,22 @@ object MineBindingAdapter {
             "004" -> button.text = "去激活"
             "005" -> button.text = "领取奖励"
         }
+        button.isEnabled = item.goodsStatue != "002"
     }
 
+
+    @JvmStatic
+    @BindingAdapter("btnFirmBank", requireAll = false)
+    fun btnFirmBank(button: Button, item: QueryMarketListItem) {
+        //001 商品可购买 002 商品已售磬 003 用户未解锁 004 用户已拥有(待激活) 005 用户已拥有(生效中)
+        when (item.goodsStatue) {
+            "001" -> button.text = "去购买"
+            "002" -> button.text = "已售罄"
+            "004" -> button.text = "去激活"
+            "005" -> button.text = "领取奖励"
+        }
+        button.isEnabled = item.goodsStatue != "002"
+    }
 
     @JvmStatic
     @BindingAdapter("wareHouseTimeLimit", requireAll = false)
