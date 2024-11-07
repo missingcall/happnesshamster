@@ -189,6 +189,9 @@
     <color name="color_F626DE">#F626DE</color>
 
 
+
+    <color name="color_E94172">#E94172</color>
+
     <color name="color_ui_main_bg">#FFF8F5FA</color>
     <color name="color_ui_main_text">@color/white</color>
     <color name="color_ui_sub_text">@color/white60</color>

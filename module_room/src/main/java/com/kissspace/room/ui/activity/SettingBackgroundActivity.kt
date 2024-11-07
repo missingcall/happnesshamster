@@ -54,6 +54,7 @@ class SettingBackgroundActivity : com.kissspace.common.base.BaseActivity(R.layou
 
         mBinding.tvLocalBg.safeClick {
             openPictureSelector(this,1) {
+
                 val file = mutableListOf<File>()
                 it?.forEach { path ->
                     file.add(File(path))

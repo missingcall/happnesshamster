@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -242,7 +243,12 @@ class ChatFragment : BaseFragment(R.layout.message_fragment_chat), ActivityTouch
         initSoftInput()
         initAudio()
 //        mBinding.viewConver.visibility = if(isFromDialog) View.VISIBLE else View.GONE
-//        mBinding.layoutRoot.setBackgroundColor(if(isFromDialog) resources.getColor(com.kissspace.module_common.R.color.color_ui_main_bg) else Color.TRANSPARENT)
+            if (isFromDialog){
+                mBinding.layoutRoot.helper.apply {
+                    setBackgroundColorNormal(ContextCompat.getColor(requireActivity(),R.color.black))
+                }
+            }
+
         (requireActivity() as com.kissspace.common.base.BaseActivity).registerActivityTouchEvent(
             this
         )

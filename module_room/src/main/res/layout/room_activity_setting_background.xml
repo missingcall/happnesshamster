@@ -41,14 +41,17 @@
         android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/tv_local_bg"
         app:layout_constraintTop_toBottomOf="@id/title_bar" />
-    <TextView
+    <com.ruffian.library.widget.RTextView
         android:id="@+id/tv_local_bg"
         android:layout_margin="@dimen/common_ui_margin"
         app:layout_constraintTop_toBottomOf="@id/recycler_view"
         android:gravity="center"
-        android:height="@dimen/dp_40"
+        android:height="41dp"
         android:textColor="@color/white"
-        android:background="@drawable/common_shape_bg_gradient_28"
+        app:background_normal="@array/button_color_bg"
+        app:gradient_orientation="LEFT_RIGHT"
+        app:gradient_type="linear"
+        app:corner_radius="21dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

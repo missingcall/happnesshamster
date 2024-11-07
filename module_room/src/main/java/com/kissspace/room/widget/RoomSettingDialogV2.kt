@@ -328,7 +328,7 @@ class RoomSettingDialogV2 : BaseBottomSheetDialogFragment<RoomDialogSettingV2Bin
             }
         }
 
-        if (roomInfo.userRole == Constants.ROOM_USER_TYPE_ANCHOR || roomInfo.userRole == Constants.ROOM_USER_TYPE_MANAGER) {
+        /*if (roomInfo.userRole == Constants.ROOM_USER_TYPE_ANCHOR || roomInfo.userRole == Constants.ROOM_USER_TYPE_MANAGER) {
             normalItem.add(
                 SettingItem(
                     type = RoomSettingClickType.TYPE_PK,
@@ -336,7 +336,7 @@ class RoomSettingDialogV2 : BaseBottomSheetDialogFragment<RoomDialogSettingV2Bin
                     name = "房间PK",
                 )
             )
-        }
+        }*/
 
         return normalItem
     }

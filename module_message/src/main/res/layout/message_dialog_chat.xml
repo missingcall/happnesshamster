@@ -4,8 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <FrameLayout
+    <com.ruffian.library.widget.RFrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="450dp" />
+        android:layout_height="450dp"
+        app:background_normal="@color/black"
+        app:corner_radius_top_left="16dp"
+        app:corner_radius_top_right="16dp"/>
 </FrameLayout>

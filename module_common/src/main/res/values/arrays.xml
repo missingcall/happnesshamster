@@ -5,4 +5,9 @@
         <item>@color/color_6C74FB</item>
     </integer-array>
 
+    <integer-array name="button_color_e9416f_to_e94172">
+        <item>@color/color_E9416F</item>
+        <item>@color/color_E94172</item>
+    </integer-array>
+
 </resources>
