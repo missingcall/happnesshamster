@@ -8,7 +8,9 @@ class QueryMarketList : ArrayList<QueryMarketListItem>()
 @kotlinx.serialization.Serializable
 data class QueryMarketListItem(
     val coinPrice: Double = 0.0,
+    val unitPrice: Double = 0.0,
     val commodityIcon: String = "",
+    val commodityType: String = "",
     val commodityInfoId: String = "",
     val commodityMark: String = "",
     val commodityName: String = "",

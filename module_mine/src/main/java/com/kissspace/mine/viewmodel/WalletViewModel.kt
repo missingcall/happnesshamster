@@ -8,6 +8,7 @@ import com.kissspace.common.config.CommonApi
 import com.kissspace.common.config.Constants
 import com.kissspace.common.config.Constants.TypeFaceRecognition
 import com.kissspace.common.model.InfoListModel
+import com.kissspace.common.model.QueryBaseInfoList
 import com.kissspace.common.model.QueryMarketListItem
 import com.kissspace.common.model.wallet.*
 import com.kissspace.common.util.DJSLiveData
@@ -541,11 +542,13 @@ class WalletViewModel : BaseViewModel() {
     }
 
     //购买商品
-    fun buy(goodsId: String?, money : Double?, number : Int?, onSuccess: ((Boolean) -> Unit) = {}) {
+    fun buy(extendedFields: String?, goodsId: String?, money: Double?, number: Int?, payType: String?, onSuccess: ((Boolean) -> Unit) = {}) {
         val param = mutableMapOf<String, Any?>()
+        param["extendedFields"] = extendedFields
         param["goodsId"] = goodsId
         param["money"] = money
         param["number"] = number
+        param["payType"] = payType
         request<Boolean>(MineApi.API_HAMSTER_MARKET_BUY, Method.POST, param, onSuccess = {
             onSuccess.invoke(it)
 
@@ -555,7 +558,7 @@ class WalletViewModel : BaseViewModel() {
     }
 
     //背包物品激活
-    fun activation( propId : String?, onSuccess: ((Boolean) -> Unit) = {}) {
+    fun activation(propId: String?, onSuccess: ((Boolean) -> Unit) = {}) {
         val param = mutableMapOf<String, Any?>()
         param["propId"] = propId
         request<Boolean>(MineApi.API_HAMSTER_MARKET_ACTIVATION, Method.POST, param, onSuccess = {
@@ -565,4 +568,6 @@ class WalletViewModel : BaseViewModel() {
             customToast(it.message)
         })
     }
+
+
 }

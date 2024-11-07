@@ -8,7 +8,6 @@
         <variable
             name="m"
             type="com.kissspace.mine.viewmodel.WalletViewModel" />
-
     </data>
 
 
@@ -91,10 +90,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
-            android:text="选择皮肤"
+            android:text="仓鼠皮肤"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivCommodityIcon" />
 
@@ -104,12 +104,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/common_bg_black23_radius15"
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="@id/tvSkinSelection"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSkinSelection">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/rv_item_basic_hamster_skin" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -117,6 +129,7 @@
             android:id="@+id/tvDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:text="详情描述"
             android:textColor="@color/white"
@@ -134,7 +147,7 @@
             android:background="@drawable/common_bg_black23_radius15"
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
-            app:layout_constraintLeft_toLeftOf="@id/tvSkinSelection"
+            app:layout_constraintLeft_toLeftOf="@id/tvDetails"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvDetails">
 
@@ -143,11 +156,11 @@
                 loadImageNoPlace="@{m.queryMarketItem.description}"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
-                android:scaleType="fitXY"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -163,7 +176,7 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="@id/tvSkinSelection"
+            app:layout_constraintLeft_toLeftOf="@id/tvDetails"
             app:layout_constraintTop_toBottomOf="@id/clDetails" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -175,17 +188,17 @@
             android:background="@drawable/common_bg_black23_radius15"
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
-            app:layout_constraintLeft_toLeftOf="@id/tvSkinSelection"
+            app:layout_constraintLeft_toLeftOf="@id/tvDetails"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvConditions">
 
             <ImageView
                 android:id="@+id/ivConditions"
+                ivConditions="@{m.queryMarketItem.payType}"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                ivConditions="@{m.queryMarketItem.payType}"
                 android:layout_marginBottom="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -234,10 +247,10 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/btnConfirm"
-            app:layout_constraintTop_toBottomOf="@id/clConditions"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/clConditions" />
 
         <Button
             android:id="@+id/btnConfirm"
@@ -252,11 +265,10 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/btnCancel"
             app:layout_constraintLeft_toRightOf="@id/btnCancel"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btnCancel"
-            app:layout_constraintBottom_toBottomOf="@id/btnCancel"
-            />
+            app:layout_constraintTop_toTopOf="@id/btnCancel" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

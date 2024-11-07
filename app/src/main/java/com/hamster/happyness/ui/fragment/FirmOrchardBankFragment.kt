@@ -60,7 +60,7 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
 
     private fun initRecyclerView() {
 
-        if (type == Constants.FirmCommodityTypes.BASIC_HAMSTER){
+        if (type == Constants.FirmCommodityTypes.BASIC_HAMSTER) {
             mBinding.recyclerView.grid(2).setup {
                 addType<QueryMarketListItem> { com.hamster.happyness.R.layout.rv_item_firm_orchard }
                 onBind {
@@ -71,15 +71,14 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
                         //001 商品可购买 002 商品已售磬 003 用户未解锁 004 用户已拥有(待激活) 005 用户已拥有(生效中)
                         when (model.goodsStatue) {
                             "001" -> {
-
-                                OrchardPurchaseDialog.newInstance(1).show(childFragmentManager)
+                                OrchardPurchaseDialog.newInstance(1 ,model.commodityType == "001").show(childFragmentManager)
                                 //测试 底部拉起说明详情并展示购买选项
 //                            jump(RouterPath.PATH_ORCHARD_DAILY_REWARDS)
                             }
                             "002" -> com.kissspace.common.util.customToast("已售罄")
                             "004" -> {
                                 //底部拉起说明详情并展示激活选项
-                                OrchardPurchaseDialog.newInstance(2).show(childFragmentManager)
+                                OrchardPurchaseDialog.newInstance(2 ,model.commodityType == "001").show(childFragmentManager)
                             }
                             "005" -> {
                                 //点击跳转领取页面
@@ -93,11 +92,12 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
                 }
             }.models = mutableListOf()
 
-        }else {
+        } else {
             mBinding.recyclerView.grid(2).setup {
                 addType<QueryMarketListItem> { com.hamster.happyness.R.layout.rv_item_firm_bank }
                 onBind {
                     val model = getModel<QueryMarketListItem>()
+
                     val button = findView<Button>(com.hamster.happyness.R.id.btn)
                     button.safeClick {
                         mViewModel.queryMarketItem.value = model
@@ -109,6 +109,8 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
                         }
 
                     }
+
+
                 }
             }.models = mutableListOf()
 
@@ -117,9 +119,11 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
 
     private fun initData() {
         mViewModel.queryMarketList(type, onSuccess = {
-            mBinding.pageRefreshLayout.addData(it, isEmpty = {
-                it.isEmpty()
-            })
+            mBinding.pageRefreshLayout.addData(
+                it.filter { queryMarketListItem -> queryMarketListItem.goodsStatue == "001" || queryMarketListItem.goodsStatue == "002" },
+                isEmpty = {
+                    it.isEmpty()
+                })
         })
     }
 

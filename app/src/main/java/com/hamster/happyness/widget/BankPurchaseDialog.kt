@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import com.hamster.happyness.databinding.DialogBankPurchaseBinding
+import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
@@ -40,18 +41,22 @@ class BankPurchaseDialog : BaseDialogFragment<DialogBankPurchaseBinding>(DialogB
 
         mBinding.nvCount.min = item?.coinPrice!!.toInt()
         mBinding.nvCount.setOnValueChangeListener {
-            mTotalPrice = it * item?.coinPrice!!
+            mTotalPrice = it * item?.unitPrice!!
+
+            mBinding.tvConditionsDetail.text = "消耗" + when (item?.payType) {
+                "001" -> "松果"
+                "002" -> "松子"
+                "003" -> "三方"
+                else -> "勋章"
+            } + mTotalPrice + "/" + mViewModel.walletModel.value?.diamond
+
+            mBinding.ivConditionsAvailable.visibility = if (mTotalPrice <= mViewModel.walletModel.value?.diamond!!) View.VISIBLE else View.GONE
+            mBinding.btnConfirm.isEnabled = mTotalPrice <= mViewModel.walletModel.value?.diamond!!
         }
+        mBinding.nvCount.currentValue = 1.0.coerceAtLeast(item.coinPrice).toInt()
 
         //购买
-        mBinding.tvConditionsDetail.text = "消耗" + when (item?.payType) {
-            "001" -> "松果"
-            "002" -> "松子"
-            "003" -> "三方"
-            else -> "勋章"
-        } + item?.coinPrice + "/" + mViewModel.walletModel.value?.diamond
 
-        mBinding.ivConditionsAvailable.visibility = if (item?.coinPrice!! <= mViewModel.walletModel.value?.diamond!!) View.VISIBLE else View.GONE
 
         mBinding.ibBack.safeClick {
             dismiss()
@@ -73,7 +78,7 @@ class BankPurchaseDialog : BaseDialogFragment<DialogBankPurchaseBinding>(DialogB
                 ""
             ) {
                 if (this) {
-                    mViewModel.buy(item.commodityInfoId, item.coinPrice, 1, onSuccess = {
+                    mViewModel.buy(null, item.commodityInfoId, item.coinPrice, 1, Constants.HamsterPayType.PINE_CONE,onSuccess = {
                         //购买成功
                         customToast("购买成功")
                         dismiss()

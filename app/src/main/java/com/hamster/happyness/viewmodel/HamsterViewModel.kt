@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 
 class HamsterViewModel : BaseViewModel() {
     val record = ObservableField<InfoListModel.Record>()
+    val baseInfoListItem = ObservableField<QueryBaseInfoList.QueryBaseInfoListItem>()
     private val _infoListEvent = MutableSharedFlow<ResultState<InfoListModel>>()
     val infoListEvent = _infoListEvent.asSharedFlow()
 
@@ -66,5 +67,12 @@ class HamsterViewModel : BaseViewModel() {
         })
     }
 
+    //获取皮肤信息(基础仓鼠)
+    fun queryBaseInfoList(onSuccess: ((QueryBaseInfoList) -> Unit) = {}) {
+        request<QueryBaseInfoList>(MineApi.API_HAMSTER_MARKET_QUERY_BASE_INFO_LIST, Method.GET, onSuccess = {
+            onSuccess.invoke(it)
 
+        }, onError = {
+        })
+    }
 }
