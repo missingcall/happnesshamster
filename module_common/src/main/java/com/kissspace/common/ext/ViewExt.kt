@@ -53,15 +53,15 @@ fun View.safeClick(spaceTime:Long =ViewClickDelay.SPACE_TIME ,action: () -> Unit
 }
 
 fun canSendMsgToOther():Boolean{
-
-    return MMKVProvider.userInfo?.let {
+    return true
+   /* return MMKVProvider.userInfo?.let {
         if (!it.family || it.consumeLevel <= 1) {
             customToast("财富等级达到2级并且加入公会后才可以发送私信哦~")
             false
         }else{
             true
         }
-    }?:false
+    }?:false*/
 
 }
 
