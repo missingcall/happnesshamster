@@ -3,6 +3,7 @@ package com.kissspace.message.ui.fragment
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.View.OnAttachStateChangeListener
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.TimeUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.didi.drouter.api.DRouter
 import com.drake.brv.BindingAdapter
 import com.drake.brv.utils.*
@@ -43,6 +45,7 @@ import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.message.viewmodel.MessageViewModel
 import com.kissspace.network.result.collectData
 import com.kissspace.common.model.ItemMessageMenu
+import com.kissspace.common.model.SystemMessageModel
 import com.kissspace.common.provider.IPayProvider
 import com.kissspace.message.widget.ChatDialog
 import com.uc.crashsdk.export.LogType.addType
@@ -67,9 +70,14 @@ import com.kissspace.util.swapWithHead
 class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
     private val mBinding by viewBinding<FragmentMessageV3Binding>()
     private val mViewModel by viewModels<MessageViewModel>()
+
+    //聊天消息adapter
     private lateinit var mRecentContactAdapter: BindingAdapter
 
-    private var menuList: MutableList<ItemMessageMenu> = ArrayList()
+    //系统消息adapter
+    private lateinit var mSysMsgAdapter: BindingAdapter
+
+    //private var menuList: MutableList<ItemMessageMenu> = ArrayList()
 
     /**
      * 系统广播监听
@@ -101,6 +109,8 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
 
     override fun lazyClickListener() {
         super.lazyClickListener()
+
+
         //关闭通知提示
         mBinding.ivClose.safeClick {
             MMKVProvider.lastShowNotificationPermission = System.currentTimeMillis()
@@ -162,9 +172,6 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
     }
 
 
-
-
-
     override fun lazyDataChangeListener() {
         super.lazyDataChangeListener()
 
@@ -220,19 +227,14 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         })
 
 
-
-
-
-
-
-/*
-      collectData(mViewModel.dynamicMessageCountEvent, onSuccess = {
-          menuList[0].unReadCount = it.likeMessage
-          menuList[2].unReadCount = it.interactiveMessages
-          mBinding.rvList.adapter?.notifyItemChanged(0)
-          mBinding.rvList.adapter?.notifyItemChanged(2)
-      })
-*/
+        /*
+              collectData(mViewModel.dynamicMessageCountEvent, onSuccess = {
+                  menuList[0].unReadCount = it.likeMessage
+                  menuList[2].unReadCount = it.interactiveMessages
+                  mBinding.rvList.adapter?.notifyItemChanged(0)
+                  mBinding.rvList.adapter?.notifyItemChanged(2)
+              })
+        */
 
 
 
@@ -243,27 +245,22 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         })
 
 
-
         //系统消息
         collectData(mViewModel.systemMessageEvent, onSuccess = {
+
             if (it.records.isNotEmpty()) {
-                val data = it.records[0]
-                data.unReadCount = it.total - MMKVProvider.systemMessageLastReadCount
-                MMKVProvider.systemMessageUnReadCount = data.unReadCount
-                menuList[1].unReadCount = MMKVProvider.systemMessageUnReadCount
-                // mBinding.rvList.adapter?.notifyItemChanged(1)
+              //  data.unReadCount = it.total - MMKVProvider.systemMessageLastReadCount
+               // MMKVProvider.systemMessageUnReadCount = data.unReadCount
+                mSysMsgAdapter.models = listOf(it.records[0])
+
+            }else{
+                if (mSysMsgAdapter.mutable.isEmpty()) return@collectData
+                mSysMsgAdapter.mutable.clear()
+                mSysMsgAdapter.notifyDataSetChanged()
             }
             FlowBus.post(Event.RefreshUnReadMsgCount)
         })
-
-
-
-
-
-
-
     }
-
 
 
     override fun lazyEventListener() {
@@ -283,9 +280,9 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
             mViewModel.requestSystemMessage()
         }
 
-        FlowBus.observerEvent<Event.MsgRefreshDynamicNoticeEvent>(this) {
-            mViewModel.requestDynamicMessageCount()
-        }
+    //   FlowBus.observerEvent<Event.MsgRefreshDynamicNoticeEvent>(this) {
+    //       mViewModel.requestDynamicMessageCount()
+    //   }
 
         FlowBus.observerEvent<Event.NotificationEventOpen>(this) {
             mBinding.layoutNotification.visibility = View.GONE
@@ -294,11 +291,9 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
     }
 
 
-
-
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        if(isAppDebug){
+        if (isAppDebug) {
             LogUtils.e("onHiddenChanged:$hidden")
         }
     }
@@ -307,14 +302,28 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         if (!isFromDialog()) {
             mBinding.titleBar.setMarginStatusBar()
         } else {
-           // mBinding.tvTitle.gravity = Gravity.CENTER
+            // mBinding.tvTitle.gravity = Gravity.CENTER
         }
 
     }
 
 
+    /**
+     * 初始化RecyclerView
+     */
     private fun initRecyclerView() {
         mBinding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        mSysMsgAdapter = BindingAdapter().apply {
+            addType<SystemMessageModel> { R.layout.message_chat_list_item_system }
+            mutable = arrayListOf()
+            onClick(R.id.root_system){
+                jump(RouterPath.PATH_SYSTEM_MESSAGE)
+            }
+        }
+
+
+
         mRecentContactAdapter = BindingAdapter().apply {
             addType<ChatListModel> { R.layout.message_chat_list_item }
 
@@ -336,16 +345,8 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
                     )
                 }
             }
-            onClick(R.id.layout_follow_room) {
-                val model = getModel<ChatListModel>()
-                val service = DRouter.build(IRoomProvider::class.java).getService()
-                if (service.getRoomId() != model.followRoomId || !isFromDialog()) {
-                    jumpRoom(crId = model.followRoomId)
-                } else {
-                    customToast("您已在当前房间")
-                }
-            }
-            onLongClick(R.id.root_chat) {
+
+            onClick(R.id.tvDelete){
                 val model = getModel<ChatListModel>()
                 val index = (mutable as MutableList<ChatListModel>).indexOf(model)
                 CommonConfirmDialog(requireContext(), "确定要删除该条会话?") {
@@ -360,12 +361,27 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
                         FlowBus.post(Event.RefreshUnReadMsgCount)
                     }
                 }.show()
+
+
             }
+
+            onClick(R.id.layout_follow_room) {
+                val model = getModel<ChatListModel>()
+                val service = DRouter.build(IRoomProvider::class.java).getService()
+                if (service.getRoomId() != model.followRoomId || !isFromDialog()) {
+                    jumpRoom(crId = model.followRoomId)
+                } else {
+                    customToast("您已在当前房间")
+                }
+            }
+
+
+
             mutable = arrayListOf()
         }
 
         val adapter =
-            ConcatAdapter(mRecentContactAdapter)
+            ConcatAdapter(mSysMsgAdapter, mRecentContactAdapter)
         mBinding.recyclerView.adapter = adapter
     }
 
@@ -373,7 +389,8 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
      * 注册云信监听
      */
     private fun registerObserver() {
-        NIMClient.getService(MsgServiceObserve::class.java).observeBroadcastMessage(broadcastObserver, true)
+        NIMClient.getService(MsgServiceObserve::class.java)
+            .observeBroadcastMessage(broadcastObserver, true)
     }
 
     private fun initRefreshLayout() {
@@ -388,22 +405,21 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
 
 
     private fun initData() {
-        if(!isFromDialog()) mViewModel.requestBannerData()
+        if (!isFromDialog()) mViewModel.requestBannerData()
         //请求系统消息
         mViewModel.requestSystemMessage()
-        //请求系统消息数量
-        mViewModel.requestDynamicMessageCount()
+
+       // mViewModel.requestDynamicMessageCount()
     }
 
 
-
-    private fun showEmptyContent(){
+    private fun showEmptyContent() {
         mBinding.stateLayout.let {
-              if( mRecentContactAdapter.models.isNullOrEmpty()){
-                  it.showEmpty()
-              }else{
-                  it.showContent()
-              }
+            if (mRecentContactAdapter.models.isNullOrEmpty() && mSysMsgAdapter.models.isNullOrEmpty()) {
+                it.showEmpty()
+            } else {
+                it.showContent()
+            }
         }
     }
 
@@ -414,7 +430,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
      * 显示通知View
      */
     private fun showNotificationView() {
-        if(isAdded) {
+        if (isAdded) {
             if (context?.let { hasNotificationPermission(it) } != true) {
                 if (!TimeUtils.isToday(MMKVProvider.lastShowNotificationPermission)) {
                     mBinding.layoutNotification.visibility = View.VISIBLE

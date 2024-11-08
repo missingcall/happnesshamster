@@ -156,7 +156,7 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
                 }
             })
     }
-
+/*
     fun requestDynamicMessageCount() {
         val param = mutableMapOf<String, Any?>()
         request(
@@ -165,7 +165,7 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
             param,
             state = _dynamicMessageCountEvent
         )
-    }
+    }*/
 
     /**
      * RecentContact数据解析为 ChatListModel

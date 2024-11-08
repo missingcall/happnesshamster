@@ -111,11 +111,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            app:layout_constraintTop_toBottomOf="@id/tv_title"-->
-<!--            android:id="@+id/rv_list"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content" />-->
 
         <com.youth.banner.Banner
             app:layout_constraintDimensionRatio="75:42"
@@ -128,6 +123,13 @@
             android:layout_marginTop="12dp"
             />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/banner"/>
+
 
         <com.drake.statelayout.StateLayout
             android:id="@+id/stateLayout"
@@ -136,7 +138,7 @@
             android:layout_marginTop="12dp"
             app:empty_layout="@layout/message_layout_empty"
             app:layout_goneMarginTop="@dimen/dp_12"
-            app:layout_constraintTop_toBottomOf="@id/banner"
+            app:layout_constraintTop_toBottomOf="@id/rv_list"
             app:layout_constraintBottom_toBottomOf="parent"
             >
             <com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -154,7 +156,7 @@
 
         </com.drake.statelayout.StateLayout>
 
-
+<!--
         <include
             android:id="@+id/layout_empty"
             android:layout_height="wrap_content"
@@ -162,7 +164,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:visibility="gone"
-            layout="@layout/message_layout_empty" />
+            layout="@layout/message_layout_empty" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

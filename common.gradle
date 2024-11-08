@@ -402,6 +402,7 @@ project.ext {
                     extension.api 'com.github.ljphawk:SwipeMenuLayout:1.05'
                     extension.api 'com.github.RuffianZhong:RWidgetHelper:androidx.v0.0.14'
                     extension.api 'com.github.lygttpod:SuperTextView:2.1.8'
+                    extension.api 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
 
 
                     extension.debugImplementation 'com.squareup.leakcanary:leakcanary-android:3.0-alpha-1'
