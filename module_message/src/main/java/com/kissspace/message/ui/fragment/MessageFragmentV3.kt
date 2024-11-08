@@ -249,11 +249,17 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         collectData(mViewModel.systemMessageEvent, onSuccess = {
 
             if (it.records.isNotEmpty()) {
-              //  data.unReadCount = it.total - MMKVProvider.systemMessageLastReadCount
-               // MMKVProvider.systemMessageUnReadCount = data.unReadCount
+                //  data.unReadCount = it.total - MMKVProvider.systemMessageLastReadCount
+                // MMKVProvider.systemMessageUnReadCount = data.unReadCount
+              //  val list = mutableListOf<SystemMessageModel>()
+              //  repeat(30) { t ->
+              //      list.add(it.records[0])
+              //  }
+              //  mSysMsgAdapter.models = list
+
                 mSysMsgAdapter.models = listOf(it.records[0])
 
-            }else{
+            } else {
                 if (mSysMsgAdapter.mutable.isEmpty()) return@collectData
                 mSysMsgAdapter.mutable.clear()
                 mSysMsgAdapter.notifyDataSetChanged()
@@ -280,9 +286,9 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
             mViewModel.requestSystemMessage()
         }
 
-    //   FlowBus.observerEvent<Event.MsgRefreshDynamicNoticeEvent>(this) {
-    //       mViewModel.requestDynamicMessageCount()
-    //   }
+        //   FlowBus.observerEvent<Event.MsgRefreshDynamicNoticeEvent>(this) {
+        //       mViewModel.requestDynamicMessageCount()
+        //   }
 
         FlowBus.observerEvent<Event.NotificationEventOpen>(this) {
             mBinding.layoutNotification.visibility = View.GONE
@@ -317,7 +323,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         mSysMsgAdapter = BindingAdapter().apply {
             addType<SystemMessageModel> { R.layout.message_chat_list_item_system }
             mutable = arrayListOf()
-            onClick(R.id.root_system){
+            onClick(R.id.root_system) {
                 jump(RouterPath.PATH_SYSTEM_MESSAGE)
             }
         }
@@ -326,6 +332,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
 
         mRecentContactAdapter = BindingAdapter().apply {
             addType<ChatListModel> { R.layout.message_chat_list_item }
+
 
             onClick(R.id.root_chat) {
                 val model = getModel<ChatListModel>()
@@ -346,7 +353,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
                 }
             }
 
-            onClick(R.id.tvDelete){
+            onClick(R.id.tvDelete) {
                 val model = getModel<ChatListModel>()
                 val index = (mutable as MutableList<ChatListModel>).indexOf(model)
                 CommonConfirmDialog(requireContext(), "确定要删除该条会话?") {
@@ -409,7 +416,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         //请求系统消息
         mViewModel.requestSystemMessage()
 
-       // mViewModel.requestDynamicMessageCount()
+        // mViewModel.requestDynamicMessageCount()
     }
 
 
