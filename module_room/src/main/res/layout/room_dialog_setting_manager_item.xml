@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -81,7 +82,8 @@
             android:layout_marginStart="3dp"
             android:layout_marginTop="4dp"
             android:text="@{m.nickname}"
-            android:textColor="@color/white"
+            android:textColor="@color/color_313133"
+            tools:text="123123"
             android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@id/layout_level"
             app:layout_constraintTop_toTopOf="@id/iv_avatar" />
@@ -93,7 +95,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="3dp"
             android:text='@{"ID: "+m.showId}'
-            android:textColor="@color/color_80FFFFFF"
+            android:textColor="@color/color_949499"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
             app:layout_constraintStart_toEndOf="@id/iv_avatar" />

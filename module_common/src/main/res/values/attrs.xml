@@ -70,6 +70,9 @@
         <attr name="search_background" format="reference" />
         <attr name="isShowCancelText" format="boolean" />
         <attr name="isShowClearIcon" format="boolean" />
+        <attr name="isDrak" format="boolean"/>
+
+
     </declare-styleable>
 
     <declare-styleable name="PhoneCode">

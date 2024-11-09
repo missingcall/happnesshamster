@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.databinding.DataBindingUtil
 import com.kissspace.module_common.R
@@ -41,6 +42,8 @@ class CommonSearchView(
                 R.styleable.CommonSearchView_search_hintTextColor,
                 resources.getColor(R.color.color_CCC7CC)
             )
+            val isDrak  = getBoolean(R.styleable.CommonSearchView_isDrak, true)
+
             //设置背景
 //            val background = getResourceId(
 //                R.styleable.CommonSearchView_search_background,
@@ -59,6 +62,14 @@ class CommonSearchView(
                 }
                 true
             }
+            if (!isDrak){
+                mBinding.clRoot.helper.setBackgroundColorNormal(ContextCompat.getColor(context, R.color.color_F8F8F9))
+                mBinding.etSearch.setTextColor(ContextCompat.getColor(context, R.color.color_CCC7CC))
+            }
+
+
+
+
         }
 
     }

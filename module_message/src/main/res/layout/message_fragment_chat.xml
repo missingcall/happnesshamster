@@ -10,7 +10,7 @@
             type="com.kissspace.message.viewmodel.ChatViewModel" />
     </data>
 
-    <FrameLayout
+    <com.ruffian.library.widget.RFrameLayout
         android:id="@+id/layout_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -149,6 +149,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
-    </FrameLayout>
+    </com.ruffian.library.widget.RFrameLayout>
 
 </layout>

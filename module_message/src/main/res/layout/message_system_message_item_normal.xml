@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -25,11 +26,12 @@
             android:layout_marginTop="12dp"
             android:textColor="@color/color_A8A8B3"
             android:textSize="12sp"
+            tools:text="2022年12月12日 12:12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.ruffian.library.widget.RConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -38,8 +40,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:paddingBottom="13dp"
-            app:bl_corners_radius="12dp"
-            app:bl_solid_color="@color/color_1A000000"
+            app:corner_radius="11dp"
+            app:background_normal="#232323"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_date">
@@ -66,7 +68,7 @@
                 android:textSize="13sp"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
                 app:layout_constraintStart_toStartOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.ruffian.library.widget.RConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

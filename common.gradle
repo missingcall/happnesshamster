@@ -219,20 +219,6 @@ project.ext {
                     extension.buildTypes{
                         release{
 
-
-//                            buildConfigField ("String","BASE_URL","\"http://120.55.183.144:8201\"")
-//                            buildConfigField ("String","H5_BASE_URl","\"http://120.55.183.144\"")
-//                            //即构
-//                            buildConfigField ("Long","ZEGO_APP_ID","826859128L")
-//
-//                            //网易云信
-//                            buildConfigField ("String","NETEASE_APP_KEY","\"0c4738b037e8121de02f2d8d5d659819\"")
-//                            buildConfigField ("String","NETEASE_APP_Secret","\"de8878c7ea5b\"")
-//
-//                            buildConfigField ("String","YiDun_APP_BusinessId","\"a527eb233d3b450abdea1f310b4bcbc0\"")
-//                            buildConfigField ("String","YiDun_Control_Id","\"YD00021795252943\"")
-//                            buildConfigField ("String","YiDun_Control_Key","\"fd438f71b019491e98c94b91ab90237f\"")
-
                             //趣玩
                             buildConfigField ("String","BASE_URL","\"https://qwapi.eyxzb.com\"")
                             buildConfigField ("String","H5_BASE_URl","\"https://qwweb.eyxzb.com\"")
@@ -261,79 +247,13 @@ project.ext {
                             buildConfigField ("String","YiDun_Control_Id","\"YD00629611355548\"")
                             buildConfigField ("String","YiDun_Control_Key","\"57dd221df631497dbace7a3a196707eb\"")
 
-//                            //猫猫
-//                            buildConfigField ("String","BASE_URL","\"http://8.154.38.162:8201\"")
-//                            buildConfigField ("String","H5_BASE_URl","\"http://8.154.33.152\"")
-//
-//                            //即构
-//                            buildConfigField ("Long","ZEGO_APP_ID","1071074591L")
-//
-//                            //网易云信
-//                            buildConfigField ("String","NETEASE_APP_KEY","\"63b7b03ff121a5a54d19ac6a3915c5e2\"")
-//                            buildConfigField ("String","NETEASE_APP_Secret","\"1521f8b479f0\"")
-//
-//                            buildConfigField ("String","YiDun_APP_BusinessId","\"c6a0a7e6a43f4517b9ca7b25ddef64cc\"")
-//                            //易盾风控
-//                            buildConfigField ("String","YiDun_Control_Id","\"YD00309318651484\"")
-//                            buildConfigField ("String","YiDun_Control_Key","\"55e3c2ebcb31ea5b069e853cafab778d\"")
+
                         }
 
-//                        debug{
-//
-//                            buildConfigField ("String","BASE_URL","\"https://qwapi.qdborui.com\"")
-//                            buildConfigField ("String","H5_BASE_URl","\"https://qwweb.qdborui.com\"")
-//                            //即构
-//                            buildConfigField ("Long","ZEGO_APP_ID","253179363L")
-//                            //网易云信
-//                            buildConfigField ("String","NETEASE_APP_KEY","\"bb85b563bd1cb3dc5cc634ab6443939d\"")
-//                            buildConfigField ("String","NETEASE_APP_Secret","\"a79449eb6799\"")
-//
-//                            buildConfigField ("String","YiDun_APP_BusinessId","\"a527eb233d3b450abdea1f310b4bcbc0\"")
-//                            buildConfigField ("String","YiDun_Control_Id","\"YD00629611355548\"")
-//                            buildConfigField ("String","YiDun_Control_Key","\"57dd221df631497dbace7a3a196707eb\"")
-//                        }
+
 
                         debug{
 
-//                            buildConfigField ("String","BASE_URL","\"https://qwapi.eyxzb.com\"")
-//                            buildConfigField ("String","H5_BASE_URl","\"https://qwweb.eyxzb.com\"")
-////                            buildConfigField ("String","BASE_URL","\"https://api.qdborui.com\"")
-////                            buildConfigField ("String","H5_BASE_URl","\"https://web.qdborui.com\"")
-//                            //即构
-//                            buildConfigField ("Long","ZEGO_APP_ID","253179363L")
-//                            //网易云信
-//                            buildConfigField ("String","NETEASE_APP_KEY","\"bb85b563bd1cb3dc5cc634ab6443939d\"")
-//                            buildConfigField ("String","NETEASE_APP_Secret","\"a79449eb6799\"")
-//
-//                            buildConfigField ("String","YiDun_APP_BusinessId","\"a527eb233d3b450abdea1f310b4bcbc0\"")
-//                            buildConfigField ("String","YiDun_Control_Id","\"YD00629611355548\"")
-//                            buildConfigField ("String","YiDun_Control_Key","\"57dd221df631497dbace7a3a196707eb\"")
-
-//                            buildConfigField ("String","BASE_URL","\"https://api.qdborui.com\"")
-//                            buildConfigField ("String","H5_BASE_URl","\"https://web.qdborui.com\"")
-//                            //即构
-//                            buildConfigField ("Long","ZEGO_APP_ID","253179363L")
-//                            //网易云信
-//                            buildConfigField ("String","NETEASE_APP_KEY","\"bb85b563bd1cb3dc5cc634ab6443939d\"")
-//                            buildConfigField ("String","NETEASE_APP_Secret","\"a79449eb6799\"")
-//
-//                            buildConfigField ("String","YiDun_APP_BusinessId","\"a527eb233d3b450abdea1f310b4bcbc0\"")
-//                            buildConfigField ("String","YiDun_Control_Id","\"YD00629611355548\"")
-//                            buildConfigField ("String","YiDun_Control_Key","\"57dd221df631497dbace7a3a196707eb\"")
-//                            buildConfigField ("String","BASE_URL","\"https://api.qdborui.com\"")
-//                            buildConfigField ("String","H5_BASE_URl","\"https://web.qdborui.com\"")
-//                            //即构
-//                            buildConfigField ("Long","ZEGO_APP_ID","253179363L")
-//                            //网易云信
-//                            buildConfigField ("String","NETEASE_APP_KEY","\"bb85b563bd1cb3dc5cc634ab6443939d\"")
-//                            buildConfigField ("String","NETEASE_APP_Secret","\"a79449eb6799\"")
-//
-//                            buildConfigField ("String","YiDun_APP_BusinessId","\"a527eb233d3b450abdea1f310b4bcbc0\"")
-//                            buildConfigField ("String","YiDun_Control_Id","\"YD00629611355548\"")
-//                            buildConfigField ("String","YiDun_Control_Key","\"57dd221df631497dbace7a3a196707eb\"")
-
-                            //趣玩欢乐
-//                            buildConfigField ("String","BASE_URL","\"http://120.55.183.144:8201\"")
                             //电报仓鼠
                             buildConfigField ("String","BASE_URL","\"http://121.40.238.170:8201\"")
                             buildConfigField ("String","H5_BASE_URl","\"http://120.55.183.144\"")
@@ -386,7 +306,7 @@ project.ext {
             if (appImplementation != "module_common" &&
                     appImplementation != "module_util" &&
                     appImplementation != "module_network"&&
-                    appImplementation != "module_svga") {
+                    appImplementation != "module_svga" && appImplementation != "module_ui") {
                 extension.implementation extension.project(path: ':module_common')
             }
 
@@ -402,7 +322,6 @@ project.ext {
                         extension.implementation extension.project(path: ':module_webview')
                         extension.implementation extension.project(path: ':module_pay')
                         extension.implementation extension.project(path: ':module_dynamic')
-                        extension.implementation extension.project(path: ':module_ui')
                     }
                     break
                 case "module_login":
@@ -419,6 +338,7 @@ project.ext {
                     extension.api extension.project(path: ':module_util')
                     extension.api extension.project(path: ':module_network')
                     extension.api extension.project(path: ':module_svga')
+                    extension.api extension.project(path: ':module_ui')
                     extension.api "androidx.appcompat:appcompat:1.5.0"
                     extension.api "androidx.core:core-ktx:1.8.0"
                     extension.api "androidx.activity:activity-ktx:1.5.0"
@@ -482,6 +402,7 @@ project.ext {
                     extension.api 'com.github.ljphawk:SwipeMenuLayout:1.05'
                     extension.api 'com.github.RuffianZhong:RWidgetHelper:androidx.v0.0.14'
                     extension.api 'com.github.lygttpod:SuperTextView:2.1.8'
+                    extension.api 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
 
 
                     extension.debugImplementation 'com.squareup.leakcanary:leakcanary-android:3.0-alpha-1'

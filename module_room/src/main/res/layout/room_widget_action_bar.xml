@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_action_bar"
     android:layout_width="match_parent"
     android:layout_height="50dp"
@@ -18,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="155dp"
+        android:layout_width="145dp"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_back"
@@ -27,8 +28,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_anchor_info"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:paddingEnd="4dp"
+            android:layout_height="34dp"
             app:bl_corners_radius="18dp"
             app:bl_solid_color="@color/color_4D000000"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,8 +37,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_anchor_avatar"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +52,10 @@
                 android:layout_marginTop="3dp"
                 android:ellipsize="end"
                 android:maxWidth="60dp"
+                tools:text="121211211211"
                 android:maxLines="1"
                 android:textColor="@color/common_white"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 app:layout_constraintStart_toEndOf="@id/iv_anchor_avatar"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,18 +66,31 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="3dp"
                 android:textColor="@color/common_white"
-                android:textSize="9sp"
+                tools:text="1211211211211"
+                android:textSize="8sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_anchor_avatar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
+        <com.ruffian.library.widget.RTextView
             android:id="@+id/tv_collect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/room_icon_collect"
             android:visibility="gone"
+            android:textSize="11sp"
+            android:paddingStart="7dp"
+            android:paddingEnd="7dp"
+            android:paddingTop="4dp"
+            android:textColor="@color/white"
+            tools:visibility="visible"
+            android:text="收藏"
+            android:layout_marginEnd="4dp"
+            app:corner_radius="17dp"
+            android:paddingBottom="4dp"
+            app:background_normal="@array/button_color_e9416f_to_e94172"
+            app:gradient_orientation="LEFT_RIGHT"
+            app:gradient_type="linear"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
