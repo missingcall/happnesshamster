@@ -84,7 +84,7 @@
         android:layout_height="@dimen/dp_50"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dp_30"
-        android:background="@drawable/common_btn_selector_blue_black_radius15"
+        android:background="@drawable/common_btn_selector_purple_black_radius45"
         android:gravity="center"
         android:text="@string/login_sign_up_now"
         android:textColor="@drawable/common_text_color_selector_white"

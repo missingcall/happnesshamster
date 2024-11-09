@@ -7,6 +7,7 @@ import android.graphics.Shader
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.view.animation.AnticipateOvershootInterpolator
 import android.widget.ImageView
 import android.widget.TextView
@@ -30,6 +31,7 @@ import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.http.getUserInfo
+import com.kissspace.common.model.LevelModel
 import com.kissspace.common.model.RoomTagListBean
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
@@ -37,6 +39,7 @@ import com.kissspace.common.util.*
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.widget.CommonHintDialog
 import com.kissspace.mine.viewmodel.FamilyViewModel
+import com.kissspace.mine.viewmodel.LevelViewModel
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.FragmentMineNewBinding
@@ -60,11 +63,10 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
 
     private val mViewModel by activityViewModels<MineViewModel>()
 
-    private val familyModel by viewModels<FamilyViewModel>()
-
     private var player: MediaPlayer? = null
 
     override fun initView(savedInstanceState: Bundle?) {
+        mBinding.titleBar.setMarginStatusBar()
         mBinding.m = mViewModel
         mBinding.lifecycleOwner = this
         mViewModel.isShowFirstRecharge.value = MMKVProvider.firstRecharge
@@ -107,169 +109,7 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
         mBinding.tvFriendTip.safeClick {
             jump(RouterPath.PATH_MY_COLLECT)
         }
-//        setTextViewStyles(mBinding.tvRecharge)
-//        mBinding.lltAuthentication.safeClick {
-//            jump(RouterPath.PATH_MINE_AUTH)
-//        }
-        /*    mBinding.layoutUnionHallInfo.safeClick {
-                //判断当前是否已经加入到公会
 
-                familyModel.getSelectFamilyInfo {
-                    if (it != null) {
-                        if (it.userFamilyStatus == Constants.FAMILY_MEMBER || it.userFamilyStatus == Constants.FAMILY_LICENSED_HOMEOWNER || it.userFamilyStatus == Constants.FAMILY_HEADER) {
-                            //跳转到公会详情页面
-                            jump(RouterPath.PATH_FAMILY_DETAIL, "familyId" to it.familyId.orEmpty())
-                        } else {
-                            //跳转到申请公会列表
-                            jump(RouterPath.PATH_FAMILY_LIST)
-                        }
-                    } else {
-                        logE("公会信息查询失败")
-                        jump(RouterPath.PATH_FAMILY_LIST)
-                    }
-                }
-            }*/
-        /*    mBinding.layoutSettings.safeClick {
-                jump(RouterPath.PATH_SETTING)
-            }
-            */
-
-        /*       mBinding.tvPersonalPage.safeClick {
-                   mViewModel.userInfo.value?.let {
-                       jump(RouterPath.PATH_USER_PROFILE, "userId" to (it.userId))
-                   }
-               }*/
-
-
-        //新人优惠
-//        mBinding.clCharge.safeClick {
-//            getSelectPayChannelList {
-//                val firstChargeDialog = FirstChargeDialog(requireContext())
-//                firstChargeDialog.callBack = { payChannelType: String, payProductId: String ->
-//                    DRouter.build(IPayProvider::class.java).getService().pay(
-//                        payChannelType,
-//                        payProductId,
-//                        activity as AppCompatActivity
-//                    ) { result ->
-//                        if (result) {
-//                            MMKVProvider.firstRecharge = false
-//                            mViewModel.isShowFirstRecharge.value = false
-//                        }
-//                        firstChargeDialog.dismiss()
-//                    }
-//                }
-//                firstChargeDialog.show()
-//                if (it.isNotEmpty()) {
-//                    if (it.size > 1) {
-//                        firstChargeDialog.setData(
-//                            it[0].firstRechargePayProductListResponses,
-//                            it[1].firstRechargePayProductListResponses
-//                        )
-//                    }
-//                }
-//            }
-//        }
-
-        //充值
-        /*    mBinding.tvRecharge.safeClick {
-                jump(RouterPath.PATH_USER_WALLET_GOLD_RECHARGE)
-            }*/
-
-
-/*
-        mBinding.layoutAccountSafe.safeClick {
-            jump(RouterPath.PATH_ACCOUNT)
-        }
-
-        mBinding.layoutAboutUs.safeClick {
-            jump(RouterPath.PATH_ABOUT_US)
-        }
-
-        mBinding.layoutWallet.setOnClickListener {
-            jump(RouterPath.PATH_USER_WALLET)
-        }
-        mBinding.layoutStore.safeClick {
-            jump(RouterPath.PATH_MY_LEVEL)
-        }
-
-        mBinding.layoutFeedback.safeClick {
-            jump(
-                RouterPath.PATH_FEEDBACK_TYPE_LIST,
-                "showFeedBack" to mViewModel.feedBackNewMessage.value.orFalse()
-            )
-        }
-
-        mBinding.layoutTaskCenter.safeClick {
-            jump(RouterPath.PATH_TASK_CENTER_LIST)
-        }
-
-        mBinding.layoutGiftInfo.safeClick {
-            jump(RouterPath.PATH_USER_PROFILE, "userId" to MMKVProvider.userId)
-        }
-
-        mBinding.ivEdit.safeClick {
-            jump(RouterPath.PATH_SETTING)
-        }
-
-        mBinding.layoutVistor.safeClick {
-            jump(RouterPath.PATH_MY_VISITOR)
-        }
-*/
-
-
-//        mBinding.lltFollow.safeClick {
-//            jump(RouterPath.PATH_MY_FOLLOW)
-//        }
-
-//        mBinding.tvUserId.setOnClickListener {
-//            mViewModel.userInfo.value?.let {
-//                copyClip(it.beautifulId.ifEmpty { it.displayId })
-//            }
-//
-//        }
-
-
-//        mBinding.conVoice.safeClick {
-//            playVoice()
-//        }
-
-
-        /*  mBinding.layoutGradeInfo.safeClick {
-              jump(RouterPath.PATH_STORE)
-
-          }*/
-
-//        mBinding.layoutGrade.safeClick {
-//            jump(RouterPath.PATH_MY_LEVEL)
-//        }
-
-        /*      mBinding.layoutActionCenter.safeClick {
-                  jump(
-                      RouterPath.PATH_WEBVIEW,
-                      "url" to getH5Url(Constants.H5.centerActionUrl, needToken = true),
-                      "showTitle" to true
-                  )
-              }*/
-
-        //我的房间
-        /* mBinding.layoutHouseInfo.safeClick {
-             jumpRoom(roomType = Constants.ROOM_TYPE_PARTY)
-         }*/
-
-/*        mBinding.layoutRoom.safeClick {
-            jumpRoom(roomType = Constants.ROOM_TYPE_PARTY)
-        }
-
-        mBinding.layoutCustomerService.safeClick {
-            CommonHintDialog.newInstance(
-                "若有问题请关注微信公众号",
-                MMKVProvider.wechatPublicAccount
-            ).show(childFragmentManager)
-        }*/
-
-//        initCircleAnim(mBinding.conFans)
-//        initCircleAnim(mBinding.conHour)
-//        initCircleAnim(mBinding.conLike)
     }
 
     private fun initWallet() {
@@ -286,8 +126,9 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
         ViewPager2Delegate.install(mBinding.vpWallet, mBinding.dtlWallet)
 
         //待领取松果
-        queryDayIncome()
+//        queryDayIncome()
 
+/*
         mBinding.btnReceive.safeClick {
             //需判断仓鼠状态
 
@@ -302,8 +143,10 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
 //                refreshWallet()//测试刷新数据
             })
         }
+*/
     }
 
+/*
     private fun refreshWallet() {
         queryDayIncome()
         FlowBus.post(Event.MsgRefreshWalletEvent)
@@ -314,6 +157,7 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
             mBinding.tvToBeCollectedNum.text = it
         })
     }
+*/
 
     private fun initRecyclerView() {
         val data = mutableListOf<MineInletItem>()

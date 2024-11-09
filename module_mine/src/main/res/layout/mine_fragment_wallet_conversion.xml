@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <TextView
+            android:id="@+id/tvConversionUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="我的松果"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clConvertUp"
+            android:layout_width="0dp"
+            android:layout_height="73dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvConversionUp">
+
+            <ImageView
+                android:id="@+id/ivConvertUpBg"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:background="@mipmap/mine_bg_convert_up"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clConvertUpContent"
+                android:layout_width="0dp"
+                android:layout_height="57dp"
+                android:background="@drawable/common_bg_black23_radius15"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvConvertUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="3dp"
+                    android:text="松果"
+                    android:textColor="@color/color_5A60FF"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etConvertUp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@null"
+                    android:hint="请输入松果"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white30"
+                    android:textCursorDrawable="@drawable/common_edit_cursor"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/tvConvertUp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clConvertDown"
+            android:layout_width="0dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/common_bg_black23_radius15"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            app:layout_constraintLeft_toLeftOf="@id/clConvertUp"
+            app:layout_constraintRight_toRightOf="@id/clConvertUp"
+            app:layout_constraintTop_toBottomOf="@id/clConvertUp">
+
+            <TextView
+                android:id="@+id/tvConvertDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/color_5A60FF"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="松子" />
+
+            <EditText
+                android:id="@+id/etConvertDown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="15dp"
+                android:background="@null"
+                android:hint="输入松果数查看转换松子数"
+                android:inputType="number"
+                android:lines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white30"
+                android:textCursorDrawable="@drawable/common_edit_cursor"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/tvConvertDown"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvConversionDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="我的松果"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clConvertDown" />
+
+        <TextView
+            android:id="@+id/tvConversionRatio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="转换比例"
+            android:textColor="@color/color_999999"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="@id/clConvertUp"
+            app:layout_constraintTop_toBottomOf="@id/tvConversionDown" />
+
+        <TextView
+            android:id="@+id/tvConversionRatioNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1松果=5松子"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvConversionRatio"
+            app:layout_constraintRight_toRightOf="@id/clConvertUp"
+            app:layout_constraintTop_toTopOf="@id/tvConversionRatio" />
+
+
+        <TextView
+            android:id="@+id/tvConversionFee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="转换手续费（5%）"
+            android:textColor="@color/color_999999"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="@id/clConvertUp"
+            app:layout_constraintTop_toBottomOf="@id/tvConversionRatio" />
+
+        <TextView
+            android:id="@+id/tvConversionFeeNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00松果"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="@id/tvConversionFee"
+            app:layout_constraintBottom_toBottomOf="@id/tvConversionFee"
+            app:layout_constraintRight_toRightOf="@id/clConvertUp"
+            />
+
+        <TextView
+            android:id="@+id/tvExpectedToObtain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="预计获得"
+            android:textColor="@color/color_999999"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="@id/clConvertUp"
+            app:layout_constraintTop_toBottomOf="@id/tvConversionFee" />
+
+        <TextView
+            android:id="@+id/tvExpectedToObtainNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00松子"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="@id/tvExpectedToObtain"
+            app:layout_constraintBottom_toBottomOf="@id/tvExpectedToObtain"
+            app:layout_constraintRight_toRightOf="@id/clConvertUp"
+            />
+
+        <TextView
+            android:id="@+id/tvReminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*温馨提示：出售和购买的松果数量为整数"
+            android:textColor="@color/color_B3FF5B03"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@id/btnConfirm"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="26dp"
+            />
+
+        <Button
+            android:id="@+id/btnConfirm"
+            android:text="确认交易"
+            style="@style/commonBottomConfirmationItem"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

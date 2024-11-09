@@ -10,7 +10,7 @@ import com.kissspace.module_common.R;
 /**
  * 简单字幕
  */
-public class SimpleNoticeMF extends MarqueeFactory<TextView, String> {
+public class SimpleNoticeMF extends MarqueeFactory<TextView, CharSequence> {
     private LayoutInflater inflater;
 
     public SimpleNoticeMF(Context context) {
@@ -19,7 +19,7 @@ public class SimpleNoticeMF extends MarqueeFactory<TextView, String> {
     }
 
     @Override
-    public TextView generateMarqueeItemView(String data) {
+    public TextView generateMarqueeItemView(CharSequence data) {
         TextView view = (TextView) inflater.inflate(R.layout.marqueen_layout_notice_item, null);
         view.setText(data);
         return view;

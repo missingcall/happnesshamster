@@ -191,6 +191,7 @@ class WalletViewModel : BaseViewModel() {
     //获取当前仓鼠信息
     var hmsInfoModel = ObservableField<HmsInfoModel>()
 
+    //获取仓鼠养成培养消费面板
     var cultivationPanelModel = ObservableField<CultivationPanelModel>()
 
     var revivePanelModel = ObservableField<RevivePanelModel>()
@@ -469,6 +470,7 @@ class WalletViewModel : BaseViewModel() {
         val param = mutableMapOf<String, Any?>()
         request<CultivationPanelModel>(MineApi.API_HAMSTER_CULTIVATE_QUERY_CULTIVATION_PANEL, Method.GET, param, onSuccess = {
             cultivationPanelModel.set(it)
+            cultivationPanelModel.notifyChange()
             block?.invoke(it)
         }, onError = {
             customToast(it.message)
@@ -501,8 +503,10 @@ class WalletViewModel : BaseViewModel() {
     }
 
     //喂养仓鼠
-    fun improveSatiety(onSuccess: ((Boolean) -> Unit) = {}) {
-        request<Boolean>(MineApi.API_HAMSTER_CULTIVATE_IMPROVE_SATIETY, Method.GET, onSuccess = {
+    fun improveSatiety(costType: String, onSuccess: ((Boolean) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+        param["costType"] = costType
+        request<Boolean>(MineApi.API_HAMSTER_CULTIVATE_IMPROVE_SATIETY, Method.GET, param, onSuccess = {
             onSuccess.invoke(it)
         }, onError = {
             customToast(it.message)
@@ -511,8 +515,10 @@ class WalletViewModel : BaseViewModel() {
 
 
     //清洗仓鼠
-    fun improveCleanliness(onSuccess: ((Boolean) -> Unit) = {}) {
-        request<Boolean>(MineApi.API_HAMSTER_CULTIVATE_IMPROVE_CLEANLINESS, Method.GET, onSuccess = {
+    fun improveCleanliness(costType: String, onSuccess: ((Boolean) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+        param["costType"] = costType
+        request<Boolean>(MineApi.API_HAMSTER_CULTIVATE_IMPROVE_CLEANLINESS, Method.GET, param, onSuccess = {
             onSuccess.invoke(it)
         }, onError = {
             customToast(it.message)

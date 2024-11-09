@@ -25,7 +25,8 @@
             app:tab_deselect_color="@color/color_ui_sub_text_middle"
             app:tab_draw_indicator="true"
             app:tab_enable_text_bold="true"
-            app:tab_indicator_drawable="@mipmap/common_bg_dialog"
+            app:tab_indicator_drawable="@mipmap/login_bg_tab"
+
             app:tab_indicator_style="STYLE_TOP"
             app:tab_item_is_equ_width="true"
             app:tab_orientation="HORIZONTAL"

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.Gravity
 import androidx.fragment.app.activityViewModels
 import com.hamster.happyness.databinding.DialogHomeCleanBinding
+import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
@@ -43,7 +44,7 @@ class HomeCleanDialog : BaseDialogFragment<DialogHomeCleanBinding>(DialogHomeCle
         }
 
         mBinding.btnConfirmLeft.safeClick {
-            mViewModel.improveCleanliness(onSuccess = {
+            mViewModel.improveCleanliness(Constants.HamsterCultivatePayType.PROP,onSuccess = {
                 //喂食成功 刷新Dialog进度条,刷新HomeFragment喂食度
                 FlowBus.post(Event.HamsterFeedingOrCleaningEvent)
             })
@@ -51,7 +52,7 @@ class HomeCleanDialog : BaseDialogFragment<DialogHomeCleanBinding>(DialogHomeCle
         }
 
         mBinding.btnConfirmRight.safeClick {
-            mViewModel.improveCleanliness(onSuccess = {
+            mViewModel.improveCleanliness(Constants.HamsterCultivatePayType.PINE_CONE,onSuccess = {
                 //喂食成功 刷新Dialog进度条,刷新HomeFragment喂食度
                 FlowBus.post(Event.HamsterFeedingOrCleaningEvent)
             })

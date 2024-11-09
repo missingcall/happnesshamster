@@ -7,11 +7,15 @@ import coil.load
 import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
+import coil.util.DebugLogger
 import com.blankj.utilcode.util.StringUtils
 import com.kissspace.module_util.R
 
 fun ImageView.loadImage(url: Any?, @DrawableRes placeholder: Int? = null, radius: Float? = null) {
-    load(url) {
+    var imageLoader: ImageLoader = ImageLoader.Builder(context)
+        .crossfade(true)
+        .build()
+    load(url, imageLoader.newBuilder().logger(DebugLogger()).build()) {
         placeholder?.let {
             placeholder(getDrawable(placeholder))
         }
@@ -32,12 +36,11 @@ fun ImageView.loadImageWithDefault(url: Any?, radius: Float? = null) {
 }
 
 
-
 fun ImageView.loadImageCircle(
     url: Any?, @DrawableRes placeholder: Int? = null
 ) {
 
-    load(url){
+    load(url) {
         placeholder?.let { placeholder(getDrawable(placeholder)) }
         transformations(CircleCropTransformation())
     }
@@ -54,12 +57,14 @@ fun ImageView.loadImage(
 ) {
     load(url) {
         placeholder?.let { placeholder(getDrawable(placeholder)) }
-        transformations(RoundedCornersTransformation(
-            topLeft = topLeftRadius.dp,
-            topRight = topRightRadius.dp,
-            bottomLeft = bottomLeftRadius.dp,
-            bottomRight = bottomRightRadius.dp
-        ))
+        transformations(
+            RoundedCornersTransformation(
+                topLeft = topLeftRadius.dp,
+                topRight = topRightRadius.dp,
+                bottomLeft = bottomLeftRadius.dp,
+                bottomRight = bottomRightRadius.dp
+            )
+        )
     }
 }
 

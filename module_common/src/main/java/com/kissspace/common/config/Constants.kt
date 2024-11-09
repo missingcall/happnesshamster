@@ -675,6 +675,20 @@ object Constants {
         }
     }
 
+    /**
+     * 	costType：	001:松果 002 松子 003 道具
+     */
+    class HamsterCultivatePayType {
+        companion object {
+
+            const val PINE_CONE = "001"//松果
+            const val PINE_NUT = "002" //松子
+            const val PROP = "003" //道具
+
+
+        }
+    }
+
 
 
     var sendSmsType: Pair<String?, String?>? = null

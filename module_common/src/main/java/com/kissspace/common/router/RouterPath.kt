@@ -291,7 +291,6 @@ object RouterPath {
     const val PATH_My_DYNAMIC = "djs://pages/my_dynamic"
 
 
-
     //任务消息
     const val PATH_MESSAGE_TASK = PATH_BASE + "message_task"
 
@@ -307,4 +306,7 @@ object RouterPath {
 
     //仓鼠皮肤
     const val PATH_FIRM = PATH_BASE + "hamster_firm"
+
+    //钱包转换 (松果转换松子/松子转换松果/松子转换钻石)
+    const val PATH_WALLET_CONVERSION = PATH_BASE + "hamster_wallet_conversion"
 }

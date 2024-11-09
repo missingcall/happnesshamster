@@ -187,7 +187,7 @@ sealed class Event {
 //    data class GiveGiftByCoinLocal(var tags:List<String>,var number:Int,var  giftInfo: GiftInfo,val source:String) : Event()
 
     //刷新钱包中松子/松果/钻石余额 以及 转入转出记录
-    object MsgRefreshWalletEvent : Event()
+//    object MsgRefreshWalletEvent : Event()
 
     //喂食清洗 合并事件
     object HamsterFeedingOrCleaningEvent : Event()

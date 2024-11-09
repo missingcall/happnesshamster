@@ -7,14 +7,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.ToastUtils
-import com.didi.drouter.api.DRouter
+import com.blankj.utilcode.util.SpanUtils
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.config.Constants
-import com.kissspace.common.flowbus.Event
-import com.kissspace.common.flowbus.FlowBus
-import com.kissspace.common.model.*
-import com.kissspace.common.provider.IRoomProvider
+import com.kissspace.common.ext.safeClick
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.widget.MarqueeFactory
@@ -22,7 +18,6 @@ import com.kissspace.common.widget.SimpleNoticeMF
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineFragmentWalletBinding
-import kotlin.io.path.Path
 
 /**
  *
@@ -34,9 +29,9 @@ import kotlin.io.path.Path
 class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
     private val mBinding by viewBinding<MineFragmentWalletBinding>()
     private val mViewModel by viewModels<WalletViewModel>()
-    private lateinit var type: String
-    private val list = mutableListOf<String>()
-    private var marqueeFactory: MarqueeFactory<TextView, String>? = null
+    private lateinit var mType: String
+    private val list = mutableListOf<CharSequence>()
+    private var marqueeFactory: MarqueeFactory<TextView, CharSequence>? = null
 //    private val
 
 
@@ -48,7 +43,7 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        type = arguments?.getString("type")!!
+        mType = arguments?.getString("type")!!
 
     }
 
@@ -56,10 +51,31 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
         marqueeFactory = SimpleNoticeMF(context)
         mBinding.mtvTransfer.setMarqueeFactory(marqueeFactory)
 
-        when (type) {
-            "001" -> mBinding.iconNuts.setImageResource(R.mipmap.icon_pine_cone)
-            "002" -> mBinding.iconNuts.setImageResource(R.mipmap.icon_pine_nut)
-            else -> mBinding.iconNuts.setImageResource(R.mipmap.icon_diamond)
+        when (mType) {
+            "001" -> {
+                mBinding.iconNuts.setImageResource(R.mipmap.icon_pine_cone)
+                mBinding.btnRecharge.visibility = View.GONE
+            }
+            "002" -> {
+                mBinding.iconNuts.setImageResource(R.mipmap.icon_pine_nut)
+                mBinding.btnRecharge.visibility = View.GONE
+            }
+            else -> {
+                mBinding.iconNuts.setImageResource(R.mipmap.icon_diamond)
+                mBinding.btnRecharge.visibility = View.VISIBLE
+            }
+        }
+
+        mBinding.btnRecharge.safeClick {
+            jump(RouterPath.PATH_USER_WALLET_GOLD_RECHARGE)
+        }
+
+        mBinding.btnTransformation.safeClick {
+            jump(RouterPath.PATH_WALLET_CONVERSION ,"type" to mType)
+        }
+
+        mBinding.btnConversion.safeClick {
+
         }
 
         initData()
@@ -68,18 +84,19 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
     private fun initData() {
         getMoney()
 
-        when (type) {
+        when (mType) {
             //松果转入转出查询
             "001" -> {
                 mViewModel.queryCollectRecordList("", "", 0, 5, onSuccess = {
                     //重置跑马灯状态
                     list.clear()
-                    if (mBinding.mtvTransfer.isFlipping){
+                    if (mBinding.mtvTransfer.isFlipping) {
                         mBinding.mtvTransfer.stopFlipping()
                     }
 
-
-                    list.add("松果转入/转出记录")
+                    list.add(
+                        SpanUtils().appendImage(R.mipmap.icon_hamster_clock).append("松果转入/转出记录").create()
+                    )
                     var s = ""
                     for (record in it?.records!!) {
                         when (record.coinType) {
@@ -140,16 +157,16 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
     override fun createDataObserver() {
         super.createDataObserver()
 
-        FlowBus.observerEvent<Event.MsgRefreshWalletEvent>(this) {
+        /*FlowBus.observerEvent<Event.MsgRefreshWalletEvent>(this) {
             initData()
-        }
+        }*/
     }
 
     private fun getMoney() {
         mViewModel.getMyMoneyBag {
             it?.let {
                 mViewModel.walletModel.value = it
-                mBinding.iconNutsNum.text =  when (type) {
+                mBinding.iconNutsNum.text = when (mType) {
                     "001" -> mViewModel.walletModel.value?.diamond.toString()
                     "002" -> mViewModel.walletModel.value?.accountBalance.toString()
                     else -> mViewModel.walletModel.value?.coin.toString()

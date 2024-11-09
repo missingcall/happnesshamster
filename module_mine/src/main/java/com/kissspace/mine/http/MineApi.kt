@@ -257,4 +257,9 @@ object MineApi {
     //获取皮肤信息(基础仓鼠)
     const val API_HAMSTER_MARKET_QUERY_BASE_INFO_LIST = "/hamster-center/hamsterMarket/queryBaseInfoList"
 
+    //当前使用皮肤
+    const val API_HAMSTER_ACCESSORIES_CURRENTLY_USE_SKIN = "/hamster-user/accessories/currentlyUseSkin"
+
+
+
 }

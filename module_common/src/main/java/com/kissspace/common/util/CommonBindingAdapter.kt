@@ -35,6 +35,7 @@ object CommonBindingAdapter {
         )
     }
 
+
     @JvmStatic
     @BindingAdapter(value = ["imageUrl", "imageRadius"])
     fun loadImage(imageView: ImageView, imageUrl: String?, imageRadius: Float = 0f) {
@@ -192,7 +193,7 @@ object CommonBindingAdapter {
         } else {
             textView.setTextColor(ColorUtils.getColor(R.color.color_AAAAAA))
         }
-        textView.setBackgroundResource(R.drawable.common_btn_selector_blue_black_radius15)
+        textView.setBackgroundResource(R.drawable.common_btn_selector_purple_black_radius45)
         textView.isEnabled = enable
     }
 
@@ -236,6 +237,12 @@ object CommonBindingAdapter {
     @BindingAdapter("userLevelCount", requireAll = false)
     fun userLevelCount(textView: UserLevelIconView, count: Int) {
         textView.setLeveCount(count)
+    }
+
+    @JvmStatic
+    @BindingAdapter("userLevelCountVisible", requireAll = false)
+    fun userLevelCountVisible(textView: UserLevelIconView, count: Int) {
+        textView.setLeveCountVisible(count)
     }
 
     @JvmStatic

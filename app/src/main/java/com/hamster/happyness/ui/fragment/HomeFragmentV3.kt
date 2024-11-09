@@ -12,6 +12,7 @@ import com.hamster.happyness.R
 import com.hamster.happyness.databinding.FragmentMainHomeV3Binding
 import com.hamster.happyness.http.Api
 import com.hamster.happyness.viewmodel.GameQuickEnterModel
+import com.hamster.happyness.viewmodel.HamsterViewModel
 import com.hamster.happyness.viewmodel.HomeViewModel
 import com.hamster.happyness.widget.*
 
@@ -24,19 +25,21 @@ import com.kissspace.common.http.getUserInfo
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.*
+import com.kissspace.common.util.glide.GlideApp
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
+import com.kissspace.util.loadImage
 
 //探索
 class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
     private val mBinding by viewBinding<FragmentMainHomeV3Binding>()
-    private val mHomeViewModel by viewModels<HomeViewModel>()
     private val mMineViewModel by activityViewModels<MineViewModel>()
     private val mWalletViewModel by activityViewModels<WalletViewModel>()
+    private val mHamsterViewModel by activityViewModels<HamsterViewModel>()
 
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.titleBar.setMarginStatusBar()
@@ -49,6 +52,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         refreshUserinfo()
         queryDayIncome()
         getHamsterStatus()
+        getCurrentHamsterSkin()
 
         mBinding.ivAvatar.safeClick {
             ChangeAccountDialog.newInstance().show(childFragmentManager)
@@ -59,9 +63,9 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         }
 
         //产能说明
-        mBinding.ivDailyComeDescription.safeClick {
-            CapacityDescriptionDialog.newInstance().show(childFragmentManager)
-        }
+        /*    mBinding.ivDailyComeDescription.safeClick {
+                CapacityDescriptionDialog.newInstance().show(childFragmentManager)
+            }*/
 
         //养成说明
         mBinding.ivBalanceDescription.safeClick {
@@ -80,6 +84,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
     }
 
+
     override fun createDataObserver() {
         super.createDataObserver()
 
@@ -91,6 +96,11 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         //复活仓鼠事件
         FlowBus.observerEvent<Event.HamsterReviveEvent>(this) {
             getHamsterStatus()
+        }
+
+        //当前皮肤设置成功
+        FlowBus.observerEvent<Event.WearSkinEvent>(this) {
+            getCurrentHamsterSkin()
         }
     }
 
@@ -207,6 +217,14 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 HomeRebornDialog.newInstance().show(childFragmentManager)
             }
         })
+
+    }
+
+    private fun getCurrentHamsterSkin() {
+        //设置仓鼠当前皮肤
+        mHamsterViewModel.currentlyUseSkin {
+            mBinding.ivHamsterDevelopment.loadImage(it.icon, R.mipmap.app_icon_hamster)
+        }
     }
 
     private fun initData() {
