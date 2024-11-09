@@ -47,26 +47,5 @@ class LoveWallActivity : com.kissspace.common.base.BaseActivity(R.layout.message
 
     }
 
-    private fun initTable() {
-//        mBinding.customTabLayout.setOnTabChangedListener {
-//            mBinding.viewPager.currentItem = it
-//        }
-//        mBinding.customTabLayout.setViewPager(mBinding.viewPager)
-//        val test1 = CustomTabLayoutBean(
-//            "最新",
-//            0,
-//            R.mipmap.message_love_wall_table_new,
-//            true
-//        )
-//
-//        val test2 = CustomTabLayoutBean(
-//            "最壕",
-//            1,
-//            R.mipmap.message_love_wall_table_money,
-//            false
-//        )
-//        mBinding.customTabLayout.addTabItem(test1)
-//        mBinding.customTabLayout.addTabItem(test2)
-    }
 
 }

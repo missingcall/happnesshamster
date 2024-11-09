@@ -11,6 +11,7 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
 import by.kirich1409.viewbindingdelegate.viewBinding
+import coil.load
 import com.blankj.utilcode.util.StringUtils
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
@@ -18,9 +19,11 @@ import com.drake.brv.utils.setup
 import com.kongzue.dialogx.dialogs.CustomDialog
 import com.kongzue.dialogx.interfaces.OnBindView
 import com.kissspace.common.base.BaseFragment
+import com.kissspace.common.base.BaseLazyFragment
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.model.LoveWallListBean
 import com.kissspace.common.model.LoveWallResponse
+import com.kissspace.common.util.glide.GlideApp
 import com.kissspace.common.util.jumpRoom
 import com.kissspace.message.http.MessageApi
 import com.kissspace.module_message.R
@@ -38,7 +41,7 @@ import com.kissspace.util.resToColor
  * @Description: 真爱墙frament
  *
  */
-class LoveWallFragment : BaseFragment(R.layout.message_fragment_love_wall) {
+class LoveWallFragment : BaseLazyFragment(R.layout.message_fragment_love_wall) {
     private val mBinding by viewBinding<MessageFragmentLoveWallBinding>()
     private lateinit var type: String
 
@@ -55,6 +58,10 @@ class LoveWallFragment : BaseFragment(R.layout.message_fragment_love_wall) {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+
+    }
+
+    override fun lazyInitView() {
         initRecyclerView()
         mBinding.pageRefreshLayout.apply {
             onRefresh {
@@ -64,12 +71,14 @@ class LoveWallFragment : BaseFragment(R.layout.message_fragment_love_wall) {
                 initData(false)
             }
         }
+    }
 
+    override fun lazyLoadData() {
+        initData(true)
     }
 
     override fun bindData() {
         super.bindData()
-        initData(true)
     }
 
     private fun initRecyclerView() {
@@ -91,7 +100,6 @@ class LoveWallFragment : BaseFragment(R.layout.message_fragment_love_wall) {
                 root.setBackgroundResource(resource)
                 val bottom = findView<TextView>(R.id.tv_enter_wall)
                 bottom.text = buildSpannedString {
-
 
 
                     color(
@@ -165,7 +173,18 @@ class LoveWallFragment : BaseFragment(R.layout.message_fragment_love_wall) {
                             dialog?.dismiss()
                         }
                     v?.findViewById<TextView>(R.id.tv_title)?.text = model.giftName
-                    v?.findViewById<ImageView>(R.id.iv_gift)?.loadImage(model.url)
+                    v?.findViewById<ImageView>(R.id.iv_gift)?.let {
+
+                        GlideApp.with(it)
+                            .load(model.url)
+                            .placeholder(com.kissspace.module_util.R.drawable.common_ic_default)
+                            .into(it)
+
+                    }
+
+
+
+
                     v?.findViewById<TextView>(R.id.tv_price)?.text =
                         StringUtils.getString(R.string.message_love_wall_price, model.price)
                 }

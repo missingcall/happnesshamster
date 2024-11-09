@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -58,36 +59,44 @@
             app:layout_constraintStart_toEndOf="@id/iv_avatar"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <com.ruffian.library.widget.RLinearLayout
             android:id="@+id/layout_follow_room"
             messageFollowRoomVisible="@{m.followRoomId}"
-            android:layout_width="66dp"
-            android:layout_height="30dp"
+            android:layout_width="41dp"
+            android:layout_height="14dp"
             android:layout_marginStart="6dp"
             android:gravity="center"
-            android:background="@mipmap/message_icon_follow_room"
+            app:background_normal="@array/button_color_bg"
+            app:gradient_orientation="LEFT_RIGHT"
+            app:gradient_type="linear"
+            app:corner_radius="7dp"
+
             app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
             app:layout_constraintStart_toEndOf="@id/tv_nickname"
             app:layout_constraintTop_toTopOf="@id/tv_nickname">
 
-            <com.airbnb.lottie.LottieAnimationView
+          <!--  <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="12dp"
                 android:layout_height="13dp"
                 app:lottie_autoPlay="true"
                 app:lottie_fileName="lottie/inroom/data.json"
                 app:lottie_imageAssetsFolder="lottie/inroom/images"
                 app:lottie_loop="true"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                />-->
 
-            <TextView
+
+            <com.ruffian.library.widget.RTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/message_follow_room"
+                app:icon_normal_left="@mipmap/message_chat_icon_live_status"
                 android:textColor="@color/white"
-                android:textSize="8sp"
-                android:visibility="gone"/>
+                android:drawablePadding="3dp"
+                android:textSize="9sp"
+                />
 
-        </LinearLayout>
+        </com.ruffian.library.widget.RLinearLayout>
 
         <TextView
             android:id="@+id/tv_content"

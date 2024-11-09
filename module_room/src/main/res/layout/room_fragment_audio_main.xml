@@ -239,9 +239,8 @@
 
                 <ImageView
                     android:id="@+id/iv_emoji"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="8dp"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:src="@mipmap/room_icon_emoji"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -254,8 +253,8 @@
 
             <ImageView
                 android:id="@+id/iv_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_marginEnd="4dp"
                 android:src="@mipmap/room_icon_more"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -264,8 +263,8 @@
 
             <ImageView
                 android:id="@+id/iv_gift"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:src="@mipmap/room_icon_gift"
                 app:layout_constraintBottom_toBottomOf="@id/layout_chat"
                 app:layout_constraintRight_toLeftOf="@id/iv_more"
@@ -273,8 +272,8 @@
 
             <ImageView
                 android:id="@+id/iv_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:src="@mipmap/room_icon_message"
                 app:layout_constraintRight_toLeftOf="@id/iv_gift"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -98,8 +98,8 @@
 
     <ImageView
         android:id="@+id/iv_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
         android:layout_marginEnd="6dp"
         android:src="@mipmap/room_icon_close"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -119,8 +119,8 @@
 
     <ImageView
         android:id="@+id/iv_notice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
         android:src="@mipmap/room_icon_notice"
         android:layout_marginEnd="3dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -85,7 +85,9 @@
             app:layout_constraintBottom_toBottomOf="@id/edit_chat"
             app:layout_constraintEnd_toEndOf="parent"
             app:corner_radius="17dp"
-            app:background_normal="@color/color_5A60FF"
+            app:background_normal="@array/button_color_bg"
+            app:gradient_orientation="LEFT_RIGHT"
+            app:gradient_type="linear"
             app:layout_constraintTop_toTopOf="@id/edit_chat" />
 
         <EditText
