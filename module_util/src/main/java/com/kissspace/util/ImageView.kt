@@ -12,10 +12,7 @@ import com.blankj.utilcode.util.StringUtils
 import com.kissspace.module_util.R
 
 fun ImageView.loadImage(url: Any?, @DrawableRes placeholder: Int? = null, radius: Float? = null) {
-    var imageLoader: ImageLoader = ImageLoader.Builder(context)
-        .crossfade(true)
-        .build()
-    load(url, imageLoader.newBuilder().logger(DebugLogger()).build()) {
+    load(url) {
         placeholder?.let {
             placeholder(getDrawable(placeholder))
         }

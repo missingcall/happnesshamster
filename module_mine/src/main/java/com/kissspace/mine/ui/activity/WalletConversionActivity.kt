@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Gravity
 import androidx.activity.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.angcyo.tablayout.delegate2.ViewPager2Delegate
 import com.didi.drouter.annotation.Router
 import com.kissspace.common.base.BaseActivity
@@ -48,38 +49,64 @@ class WalletConversionActivity : BaseActivity(R.layout.mine_activity_wallet_conv
         }
 
         ViewPager2Delegate.install(mBinding.viewPager, mBinding.dslTabLayout)
+
+
+        mBinding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+                when (position) {
+                    0 -> pineConesToPineNuts()
+                    1 -> pineNutsToPineCones()
+                    else -> pineNutsToDiamonds()
+                }
+            }
+        })
+
         mBinding.viewPager.currentItem = type.toInt() - 1
 
+        //获取钱包
+        getMoney()
+        initData()
 
-        when (type) {
-            //松果转松子
-            "001" -> {
-                mBinding.tvTransformLeft.text = "松果"
-                mBinding.tvTransformLeft.setDrawable(R.mipmap.icon_pine_cone, Gravity.START)
+    }
 
-                mBinding.tvTransformRight.text = "松子"
-                mBinding.tvTransformRight.setDrawable(R.mipmap.icon_pine_nut, Gravity.START)
-
-            }
-
-            //松子转松果
-            "002" -> {
-                mBinding.tvTransformLeft.text = "松子"
-                mBinding.tvTransformLeft.setDrawable(R.mipmap.icon_pine_nut, Gravity.START)
-
-                mBinding.tvTransformRight.text = "松果"
-                mBinding.tvTransformRight.setDrawable(R.mipmap.icon_pine_cone, Gravity.START)
-            }
-
-            //松子转钻石
-            else -> {
-                mBinding.tvTransformLeft.text = "松子"
-                mBinding.tvTransformLeft.setDrawable(R.mipmap.icon_pine_nut, Gravity.START)
-
-                mBinding.tvTransformRight.text = "钻石"
-                mBinding.tvTransformRight.setDrawable(R.mipmap.icon_diamond, Gravity.START)
+    private fun getMoney() {
+        mViewModel.getMyMoneyBag {
+            it?.let {
+                mViewModel.walletModel.value = it
             }
         }
+    }
+
+    private fun initData() {
+        //TODO 获取兑换比例 放到WalletViewModel中 下级fragment直接取
+
+    }
+
+
+    private fun pineConesToPineNuts() {
+        mBinding.tvTransformLeft.text = "松果"
+        mBinding.tvTransformLeft.setDrawable(R.mipmap.icon_pine_cone, Gravity.START)
+
+        mBinding.tvTransformRight.text = "松子"
+        mBinding.tvTransformRight.setDrawable(R.mipmap.icon_pine_nut, Gravity.START)
+    }
+
+    private fun pineNutsToPineCones() {
+        mBinding.tvTransformLeft.text = "松子"
+        mBinding.tvTransformLeft.setDrawable(R.mipmap.icon_pine_nut, Gravity.START)
+
+        mBinding.tvTransformRight.text = "松果"
+        mBinding.tvTransformRight.setDrawable(R.mipmap.icon_pine_cone, Gravity.START)
+    }
+
+    private fun pineNutsToDiamonds() {
+        mBinding.tvTransformLeft.text = "松子"
+        mBinding.tvTransformLeft.setDrawable(R.mipmap.icon_pine_nut, Gravity.START)
+
+        mBinding.tvTransformRight.text = "钻石"
+        mBinding.tvTransformRight.setDrawable(R.mipmap.icon_diamond, Gravity.START)
     }
 
 
