@@ -3,12 +3,16 @@ package com.hamster.happyness.widget
 import android.annotation.SuppressLint
 import android.view.Gravity
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.hamster.happyness.databinding.DialogHomeFeedBinding
+import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
+import com.kissspace.common.model.wallet.CultivationPanelModel
 import com.kissspace.common.widget.BaseDialogFragment
 import com.kissspace.mine.viewmodel.WalletViewModel
+import okhttp3.internal.notifyAll
 
 /**
  * 底部弹窗-产能说明
@@ -43,7 +47,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
         }
 
         mBinding.btnConfirmLeft.safeClick {
-            mViewModel.improveSatiety(onSuccess = {
+            mViewModel.improveSatiety(Constants.HamsterCultivatePayType.PROP,onSuccess = {
                 //喂食成功 刷新Dialog进度条,刷新HomeFragment喂食度
                 FlowBus.post(Event.HamsterFeedingOrCleaningEvent)
             })
@@ -51,7 +55,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
         }
 
         mBinding.btnConfirmRight.safeClick {
-            mViewModel.improveSatiety(onSuccess = {
+            mViewModel.improveSatiety(Constants.HamsterCultivatePayType.PINE_CONE,onSuccess = {
                 //喂食成功 刷新Dialog进度条,刷新HomeFragment喂食度
                 FlowBus.post(Event.HamsterFeedingOrCleaningEvent)
             })

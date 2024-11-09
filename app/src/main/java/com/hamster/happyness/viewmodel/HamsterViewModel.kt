@@ -25,7 +25,7 @@ class HamsterViewModel : BaseViewModel() {
     private val _infoListEvent = MutableSharedFlow<ResultState<InfoListModel>>()
     val infoListEvent = _infoListEvent.asSharedFlow()
 
-
+    val currentlyUseSkinModel = ObservableField<CurrentlyUseSkinModel>()
     /**
      * 用户查看皮肤首页
      */
@@ -40,9 +40,6 @@ class HamsterViewModel : BaseViewModel() {
         })
     }
 
-    /**
-     * 当前使用皮肤
-     */
     fun wearSkin(pageNum: Int, skinId: Int, onSuccess: ((Boolean) -> Unit)?) {
         val param = mutableMapOf<String, Any?>()
         param["pageNum"] = pageNum
@@ -72,6 +69,16 @@ class HamsterViewModel : BaseViewModel() {
         request<QueryBaseInfoList>(MineApi.API_HAMSTER_MARKET_QUERY_BASE_INFO_LIST, Method.GET, onSuccess = {
             onSuccess.invoke(it)
 
+        }, onError = {
+        })
+    }
+
+    //当前使用皮肤
+    fun currentlyUseSkin(onSuccess: ((CurrentlyUseSkinModel) -> Unit) = {}) {
+        request<CurrentlyUseSkinModel>(MineApi.API_HAMSTER_ACCESSORIES_CURRENTLY_USE_SKIN, Method.GET, onSuccess = {
+            currentlyUseSkinModel.set(it)
+            currentlyUseSkinModel.notifyChange()
+            onSuccess.invoke(it)
         }, onError = {
         })
     }

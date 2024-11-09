@@ -53,6 +53,12 @@ class UserLevelIconView : FrameLayout {
         mTextView.text = mLevelCount.toString()
     }
 
+    fun setLeveCountVisible(level: Int) {
+        visibility = View.VISIBLE
+        mTextView.text = level.toString()
+        mImageView.setImageResource(getIconByLevelCount(mLevelType, level))
+    }
+
     fun setLeveCount(level: Int) {
         visibility = if (level == 0) View.GONE else View.VISIBLE
         mTextView.text = level.toString()
@@ -76,8 +82,8 @@ class UserLevelIconView : FrameLayout {
                     in 30..34 -> R.mipmap.common_icon_user_level_income_four
                     in 35..39 -> R.mipmap.common_icon_user_level_income_five
                     in 40..44 -> R.mipmap.common_icon_user_level_income_six
-                    //in 45..49 -> R.mipmap.common_icon_user_level_income_seven
-                    else -> R.mipmap.common_icon_user_level_income_six
+                    in 45..49 -> R.mipmap.common_icon_user_level_income_seven
+                    else -> R.mipmap.common_icon_user_level_income_eight
                 }
             }
             else -> {

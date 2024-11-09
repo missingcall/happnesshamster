@@ -445,6 +445,8 @@ project.ext {
                     extension.implementation "androidx.fragment:fragment-ktx:1.5.5"
                     extension.implementation "com.squareup.okio:okio:3.0.0"
                     extension.api "io.coil-kt:coil:2.4.0"
+//                    extension.api "io.coil-kt:coil:2.7.0"
+//                    extension.api "io.coil-kt.coil3:coil:3.0.1"
                     extension.api "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
                     extension.api "com.guolindev.permissionx:permissionx:1.7.1"
                     break

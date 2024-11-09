@@ -1,7 +1,7 @@
 package com.hamster.happyness.adapter
 
 import android.graphics.Color
-import android.opengl.Visibility
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ResourceUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.SpanUtils
@@ -26,7 +27,6 @@ import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.module_room.R
 import com.kissspace.util.loadImage
 import com.kissspace.util.loadImageCircle
-import com.kissspace.util.logD
 
 object ViewBindingAdapter {
     @JvmStatic
@@ -139,13 +139,14 @@ object ViewBindingAdapter {
      * 可用喂食道具
      */
     @JvmStatic
-    @BindingAdapter("availableFood", requireAll = false)
-    fun availableFood(textView: TextView, vm: WalletViewModel) {
+    @BindingAdapter(value = ["propFood", "diamond"])
+    fun availableFood(textView: TextView, propFood: Int, diamond: Double) {
+
         val spanStringAvailable = SpanUtils().append("我可用的")
             .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_satiety_small)
-            .append(vm.hmsInfoModel.get()?.satiety.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append(propFood.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
-            .append(vm.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append(diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .create()
         textView.text = spanStringAvailable
     }
@@ -154,13 +155,13 @@ object ViewBindingAdapter {
      * 可用清洁道具
      */
     @JvmStatic
-    @BindingAdapter("availableClean", requireAll = false)
-    fun availableClean(textView: TextView, vm: WalletViewModel) {
+    @BindingAdapter(value = ["propClean", "diamond"])
+    fun availableClean(textView: TextView, propClean: Int, diamond: Double) {
         val spanStringAvailable = SpanUtils().append("我可用的")
             .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness_small)
-            .append(vm.hmsInfoModel.get()?.cleanliness.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append(propClean.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
-            .append(vm.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append(diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .create()
         textView.text = spanStringAvailable
     }
@@ -184,9 +185,10 @@ object ViewBindingAdapter {
     @JvmStatic
     @BindingAdapter("feedingPropConfirmation", requireAll = false)
     fun feedingPropConfirmation(button: Button, cultivationPanelModel: CultivationPanelModel?) {
+
         val spanString = SpanUtils()
             .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_satiety_small)
-            .append(cultivationPanelModel?.satiety?.prop.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append(cultivationPanelModel?.satiety?.costPropCount.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .append("\n确认喂养")
             .create()
         button.text = spanString
@@ -215,7 +217,7 @@ object ViewBindingAdapter {
     fun cleaningPropConfirmation(button: Button, cultivationPanelModel: CultivationPanelModel?) {
         val spanString = SpanUtils()
             .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness_small)
-            .append(cultivationPanelModel?.cleanliness?.prop.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append(cultivationPanelModel?.cleanliness?.costPropCount.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .append("\n确认清洁")
             .create()
         button.text = spanString

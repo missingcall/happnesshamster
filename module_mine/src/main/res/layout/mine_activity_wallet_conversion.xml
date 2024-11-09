@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.kissspace.mine.viewmodel.WalletViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hjq.bar.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:barStyle="transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftHorizontalPadding="16dp"
+            app:leftIcon="@mipmap/common_icon_back_white"
+            app:lineVisible="false" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="转换"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_bar"
+
+            />
+
+        <TextView
+            android:id="@+id/tvSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="参与其他玩法"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvTransformLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+
+            android:layout_marginTop="19dp"
+            android:background="@drawable/common_bg_black23_radius45"
+            android:drawablePadding="2dp"
+            android:gravity="center"
+            android:paddingLeft="25dp"
+            android:paddingTop="3dp"
+            android:paddingRight="25dp"
+            android:paddingBottom="3dp"
+            android:text="松果"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:drawableLeftCompat="@mipmap/icon_pine_cone"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tvTransformLeftNum"
+            app:layout_constraintTop_toBottomOf="@id/tvSubTitle" />
+
+        <TextView
+            android:id="@+id/tvTransformLeftNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/color_FDC120"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tvTransformLeft"
+            app:layout_constraintLeft_toRightOf="@id/tvTransformLeft"
+            app:layout_constraintRight_toLeftOf="@id/ivTransform"
+            app:layout_constraintTop_toTopOf="@id/tvTransformLeft" />
+
+        <ImageView
+            android:id="@+id/ivTransform"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="9dp"
+            android:gravity="center"
+            android:src="@mipmap/icon_mine_transform"
+            app:layout_constraintBottom_toBottomOf="@id/tvTransformLeft"
+            app:layout_constraintLeft_toRightOf="@id/tvTransformLeftNum"
+            app:layout_constraintRight_toLeftOf="@id/tvTransformRightNum"
+            app:layout_constraintTop_toTopOf="@id/tvTransformLeft" />
+
+        <TextView
+            android:id="@+id/tvTransformRightNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="11dp"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/color_FDC120"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tvTransformLeft"
+            app:layout_constraintLeft_toRightOf="@id/ivTransform"
+            app:layout_constraintRight_toLeftOf="@id/tvTransformRight"
+            app:layout_constraintTop_toTopOf="@id/tvTransformLeft" />
+
+        <TextView
+            android:id="@+id/tvTransformRight"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:background="@drawable/common_bg_black23_radius45"
+            android:drawablePadding="2dp"
+            android:gravity="center"
+            android:paddingLeft="25dp"
+            android:paddingTop="3dp"
+            android:paddingRight="25dp"
+            android:paddingBottom="3dp"
+            android:text="松子"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:drawableLeftCompat="@mipmap/icon_pine_nut"
+            app:layout_constraintBottom_toBottomOf="@id/tvTransformLeft"
+            app:layout_constraintLeft_toRightOf="@id/tvTransformRightNum"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTransformLeft" />
+
+        <com.angcyo.tablayout.DslTabLayout
+            android:id="@+id/dsl_tab_layout"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/common_bg_black23_radius15"
+            android:padding="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTransformLeftNum"
+            app:tab_draw_indicator="true"
+            app:tab_enable_text_bold="true"
+            app:tab_indicator_drawable="@drawable/common_shape_indicator_383b44_10"
+            app:tab_indicator_height="MATCH_PARENT"
+            app:tab_indicator_radius="10dp"
+            app:tab_indicator_style="STYLE_CENTER"
+            app:tab_indicator_width="MATCH_PARENT"
+            app:tab_item_is_equ_width="true"
+            app:tab_orientation="HORIZONTAL"
+            app:tab_select_color="@color/white"
+            app:tab_text_max_size="11sp"
+            app:tab_text_min_size="10sp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="松果转换松子"
+                android:textSize="11sp"
+                app:bl_corners_radius="10dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="松子转换松果"
+                android:textSize="11sp"
+                app:bl_corners_radius="10dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="松子转换钻石"
+                android:textSize="11sp"
+                app:bl_corners_radius="10dp" />
+        </com.angcyo.tablayout.DslTabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dsl_tab_layout"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="16dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

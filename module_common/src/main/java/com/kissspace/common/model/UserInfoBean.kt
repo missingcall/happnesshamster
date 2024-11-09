@@ -47,7 +47,7 @@ data class UserInfoBean(
     val headOfFamily: Boolean = false,
     val collectionNum: Int = 0,
     val visitorNum: Int = 0,
-    val charmLevel: Int = 0,
+    var charmLevel: Int = 0,
     val consumeLevel: Int = 0,
     val userRightList: List<String> = emptyList(),
     val firstRecharge: Boolean = false,
@@ -73,7 +73,7 @@ data class UserInfoBean(
     val isSetPassword: Boolean = false,
     val likesReceivedNum:String ="0",
 
-) : Parcelable {
+    ) : Parcelable {
     fun getIntegralLong(): Long = integral.roundToLong()
 
     fun getAge(): String {
