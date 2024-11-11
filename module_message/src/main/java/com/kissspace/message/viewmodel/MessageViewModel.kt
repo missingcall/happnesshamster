@@ -87,15 +87,6 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
         }
     }
 
-    fun getMessageMenu(): MutableList<ItemMessageMenu> {
-        val messageList: MutableList<ItemMessageMenu> = ArrayList()
-        return messageList.apply {
-            add(ItemMessageMenu("真爱墙", R.mipmap.message_menu_icon1))
-            add(ItemMessageMenu("系统通知", R.mipmap.message_menu_icon2))
-            add(ItemMessageMenu("互动消息", R.mipmap.message_menu_icon3))
-            add(ItemMessageMenu("任务消息", R.mipmap.message_menu_icon4))
-        }
-    }
 
 
     override fun onCreate(owner: LifecycleOwner) {

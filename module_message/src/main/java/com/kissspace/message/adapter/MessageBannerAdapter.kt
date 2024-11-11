@@ -67,8 +67,6 @@ class MessageBannerAdapter(data: List<LoveWallListBean>) :
                 0 -> R.mipmap.message_bg_love_wall_blue
                 1 -> R.mipmap.message_bg_love_wall_second
                 else -> R.mipmap.message_bg_love_wall_third
-//            0 -> R.mipmap.message_bg_love_wall_first
-//            else -> R.mipmap.message_bg_love_wall_blue
         }
         holder.mRootView.setBackgroundResource(resource)
         holder.mAvatarLeft.loadwithGlide(data.sourceUserProfilePath,isCircle = true)
