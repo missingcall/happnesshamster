@@ -113,13 +113,16 @@
 
 
         <com.youth.banner.Banner
-            app:layout_constraintDimensionRatio="75:42"
+            app:layout_constraintDimensionRatio="320:131"
             bindMessageBanner="@{m}"
             app:layout_constraintTop_toBottomOf="@id/layout_notification"
+            tools:visibility="visible"
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:visibility="gone"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:layout_marginTop="12dp"
             />
 

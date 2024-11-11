@@ -420,6 +420,9 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
     }
 
 
+    /**
+     * 显示或隐藏空布局
+     */
     private fun showEmptyContent() {
         mBinding.stateLayout.let {
             if (mRecentContactAdapter.models.isNullOrEmpty() && mSysMsgAdapter.models.isNullOrEmpty()) {

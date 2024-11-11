@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ruffian.library.widget.RConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="28dp"
-    app:bl_corners_topRadius="12dp"
-    app:bl_solid_color="@color/color_E6000000">
+    app:background_normal="@color/white"
+    app:corner_radius="12dp"
+    >
 
     <TextView
         android:id="@+id/tv_title"
@@ -13,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/room_mic_queue_title_manager"
-        android:textColor="@color/white"
+        android:textColor="@color/color_313133"
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginTop="16dp"
-        android:background="@color/color_494B70"
+        android:background="@color/color_E5E5E5"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
 
@@ -37,49 +39,62 @@
         android:overScrollMode="never"
         app:layout_constraintTop_toBottomOf="@id/view_line" />
 
-    <TextView
+    <com.ruffian.library.widget.RTextView
         android:id="@+id/tv_clean_all"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="41dp"
         android:layout_marginStart="31dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
         android:gravity="center"
         android:text="@string/room_mic_queue_clean"
-        android:textColor="@color/color_FFFD62"
+        android:textColor="@color/color_6C74FB"
         android:textSize="16sp"
         android:visibility="gone"
-        app:bl_corners_radius="24dp"
-        app:bl_stroke_color="@color/color_FFFD62"
-        app:bl_stroke_width="1dp"
+        app:corner_radius="21dp"
+        app:border_color_normal="@color/color_5A60FF"
+        app:border_width_normal="1dp"
+        tools:visibility="visible"
         app:layout_constraintEnd_toStartOf="@id/tv_invite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recycler_view" />
 
-    <TextView
+    <com.ruffian.library.widget.RTextView
         android:id="@+id/tv_invite"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="41dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="31dp"
-        android:background="@mipmap/room_bg_invite_mic_button"
         android:gravity="center"
         android:text="@string/room_mic_queue_invite"
-        android:textColor="@color/color_FFFD62"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:visibility="gone"
+        tools:visibility="visible"
+        app:background_normal="@array/button_color_bg"
+        app:gradient_orientation="LEFT_RIGHT"
+        app:gradient_type="linear"
+        app:corner_radius="21dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_clean_all"
         app:layout_constraintTop_toBottomOf="@id/recycler_view" />
 
 
-    <ImageView
+    <com.ruffian.library.widget.RTextView
         android:id="@+id/iv_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="58dp"
-        android:src="@mipmap/common_icon_empty"
+        app:icon_normal_top="@mipmap/common_icon_empty2"
+        app:icon_width="149dp"
+        app:icon_height="135dp"
+        android:text="暂无用户排麦"
+        android:drawablePadding="11dp"
+        android:textColor="@color/color_999999"
+        android:textSize="11sp"
+        android:gravity="center_horizontal"
+        tools:visibility="visible"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,4 +112,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_empty" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.ruffian.library.widget.RConstraintLayout>
