@@ -79,7 +79,7 @@ class TransferViewModel : BaseViewModel() {
         val param = mutableMapOf<String, Any?>()
         param["displayId"] = displayId
         request<UserInfoBean>(
-            MineApi.API_QueryUserByDisplayIdResponse, Method.GET, param, onSuccess =
+            MineApi.API_QUERY_USER_BY_DISPLAY_ID_RESPONSE, Method.GET, param, onSuccess =
             {
                 onSuccess?.invoke(it)
             }, onError = {

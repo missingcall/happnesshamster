@@ -309,4 +309,7 @@ object RouterPath {
 
     //钱包转换 (松果转换松子/松子转换松果/松子转换钻石)
     const val PATH_WALLET_CONVERSION = PATH_BASE + "hamster_wallet_conversion"
+
+    //转增 (松子转赠/钻石转赠)
+    const val PATH_WALLET_TRANSFER = PATH_BASE + "hamster_wallet_transfer"
 }

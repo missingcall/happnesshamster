@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="m"
+            type="com.kissspace.mine.viewmodel.WalletViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvAssets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="我的松子"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clRecipientUID"
+            android:layout_width="0dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/common_bg_black23_radius15"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAssets">
+
+            <TextView
+                android:id="@+id/tvRecipientUID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:text="接收人UID"
+                android:textColor="@color/color_5A60FF"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etRecipientUID"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="15dp"
+                android:background="@null"
+                android:hint="请输入接收人UID"
+                android:inputType="number"
+                android:lines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white30"
+                android:textCursorDrawable="@drawable/common_edit_cursor"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/tvRecipientUID"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvRecipientNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:text="昵称"
+                android:maxLength="10"
+                android:ellipsize="end"
+                android:textColor="@color/color_FDC120"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="@id/etRecipientUID"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clGiftQuantity"
+            android:layout_width="0dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/common_bg_black23_radius15"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            app:layout_constraintLeft_toLeftOf="@id/clRecipientUID"
+            app:layout_constraintRight_toRightOf="@id/clRecipientUID"
+            app:layout_constraintTop_toBottomOf="@id/clRecipientUID">
+
+            <TextView
+                android:id="@+id/tvGiftQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:text="赠送数量"
+                android:textColor="@color/color_5A60FF"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.kissspace.common.widget.NumberEditText
+                android:id="@+id/etGiftQuantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="15dp"
+                android:background="@null"
+                android:hint="请输入数量"
+                android:inputType="number"
+                android:lines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white30"
+                android:textCursorDrawable="@drawable/common_edit_cursor"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/tvGiftQuantity"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tvTransferorFee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="转赠人损耗（2%）"
+            android:textColor="@color/color_999999"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="@id/clRecipientUID"
+            app:layout_constraintTop_toBottomOf="@id/clGiftQuantity" />
+
+        <TextView
+            android:id="@+id/tvTransferorFeeNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="损耗0.00松子"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvTransferorFee"
+            app:layout_constraintRight_toRightOf="@id/clRecipientUID"
+            app:layout_constraintTop_toTopOf="@id/tvTransferorFee" />
+
+        <TextView
+            android:id="@+id/tvExpectedToObtain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:text="本次转赠合计"
+            android:textColor="@color/color_999999"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="@id/tvTransferorFee"
+            app:layout_constraintTop_toBottomOf="@id/tvTransferorFee" />
+
+        <TextView
+            android:id="@+id/tvExpectedToObtainNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="共计0.00松子"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvExpectedToObtain"
+            app:layout_constraintRight_toRightOf="@id/tvTransferorFeeNum"
+            app:layout_constraintTop_toTopOf="@id/tvExpectedToObtain" />
+
+        <TextView
+            android:id="@+id/tvReminder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="@string/mine_transfer_tips_pine_nut"
+            android:textColor="@color/color_B3FF5B03"
+            android:textSize="11sp"
+            android:lineSpacingMultiplier="1.5"
+            app:layout_constraintBottom_toTopOf="@id/btnConfirm"
+            app:layout_constraintLeft_toLeftOf="@id/tvTransferorFee"
+            app:layout_constraintRight_toRightOf="@id/tvTransferorFeeNum" />
+
+        <Button
+            android:id="@+id/btnConfirm"
+            style="@style/commonBottomConfirmationItem"
+            android:text="赠送"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

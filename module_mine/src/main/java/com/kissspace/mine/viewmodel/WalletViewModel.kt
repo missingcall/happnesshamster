@@ -7,9 +7,8 @@ import com.kissspace.common.base.BaseViewModel
 import com.kissspace.common.config.CommonApi
 import com.kissspace.common.config.Constants
 import com.kissspace.common.config.Constants.TypeFaceRecognition
-import com.kissspace.common.model.InfoListModel
-import com.kissspace.common.model.QueryBaseInfoList
 import com.kissspace.common.model.QueryMarketListItem
+import com.kissspace.common.model.UserInfoBean
 import com.kissspace.common.model.wallet.*
 import com.kissspace.common.util.DJSLiveData
 import com.kissspace.common.util.customToast
@@ -23,7 +22,6 @@ import com.kissspace.network.net.request
 import com.kissspace.util.isNotEmptyBlank
 import com.kissspace.util.logE
 import com.kissspace.util.orZero
-import com.tencent.bugly.crashreport.biz.UserInfoBean
 import org.json.JSONObject
 
 /**
@@ -60,14 +58,13 @@ class WalletViewModel : BaseViewModel() {
     val walletModel = MutableLiveData<WalletModel>()
 
     //转账的用户id
-    private val transferUserId = MutableLiveData<String>()
+    val transferUserId = MutableLiveData<String>()
 
 
     val transferSuccessText = MutableLiveData<CharSequence>()
 
     //转账的金币
-    private val transferUserNumber = MutableLiveData<Double>()
-
+    val transferUserNumber = MutableLiveData<Double>()
 
     //是否显示白色背景
     val isShowWhiteBackground = MutableLiveData<Boolean>()
@@ -373,17 +370,17 @@ class WalletViewModel : BaseViewModel() {
     }
 
     //根据displayid获取用户信息
-    fun loadUserByDisplayId(displayId: String, onSuccess: ((UserInfoBean?) -> Unit)?) {
+    fun loadUserByDisplayId(displayId: String, onSuccess: ((UserInfoBean?) -> Unit)?, onError: ((AppException?) -> Unit)?) {
         val param = mutableMapOf<String, Any?>()
         param["displayId"] = displayId
-        request<UserInfoBean>(MineApi.API_QueryUserByDisplayIdResponse,
+        request<UserInfoBean>(MineApi.API_QUERY_USER_BY_DISPLAY_ID_RESPONSE,
             Method.GET,
             param,
             onSuccess = {
                 onSuccess?.invoke(it)
             },
             onError = {
-                customToast(it.message)
+                onError?.invoke(it)
             })
     }
 
@@ -570,6 +567,30 @@ class WalletViewModel : BaseViewModel() {
         request<Boolean>(MineApi.API_HAMSTER_MARKET_ACTIVATION, Method.POST, param, onSuccess = {
             onSuccess.invoke(it)
 
+        }, onError = {
+            customToast(it.message)
+        })
+    }
+
+    //查询所有用户信息
+    fun queryUserByUserId(userId: String, onSuccess: ((UserInfoBean) -> Unit) = {}, onError: ((AppException?) -> Unit)) {
+        val param = mutableMapOf<String, Any?>()
+        param["userId"] = userId
+        request<UserInfoBean>(CommonApi.API_GET_USER_INFO_BY_ID, Method.GET, param, onSuccess = {
+            onSuccess.invoke(it)
+        }, onError = {
+            onError.invoke(it)
+        })
+    }
+
+
+    //松子转赠
+    fun transferPineNuts(amount: Double, targetUserDisplayId: String, onSuccess: ((Boolean) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+        param["amount"] = amount
+        param["targetUserDisplayId"] = targetUserDisplayId
+        request<Boolean>(MineApi.API_TRANSFER_PINE_NUTS, Method.POST, param, onSuccess = {
+            onSuccess.invoke(it)
         }, onError = {
             customToast(it.message)
         })

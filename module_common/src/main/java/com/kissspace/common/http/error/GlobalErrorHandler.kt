@@ -57,6 +57,7 @@ class GlobalErrorHandler : NetErrorHandler {
                 }
 
                 Error.ACCOUNT_FREEZE_CODE.getKey() -> {
+                    //TODO 登出并弹窗
                     toast(Error.ACCOUNT_FREEZE_CODE.getValue())
                 }
 
