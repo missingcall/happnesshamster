@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -19,7 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:textColor="@color/color_80FFFFFF"
+            android:textColor="@color/color_636366"
+            tools:text="1"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,8 +64,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{m.nickname}"
-                android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textColor="@color/color_313133"
+                android:textSize="14sp"
+                tools:text="xxx"
                 app:layout_constraintBottom_toBottomOf="@id/layout_level"
                 app:layout_constraintStart_toEndOf="@id/layout_level"
                 app:layout_constraintTop_toTopOf="@id/layout_level" />
@@ -76,8 +79,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="3dp"
             android:text='@{"ID: "+m.displayId}'
-            android:textColor="@color/color_80FFFFFF"
-            android:textSize="13sp"
+            android:textColor="@color/color_949499"
+            android:textSize="12sp"
+            tools:text="xxx"
             app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
             app:layout_constraintStart_toEndOf="@id/iv_avatar" />
     </androidx.constraintlayout.widget.ConstraintLayout>

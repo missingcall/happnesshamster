@@ -140,6 +140,7 @@ object MessageBindingAdapter {
     @BindingAdapter("loveWallUserInfo", requireAll = false)
     fun loveWallUserInfo(textView: TextView, loveWallListBean: LoveWallListBean) {
         val nameColor = com.kissspace.module_common.R.color.common_white.resToColor()
+
         textView.text = buildSpannedString {
             color(nameColor) {
                 bold {
@@ -155,6 +156,9 @@ object MessageBindingAdapter {
             append("一见倾心")
         }
     }
+
+
+
 
     @JvmStatic
     @BindingAdapter("loveWallGiftInfo", requireAll = false)

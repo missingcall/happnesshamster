@@ -35,7 +35,7 @@
             android:shadowColor="#47000000"
             android:shadowRadius="3.0" />
 
-        <TextView
+        <com.ruffian.library.widget.RTextView
             android:id="@+id/tv_clean_all"
             android:layout_marginTop="@dimen/dp_50"
             android:layout_marginRight="@dimen/dp_18"

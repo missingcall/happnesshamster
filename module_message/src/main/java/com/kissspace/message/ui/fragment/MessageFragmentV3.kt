@@ -1,59 +1,41 @@
 package com.kissspace.message.ui.fragment
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.view.View
-import android.view.View.OnAttachStateChangeListener
-import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.TimeUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.didi.drouter.api.DRouter
 import com.drake.brv.BindingAdapter
-import com.drake.brv.utils.*
-import com.drake.statelayout.Status
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.Observer
 import com.netease.nimlib.sdk.msg.MsgService
 import com.netease.nimlib.sdk.msg.MsgServiceObserve
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum
 import com.netease.nimlib.sdk.msg.model.BroadcastMessage
-import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.base.BaseLazyFragment
-import com.kissspace.common.config.Constants
 import com.kissspace.common.router.jump
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
-import com.kissspace.common.http.getSelectPayChannelList
 import com.kissspace.common.model.ChatListModel
 import com.kissspace.common.provider.IRoomProvider
 import com.kissspace.common.router.RouterPath
-import com.kissspace.common.util.getH5Url
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.util.jumpRoom
 import com.kissspace.common.util.customToast
 import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.message.viewmodel.MessageViewModel
 import com.kissspace.network.result.collectData
-import com.kissspace.common.model.ItemMessageMenu
 import com.kissspace.common.model.SystemMessageModel
-import com.kissspace.common.provider.IPayProvider
 import com.kissspace.message.widget.ChatDialog
-import com.uc.crashsdk.export.LogType.addType
-import kotlinx.coroutines.launch
 import com.kissspace.module_message.R
-import com.kissspace.module_message.databinding.FragmentMessageV2Binding
 import com.kissspace.module_message.databinding.FragmentMessageV3Binding
-import com.kissspace.module_message.databinding.MessageItemMenuBinding
 import com.kissspace.util.hasNotificationPermission
 import com.kissspace.util.isAppDebug
 import com.kissspace.util.logE
@@ -420,6 +402,9 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
     }
 
 
+    /**
+     * 显示或隐藏空布局
+     */
     private fun showEmptyContent() {
         mBinding.stateLayout.let {
             if (mRecentContactAdapter.models.isNullOrEmpty() && mSysMsgAdapter.models.isNullOrEmpty()) {

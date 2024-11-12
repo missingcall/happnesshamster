@@ -1,5 +1,7 @@
 package com.kissspace.room.widget
 
+import android.annotation.SuppressLint
+import android.content.ContextWrapper
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -10,6 +12,7 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.WindowManager
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.Insets
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
@@ -233,8 +236,10 @@ class InputTextDialogFragment : BottomSheetDialogFragment() {
     private fun initCallback() {
 
         binding.apply {
-
-            tvConfirm.background.alpha = 125
+            tvConfirm.helper.setBackgroundColorNormalArray(intArrayOf(
+                ContextCompat.getColor(requireActivity(),com.kissspace.module_common.R.color.color_4D936DDE),
+                ContextCompat.getColor(requireActivity(),com.kissspace.module_common.R.color.color_4D6C74FB)
+            ))
             tvConfirm.isEnabled = false
 
             etInput.setOnKeyListener(View.OnKeyListener { _, keyCode, keyEvent ->
@@ -248,13 +253,17 @@ class InputTextDialogFragment : BottomSheetDialogFragment() {
 
             etInput.addAfterTextChanged {
                 if (etInput.text.toString().isEmpty()) {
-                    tvConfirm.background.alpha = 125 //(R.mipmap.room_icon_send_chat_normal)
+                    tvConfirm.helper.setBackgroundColorNormalArray(intArrayOf(
+                        ContextCompat.getColor(requireActivity(),com.kissspace.module_common.R.color.color_4D936DDE),
+                        ContextCompat.getColor(requireActivity(),com.kissspace.module_common.R.color.color_4D6C74FB)
+                    ))
                     tvConfirm.isEnabled = false
-                    //tvConfirm.setBackgroundResource(R.mipmap.room_icon_send_chat_normal)
                 } else {
-                    tvConfirm.background.alpha = 255
+                    tvConfirm.helper.setBackgroundColorNormalArray(intArrayOf(
+                        ContextCompat.getColor(requireActivity(),com.kissspace.module_common.R.color.color_936DDE),
+                        ContextCompat.getColor(requireActivity(),com.kissspace.module_common.R.color.color_6C74FB)
+                    ))
                     tvConfirm.isEnabled = true
-                    //tvConfirm.setBackgroundResource(R.mipmap.room_icon_send_chat_selected)
                 }
             }
             tvConfirm.safeClick {

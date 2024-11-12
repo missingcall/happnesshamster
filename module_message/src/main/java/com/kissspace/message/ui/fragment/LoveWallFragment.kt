@@ -85,23 +85,21 @@ class LoveWallFragment : BaseLazyFragment(R.layout.message_fragment_love_wall) {
         mBinding.recyclerView.linear().setup {
             addType<LoveWallListBean> { R.layout.message_layout_love_wall_item }
             onBind {
+
+                val isTextWhite = modelPosition%3==0
                 val model = getModel<LoveWallListBean>()
                 val root = findView<ConstraintLayout>(R.id.root)
                 val resource = when (modelPosition%3) {
                     0 -> R.mipmap.message_bg_love_wall_blue
                     1 -> R.mipmap.message_bg_love_wall_second
                     else -> R.mipmap.message_bg_love_wall_third
-//                    else -> when (modelPosition % 3) {
-//                        0 -> R.mipmap.message_bg_love_wall_second
-//                        1 -> R.mipmap.message_bg_love_wall_third
-//                        else -> R.mipmap.message_bg_love_wall_four
-//                    }
                 }
+
                 root.setBackgroundResource(resource)
+
+
                 val bottom = findView<TextView>(R.id.tv_enter_wall)
                 bottom.text = buildSpannedString {
-
-
                     color(
                         when (modelPosition % 3){
                             0 -> R.color.color_love_wall_color_1.resToColor()
@@ -129,6 +127,7 @@ class LoveWallFragment : BaseLazyFragment(R.layout.message_fragment_love_wall) {
                         }
                     }
                 }
+
                 bottom.visibility = if (model.chatRoomId.isNotEmpty()) View.VISIBLE else View.GONE
                 bottom.safeClick {
                     val model = getModel<LoveWallListBean>()
@@ -136,7 +135,52 @@ class LoveWallFragment : BaseLazyFragment(R.layout.message_fragment_love_wall) {
                         jumpRoom(model.chatRoomId)
                     }
                 }
+
+                val textView = findView<TextView>(R.id.tv_user_info)
+                textView.text = buildSpannedString {
+                    color(if (isTextWhite)R.color.white.resToColor() else  R.color.black.resToColor()) {
+                        bold {
+                            append(model.sourceUserNickname.ellipsizeString(7))
+                        }
+                    }
+
+                    color(if (isTextWhite)R.color.white.resToColor() else  R.color.black.resToColor()) {
+                        append(" 对 ")
+                    }
+
+
+                    color(if (isTextWhite)R.color.white.resToColor() else  R.color.black.resToColor()) {
+                        bold {
+                            append(model.targetUserNickname.ellipsizeString(7))
+                        }
+                    }
+                    color(if (isTextWhite)R.color.white.resToColor() else  R.color.black.resToColor()) {
+                        append("一见倾心")
+                    }
+
+                }
+
+                val textView2 = findView<TextView>(R.id.tv_gift_info)
+
+                textView2.text = buildSpannedString{
+                    color(if (isTextWhite)R.color.white.resToColor() else  R.color.black.resToColor()) {
+                        append("壕刷")
+                    }
+
+                    color(R.color.color_FA3127.resToColor())
+                    {
+                        bold {
+                            append(model.giftName.ellipsizeString(4) + "x" + model.number)
+                        }
+                    }
+                }
+
+
             }
+
+
+
+
             onFastClick(R.id.iv_gift) {
                 val model = getModel<LoveWallListBean>()
                 showGiftDialog(model)

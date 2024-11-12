@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kissspace.common.router.jump
 import com.kissspace.common.model.LoveWallListBean
 import com.kissspace.common.router.RouterPath
+import com.kissspace.common.util.glide.loadwithGlide
 import com.kissspace.util.ellipsizeString
 import com.kissspace.util.resToColor
 import com.kissspace.module_message.R
@@ -29,8 +30,9 @@ class MessageBannerAdapter(data: List<LoveWallListBean>) :
         var mAvatarRight: ImageView
         var mInfo: TextView
         var mGiftImage: ImageView
-        var mSourceName: TextView
-        var mTagName: TextView
+        var mtvEnterWall:TextView
+       // var mSourceName: TextView
+       // var mTagName: TextView
 
         init {
             mRootView = itemView.findViewById(R.id.root)
@@ -38,8 +40,9 @@ class MessageBannerAdapter(data: List<LoveWallListBean>) :
             mAvatarRight = itemView.findViewById(R.id.iv_avatar_right)
             mInfo = itemView.findViewById(R.id.tv_gift_info)
             mGiftImage = itemView.findViewById(R.id.iv_gift)
-            mSourceName = itemView.findViewById(R.id.iv_name_left)
-            mTagName = itemView.findViewById(R.id.iv_name_right)
+            mtvEnterWall = itemView.findViewById(R.id.tv_enter_wall)
+          //  mSourceName = itemView.findViewById(R.id.iv_name_left)
+           // mTagName = itemView.findViewById(R.id.iv_name_right)
 
         }
     }
@@ -56,48 +59,53 @@ class MessageBannerAdapter(data: List<LoveWallListBean>) :
         position: Int,
         size: Int
     ) {
+
+
+        val isTextWhite = position % 3 == 0
+
         val resource = when (position % 3) {
                 0 -> R.mipmap.message_bg_love_wall_blue
                 1 -> R.mipmap.message_bg_love_wall_second
                 else -> R.mipmap.message_bg_love_wall_third
-//            0 -> R.mipmap.message_bg_love_wall_first
-//            else -> R.mipmap.message_bg_love_wall_blue
         }
         holder.mRootView.setBackgroundResource(resource)
-        holder.mAvatarLeft.loadImage(data.sourceUserProfilePath)
-        holder.mAvatarRight.loadImage(data.targetUserProfilePath)
-        holder.mGiftImage.loadImage(data.url)
-        holder.mSourceName.text = data.sourceUserNickname
-        holder.mTagName.text = data.targetUserNickname
+        holder.mAvatarLeft.loadwithGlide(data.sourceUserProfilePath,isCircle = true)
+        holder.mAvatarRight.loadwithGlide(data.targetUserProfilePath,isCircle = true)
+        holder.mGiftImage.loadwithGlide(data.url)
+  //      holder.mSourceName.text = data.sourceUserNickname
+   //     holder.mTagName.text = data.targetUserNickname
         holder.mInfo.text = buildSpannedString {
-//            color(R.color.white.resToColor()) {
-//                bold {
-//                    append(data.sourceUserNickname.ellipsizeString(4))
-//                }
-//            }
-//            color(R.color.white.resToColor()) {
-//                append(" 对 ")
-//            }
-//            color(R.color.white.resToColor()) {
-//                bold {
-//                    append(data.targetUserNickname.ellipsizeString(4))
-//                }
-//            }
-            color(R.color.white.resToColor()) {
+
+            color(if (isTextWhite)R.color.white.resToColor() else  R.color.black.resToColor()) {
+                bold {
+                    append(data.sourceUserNickname.ellipsizeString(4))
+                }
+            }
+            color(if (isTextWhite)R.color.white.resToColor() else  R.color.black.resToColor()) {
+                append(" 对 ")
+            }
+            color(if (isTextWhite)R.color.white.resToColor() else  R.color.black.resToColor()) {
+                bold {
+                    append(data.targetUserNickname.ellipsizeString(4))
+                }
+            }
+
+            color(if (isTextWhite)R.color.white.resToColor() else  R.color.black.resToColor()) {
                 append("壕刷")
             }
 
-            color(
-                when (position % 3){
-                    0 -> R.color.color_love_wall_color_1.resToColor()
-                    1->  R.color.color_love_wall_color_2.resToColor()
-                    else->R.color.color_love_wall_color_3.resToColor()
-                }
-                ) {
+            color(R.color.color_FA3127.resToColor())
+            {
                 bold {
                     append(data.giftName.ellipsizeString(4) + "x" + data.number)
                 }
             }
+        }
+
+        if (isTextWhite) {
+            holder.mtvEnterWall.setTextColor(R.color.white.resToColor())
+        }else{
+            holder.mtvEnterWall.setTextColor(R.color.black.resToColor())
         }
 
         holder.mRootView.setOnClickListener {
