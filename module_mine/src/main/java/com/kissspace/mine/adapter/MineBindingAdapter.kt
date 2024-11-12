@@ -535,4 +535,19 @@ object MineBindingAdapter {
         }
         textView.text = s
     }
+/*
+    *//**
+     * 我的-转换-松果->松子
+     *//*
+    @JvmStatic
+    @BindingAdapter("pineConesToPineNuts", requireAll = false)
+    fun pineConesToPineNuts(textView: TextView, diamond: Double) {
+        textView.text = SpanUtils()
+            .append("我的松果")
+            .appendImage(R.mipmap.icon_pine_cone_small)
+            .append(diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+
+    }*/
+
 }

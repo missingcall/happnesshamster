@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="m"
+            type="com.kissspace.mine.viewmodel.WalletViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hjq.bar.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:barStyle="transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftHorizontalPadding="16dp"
+            app:leftIcon="@mipmap/common_icon_back_white"
+            app:title="转赠"
+            app:lineVisible="false" />
+
+
+        <com.angcyo.tablayout.DslTabLayout
+            android:id="@+id/dsl_tab_layout"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/common_bg_black23_radius15"
+            android:padding="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_bar"
+            app:tab_draw_indicator="true"
+            app:tab_enable_text_bold="true"
+            app:tab_indicator_drawable="@drawable/common_shape_indicator_383b44_10"
+            app:tab_indicator_height="MATCH_PARENT"
+            app:tab_indicator_radius="10dp"
+            app:tab_indicator_style="STYLE_CENTER"
+            app:tab_indicator_width="MATCH_PARENT"
+            app:tab_item_is_equ_width="true"
+            app:tab_orientation="HORIZONTAL"
+            app:tab_select_color="@color/white"
+            app:tab_text_max_size="11sp"
+            app:tab_text_min_size="10sp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="转增松子"
+                android:textSize="11sp"
+                app:bl_corners_radius="10dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="转增钻石"
+                android:textSize="11sp"
+                app:bl_corners_radius="10dp" />
+
+        </com.angcyo.tablayout.DslTabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dsl_tab_layout"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="16dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

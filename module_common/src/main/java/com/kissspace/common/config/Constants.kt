@@ -211,6 +211,21 @@ object Constants {
 
     }
 
+    enum class HamsterWalletType(val type: String) {
+        //松果
+        PINE_CONE("松果"),
+
+        //松子
+        PINE_NUT("松子"),
+
+        //钻石
+        DIAMONDS("钻石"),
+
+        //勋章
+        MEDAL("勋章")
+
+    }
+
 
     enum class SuccessType(val type: String) {
         //兑换

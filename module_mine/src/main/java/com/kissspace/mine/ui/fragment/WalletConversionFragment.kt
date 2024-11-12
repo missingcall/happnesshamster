@@ -4,7 +4,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.SpanUtils
 import com.drake.brv.utils.grid
@@ -22,6 +24,7 @@ import com.kissspace.module_mine.databinding.MineFragmentWarehouseBinding
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
 import com.kissspace.util.addAfterTextChanged
+import com.kissspace.util.lifecycleOwner
 import com.kissspace.util.toast
 import kotlinx.coroutines.flow.MutableSharedFlow
 
@@ -29,12 +32,12 @@ import kotlinx.coroutines.flow.MutableSharedFlow
  *
  * @Author: nicko
  * @CreateDate: 2023/1/6 15:40
- * @Description: 我的收藏fragment
+ * @Description: 转换页面
  *
  */
 class WalletConversionFragment : BaseFragment(R.layout.mine_fragment_wallet_conversion) {
     private val mBinding by viewBinding<MineFragmentWalletConversionBinding>()
-    private val mViewModel by viewModels<WalletViewModel>()
+    private val mViewModel by activityViewModels<WalletViewModel>()
     private lateinit var type: String
 
     companion object {
@@ -49,15 +52,21 @@ class WalletConversionFragment : BaseFragment(R.layout.mine_fragment_wallet_conv
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        mBinding.etConvertUp.addAfterTextChanged {
-            mBinding.etConvertDown.setText(it.toString() )
+        mBinding.m = mViewModel
+
+        mViewModel.walletModel.observe(this) {
+            when (type) {
+                "001" -> pineConesToPineNuts()
+                "002" -> pineNutsToPineCones()
+                else -> pineNutsToDiamonds()
+            }
         }
 
-        when (type) {
-            "001" -> pineConesToPineNuts()
-            "002" -> pineNutsToPineCones()
-            else -> pineNutsToDiamonds()
+        mBinding.etConvertUp.addAfterTextChanged {
+            mBinding.etConvertDown.setText(it.toString())
         }
+
+
 
     }
 
@@ -71,7 +80,7 @@ class WalletConversionFragment : BaseFragment(R.layout.mine_fragment_wallet_conv
         mBinding.tvConversionDown.text = SpanUtils()
             .append("我的松子")
             .appendImage(R.mipmap.icon_pine_nut_small)
-            .append(mViewModel.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append(mViewModel.walletModel.value?.accountBalance.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .create()
 
         mBinding.tvConvertUp.text = "松果"
@@ -89,7 +98,7 @@ class WalletConversionFragment : BaseFragment(R.layout.mine_fragment_wallet_conv
         mBinding.tvConversionUp.text = SpanUtils()
             .append("我的松子")
             .appendImage(R.mipmap.icon_pine_nut_small)
-            .append(mViewModel.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append(mViewModel.walletModel.value?.accountBalance.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .create()
 
         mBinding.tvConversionDown.text = SpanUtils()
@@ -110,7 +119,7 @@ class WalletConversionFragment : BaseFragment(R.layout.mine_fragment_wallet_conv
         mBinding.tvConversionUp.text = SpanUtils()
             .append("我的松子")
             .appendImage(R.mipmap.icon_pine_nut_small)
-            .append(mViewModel.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .append(mViewModel.walletModel.value?.accountBalance.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .create()
 
         mBinding.tvConversionDown.text = SpanUtils()

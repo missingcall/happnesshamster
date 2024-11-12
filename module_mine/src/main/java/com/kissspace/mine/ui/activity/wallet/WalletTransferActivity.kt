@@ -1,23 +1,24 @@
-package com.kissspace.mine.ui.activity
+package com.kissspace.mine.ui.activity.wallet
 
 import android.os.Bundle
-import android.view.Gravity
+import android.view.MotionEvent
+import android.view.View
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.angcyo.tablayout.delegate2.ViewPager2Delegate
+import com.blankj.utilcode.util.KeyboardUtils
 import com.didi.drouter.annotation.Router
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.binding.dataBinding
-import com.kissspace.common.ext.setDrawable
 import com.kissspace.common.ext.setTitleBarListener
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.parseIntent
-import com.kissspace.mine.ui.fragment.WalletConversionFragment
-import com.kissspace.mine.ui.fragment.WareHouseFragment
+import com.kissspace.mine.ui.fragment.WalletTransferFragment
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.module_mine.R
-import com.kissspace.module_mine.databinding.MineActivityWalletConversionBinding
+import com.kissspace.module_mine.databinding.MineActivityWalletTransferHamsterBinding
 
 /**
  *
@@ -26,10 +27,10 @@ import com.kissspace.module_mine.databinding.MineActivityWalletConversionBinding
  * @Description: 手机验证码登录页面
  *
  */
-@Router(path = RouterPath.PATH_WALLET_CONVERSION)
-class WalletConversionActivity : BaseActivity(R.layout.mine_activity_wallet_conversion) {
+@Router(path = RouterPath.PATH_WALLET_TRANSFER)
+class WalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_transfer_hamster) {
     private val type by parseIntent<String>()
-    private val mBinding by dataBinding<MineActivityWalletConversionBinding>()
+    private val mBinding by dataBinding<MineActivityWalletTransferHamsterBinding>()
     private val mViewModel by viewModels<WalletViewModel>()
 
 
@@ -39,12 +40,11 @@ class WalletConversionActivity : BaseActivity(R.layout.mine_activity_wallet_conv
         mBinding.lifecycleOwner = this
 
         mBinding.viewPager.adapter = object : FragmentStateAdapter(this) {
-            override fun getItemCount(): Int = 3
+            override fun getItemCount(): Int = 2
 
             override fun createFragment(position: Int) = when (position) {
-                0 -> WalletConversionFragment.newInstance("001")
-                1 -> WalletConversionFragment.newInstance("002")
-                else -> WalletConversionFragment.newInstance("003")
+                0 -> WalletTransferFragment.newInstance("002")
+                else -> WalletTransferFragment.newInstance("003")
             }
         }
 
@@ -55,15 +55,14 @@ class WalletConversionActivity : BaseActivity(R.layout.mine_activity_wallet_conv
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
-                when (position) {
+                /*when (position) {
                     0 -> pineConesToPineNuts()
-                    1 -> pineNutsToPineCones()
                     else -> pineNutsToDiamonds()
-                }
+                }*/
             }
         })
 
-        mBinding.viewPager.currentItem = type.toInt() - 1
+        mBinding.viewPager.currentItem = type.toInt() - 2
 
         //获取钱包
         getMoney()
@@ -80,34 +79,9 @@ class WalletConversionActivity : BaseActivity(R.layout.mine_activity_wallet_conv
     }
 
     private fun initData() {
-        //TODO 获取兑换比例 放到WalletViewModel中 下级fragment直接取
 
     }
 
-
-    private fun pineConesToPineNuts() {
-        mBinding.tvTransformLeft.text = "松果"
-        mBinding.tvTransformLeft.setDrawable(R.mipmap.icon_pine_cone, Gravity.START)
-
-        mBinding.tvTransformRight.text = "松子"
-        mBinding.tvTransformRight.setDrawable(R.mipmap.icon_pine_nut, Gravity.START)
-    }
-
-    private fun pineNutsToPineCones() {
-        mBinding.tvTransformLeft.text = "松子"
-        mBinding.tvTransformLeft.setDrawable(R.mipmap.icon_pine_nut, Gravity.START)
-
-        mBinding.tvTransformRight.text = "松果"
-        mBinding.tvTransformRight.setDrawable(R.mipmap.icon_pine_cone, Gravity.START)
-    }
-
-    private fun pineNutsToDiamonds() {
-        mBinding.tvTransformLeft.text = "松子"
-        mBinding.tvTransformLeft.setDrawable(R.mipmap.icon_pine_nut, Gravity.START)
-
-        mBinding.tvTransformRight.text = "钻石"
-        mBinding.tvTransformRight.setDrawable(R.mipmap.icon_diamond, Gravity.START)
-    }
 
 
     override fun createDataObserver() {
@@ -122,5 +96,29 @@ class WalletConversionActivity : BaseActivity(R.layout.mine_activity_wallet_conv
 
     }
 
+    //点击空白区域隐藏软件盘并清除焦点
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev?.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (isShouldHideKeyboard(v, ev)) {
+                KeyboardUtils.hideSoftInput(this)
+                v?.clearFocus()
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    private fun isShouldHideKeyboard(v: View?, event: MotionEvent): Boolean {
+        if (v is EditText) {
+            val l = IntArray(2)
+            v.getLocationOnScreen(l)
+            val left = l[0]
+            val top = l[1]
+            val bottom = top + v.height
+            val right = left + v.width
+            return!(event.rawX > left && event.rawX < right && event.rawY > top && event.rawY < bottom)
+        }
+        return false
+    }
 
 }

@@ -80,8 +80,7 @@ class PasswordLoginActivity : BaseActivity(R.layout.login_activity_password) {
         })
 
         collectData(mViewModel.accounts, onSuccess = {
-            hideLoading()
-            if (it.size == 1) {
+            if (it.isNotEmpty()) {
                 val userAccountBean = it[0]
                 mViewModel.loginByUserId(
                     userAccountBean.userId,

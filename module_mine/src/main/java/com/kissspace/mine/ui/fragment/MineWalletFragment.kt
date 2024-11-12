@@ -23,7 +23,7 @@ import com.kissspace.module_mine.databinding.MineFragmentWalletBinding
  *
  * @Author: nicko
  * @CreateDate: 2023/1/6 15:40
- * @Description: 我的收藏fragment
+ * @Description: 钱包滑动页 松果/松子/钻石
  *
  */
 class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
@@ -55,6 +55,8 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
             "001" -> {
                 mBinding.iconNuts.setImageResource(R.mipmap.icon_pine_cone)
                 mBinding.btnRecharge.visibility = View.GONE
+                mBinding.btnTransfer.visibility = View.GONE
+
             }
             "002" -> {
                 mBinding.iconNuts.setImageResource(R.mipmap.icon_pine_nut)
@@ -71,11 +73,11 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
         }
 
         mBinding.btnTransformation.safeClick {
-            jump(RouterPath.PATH_WALLET_CONVERSION ,"type" to mType)
+            jump(RouterPath.PATH_WALLET_CONVERSION, "type" to mType)
         }
 
-        mBinding.btnConversion.safeClick {
-
+        mBinding.btnTransfer.safeClick {
+            jump(RouterPath.PATH_WALLET_TRANSFER, "type" to mType)
         }
 
         initData()

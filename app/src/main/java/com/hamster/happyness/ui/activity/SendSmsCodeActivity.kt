@@ -47,7 +47,7 @@ class SendSmsCodeActivity :
 
     private var smsType: String? = null
     private var bindPhoneStepCount: Int? = null
-    private var phoneNumberReal: String? = ""
+    private var phoneNumberReal: String? = null
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)

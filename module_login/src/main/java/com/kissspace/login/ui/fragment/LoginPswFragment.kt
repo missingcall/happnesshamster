@@ -111,8 +111,8 @@ class LoginPswFragment : BaseFragment(R.layout.login_fragment_phone_code_login) 
     override fun createDataObserver() {
         super.createDataObserver()
         collectData(mViewModel.token, onSuccess = {
-            hideLoading()
             mViewModel.loginIm(it, onSuccess = {
+                hideLoading()
                 activity?.finish()
             })
         }, onError = {
@@ -121,7 +121,6 @@ class LoginPswFragment : BaseFragment(R.layout.login_fragment_phone_code_login) 
         })
 
         collectData(mViewModel.accounts, onSuccess = {
-            hideLoading()
             when (it.size) {
                 1 -> {
                     val userAccountBean = it[0]

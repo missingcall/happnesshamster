@@ -156,16 +156,17 @@ object MineApi {
     //金币转账
     const val API_TRANSFER_COIN = "/hamster-user/userNum/transferCoin"
 
+    //松子转赠
+    const val API_TRANSFER_PINE_NUTS = "/hamster-user/userNum/transferPineNuts"
+
     //收益转账
     const val API_TRANSFER_REWARD = "/hamster-user/userNum/transferAccountBalance"
 
     //钻石转账
     const val API_TRANSFER_DIAMOND = "/hamster-user/userNum/transferDiamond"
 
-
     //根据用户展示id获取通用用户信息
-    const val API_QueryUserByDisplayIdResponse = "/hamster-user/user/queryUserByDisplayIdResponse"
-
+    const val API_QUERY_USER_BY_DISPLAY_ID_RESPONSE = "/hamster-user/user/queryUserByDisplayIdResponse"
 
     //用户提现列表
     const val API_WithDrawList = "/hamster-payment/withdraw/withdrawList"

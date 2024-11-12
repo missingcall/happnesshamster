@@ -17,6 +17,7 @@ object LoginApi {
     //获取启动页广告
     const val API_GET_AD = "/hamster-user/splashAd/queryOne"
 
+    //密码登录
     const val API_PASSWORD_LOGIN = "/hamster-user/user/passwordLogin"
 
     //重置密码
