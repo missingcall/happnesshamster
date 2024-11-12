@@ -39,6 +39,7 @@ import java.io.File
 @Router(path = RouterPath.PATH_ROOM_SETTING_BACKGROUND)
 class SettingBackgroundActivity : com.kissspace.common.base.BaseActivity(R.layout.room_activity_setting_background) {
     private val currentPath: String by parseIntent()
+    //房间id
     private val crId by parseIntent<String>()
     private val mBinding by viewBinding<RoomActivitySettingBackgroundBinding>()
 
@@ -52,6 +53,7 @@ class SettingBackgroundActivity : com.kissspace.common.base.BaseActivity(R.layou
             }
         })
 
+        //选择本地图片
         mBinding.tvLocalBg.safeClick {
             openPictureSelector(this,1) {
 
@@ -65,6 +67,8 @@ class SettingBackgroundActivity : com.kissspace.common.base.BaseActivity(R.layou
             }
         }
 
+
+        //点击提交
         mBinding.tvSubmit.setOnClickListener {
             val adapter = mBinding.recyclerView.bindingAdapter
             if (adapter.checkedPosition.isEmpty()) {
@@ -75,6 +79,8 @@ class SettingBackgroundActivity : com.kissspace.common.base.BaseActivity(R.layou
             }
         }
 
+
+        //查询房间背景图
         val param = mutableMapOf<String, Any?>("roomId" to crId)
         request<MutableList<RoomBackgroundListBean>>(
             RoomApi.API_QUERY_ROOM_BACKGROUND,
@@ -85,6 +91,8 @@ class SettingBackgroundActivity : com.kissspace.common.base.BaseActivity(R.layou
             })
     }
 
+
+    //向后端提交背景图
     private fun submitBackground(model:RoomBackgroundListBean,isLocal: Boolean = false ) {
         val param = mutableMapOf<String, Any?>()
         param["chatRoomId"] = crId
@@ -103,6 +111,7 @@ class SettingBackgroundActivity : com.kissspace.common.base.BaseActivity(R.layou
         })
     }
 
+    //初始化recyclerView
     private fun initRecyclerView(list: List<RoomBackgroundListBean>) {
         mBinding.recyclerView.grid(3)
             .divider(R.drawable.room_divider_select_background, DividerOrientation.GRID).setup {
