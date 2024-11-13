@@ -2,6 +2,7 @@ package com.kissspace.login.ui.fragment
 
 import android.Manifest
 import android.os.Bundle
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -36,7 +37,7 @@ import kotlinx.coroutines.Job
  */
 class LoginSmsFragment : BaseFragment(R.layout.login_fragment_sms_login) {
     private val mBinding by viewBinding<LoginFragmentSmsLoginBinding>()
-    private val mViewModel by viewModels<LoginViewModel>()
+    private val mViewModel by activityViewModels<LoginViewModel>()
 
     var mCountDown: Job? = null
 
@@ -123,51 +124,7 @@ class LoginSmsFragment : BaseFragment(R.layout.login_fragment_sms_login) {
 
     override fun createDataObserver() {
         super.createDataObserver()
-        collectData(mViewModel.token, onSuccess = {
 
-            mViewModel.loginIm(it, onSuccess = {
-                hideLoading()
-                activity?.finish()
-            })
-        }, onError = {
-            hideLoading()
-            ToastUtils.showLong("登录失败${it.errorMsg}")
-        })
-
-        collectData(mViewModel.accounts, onSuccess = {
-
-            when (it.size) {
-                1 -> {
-                    val userAccountBean = it[0]
-                    mViewModel.loginByUserId(
-                        userAccountBean.userId,
-                        userAccountBean.tokenHead,
-                        userAccountBean.token
-                    )
-                }
-                //多于一个身份时直接登录最近的那个
-                else -> {
-                    val userAccountBean = it[0]
-                    mViewModel.loginByUserId(
-                        userAccountBean.userId,
-                        userAccountBean.tokenHead,
-                        userAccountBean.token
-                    )
-                }
-            }
-        }, onError = {
-            hideLoading()
-        }, onEmpty = {
-            hideLoading()
-            //填写邀请码
-            jump(
-                RouterPath.PATH_INPUT_INVITE_CODE,
-
-                "phone" to mBinding.xetPhone.text.toString().trim().replace(" ", ""),
-                "smsCode" to mBinding.xetVerify.text.toString().trim().replace(" ", "")
-            )
-
-        })
     }
 
     private fun startCountDown(countDownTime: Long) {

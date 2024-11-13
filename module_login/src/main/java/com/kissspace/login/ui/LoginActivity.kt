@@ -2,18 +2,13 @@ package com.kissspace.login.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.media.MediaPlayer
-import android.net.Uri
+import android.graphics.Typeface
 import android.os.Bundle
-import android.text.TextUtils
 import androidx.activity.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.ToastUtils
 import com.didi.drouter.annotation.Router
 import com.drake.net.NetConfig
-import com.netease.nimlib.sdk.NIMClient
-import com.netease.nimlib.sdk.SDKOptions
-import com.netease.nimlib.sdk.auth.LoginInfo
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.config.*
 import com.kissspace.common.ext.safeClick
@@ -23,7 +18,6 @@ import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.*
 import com.kissspace.common.util.mmkv.MMKVProvider
-import com.kissspace.common.util.mmkv.isLogin
 import com.kissspace.login.umeng.QuickLoginManager
 import com.kissspace.login.umeng.callback.QuickLoginCallback
 import com.kissspace.login.viewmodel.LoginViewModel
@@ -35,10 +29,6 @@ import com.kissspace.network.result.collectData
 import com.kissspace.room.manager.RoomServiceManager
 import com.kissspace.util.finishAllActivitiesExceptNewest
 import com.kissspace.util.immersiveStatusBar
-import com.kissspace.util.isAppDebug
-import com.kissspace.util.logE
-import com.kissspace.util.postRunnable
-import com.kissspace.util.toJson
 import com.qmuiteam.qmui.kotlin.onClick
 import java.util.*
 
@@ -53,6 +43,7 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
     private val mQuickLoginManager by lazy {
         QuickLoginManager()
     }
+    protected var tfRegular: Typeface? = null // 定义字体
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +59,10 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
         immersiveStatusBar(false)
         mBinding.vm = mViewModel
         initAgreement()
+
+        //设置字体
+//        mBinding.tvLogin.typeface = Typeface.createFromAsset(assets, "fonts/AlimamaShuHeiTi-Bold.ttf") // 初始化字体
+
         mBinding.tvLogin.setOnClickListener {
             if (mBinding.cbAgree.isChecked) {
 //                jump(RouterPath.PATH_LOGIN_PHONE_CODE)
@@ -121,24 +116,16 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
                 start()
             }
         }*/
-        dispatchPath()
+        showAgreeProtocol()
     }
 
 
     /**
-     * 青少年、是否编辑资料、是否第一次登录
+     * 同意隐私弹窗
      */
-    private fun dispatchPath() {
+    private fun showAgreeProtocol() {
         if (!MMKVProvider.isAgreeProtocol) {
             showPrivacyDialog()
-        } else if (MMKVProvider.adolescent) {
-            jump(RouterPath.PATH_TEENAGER_MODE, "stepCount" to 2)
-        } else if (isLogin()) {
-            if (MMKVProvider.isEditProfile) {
-                jump(RouterPath.PATH_MAIN)
-            } else {
-                jump(RouterPath.PATH_LOGIN_EDIT_PROFILE)
-            }
         }
     }
 
@@ -196,23 +183,16 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
         })
 
         collectData(mViewModel.accounts, onSuccess = {
-            hideLoading()
-            if (it.size == 1) {
-                val userAccountBean = it[0]
-                mViewModel.loginByUserId(
-                    userAccountBean.userId,
-                    userAccountBean.tokenHead,
-                    userAccountBean.token
-                )
-            } else {
-                jump(
-                    RouterPath.PATH_CHOOSE_ACCOUNT,
-                    "accounts" to toJson(it),
-                    "phone" to it[0].phone
-                )
-                finish()
-            }
+            val userAccountBean = it[0]
+            mViewModel.loginByUserId(
+                userAccountBean.userId,
+                userAccountBean.tokenHead,
+                userAccountBean.token
+            )
+
         }, onError = {
+            hideLoading()
+        }, onEmpty = {
             hideLoading()
         })
     }
@@ -226,7 +206,6 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
         super.onPause()
 
     }
-
 
 
     override fun onResume() {

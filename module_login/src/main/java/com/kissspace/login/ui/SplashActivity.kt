@@ -19,6 +19,7 @@ import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.countDown
 import com.kissspace.common.util.mmkv.MMKVProvider
+import com.kissspace.common.util.mmkv.isLogin
 import com.kissspace.login.http.LoginApi
 import com.kissspace.module_login.R
 import com.kissspace.module_login.databinding.LoginActivitySplashBinding
@@ -137,7 +138,7 @@ class SplashActivity : BaseActivity(R.layout.login_activity_splash) {
     }
 
     private fun getAd() {
-        if(true) goLogin()
+        if (true) goLogin()
         val params = mutableMapOf<String, Any?>()
         params["osType"] = "001"
         request<AdBean?>(LoginApi.API_GET_AD, Method.GET, params, onSuccess = {
@@ -151,12 +152,25 @@ class SplashActivity : BaseActivity(R.layout.login_activity_splash) {
     private fun goLogin() {
         job?.cancel()
         removeRunnable(this)
-        if (MMKVProvider.loginResult==null){
-            jump(RouterPath.PATH_LOGIN)
-        }else{
-            jump(RouterPath.PATH_MAIN)
-        }
+        dispatchPath()
         finish()
+    }
+
+    /**
+     * 青少年、是否编辑资料、是否第一次登录
+     */
+    private fun dispatchPath() {
+        if (MMKVProvider.adolescent) {
+            jump(RouterPath.PATH_TEENAGER_MODE, "stepCount" to 2)
+        } else if (isLogin()) {
+            if (MMKVProvider.isEditProfile) {
+                jump(RouterPath.PATH_MAIN)
+            } else {
+                jump(RouterPath.PATH_LOGIN_EDIT_PROFILE)
+            }
+        } else {
+            jump(RouterPath.PATH_LOGIN)
+        }
     }
 
     override fun onDestroy() {

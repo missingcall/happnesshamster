@@ -117,7 +117,7 @@ class ChooseAccountActivity : com.kissspace.common.base.BaseActivity(R.layout.lo
 
     private fun createAccount() {
         showLoading()
-        mViewModel.createAccount(phone , "" , "")
+        mViewModel.createAccount(phone , "" , "" ,"")
     }
 
 }

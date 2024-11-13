@@ -72,6 +72,7 @@ class InviteCodeActivity :
         showLoading("正在注册")
         mViewModel.createAccount(
             phone,
+            "",
             mBinding.xetInviteCode.text.toString().trim(),
             smsCode
         )

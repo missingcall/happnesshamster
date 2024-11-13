@@ -90,7 +90,7 @@ class LoginViewModel : BaseViewModel() {
         request(LoginApi.API_USER_LIST_UMENG, Method.POST,param = params,state = _accouts)
     }
 
-    fun createAccount(phone:String , inviteCode:String, smsCode:String ){
+    fun createAccount(phone:String , password:String, inviteCode:String, smsCode:String  ){
         val params = mutableMapOf<String,Any?>()
         params["phone"] = phone
         params["machineCode"] = DeviceUtils.getUniqueDeviceId()
@@ -98,7 +98,7 @@ class LoginViewModel : BaseViewModel() {
         params["appleId"] = ""
         params["inviteCode"] = inviteCode
         params["smsCode"] = smsCode
-        params["password"] = "12345678"
+        params["password"] = password
         request(CommonApi.API_USER_ACCOUNT_CREATE, Method.POST,param = params,state = _createaccouts)
     }
 
