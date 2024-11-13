@@ -162,9 +162,21 @@ object Constants {
     const val SAND_ALI_PAY = "sandPay"
     const val SAND_WECHAT_PAY = "sandWechatPay"
 
-    val ASSERT_ANIM_FILE = arrayOf("bg_login_with_one_key.mp4","common_gift_box.mp4","common_home_background.mp4"
-        ,"home_anim_explore.mp4","home_anim_mine.mp4","home_anim_msg.mp4","home_anim_trends.mp4"
-    ,"home_card_dynamic.mp4","home_tab_line.mp4","home_tab_party.mp4","mine_auth_guide.mp4","loading.mp4","loading.pag")
+    val ASSERT_ANIM_FILE = arrayOf(
+        "bg_login_with_one_key.mp4",
+        "common_gift_box.mp4",
+        "common_home_background.mp4",
+        "home_anim_explore.mp4",
+        "home_anim_mine.mp4",
+        "home_anim_msg.mp4",
+        "home_anim_trends.mp4",
+        "home_card_dynamic.mp4",
+        "home_tab_line.mp4",
+        "home_tab_party.mp4",
+        "mine_auth_guide.mp4",
+        "loading.mp4",
+        "loading.pag"
+    )
 
 
     @StringDef(ALI_PAY, WECHAT_PAY, SAND_PAY, SAND_ALI_PAY, SAND_WECHAT_PAY)
@@ -211,18 +223,18 @@ object Constants {
 
     }
 
-    enum class HamsterWalletType(val type: String) {
+    enum class HamsterWalletType(val type: String, val typeName: String) {
         //松果
-        PINE_CONE("松果"),
+        PINE_CONE("001", "松果"),
 
         //松子
-        PINE_NUT("松子"),
+        PINE_NUT("002", "松子"),
 
         //钻石
-        DIAMONDS("钻石"),
+        DIAMONDS("003", "钻石"),
 
         //勋章
-        MEDAL("勋章")
+        MEDAL("004", "勋章")
 
     }
 
@@ -426,6 +438,7 @@ object Constants {
 
         //连接mqtt
         const val MSG_ROOM_MQTT = "071"
+
         //CP消息
         const val MSG_CP = "090"
 
@@ -705,7 +718,6 @@ object Constants {
     }
 
 
-
     var sendSmsType: Pair<String?, String?>? = null
 
     //活体验证type
@@ -717,7 +729,7 @@ object Constants {
     //是否token过期
     var isTokenExpired: Boolean = false
 
-    private var tags: List<RoomTagListBean> ? = null
+    private var tags: List<RoomTagListBean>? = null
 
     private val roomTagID_PD: String?
         get() {
@@ -729,15 +741,15 @@ object Constants {
         }
 
     //获取派单的roomId
-    fun isPdRoom(roomTagId:String):Boolean{
+    fun isPdRoom(roomTagId: String): Boolean {
         return roomTagId == roomTagID_PD
     }
 
-    fun ViewModel.getTags(block:(List<RoomTagListBean>?) -> Unit ){
+    fun ViewModel.getTags(block: (List<RoomTagListBean>?) -> Unit) {
         synchronized(this) {
             if (tags.isNullOrEmpty()) {
                 getAppConfigByKey<List<RoomTagListBean>>(AppConfigKey.KEY_PARTY_TAG_LIST) {
-                    it.filter { bean -> bean.state == "001"}.let { ros ->
+                    it.filter { bean -> bean.state == "001" }.let { ros ->
                         tags = ros
                         block(ros)
                     }

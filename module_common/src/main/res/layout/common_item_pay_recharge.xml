@@ -27,11 +27,11 @@
             android:layout_marginTop="16.5dp"
             android:textColor="@drawable/common_item_recharge_text_number_selector"
             android:textStyle="bold"
-            android:text='@{DjsInverseBindingKt.doubleToIntToString(m.payProductGoldCoin)+"金币"}'
+            android:text='@{DjsInverseBindingKt.doubleToIntToString(m.payProductGoldCoin)+"钻石"}'
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="600金币" />
+            tools:text="600钻石" />
 
         <TextView
             android:id="@+id/tv_rmb1"

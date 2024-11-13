@@ -2,39 +2,26 @@ package com.kissspace.mine.ui.fragment
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.SpanUtils
-import com.drake.brv.utils.bindingAdapter
-import com.drake.brv.utils.grid
-import com.drake.brv.utils.setup
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.callback.ActivityResult.TransferAccount
-import com.kissspace.common.config.CommonApi
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
-import com.kissspace.common.ext.setDrawable
 import com.kissspace.common.model.*
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
-import com.kissspace.common.util.mmkv.MMKVProvider
-import com.kissspace.mine.http.MineApi
+import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.module_mine.R
-import com.kissspace.module_mine.databinding.MineFragmentWalletConversionBinding
 import com.kissspace.module_mine.databinding.MineFragmentWalletTransferBinding
-import com.kissspace.module_mine.databinding.MineFragmentWarehouseBinding
-import com.kissspace.network.net.Method
-import com.kissspace.network.net.request
 import com.kissspace.util.*
 import com.kissspace.util.activityresult.registerForStartActivityResult
-import kotlinx.coroutines.flow.MutableSharedFlow
 
 /**
  *
@@ -47,6 +34,7 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
     private val mBinding by viewBinding<MineFragmentWalletTransferBinding>()
     private val mViewModel by activityViewModels<WalletViewModel>()
     private lateinit var type: String
+    private var mRecipientInfoBean: UserInfoBean? = null
 
     companion object {
         fun newInstance(type: String) = WalletTransferFragment().apply {
@@ -73,6 +61,7 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
         mBinding.etRecipientUID.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 mViewModel.loadUserByDisplayId(mBinding.etRecipientUID.text.toString(), onSuccess = {
+                    mRecipientInfoBean = it
                     mBinding.tvRecipientNickname.text = "昵称：" + it?.nickname
                     mBinding.tvRecipientNickname.setTextColor(ColorUtils.getColor(com.kissspace.module_common.R.color.color_FDC120))
                 },
@@ -98,31 +87,52 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
 
 
         mBinding.btnConfirm.safeClick {
+            if (mViewModel.transferUserNumber.value.isNullOrZero() && mViewModel.walletModel.value?.accountBalance.isNullOrZero()) {
+                com.kissspace.common.util.customToast("赠送数量不能为空", true)
+                return@safeClick
+            }
 
             when (type) {
                 Constants.HamsterPayType.PINE_NUT -> {
                     if (mViewModel.transferUserNumber.value!! > mViewModel.walletModel.value?.accountBalance!!) {
                         com.kissspace.common.util.customToast("松子数量不足")
                     } else {
-                        logE("转账数目" + mViewModel.transferUserNumber.value.orZero())
-                        jump(
-                            RouterPath.PATH_SEND_SMS_CODE,
-                            "type" to TransferAccount,
-                            activity = activity,
-                            resultLauncher = startActivityLauncher
-                        )
+                        confirmGive()
+
                     }
                 }
 
                 else -> {
-                    if (mBinding.etGiftQuantity.text.toString().toDouble() < mViewModel.walletModel.value?.coin!!) {
+                    if (mBinding.etGiftQuantity.text.toString().toDouble() > mViewModel.walletModel.value?.coin!!) {
                         com.kissspace.common.util.customToast("钻石数量不足")
                     } else {
-
+                        confirmGive()
                     }
                 }
             }
         }
+    }
+
+    private fun confirmGive() {
+        CommonConfirmDialog(
+            requireContext(),
+            "您确定要赠送${mViewModel.transferUserNumber.value}个" + when (type) {
+                Constants.HamsterWalletType.PINE_NUT.type -> Constants.HamsterWalletType.PINE_NUT.typeName
+                Constants.HamsterWalletType.DIAMONDS.type -> Constants.HamsterWalletType.DIAMONDS.typeName
+                else -> "勋章"
+            } + "给 " + mRecipientInfoBean?.nickname + "（UID：${mRecipientInfoBean?.displayId}）吗？",
+            ""
+        ) {
+            if (this) {
+                logE("转账数目" + mViewModel.transferUserNumber.value.orZero())
+                jump(
+                    RouterPath.PATH_SEND_SMS_CODE,
+                    "type" to TransferAccount,
+                    activity = activity,
+                    resultLauncher = startActivityLauncher
+                )
+            }
+        }.show()
     }
 
     private fun pineNutsGift() {

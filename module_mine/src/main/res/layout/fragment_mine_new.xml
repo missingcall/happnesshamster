@@ -205,6 +205,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="关注"
+            android:layout_marginTop="10dp"
             android:textColor="@color/color_949499"
             android:textSize="11sp"
             app:layout_constraintLeft_toLeftOf="@id/tv_follow"
@@ -222,7 +223,7 @@
             android:textSize="11sp"
             app:layout_constraintLeft_toLeftOf="@id/tv_fans"
             app:layout_constraintRight_toRightOf="@id/tv_fans"
-            app:layout_constraintTop_toBottomOf="@id/tv_fans" />
+            app:layout_constraintTop_toTopOf="@id/tv_follow_tip" />
 
         <TextView
             android:id="@+id/tv_visitor_tip"
@@ -234,7 +235,7 @@
             android:textSize="11sp"
             app:layout_constraintLeft_toLeftOf="@id/tv_visitor"
             app:layout_constraintRight_toRightOf="@id/tv_visitor"
-            app:layout_constraintTop_toBottomOf="@id/tv_visitor" />
+            app:layout_constraintTop_toTopOf="@id/tv_follow_tip" />
 
         <TextView
             android:id="@+id/tv_friend_tip"
@@ -246,7 +247,7 @@
             android:textSize="11sp"
             app:layout_constraintLeft_toLeftOf="@id/tv_friend"
             app:layout_constraintRight_toRightOf="@id/tv_friend"
-            app:layout_constraintTop_toBottomOf="@id/tv_friend" />
+            app:layout_constraintTop_toTopOf="@id/tv_follow_tip" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

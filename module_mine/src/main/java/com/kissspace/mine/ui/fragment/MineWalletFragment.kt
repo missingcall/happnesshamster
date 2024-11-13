@@ -52,13 +52,13 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
         mBinding.mtvTransfer.setMarqueeFactory(marqueeFactory)
 
         when (mType) {
-            "001" -> {
+            Constants.HamsterWalletType.PINE_CONE.type -> {
                 mBinding.iconNuts.setImageResource(R.mipmap.icon_pine_cone)
                 mBinding.btnRecharge.visibility = View.GONE
                 mBinding.btnTransfer.visibility = View.GONE
 
             }
-            "002" -> {
+            Constants.HamsterWalletType.PINE_NUT.type -> {
                 mBinding.iconNuts.setImageResource(R.mipmap.icon_pine_nut)
                 mBinding.btnRecharge.visibility = View.GONE
             }
@@ -88,7 +88,7 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
 
         when (mType) {
             //松果转入转出查询
-            "001" -> {
+            Constants.HamsterWalletType.PINE_CONE.type -> {
                 mViewModel.queryCollectRecordList("", "", 0, 5, onSuccess = {
                     //重置跑马灯状态
                     list.clear()
@@ -135,7 +135,7 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
 
             }
             //TODO 松子转入转出查询 最好的情况就是原接口加个参数type 请求到的就是松果/松子/钻石
-            "002" -> LogUtils.d("002")
+            Constants.HamsterWalletType.PINE_NUT.type -> LogUtils.d("002")
 
             //TODO 钻石转入转出查询
             else -> LogUtils.d("000")
@@ -169,8 +169,8 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
             it?.let {
                 mViewModel.walletModel.value = it
                 mBinding.iconNutsNum.text = when (mType) {
-                    "001" -> mViewModel.walletModel.value?.diamond.toString()
-                    "002" -> mViewModel.walletModel.value?.accountBalance.toString()
+                    Constants.HamsterWalletType.PINE_CONE.type -> mViewModel.walletModel.value?.diamond.toString()
+                    Constants.HamsterWalletType.PINE_NUT.type -> mViewModel.walletModel.value?.accountBalance.toString()
                     else -> mViewModel.walletModel.value?.coin.toString()
                 }
 

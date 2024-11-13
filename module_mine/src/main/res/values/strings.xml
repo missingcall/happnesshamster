@@ -123,4 +123,7 @@
     <string name="coinType_011">管理员扣除</string>
     <string name="mine_transfer_tips_pine_nut">为了您的松子安全，请谨慎赠送：\n 1.请不要向陌生人转赠您的松子。\n 2.请不要向陌生人透露自己的信息。\n 3.如果有人向您承诺“可盈利”的，属于欺骗行为，请勿相信，避免遭受损失。\n 4.平台不会以任何方式回收松子，松子在平台或者相关业务游戏里只可享受各种权益。</string>
     <string name="mine_transfer_tips_diamonds">为了您的钻石安全，请谨慎赠送：\n 1.请不要向陌生人转赠您的钻石。\n 2.请不要向陌生人透露自己的信息。\n 3.如果有人向您承诺“可盈利”的，属于欺骗行为，请勿相信，避免遭受损失。\n 4.平台不会以任何方式回收钻石，钻石在平台或者相关业务游戏里只可享受各种权益。</string>
+    <string name="mine_transfer_tips_pine_nut_dialog">为了您的松子安全，请谨慎赠送\n1.请勿向陌生人转赠松子\n2.请勿相信“松子盈利”等说法</string>
+    <string name="mine_transfer_tips_diamonds_dialog">为了您的钻石安全，请谨慎赠送\n1.请勿向陌生人转赠钻石\n2.请勿相信“钻石盈利”等说法</string>
+
 </resources>

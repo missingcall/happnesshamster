@@ -69,7 +69,7 @@ class MyWalletReChargeActivity : BaseActivity(R.layout.mine_activity_wallet_rech
         }
 
         mBinding.rvPayType.isNestedScrollingEnabled = false
-        mBinding.rvPayType.grid(2).setup {
+        mBinding.rvPayType.linear().setup {
             addType<WalletRechargeList>(com.kissspace.module_common.R.layout.common_item_pay_type)
             singleMode = true
             onBind {
@@ -123,8 +123,8 @@ class MyWalletReChargeActivity : BaseActivity(R.layout.mine_activity_wallet_rech
             onFastClick(R.id.cl_charge) {
                 checkedAll(false)
                 setChecked(modelPosition, true)
-                mViewModel.mRmb.value = "¥" +
-                        Format.E.format(getModel<PayProductResponses>().payProductCash)
+                mViewModel.mRmb.value = Format.E.format(getModel<PayProductResponses>().payProductCash)
+                mViewModel.mDiamond.value = Format.E.format(getModel<PayProductResponses>().payProductGoldCoin)
             }
         }.models = mutableListOf()
 
@@ -161,7 +161,7 @@ class MyWalletReChargeActivity : BaseActivity(R.layout.mine_activity_wallet_rech
         mBinding.scrollView.viewTreeObserver.addOnScrollChangedListener {
             val scrollY = mBinding.scrollView.scrollY
             if (scrollY <= 0) {
-               // mBinding.titleBar.leftIcon.setTint(Color.WHITE)
+                // mBinding.titleBar.leftIcon.setTint(Color.WHITE)
                 mBinding.layoutStatusBar.setBackgroundColor(Color.TRANSPARENT)
             } else if (scrollY <= 100.dp) {
                 //mBinding.titleBar.leftIcon.setTint(Color.WHITE)
@@ -169,7 +169,7 @@ class MyWalletReChargeActivity : BaseActivity(R.layout.mine_activity_wallet_rech
                 val rate = (scrollY.toFloat() / 100.dp)
                 mBinding.layoutStatusBar.background.alpha = (rate * 255).toInt()
             } else {
-               // mBinding.titleBar.leftIcon.setTint(Color.BLACK)
+                // mBinding.titleBar.leftIcon.setTint(Color.BLACK)
                 mBinding.layoutStatusBar.setBackgroundColor(com.kissspace.module_common.R.color.color_ui_page_second_card.resToColor())
                 mBinding.layoutStatusBar.background.alpha = 255
             }
@@ -245,8 +245,8 @@ class MyWalletReChargeActivity : BaseActivity(R.layout.mine_activity_wallet_rech
                         mBinding.rvWalletType.bindingAdapter.checkedAll(false)
                         //设置默认选中第一个
                         mBinding.rvWalletType.bindingAdapter.setChecked(0, true)
-                        mViewModel.mRmb.value = "¥" +
-                                Format.E.format(listPayProductList?.get(0)?.payProductCash)
+                        mViewModel.mRmb.value = Format.E.format(listPayProductList?.get(0)?.payProductCash)
+                        mViewModel.diamond.value = Format.E.format(listPayProductList?.get(0)?.payProductGoldCoin)
                         list[0].isSelected = true
                         list[0].notifyChange()
                     }
@@ -256,8 +256,8 @@ class MyWalletReChargeActivity : BaseActivity(R.layout.mine_activity_wallet_rech
                 if (position != null) {
                     mBinding.rvWalletType.bindingAdapter.setChecked(position, true)
                     list[position].isSelected = true
-                    mViewModel.mRmb.value =
-                        "¥" + Format.E.format(list[position].payProductCash)
+                    mViewModel.mRmb.value = Format.E.format(list[position].payProductCash)
+                    mViewModel.mDiamond.value = Format.E.format(list[position].payProductGoldCoin)
                     list[position].notifyChange()
                 }
             }

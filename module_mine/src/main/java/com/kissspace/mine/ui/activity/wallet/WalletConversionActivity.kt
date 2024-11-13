@@ -22,7 +22,7 @@ import com.kissspace.module_mine.databinding.MineActivityWalletConversionBinding
  *
  * @Author: nicko
  * @CreateDate: 2022/11/17
- * @Description: 手机验证码登录页面
+ * @Description: 货币转换页面
  *
  */
 @Router(path = RouterPath.PATH_WALLET_CONVERSION)

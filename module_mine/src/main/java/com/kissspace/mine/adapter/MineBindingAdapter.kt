@@ -453,6 +453,18 @@ object MineBindingAdapter {
 
     }
 
+    /**
+     * 充值-合计金额
+     */
+    @JvmStatic
+    @BindingAdapter(value = ["payProductCash", "payProductGoldCoin"])
+    fun totalRechargeAmount(textView: TextView, payProductCash: String, payProductGoldCoin: String) {
+        textView.text = SpanUtils().append("合计：")
+            .append(payProductCash + "元").setForegroundColor(Color.parseColor("#5A60FF")).setFontSize(20, true)
+            .append("（" + payProductGoldCoin + "钻石）")
+            .create()
+    }
+
     @JvmStatic
     @BindingAdapter("btnFirmOrchard", requireAll = false)
     fun btnFirmOrchard(button: Button, item: QueryMarketListItem) {
@@ -535,19 +547,6 @@ object MineBindingAdapter {
         }
         textView.text = s
     }
-/*
-    *//**
-     * 我的-转换-松果->松子
-     *//*
-    @JvmStatic
-    @BindingAdapter("pineConesToPineNuts", requireAll = false)
-    fun pineConesToPineNuts(textView: TextView, diamond: Double) {
-        textView.text = SpanUtils()
-            .append("我的松果")
-            .appendImage(R.mipmap.icon_pine_cone_small)
-            .append(diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .create()
 
-    }*/
 
 }

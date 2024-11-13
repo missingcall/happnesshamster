@@ -12,11 +12,16 @@ import com.blankj.utilcode.util.KeyboardUtils
 import com.didi.drouter.annotation.Router
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.binding.dataBinding
+import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.setTitleBarListener
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.parseIntent
+import com.kissspace.common.widget.CommonBottomHintDialog
+import com.kissspace.common.widget.CommonConfirmDialog
+import com.kissspace.common.widget.CommonHintDialog
 import com.kissspace.mine.ui.fragment.WalletTransferFragment
 import com.kissspace.mine.viewmodel.WalletViewModel
+import com.kissspace.module_common.databinding.CommonBottomDialogHintBinding
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineActivityWalletTransferHamsterBinding
 
@@ -24,7 +29,7 @@ import com.kissspace.module_mine.databinding.MineActivityWalletTransferHamsterBi
  *
  * @Author: nicko
  * @CreateDate: 2022/11/17
- * @Description: 手机验证码登录页面
+ * @Description: 松子/钻石 转赠页面
  *
  */
 @Router(path = RouterPath.PATH_WALLET_TRANSFER)
@@ -43,8 +48,8 @@ class WalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_transf
             override fun getItemCount(): Int = 2
 
             override fun createFragment(position: Int) = when (position) {
-                0 -> WalletTransferFragment.newInstance("002")
-                else -> WalletTransferFragment.newInstance("003")
+                0 -> WalletTransferFragment.newInstance(Constants.HamsterWalletType.PINE_NUT.type)
+                else -> WalletTransferFragment.newInstance(Constants.HamsterWalletType.DIAMONDS.type)
             }
         }
 
@@ -68,6 +73,13 @@ class WalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_transf
         getMoney()
         initData()
 
+        //安全提示弹窗
+        when (type) {
+            Constants.HamsterWalletType.PINE_NUT.type -> CommonBottomHintDialog.newInstance(getString(R.string.mine_transfer_tips_pine_nut_dialog) , true)
+                .show(supportFragmentManager)
+            Constants.HamsterWalletType.DIAMONDS.type -> CommonBottomHintDialog.newInstance(getString(R.string.mine_transfer_tips_diamonds_dialog) ,true)
+                .show(supportFragmentManager)
+        }
     }
 
     private fun getMoney() {
@@ -81,7 +93,6 @@ class WalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_transf
     private fun initData() {
 
     }
-
 
 
     override fun createDataObserver() {
@@ -116,7 +127,7 @@ class WalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_transf
             val top = l[1]
             val bottom = top + v.height
             val right = left + v.width
-            return!(event.rawX > left && event.rawX < right && event.rawY > top && event.rawY < bottom)
+            return !(event.rawX > left && event.rawX < right && event.rawY > top && event.rawY < bottom)
         }
         return false
     }

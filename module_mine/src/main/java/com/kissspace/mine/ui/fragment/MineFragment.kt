@@ -118,9 +118,9 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
 
             override fun createFragment(position: Int) =
                 when (position) {
-                    0 -> MineWalletFragment.newInstance("001")
-                    1 -> MineWalletFragment.newInstance("002")
-                    else -> MineWalletFragment.newInstance("003")
+                    0 -> MineWalletFragment.newInstance(Constants.HamsterWalletType.PINE_CONE.type)
+                    1 -> MineWalletFragment.newInstance(Constants.HamsterWalletType.PINE_NUT.type)
+                    else -> MineWalletFragment.newInstance(Constants.HamsterWalletType.DIAMONDS.type)
                 }
         }
         ViewPager2Delegate.install(mBinding.vpWallet, mBinding.dtlWallet)

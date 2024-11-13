@@ -55,6 +55,8 @@ class WalletViewModel : BaseViewModel() {
 
     var mRmb = MutableLiveData<String>()
 
+    var mDiamond = MutableLiveData<String>()
+
     val walletModel = MutableLiveData<WalletModel>()
 
     //转账的用户id
@@ -143,7 +145,7 @@ class WalletViewModel : BaseViewModel() {
         }
     }
 
-    //coin 金币
+    //coin 钻石
     val coin = MediatorLiveData<String>().apply {
         addSource(walletModel) { walletModel ->
             setValue(Format.E_EE.format(walletModel.coin.orZero()))
