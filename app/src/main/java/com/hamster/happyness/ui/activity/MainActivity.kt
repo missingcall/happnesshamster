@@ -412,7 +412,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
     private fun updateMessageCount() {
         try {
             if(NIMClient.getStatus() == StatusCode.LOGINED) {
-                val unReadCount = NIMClient.getService(MsgService::class.java).totalUnreadCount // + MMKVProvider.systemMessageUnReadCount
+                val unReadCount = NIMClient.getService(MsgService::class.java).totalUnreadCount  //+ MMKVProvider.systemMessageUnReadCount
                 mBinding.tvNotifyCount.visibility = if (unReadCount > 0) View.VISIBLE else View.GONE
                 mBinding.tvNotifyCount.text =
                     if (unReadCount > 99) "99+" else unReadCount.toString()

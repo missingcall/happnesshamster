@@ -26,6 +26,7 @@ import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.model.ChatListModel
 import com.kissspace.common.model.DynamicMessageNotice
+import com.kissspace.common.model.GiftEmailMessageResponse
 import com.kissspace.common.model.ItemMessageMenu
 import com.kissspace.common.model.LoveWallResponse
 import com.kissspace.common.model.SystemMessageResponse
@@ -74,6 +75,12 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
     val systemMessageEvent = _systemMessageEvent.asSharedFlow()
 
 
+    //礼物邮件
+    private val _giftemailMessageEvent = MutableSharedFlow<ResultState<GiftEmailMessageResponse>>()
+    val giftemailMessageEvent = _giftemailMessageEvent.asSharedFlow()
+
+
+
     private val _dynamicMessageCountEvent = MutableSharedFlow<ResultState<DynamicMessageNotice>>()
     val dynamicMessageCountEvent = _dynamicMessageCountEvent.asSharedFlow()
 
@@ -110,6 +117,14 @@ class MessageViewModel : BaseViewModel(), DefaultLifecycleObserver {
         param["os"] = "android"
         request(MessageApi.API_SYSTEM_MESSAGE, Method.GET, param, state = _systemMessageEvent)
     }
+
+    fun requestGiftEmailMessage(){
+        val param = mutableMapOf<String, Any?>()
+        param["pageNum"] = 1
+        param["pageSize"] = 1
+        request(MessageApi.API_GIFT_MAIL,Method.GET,param, state = _giftemailMessageEvent)
+    }
+
 
     /**
      * 请求banner信息

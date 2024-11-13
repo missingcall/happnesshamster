@@ -7,6 +7,9 @@ object MessageApi {
     //系统消息
     const val API_SYSTEM_MESSAGE = "/hamster-user/systemMessage/pageQuery"
 
+    //礼物邮件
+    const val API_GIFT_MAIL = "/hamster-user/gift/email/queryList"
+
     //系统消息数量
     const val API_SYSTEM_MESSAGE_COUNT = "/hamster-user/dynamics/queryNumberOfUserLikesAndCommentsMessagesByUserId"
 }
