@@ -63,7 +63,9 @@
             android:textSize="15sp"
             android:layout_marginEnd="21dp"
             app:corner_radius="20dp"
-            app:background_normal="@color/color_5A60FF"
+            app:background_normal="@array/button_color_bg"
+            app:gradient_orientation="LEFT_RIGHT"
+            app:gradient_type="linear"
             android:textColor="@color/white"
             />
 

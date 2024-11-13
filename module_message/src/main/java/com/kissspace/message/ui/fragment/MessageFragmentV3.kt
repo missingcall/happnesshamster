@@ -258,6 +258,9 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
             }
             showEmptyContent()
             FlowBus.post(Event.RefreshUnReadMsgCount)
+        }, onError = {
+
+            customToast(it.message)
         })
 
 
