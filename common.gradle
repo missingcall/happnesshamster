@@ -3,15 +3,14 @@ project.ext {
     isModuleDebug = false
     //单独调试module名
     moduleName = ""
-//    applicationId = "com.hamster.happyness"
-//    applicationId = "com.musiyear.world"
-//    applicationId = "com.funnyplay.world"
-    applicationId = "com.hamster.happyness"
-    compileSdk = 33
-    minSdk = 21
-    targetSdk = 33
-    versionCode = 109
-    versionName = "1.0.9"
+
+    applicationId = libs.versions.applicationId.get()
+    compileSdk = libs.versions.compileSdk.get().toInteger()
+    minSdk = libs.versions.minSdk.get().toInteger()
+    targetSdk = libs.versions.targetSdk.get().toInteger()
+    versionCode = libs.versions.versionCode.get().toInteger()
+    versionName = libs.versions.versionName.get()
+
 
     setAppDefaultConfig = { extension ->
         extension.apply plugin: 'com.android.application'
@@ -73,19 +72,6 @@ project.ext {
             }
         }
         extension.signingConfigs {
-//            debug {
-//                storeFile file("../musi.jks")
-//                storePassword "987654321"
-//                keyAlias "musi"
-//                keyPassword "987654321"
-//            }
-//            release {
-//                storeFile file("../musi.jks")
-//                storePassword "987654321"
-//                keyAlias "musi"
-//                keyPassword "987654321"
-//            }
-
             debug {
                 storeFile file("../musiyear.jks")
                 storePassword "musiyear123456"
@@ -98,18 +84,6 @@ project.ext {
                 keyAlias "musiyear"
                 keyPassword "musiyear123456"
             }
-//            debug {
-//                storeFile file("../quwan.jks")
-//                storePassword "quwan123456"
-//                keyAlias "key0"
-//                keyPassword "quwan123"
-//            }
-//            release {
-//                storeFile file("../quwan.jks")
-//                storePassword "quwan123456"
-//                keyAlias "key0"
-//                keyPassword "quwan123"
-//            }
         }
 
         extension.buildTypes {
@@ -339,87 +313,46 @@ project.ext {
                     extension.api extension.project(path: ':module_network')
                     extension.api extension.project(path: ':module_svga')
                     extension.api extension.project(path: ':module_ui')
-                    extension.api "androidx.appcompat:appcompat:1.5.0"
-                    extension.api "androidx.core:core-ktx:1.8.0"
-                    extension.api "androidx.activity:activity-ktx:1.5.0"
-                    extension.api "androidx.fragment:fragment-ktx:1.5.5"
-                    extension.api "com.google.android.material:material:1.6.1"
-                    extension.api "com.netease.nimlib:basesdk:8.9.112"
-                    extension.api "com.netease.nimlib:chatroom:8.9.112"
-                    extension.api "com.github.DylanCaiCoding:MMKV-KTX:1.2.13"
-                    extension.api "io.github.youth5201314:banner:2.2.2"
-                    extension.api "com.github.liangjingkanji:BRV:1.5.7"
-                    extension.api "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11"
-                    extension.api "com.github.getActivity:TitleBar:9.6"
-                    extension.api "com.github.JavaNoober.BackgroundLibrary:libraryx:1.7.6"
-                    extension.api "io.github.lucksiege:pictureselector:v3.11.2"
-                    extension.api "io.github.lucksiege:compress:v3.10.7"
-                    extension.api "io.github.lucksiege:ucrop:v3.10.7"
-                    extension.api "com.github.angcyo.DslTablayout:TabLayout:3.5.4"
-                    extension.api "com.github.angcyo.DslTablayout:ViewPager2Delegate:3.5.4"
-                    extension.api "com.umeng.umsdk:common:9.5.6"
-                    extension.api "com.umeng.umsdk:asms:1.6.3"
-                    extension.api "com.umeng.umsdk:apm:1.7.0"
-                    extension.api "com.umeng.umsdk:share-core:7.2.2"
-                    extension.api "com.umeng.umsdk:share-wx:7.2.2"
-                    extension.api 'com.tencent.mm.opensdk:wechat-sdk-android:+'
-                    extension.api "com.umeng.umsdk:uverify:2.5.9"
-                    extension.api "com.umeng.umsdk:uverify-main:2.1.4"
-                    extension.api "com.umeng.umsdk:uverify-logger:2.1.4"
-                    extension.api "com.umeng.umsdk:uverify-crashshield:2.1.4"
-                    extension.api "io.github.scwang90:refresh-header-classics:2.0.5"
-                    extension.api "io.github.scwang90:refresh-footer-classics:2.0.5"
-                    extension.api "com.qmuiteam:qmui:2.0.0-alpha10"
-                    extension.api "io.github.razerdp:BasePopup:3.1.0"
-                    extension.api 'com.github.kongzue.DialogX:DialogX:0.0.46'
-                    extension.api 'com.github.Petterpx:FloatingX:1.3.0'
-                    extension.api 'com.github.kirich1409:viewbindingpropertydelegate:1.5.9'
-                    extension.api 'com.github.gzu-liyujiang.AndroidPicker:Common:4.1.11'
-                    extension.api 'com.github.gzu-liyujiang.AndroidPicker:WheelView:4.1.11'
-                    extension.api 'com.github.gzu-liyujiang.AndroidPicker:WheelPicker:4.1.11'
-                    extension.api 'com.github.gzu-liyujiang.AndroidPicker:CalendarPicker:4.1.11'
-                    extension.api 'com.dinuscxj:circleprogressbar:1.3.6'
-                    extension.api 'com.alipay.sdk:alipaysdk-android:+@aar'
-                    extension.api 'com.github.xiaweizi:MarqueeTextView:1.0'
-                    extension.api 'com.airbnb.android:lottie:5.2.0'
-                    extension.api "com.tencent.vasdolly:helper:3.0.5"
-                    extension.api 'com.github.gzu-liyujiang:Android_CN_OAID:4.2.4'
-                    extension.api 'io.github.yidun:livedetect:3.2.0.2'
-                    extension.api 'com.github.SherlockGougou:BigImageViewPager:androidx-7.2.5'
-                    extension.api 'com.github.bumptech.glide:glide:4.15.1'
-                    extension.api 'com.github.bumptech.glide:okhttp3-integration:4.15.1'
-                    extension.kapt 'com.github.bumptech.glide:compiler:4.15.1'
-                    extension.api 'io.github.didi:drouter-api:2.4.5'
-                    extension.api 'com.github.zhpanvip:bannerviewpager:3.5.10'
-                    extension.api 'com.tencent.bugly:crashreport:latest.release'
-                    extension.api 'com.tencent.tav:libpag:4.2.88'
-                    extension.api 'io.github.tencent:vap:2.0.28'
+
+                    extension.api (libs.bundles.androidx)
+                    extension.api (libs.bundles.yunxin)
+                    extension.api (libs.bundles.pictureselector)
+                    extension.api (libs.bundles.umeng)
+                    extension.api (libs.bundles.androidpicker)
+                    extension.api (libs.bundles.glide)
+
+                    extension.api (libs.bundles.uicommon)
+
+                    extension.api (libs.mmkv.ktx)
+
+
+                    extension.api (libs.wx.sdk)
+                    extension.api (libs.viewbind.propertydelegate)
+
+                    extension.api (libs.tencent.vasdolly)
+                    extension.api (libs.android.oaid)
+                    extension.api (libs.yidun.livedetect)
+
+                    extension.api (libs.didi.router)
+
+                    extension.api (libs.tencent.bugly)
+                    extension.api (libs.tencent.libpag)
+                    extension.api (libs.tencent.vap)
+
+
+                    extension.kapt (libs.ui.glide.compiler)
+                    extension.debugImplementation (libs.leakcanary)
                     extension.api 'org.apmem.tools:layouts:1.10@aar'
-                    extension.api 'com.nex3z:flow-layout:1.2.4'
-                    extension.api 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-                    extension.api 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
-                    extension.api 'de.hdodenhof:circleimageview:3.0.1'
-                    extension.api 'com.github.ljphawk:SwipeMenuLayout:1.05'
-                    extension.api 'com.github.RuffianZhong:RWidgetHelper:androidx.v0.0.14'
-                    extension.api 'com.github.lygttpod:SuperTextView:2.1.8'
-                    extension.api 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
-
-
-                    extension.debugImplementation 'com.squareup.leakcanary:leakcanary-android:3.0-alpha-1'
+                    extension.api "com.alipay.sdk:alipaysdk-android:+@aar"
                     extension.compileOnly fileTree(dir: "../app/libs", include: ["*.aar"])
                     break
                 case "module_network":
                     extension.compileOnly extension.project(path: ':module_util')
-                    extension.api "com.squareup.retrofit2:retrofit:2.9.0"
-                    extension.api "com.squareup.okhttp3:okhttp:4.10.0"
-                    extension.api "com.squareup.retrofit2:converter-gson:2.9.0"
-                    extension.api "com.squareup.retrofit2:converter-scalars:2.9.0"
-                    extension.api "com.github.liangjingkanji:Net:3.6.4"
-                    extension.api "com.github.fengzhizi715:saf-logginginterceptor:v1.6.13"
+                    extension.api libs.bundles.net
                     break
                 case "module_room":
                     extension.implementation extension.project(path: ':module_webview')
-                    extension.implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+                    extension.implementation libs.mqtt
                     extension.implementation project(':SudMGPWrapper')
                     break
                 case "module_webview":
@@ -427,28 +360,27 @@ project.ext {
                     extension.implementation extension.project(path: ':module_pay')
                     break
                 case "module_svga":
-                    extension.implementation 'com.github.bumptech.glide:glide:4.15.1'
-                    extension.implementation 'com.github.bumptech.glide:okhttp3-integration:4.15.1'
-                    extension.kapt 'com.github.bumptech.glide:compiler:4.15.1'
-                    extension.implementation 'com.squareup.wire:wire-runtime:3.7.0'
-                    //extension.implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+                    extension.implementation(libs.svga.glide.core)
+                    extension.implementation (libs.svga.glide.okhttp3integration)
+                    extension.kapt (libs.svga.glide.compiler)
+                    extension.implementation (libs.svga.wire)
                     break
                 case "module_util":
-                    extension.api "com.blankj:utilcodex:1.31.1"
-                    extension.api 'com.github.liangjingkanji:soft-input-event:1.0.9'
-                    extension.implementation 'androidx.core:core-ktx:1.8.0'
-                    extension.implementation 'androidx.appcompat:appcompat:1.6.1'
-                    extension.implementation 'com.google.android.material:material:1.8.0'
-                    extension.implementation "androidx.startup:startup-runtime:1.1.1"
-                    extension.implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha03"
-                    extension.implementation "androidx.lifecycle:lifecycle-common-java8:2.4.0-alpha03"
-                    extension.implementation "androidx.fragment:fragment-ktx:1.5.5"
-                    extension.implementation "com.squareup.okio:okio:3.0.0"
-                    extension.api "io.coil-kt:coil:2.4.0"
+                    extension.api (libs.util.utilcodex)
+                    extension.api (libs.util.softinputevent)
+                    extension.implementation (libs.util.androidxcorektx)
+                    extension.implementation (libs.util.androidxappcompat)
+                    extension.implementation (libs.util.androidxmaterial)
+                    extension.implementation (libs.util.startup)
+                    extension.implementation (libs.util.lifecycleruntimektx)
+                    extension.implementation (libs.util.lifecyclecommonjava8)
+                    extension.implementation (libs.util.androidxfragmentktx)
+                    extension.implementation (libs.util.okio)
+                    extension.api (libs.util.coil)
 //                    extension.api "io.coil-kt:coil:2.7.0"
 //                    extension.api "io.coil-kt.coil3:coil:3.0.1"
-                    extension.api "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
-                    extension.api "com.guolindev.permissionx:permissionx:1.7.1"
+                    extension.api (libs.util.kotlinxserializationjson)
+                    extension.api (libs.util.permissionx)
                     break
                 case "module_dynamic":
                     extension.implementation extension.project(path: ':module_webview')

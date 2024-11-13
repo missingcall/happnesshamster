@@ -1,0 +1,229 @@
+[versions]
+compileSdk = "33"
+minSdk = "21"
+targetSdk = "33"
+versionCode = "109"
+versionName = "1.0.9"
+applicationId="com.hamster.happyness"
+
+
+[libraries]
+
+#androidX的库
+androidx-appcompat ={ module="androidx.appcompat:appcompat",version="1.5.0"}
+androidx-coreKtx = { module="androidx.core:core-ktx" ,version="1.9.0"}
+androidx-activityKtx={ module="androidx.activity:activity-ktx",version="1.5.0"}
+androidx-fragmentKtx={ module="androidx.fragment:fragment-ktx",version="1.5.5"}
+androidx-lifecycleLivedataKtx={ module="androidx.lifecycle:lifecycle-livedata-ktx",version="2.3.1"}
+android-material = {module="com.google.android.material:material", version="1.6.1"}
+
+##网易云信
+yunxin-basesdk = {module="com.netease.nimlib:basesdk", version="8.9.112"}
+yunxin-chatroom={module="com.netease.nimlib:chatroom",version="8.9.112"}
+
+##mmkv
+mmkv-ktx = {module="com.github.DylanCaiCoding:MMKV-KTX",version="1.2.13"}
+
+
+##banner(图片轮播)
+ui-banner = {module="io.github.youth5201314:banner",version="2.2.2"}
+##bannerviewpager(图片轮播2)
+ui-bannerviewpager={module="com.github.zhpanvip:bannerviewpager",version="3.5.10"}
+
+
+##BRV recyclerView适配器
+ui-brv={module="com.github.liangjingkanji:BRV",version="1.5.7"}
+##recyclerView万能适配器
+ui-baserecyclerviewadapterhelper={module="com.github.CymChad:BaseRecyclerViewAdapterHelper",version="3.0.11"}
+
+##TitleBar
+ui-titlebar = {module="com.github.getActivity:TitleBar",version="9.6"}
+
+##shape drawable快捷开发
+ui-backgroundLibrary ={module="com.github.JavaNoober.BackgroundLibrary:libraryx",version="1.7.6"}
+
+##图片选择快捷
+ui-pictureselector-core = {module="io.github.lucksiege:pictureselector" ,version="v3.11.2"}
+ui-pictureselector-compress = {module="io.github.lucksiege:compress",version="v3.10.7"}
+ui-pictureselector-ucrop = {module="io.github.lucksiege:ucrop",version="v3.10.7"}
+
+
+##tablayout
+ui-dsltabLayout-core ={module="com.github.angcyo.DslTablayout:TabLayout",version="3.5.4"}
+ui-dsltabLayout-viewpager2delegate ={module="com.github.angcyo.DslTablayout:ViewPager2Delegate",version="3.5.4"}
+
+
+##刷新
+ui-refresh-header-classics = {module="io.github.scwang90:refresh-header-classics",version="2.0.5"}
+ui-refresh-footer-classics = {module="io.github.scwang90:refresh-footer-classics",version="2.0.5"}
+
+##qmui
+ui-qmui = {module="com.qmuiteam:qmui",version="2.0.0-alpha10"}
+
+
+
+
+##弹框
+ui-basepopup ={module="io.github.razerdp:BasePopup",version="3.1.0"}
+ui-dialogx={module="com.github.kongzue.DialogX:DialogX",version="0.0.46"}
+##悬浮窗
+ui-floatingx={module="com.github.Petterpx:FloatingX",version="1.3.0"}
+
+##选择组件
+ui-androidpicker-common={module="com.github.gzu-liyujiang.AndroidPicker:Common",version="4.1.11"}
+ui-androidpicker-wheelview={module="com.github.gzu-liyujiang.AndroidPicker:WheelView",version="4.1.11"}
+ui-androidpicker-wheelpicker={module="com.github.gzu-liyujiang.AndroidPicker:WheelPicker",version="4.1.11"}
+ui-androidpicker-calendarpicker={module="com.github.gzu-liyujiang.AndroidPicker:CalendarPicker",version="4.1.11"}
+
+##圆形进度条
+ui-circleprogressbar={module="com.dinuscxj:circleprogressbar",version="1.3.6"}
+
+##TextView跑马灯
+ui-marqueetextview={module="com.github.xiaweizi:MarqueeTextView",version="1.0"}
+
+##lottie 动画框架
+ui-lottie={module="com.airbnb.android:lottie",version="5.2.0"}
+
+##大图viewpager
+ui-bigimageviewpager={module="com.github.SherlockGougou:BigImageViewPager",version="androidx-7.2.5"}
+
+
+##glide 图片加载
+ui-glide-core = {module="com.github.bumptech.glide:glide",version="4.15.1"}
+ui-glide-okhttp3integration={module="com.github.bumptech.glide:okhttp3-integration",version="4.15.1"}
+ui-glide-compiler={module="com.github.bumptech.glide:compiler",version="4.15.1"}
+
+##layouts
+#ui-layouts = {module="org.apmem.tools:layouts",version="1.10@aar"}
+
+##flowlayout 流式布局
+ui-flowlayout = {module="com.nex3z:flow-layout",version="1.2.4"}
+
+##屏幕适配
+ui-androidautosize = {module="com.github.JessYanCoding:AndroidAutoSize",version="v1.2.1"}
+
+
+##圆形imageview
+ui-circleimageview={module="de.hdodenhof:circleimageview",version="3.0.1"}
+
+##SwipeMenuLayout 侧滑菜单
+ui-swipemenulayout={module="com.github.ljphawk:SwipeMenuLayout",version="1.05"}
+##EasySwipeMenuLayout 侧滑菜单
+ui-easyswipemenulayout={module="com.github.anzaizai:EasySwipeMenuLayout",version="1.1.4"}
+
+
+##view便捷开发
+ui-rwidgethelper ={module="com.github.RuffianZhong:RWidgetHelper",version="androidx.v0.0.14"}
+
+##SuperTextView
+ui-supertextview ={module="com.github.lygttpod:SuperTextView",version="2.1.8"}
+
+
+
+
+##viewbindg 代理
+viewbind-propertydelegate={module="com.github.kirich1409:viewbindingpropertydelegate",version="1.5.9"}
+
+##友盟
+umeng-common = {module="com.umeng.umsdk:common",version="9.5.6"}
+umeng-asms = {module="com.umeng.umsdk:asms",version="1.6.3"}
+umeng-apm ={module="com.umeng.umsdk:apm" ,version="1.7.0"}
+umeng-sharecore ={module="com.umeng.umsdk:share-core" ,version="7.2.2"}
+umeng-sharewx ={module="com.umeng.umsdk:share-wx" ,version="7.2.2"}
+umeng-uverify-core ={module="com.umeng.umsdk:uverify" ,version="2.5.9"}
+umeng-uverify-main ={module="com.umeng.umsdk:uverify-main" ,version="2.1.4"}
+umeng-uverify-logger ={module="com.umeng.umsdk:uverify-logger",version="2.1.4"}
+umeng-uverify-crashshield={module="com.umeng.umsdk:uverify-crashshield",version="2.1.4"}
+
+
+##微信sdk
+wx-sdk = {module="com.tencent.mm.opensdk:wechat-sdk-android",version="+"}
+##阿里sdk
+##ali-sdk = {module="com.alipay.sdk:alipaysdk-android",version="+@aar"}
+
+##多渠道打包
+tencent-vasdolly={module="com.tencent.vasdolly:helper",version="3.0.5"}
+##bugly
+tencent-bugly={module="com.tencent.bugly:crashreport",version="latest.release"}
+##动效文件的渲染
+tencent-libpag={module="com.tencent.tav:libpag",version="4.2.88"}
+##炫酷动画
+tencent-vap={module="io.github.tencent:vap",version="2.0.28"}
+
+
+
+##OAID
+android-oaid = {module="com.github.gzu-liyujiang:Android_CN_OAID",version="4.2.4"}
+
+##易盾活体检测
+yidun-livedetect={module="io.github.yidun:livedetect",version="3.2.0.2"}
+
+##滴滴路由框架
+didi-router = {module="io.github.didi:drouter-api",version="2.4.5"}
+
+
+##内存泄漏检测
+leakcanary = {module="com.squareup.leakcanary:leakcanary-android",version="3.0-alpha-1"}
+
+
+#网络请求相关
+net-okhttp-retrofit={module="com.squareup.retrofit2:retrofit",version="2.9.0"}
+net-okhttp-core={module="com.squareup.okhttp3:okhttp",version="4.10.0"}
+net-okhttp-retrofitconvertergson={module="com.squareup.retrofit2:converter-gson",version="2.9.0"}
+net-okhttp-retrofitconverterscalars={module="com.squareup.retrofit2:converter-scalars",version="2.9.0"}
+net-liangjingkanji-core={module="com.github.liangjingkanji:Net",version="3.6.4"}
+net-okhttp-logginginterceptor={module="com.github.fengzhizi715:saf-logginginterceptor",version="v1.6.13"}
+
+#mqtt
+mqtt={module="org.eclipse.paho:org.eclipse.paho.client.mqttv3",version="1.1.0"}
+
+
+#svga
+svga-glide-core={module="com.github.bumptech.glide:glide",version="4.15.1"}
+svga-glide-okhttp3integration={module="com.github.bumptech.glide:okhttp3-integration",version="4.15.1"}
+svga-glide-compiler={module="com.github.bumptech.glide:compiler",version="4.15.1"}
+svga-wire={module="com.squareup.wire:wire-runtime",version="3.7.0"}
+
+
+#util
+
+util-utilcodex={module="com.blankj:utilcodex",version="1.31.1"}
+util-softinputevent={module="com.github.liangjingkanji:soft-input-event",version="1.0.9"}
+util-androidxcorektx={module="androidx.core:core-ktx",version="1.8.0"}
+util-androidxappcompat={module="androidx.appcompat:appcompat",version="1.6.1"}
+util-androidxmaterial={module="com.google.android.material:material",version="1.8.0"}
+util-startup={module="androidx.startup:startup-runtime",version="1.1.1"}
+util-lifecycleruntimektx={module="androidx.lifecycle:lifecycle-runtime-ktx",version="2.4.0-alpha03"}
+util-lifecyclecommonjava8={module="androidx.lifecycle:lifecycle-common-java8",version="2.4.0-alpha03"}
+util-androidxfragmentktx={module="androidx.fragment:fragment-ktx",version="1.5.5"}
+util-okio={module="com.squareup.okio:okio",version="3.0.0"}
+util-kotlinxserializationjson={module="org.jetbrains.kotlinx:kotlinx-serialization-json",version="1.4.1"}
+util-permissionx={module="com.guolindev.permissionx:permissionx",version="1.7.1"}
+
+util-coil={module="io.coil-kt:coil",version="2.4.0"}
+
+[bundles]
+
+##common模块依赖库
+androidx=["androidx-appcompat","androidx-coreKtx","androidx-activityKtx","androidx-fragmentKtx","androidx-lifecycleLivedataKtx","android-material"]
+
+umeng=["umeng-common","umeng-asms","umeng-apm","umeng-sharecore","umeng-sharewx","umeng-uverify-core","umeng-uverify-main","umeng-uverify-logger","umeng-uverify-crashshield"]
+
+yunxin=["yunxin-basesdk","yunxin-chatroom"]
+
+pictureselector=["ui-pictureselector-core","ui-pictureselector-ucrop","ui-pictureselector-compress"]
+
+androidpicker=["ui-androidpicker-common","ui-androidpicker-wheelview","ui-androidpicker-wheelpicker","ui-androidpicker-calendarpicker"]
+
+glide = ["ui-glide-core","ui-glide-okhttp3integration"]
+
+
+uicommon=["ui-banner","ui-brv","ui-titlebar","ui-backgroundLibrary","ui-dsltabLayout-core", "ui-dsltabLayout-viewpager2delegate","ui-circleprogressbar",
+         "ui-qmui","ui-basepopup","ui-dialogx","ui-floatingx","ui-refresh-header-classics","ui-refresh-footer-classics","ui-marqueetextview","ui-lottie",
+         "ui-bigimageviewpager","ui-bannerviewpager","ui-flowlayout","ui-androidautosize","ui-circleimageview","ui-swipemenulayout","ui-easyswipemenulayout",
+         "ui-rwidgethelper","ui-supertextview","ui-baserecyclerviewadapterhelper"
+]
+
+net=["net-okhttp-retrofit","net-okhttp-core","net-okhttp-retrofitconvertergson","net-okhttp-retrofitconverterscalars","net-liangjingkanji-core","net-okhttp-logginginterceptor"]
+[plugins]
+

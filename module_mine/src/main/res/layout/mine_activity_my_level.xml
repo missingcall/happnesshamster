@@ -235,7 +235,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_12"
-        android:visibility="gone"
         android:layout_gravity="center_horizontal"
         android:layout_width="@dimen/dp_343"
         android:layout_height="@dimen/dp_80" />
