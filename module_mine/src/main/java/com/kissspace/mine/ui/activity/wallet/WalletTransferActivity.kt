@@ -14,6 +14,8 @@ import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.binding.dataBinding
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.setTitleBarListener
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.parseIntent
 import com.kissspace.common.widget.CommonBottomHintDialog
@@ -98,7 +100,9 @@ class WalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_transf
     override fun createDataObserver() {
         super.createDataObserver()
 
-
+        FlowBus.observerEvent<Event.RefreshCoin>(this) {
+            getMoney()
+        }
     }
 
 

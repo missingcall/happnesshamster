@@ -104,21 +104,23 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         FlowBus.observerEvent<Event.WearSkinEvent>(this) {
             getCurrentHamsterSkin()
         }
+
+        FlowBus.observerEvent<Event.RefreshCoin>(this) {
+            getMoney()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        initWalletBalance()
+        getMoney()
     }
 
-    private fun initWalletBalance() {
+    private fun getMoney() {
         mWalletViewModel.getMyMoneyBag {
             it?.let {
                 mWalletViewModel.walletModel.value = it
-
             }
         }
-
     }
 
     private fun refreshUserinfo() {

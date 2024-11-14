@@ -208,5 +208,4 @@ sealed class Event {
     //果园激活成功
     object OrchardActivationEvent : Event()
 
-    //刷新钱包
 }

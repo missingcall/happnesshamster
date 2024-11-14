@@ -175,7 +175,7 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
             ) { _ ->
                 com.kissspace.common.util.customToast("赠送成功")
 
-                FlowBus.post(Event.OrchardActivationEvent)
+                FlowBus.post(Event.RefreshCoin)
             }
         }
     }
