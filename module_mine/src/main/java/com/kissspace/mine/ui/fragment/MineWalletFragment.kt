@@ -11,6 +11,8 @@ import com.blankj.utilcode.util.SpanUtils
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.widget.MarqueeFactory
@@ -159,9 +161,9 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
     override fun createDataObserver() {
         super.createDataObserver()
 
-        /*FlowBus.observerEvent<Event.MsgRefreshWalletEvent>(this) {
-            initData()
-        }*/
+        FlowBus.observerEvent<Event.RefreshCoin>(this) {
+            getMoney()
+        }
     }
 
     private fun getMoney() {

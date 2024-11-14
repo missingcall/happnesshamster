@@ -171,7 +171,9 @@ class SendSmsCodeActivity :
                         mBinding.etCode.text.toString(),
                         smsType.orEmpty()
                     ) {
-                        setResult(Activity.RESULT_OK)
+                        var intent = Intent()
+                        intent.putExtra("smsCode",mBinding.etCode.text.toString())
+                        setResult(Activity.RESULT_OK ,intent)
                         finish()
                     }
                 }

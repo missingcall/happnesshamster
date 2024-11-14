@@ -13,7 +13,10 @@ import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.callback.ActivityResult.TransferAccount
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.model.*
+import com.kissspace.common.router.ParseIntent
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.widget.CommonConfirmDialog
@@ -166,10 +169,13 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
     private val startActivityLauncher = registerForStartActivityResult { result ->
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
             mViewModel.transferPineNuts(
+                result.data?.getStringExtra("smsCode"),
                 mViewModel.transferUserNumber.value.orZero(),
                 mViewModel.transferUserId.value.orEmpty()
             ) { _ ->
                 com.kissspace.common.util.customToast("赠送成功")
+
+                FlowBus.post(Event.RefreshCoin)
             }
         }
     }

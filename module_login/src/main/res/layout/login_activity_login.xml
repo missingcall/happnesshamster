@@ -11,8 +11,29 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@mipmap/common_page_background"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@mipmap/common_page_background"
+            android:scaleType="centerCrop"
+            />
+
+        <ImageView
+            android:id="@+id/ivIconTop"
+            android:layout_width="283dp"
+            android:layout_height="109dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@mipmap/login_icon_top"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="45dp"
+            />
 
 
         <com.kissspace.login.widget.FixedTextureVideoView
@@ -40,7 +61,7 @@
             android:layout_width="202dp"
             android:layout_height="284dp"
             android:layout_marginTop="80dp"
-            android:src="@mipmap/login_icon_title"
+            android:src="@mipmap/login_icon_top"
             android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -49,14 +70,15 @@
         <TextView
             android:id="@+id/tv_login"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="@dimen/dp_30"
-            android:layout_marginEnd="@dimen/dp_30"
-            android:layout_marginBottom="10dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="7dp"
             android:background="@mipmap/icon_login_sms"
             android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="20sp"
+            app:layout_constraintDimensionRatio="320:53"
             app:layout_constraintBottom_toTopOf="@id/tv_account_create"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
@@ -64,14 +86,15 @@
         <TextView
             android:id="@+id/tv_account_create"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="@dimen/dp_30"
-            android:layout_marginEnd="@dimen/dp_30"
-            android:layout_marginBottom="10dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="11dp"
             android:background="@mipmap/icon_signup"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="14sp"
+            app:layout_constraintDimensionRatio="320:53"
             app:layout_constraintBottom_toTopOf="@id/ll_agree"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

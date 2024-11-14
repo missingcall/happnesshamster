@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.ColorUtils
+import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.utils.*
 import com.hamster.happyness.R
 import com.hamster.happyness.databinding.FragmentMainHomeV3Binding
@@ -102,21 +104,23 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         FlowBus.observerEvent<Event.WearSkinEvent>(this) {
             getCurrentHamsterSkin()
         }
+
+        FlowBus.observerEvent<Event.RefreshCoin>(this) {
+            getMoney()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        initWalletBalance()
+        getMoney()
     }
 
-    private fun initWalletBalance() {
+    private fun getMoney() {
         mWalletViewModel.getMyMoneyBag {
             it?.let {
                 mWalletViewModel.walletModel.value = it
-
             }
         }
-
     }
 
     private fun refreshUserinfo() {
@@ -127,7 +131,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
     private fun queryDayIncome() {
         mMineViewModel.queryDayIncome(onSuccess = {
-            mBinding.tvDailyComeNum.text = it
+            mBinding.tvDailyComeNum.text = it.toString()
         })
     }
 
@@ -238,7 +242,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             var game1: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
                 gameId = "1",
                 "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "海盗船"
+                "财神驾到"
             )
             var game2: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
                 gameId = "2",
@@ -255,19 +259,28 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
                 "大逃杀3"
             )
-            var game5: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
-                gameId = "5",
-                "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "大逃杀4"
-            )
+
             var list: MutableList<GameQuickEnterModel.Game> = mutableListOf()
             list.add(game1)
             list.add(game2)
             list.add(game3)
             list.add(game4)
-            list.add(game5)
+
+/*            var game5: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
+                gameId = "5",
+                "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
+                "大逃杀4"
+            )
+            list.add(game5)*/
 
             mBinding.recyclerView.addModels(list)
+       /*     if (list.size <= 4) {
+
+                }
+                mBinding.recyclerView.layoutManager = HoverLinearLayoutManager(context, orientation, reverseLayout).apply {
+            setScrollEnabled(scrollEnabled)
+            this.stackFromEnd = stackFromEnd
+            }*/
         })
     }
 
@@ -285,5 +298,4 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             }
         }.mutable = mutableListOf()
     }
-
 }

@@ -45,22 +45,25 @@
             android:id="@+id/tvNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="@{mvm.userInfo.nickname}"
             android:textColor="@color/color_ui_main_text"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvId"
             app:layout_constraintLeft_toRightOf="@id/ivAvatar"
-            app:layout_constraintTop_toTopOf="@id/ivAvatar" />
+            app:layout_constraintTop_toTopOf="@id/ivAvatar"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/tvId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:text="UID:"
-            android:textColor="@color/color_ui_main_text"
-            android:textSize="10sp"
+            android:textColor="@color/color_999999"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
             app:layout_constraintLeft_toLeftOf="@id/tvNickname"
             app:layout_constraintTop_toBottomOf="@id/tvNickname" />
 
@@ -78,19 +81,17 @@
 
         <ImageView
             android:id="@+id/ivCopy"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:layout_marginStart="4dp"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:src="@mipmap/mine_ic_copy"
+            android:src="@mipmap/mine_icon_copy"
             app:layout_constraintBottom_toBottomOf="@id/tvUserId"
             app:layout_constraintLeft_toRightOf="@id/tvUserId"
             app:layout_constraintTop_toTopOf="@id/tvUserId" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="161dp"
+            android:layout_height="46dp"
             android:layout_marginRight="15dp"
             android:background="@mipmap/app_bg_home_produce"
             android:paddingLeft="15dp"
@@ -104,22 +105,21 @@
                 android:id="@+id/ivHamster"
                 android:layout_width="27dp"
                 android:layout_height="27dp"
-                android:src="@mipmap/app_icon_hamster"
+                android:src="@mipmap/app_icon_hamster_avator"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/viewDivider"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/viewDivider"
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"
-                android:background="#323441"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="10dp"
+                android:background="#323441"
                 app:layout_constraintLeft_toRightOf="@id/ivHamster"
                 app:layout_constraintRight_toLeftOf="@id/clDailyIncome" />
 
@@ -127,11 +127,10 @@
                 android:id="@+id/clDailyIncome"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/viewDivider"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/tvDailyCome"
@@ -147,7 +146,7 @@
                     app:layout_constraintVertical_chainStyle="packed" />
 
                 <!--产能-->
-             <!--   <ImageView
+                <!--   <ImageView
                     android:id="@+id/ivDailyComeDescription"
                     android:layout_width="17dp"
                     android:layout_height="17dp"
@@ -209,10 +208,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
-            android:layout_height="88dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -306,8 +305,8 @@
             android:id="@+id/ivHamsterDevelopment"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scaleType="fitCenter"
             android:padding="10dp"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@id/ivHamsterDevelopmentBg"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintLeft_toLeftOf="@id/ivHamsterDevelopmentBg"

@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:bl_corners_topRadius="12dp"
-    android:paddingBottom="10dp"
-    app:bl_solid_color="@color/color_161616">
+    android:background="@mipmap/common_bg_dialog_low_height"
+    android:paddingBottom="10dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

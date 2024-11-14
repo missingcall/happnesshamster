@@ -37,7 +37,7 @@ import kotlinx.coroutines.Job
  *
  * @Author: nicko
  * @CreateDate: 2022/11/17
- * @Description: 手机验证码登录页面
+ * @Description: 注册用户页面
  *
  */
 @Router(path = RouterPath.PATH_ACCOUNT_CREATE)
@@ -62,7 +62,7 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
         mBinding.xetPhone.setPattern(intArrayOf(3, 4, 4))
         mBinding.xetPhone.addAfterTextChanged {
 //            mViewModel.phoneIconState.set(it?.isNotEmpty())
-            mViewModel.getCodeBtnState.set(it?.length == 13)
+            mViewModel.getCodeBtnState.set(it?.length == 13 && (mCountDown?.isActive == false || mCountDown == null))
         }
         mBinding.etVerify.addAfterTextChanged {
             mViewModel.btnEnable.set(it?.length == 6 && mBinding.xetPhone.text?.length == 13 && mBinding.xetInvite.length() == 6)
@@ -116,6 +116,7 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
                 }) {
                 mViewModel.createAccount(
                     mBinding.xetPhone.text.toString().replace(" ", ""),
+                    mBinding.xetPassword.text.toString(),
                     mBinding.etVerify.text.toString(),
                     mBinding.xetInvite.text.toString()
                 )
@@ -138,27 +139,13 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
         })
 
         collectData(mViewModel.accounts, onSuccess = {
-            hideLoading()
+            val userAccountBean = it[0]
+            mViewModel.loginByUserId(
+                userAccountBean.userId,
+                userAccountBean.tokenHead,
+                userAccountBean.token
+            )
 
-            when (it.size) {
-                1 -> {
-                    val userAccountBean = it[0]
-                    mViewModel.loginByUserId(
-                        userAccountBean.userId,
-                        userAccountBean.tokenHead,
-                        userAccountBean.token
-                    )
-                }
-
-                else -> {
-                    val userAccountBean = it[0]
-                    mViewModel.loginByUserId(
-                        userAccountBean.userId,
-                        userAccountBean.tokenHead,
-                        userAccountBean.token
-                    )
-                }
-            }
         }, onError = {
             hideLoading()
         }, onEmpty = {
@@ -170,6 +157,7 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
 
         }, onError = {
             hideLoading()
+            customToast(it.errorMsg)
         }, onEmpty = {
             hideLoading()
         })
@@ -178,9 +166,9 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
     private fun startCountDown(countDownTime: Long) {
         mCountDown = countDown(countDownTime, reverse = false, scope = lifecycleScope, onTick = {
             mBinding.tvVerify.text = "重新发送 (${it}s)"
-            mViewModel.sendSmsEnable.set(false)
+            mViewModel.getCodeBtnState.set(false)
         }, onFinish = {
-            mViewModel.sendSmsEnable.set(true)
+            mViewModel.getCodeBtnState.set(true)
             mBinding.tvVerify.text = "重新获取"
             mCountDown?.cancel()
         })

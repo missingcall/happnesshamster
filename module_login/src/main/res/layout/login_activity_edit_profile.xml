@@ -217,15 +217,10 @@
 
         <TextView
             android:id="@+id/text_submit"
-            commonBtnState="@{vm.submitBtnState}"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
+            commonBtnStateBlue="@{vm.submitBtnState}"
+            style="@style/commonBottomConfirmationItem"
             android:layout_marginTop="70dp"
-            android:gravity="center"
             android:text="@string/login_btn_submit_profile"
-            android:textColor="@color/common_white"
-            android:textSize="17sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/ll_nickname"
             app:layout_constraintStart_toStartOf="@id/ll_nickname"
             app:layout_constraintTop_toBottomOf="@id/tv_sex_tips" />

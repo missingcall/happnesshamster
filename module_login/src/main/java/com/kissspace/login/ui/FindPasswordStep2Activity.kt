@@ -58,8 +58,8 @@ class FindPasswordStep2Activity : BaseActivity(R.layout.login_activity_find_pass
     private fun updatePwd() {
         val param = mutableMapOf<String, Any?>("password" to mViewModel.password.get().toString())
         request<Int>(LoginApi.API_RESET_LOGIN_PASSWORD, Method.POST, param, onSuccess = {
-            customToast("设置成功")
             loginOut()
+            customToast("设置成功")
         }, onError = {
             customToast(it.errorMsg)
         })

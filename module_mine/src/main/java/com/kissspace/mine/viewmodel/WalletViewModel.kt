@@ -587,8 +587,9 @@ class WalletViewModel : BaseViewModel() {
 
 
     //松子转赠
-    fun transferPineNuts(amount: Double, targetUserDisplayId: String, onSuccess: ((Boolean) -> Unit) = {}) {
+    fun transferPineNuts(smsCode :String? ,amount: Double, targetUserDisplayId: String, onSuccess: ((Boolean) -> Unit) = {}) {
         val param = mutableMapOf<String, Any?>()
+        param["smsCode"] = smsCode
         param["amount"] = amount
         param["targetUserDisplayId"] = targetUserDisplayId
         request<Boolean>(MineApi.API_TRANSFER_PINE_NUTS, Method.POST, param, onSuccess = {

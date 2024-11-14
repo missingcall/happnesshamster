@@ -2,6 +2,7 @@ package com.kissspace.login.ui.fragment
 
 import android.Manifest
 import android.os.Bundle
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -38,7 +39,7 @@ import kotlinx.coroutines.Job
  */
 class LoginPswFragment : BaseFragment(R.layout.login_fragment_phone_code_login) {
     private val mBinding by viewBinding<LoginFragmentPhoneCodeLoginBinding>()
-    private val mViewModel by viewModels<LoginViewModel>()
+    private val mViewModel by activityViewModels<LoginViewModel>()
 
 
     companion object {
@@ -110,38 +111,6 @@ class LoginPswFragment : BaseFragment(R.layout.login_fragment_phone_code_login) 
 
     override fun createDataObserver() {
         super.createDataObserver()
-        collectData(mViewModel.token, onSuccess = {
-            mViewModel.loginIm(it, onSuccess = {
-                hideLoading()
-                activity?.finish()
-            })
-        }, onError = {
-            hideLoading()
-            customToast("登录失败${it.message}")
-        })
 
-        collectData(mViewModel.accounts, onSuccess = {
-            when (it.size) {
-                1 -> {
-                    val userAccountBean = it[0]
-                    mViewModel.loginByUserId(
-                        userAccountBean.userId,
-                        userAccountBean.tokenHead,
-                        userAccountBean.token
-                    )
-                }
-                //多于一个身份时直接登录最近的那个
-                else -> {
-                    val userAccountBean = it[0]
-                    mViewModel.loginByUserId(
-                        userAccountBean.userId,
-                        userAccountBean.tokenHead,
-                        userAccountBean.token
-                    )
-                }
-            }
-        }, onError = {
-            hideLoading()
-        })
     }
 }
