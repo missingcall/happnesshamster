@@ -24,6 +24,7 @@ import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.model.ChatListModel
+import com.kissspace.common.model.GiftEmailMessageModel
 import com.kissspace.common.provider.IRoomProvider
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.util.mmkv.MMKVProvider
@@ -36,6 +37,7 @@ import com.kissspace.common.model.SystemMessageModel
 import com.kissspace.message.widget.ChatDialog
 import com.kissspace.module_message.R
 import com.kissspace.module_message.databinding.FragmentMessageV3Binding
+import com.kissspace.module_message.databinding.MessageChatListItemGiftemailBinding
 import com.kissspace.util.hasNotificationPermission
 import com.kissspace.util.isAppDebug
 import com.kissspace.util.logE
@@ -59,6 +61,10 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
     //系统消息adapter
     private lateinit var mSysMsgAdapter: BindingAdapter
 
+    //礼物邮件adapter
+    private lateinit var mGiftMailAdapter: BindingAdapter
+
+
     //private var menuList: MutableList<ItemMessageMenu> = ArrayList()
 
     /**
@@ -66,6 +72,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
      */
     private val broadcastObserver = Observer<BroadcastMessage> {
         mViewModel.requestSystemMessage()
+        mViewModel.requestGiftEmailMessage()
     }
 
     @SuppressLint("UnsafeOptInUsageError")
@@ -209,14 +216,6 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         })
 
 
-        /*
-              collectData(mViewModel.dynamicMessageCountEvent, onSuccess = {
-                  menuList[0].unReadCount = it.likeMessage
-                  menuList[2].unReadCount = it.interactiveMessages
-                  mBinding.rvList.adapter?.notifyItemChanged(0)
-                  mBinding.rvList.adapter?.notifyItemChanged(2)
-              })
-        */
 
 
 
@@ -246,13 +245,31 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
                 mSysMsgAdapter.mutable.clear()
                 mSysMsgAdapter.notifyDataSetChanged()
             }
+            showEmptyContent()
             FlowBus.post(Event.RefreshUnReadMsgCount)
         })
+        //礼物邮件
+        collectData(mViewModel.giftemailMessageEvent, onSuccess = {
+            if (!it.list.isNullOrEmpty()) {
+                mGiftMailAdapter.models = listOf(it.list!![0])
+            } else {
+                if (mGiftMailAdapter.mutable.isEmpty()) return@collectData
+                mGiftMailAdapter.mutable.clear()
+                mGiftMailAdapter.notifyDataSetChanged()
+            }
+            showEmptyContent()
+            FlowBus.post(Event.RefreshUnReadMsgCount)
+        }, onError = {
+            customToast(it.errorMsg)
+        })
+
+
     }
 
 
     override fun lazyEventListener() {
         super.lazyEventListener()
+
         FlowBus.observerEvent<Event.RefreshUnReadMsgCount>(this) {
             mViewModel.updateUnReadCount()
         }
@@ -309,6 +326,18 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
                 jump(RouterPath.PATH_SYSTEM_MESSAGE)
             }
         }
+        mGiftMailAdapter = BindingAdapter().apply {
+            addType<GiftEmailMessageModel>(R.layout.message_chat_list_item_giftemail)
+            onBind {
+                val binding = getBinding<MessageChatListItemGiftemailBinding>()
+                val model = getModel<GiftEmailMessageModel>()
+                binding.tvContent.text = model.remark.replace("\n\n","")
+            }
+            mutable = arrayListOf()
+            onClick(R.id.root_giftemail) {
+                jump(RouterPath.PATH_GIFT_MAIL)
+            }
+        }
 
 
 
@@ -351,7 +380,6 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
                     }
                 }.show()
 
-
             }
 
             onClick(R.id.layout_follow_room) {
@@ -370,7 +398,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         }
 
         val adapter =
-            ConcatAdapter(mSysMsgAdapter, mRecentContactAdapter)
+            ConcatAdapter(mSysMsgAdapter,mGiftMailAdapter,mRecentContactAdapter)
         mBinding.recyclerView.adapter = adapter
     }
 
@@ -392,13 +420,16 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        //请求礼物消息
+        mViewModel.requestGiftEmailMessage()
+    }
 
     private fun initData() {
         if (!isFromDialog()) mViewModel.requestBannerData()
         //请求系统消息
         mViewModel.requestSystemMessage()
-
-        // mViewModel.requestDynamicMessageCount()
     }
 
 
@@ -407,7 +438,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
      */
     private fun showEmptyContent() {
         mBinding.stateLayout.let {
-            if (mRecentContactAdapter.models.isNullOrEmpty() && mSysMsgAdapter.models.isNullOrEmpty()) {
+            if (mRecentContactAdapter.models.isNullOrEmpty() && mSysMsgAdapter.models.isNullOrEmpty() &&mGiftMailAdapter.models.isNullOrEmpty()) {
                 it.showEmpty()
             } else {
                 it.showContent()

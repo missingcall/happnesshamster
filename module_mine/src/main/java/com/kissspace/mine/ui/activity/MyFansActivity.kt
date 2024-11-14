@@ -86,6 +86,8 @@ class MyFansActivity : com.kissspace.common.base.BaseActivity(R.layout.mine_acti
             }, isEmpty = {
                 it.records.isEmpty()
             })
+        }, onError = {
+            customToast(it.errorMsg)
         })
     }
 
@@ -95,6 +97,8 @@ class MyFansActivity : com.kissspace.common.base.BaseActivity(R.layout.mine_acti
         request<Int>(CommonApi.API_CANCEL_FOLLOW_USER, Method.GET, param, onSuccess = {
             model.followState = false
             model.notifyChange()
+        }, onError = {
+            customToast(it.errorMsg)
         })
     }
 
@@ -104,6 +108,8 @@ class MyFansActivity : com.kissspace.common.base.BaseActivity(R.layout.mine_acti
             model.followState = true
             model.notifyChange()
             customToast("已关注", true)
+        }, onError = {
+            customToast(it.errorMsg)
         })
     }
 
