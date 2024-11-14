@@ -188,11 +188,13 @@ sealed class Event {
 
     //喂食清洗 合并事件
     object HamsterFeedingOrCleaningEvent : Event()
+
     //喂食
     object HamsterFeedingEvent : Event()
 
     //清洗
     object HamsterCleaningEvent : Event()
+
     //复活仓鼠
     object HamsterReviveEvent : Event()
 
@@ -207,5 +209,8 @@ sealed class Event {
 
     //果园激活成功
     object OrchardActivationEvent : Event()
+
+    //仓鼠需要清洁或喂食 /hamster-center/hamsters/cultivate/communicate 仓鼠交流语言获取
+    object CommunicateEvent : Event()
 
 }

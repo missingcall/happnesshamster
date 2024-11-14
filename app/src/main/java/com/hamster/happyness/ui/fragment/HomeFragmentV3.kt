@@ -1,13 +1,17 @@
 package com.hamster.happyness.ui.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.ColorUtils
+import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.utils.*
 import com.hamster.happyness.R
@@ -34,6 +38,7 @@ import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
 import com.kissspace.util.loadImage
+import kotlinx.coroutines.Job
 
 //探索
 class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
@@ -42,6 +47,8 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     private val mMineViewModel by activityViewModels<MineViewModel>()
     private val mWalletViewModel by activityViewModels<WalletViewModel>()
     private val mHamsterViewModel by activityViewModels<HamsterViewModel>()
+
+    private var mCountDown: Job? = null
 
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.titleBar.setMarginStatusBar()
@@ -53,7 +60,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         initData()
         refreshUserinfo()
         queryDayIncome()
-        getHamsterStatus()
+        getHamsterStatus(true)
         getCurrentHamsterSkin()
 
         mBinding.ivAvatar.safeClick {
@@ -70,7 +77,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             }*/
 
         //养成说明
-        mBinding.ivBalanceDescription.safeClick {
+        mBinding.clBalanceDescription.safeClick {
             DevelopmentDescriptionDialog.newInstance().show(childFragmentManager)
         }
 
@@ -84,6 +91,18 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             jump(RouterPath.PATH_TASK_CENTER_LIST)
         }
 
+        mBinding.ivHamsterDevelopment.safeClick {
+            mHamsterViewModel.click {
+                if (it) {
+                    customToast("领取成功")
+                    FlowBus.post(Event.RefreshCoin)
+                }
+            }
+        }
+
+        //设置字体
+        mBinding.tvCleanliness.typeface = Typeface.createFromAsset(activity?.assets, "fonts/AlimamaShuHeiTi-Bold.ttf")
+        mBinding.tvSatiety.typeface = Typeface.createFromAsset(activity?.assets, "fonts/AlimamaShuHeiTi-Bold.ttf")
     }
 
 
@@ -92,12 +111,12 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
         //喂食,清洗仓鼠事件
         FlowBus.observerEvent<Event.HamsterFeedingOrCleaningEvent>(this) {
-            getHamsterStatus()
+            getHamsterStatus(false)
         }
 
         //复活仓鼠事件
         FlowBus.observerEvent<Event.HamsterReviveEvent>(this) {
-            getHamsterStatus()
+            getHamsterStatus(false)
         }
 
         //当前皮肤设置成功
@@ -107,6 +126,21 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
         FlowBus.observerEvent<Event.RefreshCoin>(this) {
             getMoney()
+        }
+
+        FlowBus.observerEvent<Event.CommunicateEvent>(this) {
+            mHamsterViewModel.communicate {
+                if (it.isNullOrBlank()) {
+                    mBinding.tvCommunicate.text = it
+                    mBinding.tvCommunicate.visibility = View.VISIBLE
+                    //倒计时10秒
+                    mCountDown = countDown(10, reverse = false, scope = lifecycleScope, onTick = {
+                    }, onFinish = {
+                        mBinding.tvCommunicate.visibility = View.GONE
+                        mCountDown?.cancel()
+                    })
+                }
+            }
         }
     }
 
@@ -136,68 +170,33 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     }
 
     //获取松鼠状态
-    private fun getHamsterStatus() {
+    private fun getHamsterStatus(isFirst: Boolean) {
 
         mWalletViewModel.hmsInfo(onSuccess = {
             when (it?.hamsterStatus) {
                 //（001 正常 002 濒死 003 已死亡 004 已到期）
                 "001", "002" -> {
-                    if (it?.cleanliness!! in 0..29) {
-                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF1A16)
-                    } else if (it.satiety!! in 30..60) {
-                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF8C5C)
-                    } else if (it.satiety!! in 60..90) {
-                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_8C28FF)
-                    } else {
-                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_5A60FF)
+                    //清洁弹窗
+                    mBinding.clHomeCleanliness.safeClick {
+                        HomeCleanDialog.newInstance().show(childFragmentManager)
                     }
-
-                    if (it?.satiety!! in 0..29) {
-                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF1A16)
-                    } else if (it.satiety!! in 30..60) {
-                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF8C5C)
-                    } else if (it.satiety!! in 60..90) {
-                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_8C28FF)
-                    } else {
-                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_5A60FF)
-                    }
-
-                    mBinding.wlvClean.progressValue = it!!.cleanliness
-                    mBinding.wlvFood.progressValue = it.satiety
-
-                    mBinding.wlvClean.centerTitle = it.cleanliness.toString() + "%"
-                    mBinding.wlvFood.centerTitle = it.satiety.toString() + "%"
 
                     //喂食弹窗
-                    mBinding.ivSatiety.safeClick {
-                        HomeFeedDialog.newInstance().show(childFragmentManager)
-                    }
-                    mBinding.wlvFood.safeClick {
+                    mBinding.clHomeSatiety.safeClick {
                         HomeFeedDialog.newInstance().show(childFragmentManager)
                     }
 
-                    //清洁弹窗
-                    mBinding.ivCleanliness.safeClick {
-                        HomeCleanDialog.newInstance().show(childFragmentManager)
-                    }
-                    mBinding.wlvClean.safeClick {
-                        HomeCleanDialog.newInstance().show(childFragmentManager)
-                    }
                 }
                 "003" -> {
+                    //死亡状态下都复活弹窗
+                    mBinding.clHomeCleanliness.safeClick {
+                        HomeRebornDialog.newInstance().show(childFragmentManager)
+                    }
 
-                    mBinding.ivSatiety.safeClick {
+                    mBinding.clHomeSatiety.safeClick {
                         HomeRebornDialog.newInstance().show(childFragmentManager)
                     }
-                    mBinding.wlvFood.safeClick {
-                        HomeRebornDialog.newInstance().show(childFragmentManager)
-                    }
-                    mBinding.ivCleanliness.safeClick {
-                        HomeRebornDialog.newInstance().show(childFragmentManager)
-                    }
-                    mBinding.wlvClean.safeClick {
-                        HomeRebornDialog.newInstance().show(childFragmentManager)
-                    }
+
                 }
                 "004" -> {
 
@@ -207,19 +206,18 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
 
         }, onError = {
+            if (!isFirst) {
+                customToast(it?.errorMsg)
+            }
             //TODO 测试 仓鼠不存在 或者请求失败
-            mBinding.ivSatiety.safeClick {
+            mBinding.clHomeCleanliness.safeClick {
                 HomeRebornDialog.newInstance().show(childFragmentManager)
             }
-            mBinding.wlvFood.safeClick {
+
+            mBinding.clHomeSatiety.safeClick {
                 HomeRebornDialog.newInstance().show(childFragmentManager)
             }
-            mBinding.ivCleanliness.safeClick {
-                HomeRebornDialog.newInstance().show(childFragmentManager)
-            }
-            mBinding.wlvClean.safeClick {
-                HomeRebornDialog.newInstance().show(childFragmentManager)
-            }
+
         })
 
     }
@@ -274,13 +272,18 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             list.add(game5)*/
 
             mBinding.recyclerView.addModels(list)
-       /*     if (list.size <= 4) {
-
+            if (list.size <= 4) {
+                mBinding.recyclerView.layoutManager = HoverGridLayoutManager(context, 4, RecyclerView.VERTICAL, false).apply {
+                    setScrollEnabled(false)
+                    this.stackFromEnd = stackFromEnd
                 }
-                mBinding.recyclerView.layoutManager = HoverLinearLayoutManager(context, orientation, reverseLayout).apply {
-            setScrollEnabled(scrollEnabled)
-            this.stackFromEnd = stackFromEnd
-            }*/
+
+            } else {
+                mBinding.recyclerView.layoutManager = HoverLinearLayoutManager(context, RecyclerView.HORIZONTAL, false).apply {
+                    setScrollEnabled(true)
+                    this.stackFromEnd = stackFromEnd
+                }
+            }
         })
     }
 
@@ -297,5 +300,11 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 }
             }
         }.mutable = mutableListOf()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mCountDown?.cancel()
+
     }
 }
