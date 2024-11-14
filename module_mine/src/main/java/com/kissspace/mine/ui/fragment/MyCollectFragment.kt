@@ -55,11 +55,11 @@ class MyCollectFragment : BaseFragment(R.layout.mine_fragment_collect) {
     private fun initRecyclerView() {
         mBinding.recyclerView.linear().setup {
             addType<CollectListBean> { R.layout.mine_layout_collect_item }
-            onClick(R.id.tv_enter_room) {
+            onClick(R.id.tvEnterRoom) {
                 val model = getModel<CollectListBean>()
                 jumpRoom(model.chatRoomId)
             }
-            onLongClick(R.id.sml) {
+            onClick(R.id.tvDetele){
                 val model = getModel<CollectListBean>()
                 CommonConfirmDialog(requireContext(), "确定要取消收藏此房间吗") {
                     if (this) {

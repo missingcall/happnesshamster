@@ -380,7 +380,6 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
                     }
                 }.show()
 
-
             }
 
             onClick(R.id.layout_follow_room) {

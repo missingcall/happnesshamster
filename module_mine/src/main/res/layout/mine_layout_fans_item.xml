@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -21,8 +22,8 @@
         <ImageView
             android:id="@+id/iv_avatar"
             loadCircleImage="@{m.profilePath}"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
             android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,29 +58,35 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:maxLines="1"
+                tools:text="xxxx"
                 android:ellipsize="end"
                 android:text="@{m.nickname}"
                 android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="7dp"
             android:text='@{"ID："+m.displayId}'
-            android:textColor="@color/color_80FFFFFF"
+            android:textColor="@color/color_949499"
             android:textSize="12sp"
+            tools:text="xxxx"
             app:layout_constraintStart_toStartOf="@id/layout_nickname"
             app:layout_constraintTop_toBottomOf="@id/layout_nickname" />
 
         <TextView
             android:id="@+id/tv_follow"
             followBtnState="@{m.followState}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="71dp"
+            android:layout_height="26dp"
             android:layout_marginEnd="10dp"
+            tools:text="关注"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -87,7 +94,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="0.5dp"
-            android:background="@color/color_494B70"
+            android:background="@color/color_2C2C2C"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_id" />

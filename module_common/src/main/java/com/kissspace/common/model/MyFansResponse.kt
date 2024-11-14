@@ -12,8 +12,8 @@ data class MyFansResponse(
 
 @kotlinx.serialization.Serializable
 data class FansListBean(
-    val charmLevel: Int,
-    val consumeLevel: Int,
+    val charmLevel: Int?,
+    val consumeLevel: Int?,
     val displayId: String,
     var followState: Boolean,
     val nickname: String,
