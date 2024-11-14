@@ -41,13 +41,13 @@
 
             <TextView
                 android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:ellipsize="end"
                 android:lines="1"
-                android:maxLength="20"
-                tools:text="1231231212121212121212"
+                tools:text="1231231212121212121212123123121212121212121123123121212121212121212312312121212121212122"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/white50"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -62,10 +62,11 @@
                 android:textColor="@color/white40"
                 android:textSize="11sp"
                 tools:text="1天前"
+                messageDate="@{m.createTime}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+         <!--   <TextView
                 android:id="@+id/tv_message_count_system"
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
@@ -79,7 +80,7 @@
                 app:bl_corners_radius="15dp"
                 app:bl_solid_color="@color/color_FA3127"
                 app:layout_constraintEnd_toEndOf="@id/tv_date"
-                app:layout_constraintTop_toBottomOf="@id/tv_date" />
+                app:layout_constraintTop_toBottomOf="@id/tv_date" />-->
 
             <View
                 android:id="@+id/view_line"
