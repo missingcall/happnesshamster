@@ -146,19 +146,6 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
 */
     }
 
-/*
-    private fun refreshWallet() {
-        queryDayIncome()
-        FlowBus.post(Event.MsgRefreshWalletEvent)
-    }
-
-    private fun queryDayIncome() {
-        mViewModel.queryDayIncome(onSuccess = {
-            mBinding.tvToBeCollectedNum.text = it
-        })
-    }
-*/
-
     private fun initRecyclerView() {
         val data = mutableListOf<MineInletItem>()
         data.add(MineInletItem(R.mipmap.mine_ic_account_information, "个人信息"))

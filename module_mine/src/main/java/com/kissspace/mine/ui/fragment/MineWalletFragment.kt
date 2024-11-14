@@ -159,9 +159,7 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
     override fun createDataObserver() {
         super.createDataObserver()
 
-        /*FlowBus.observerEvent<Event.MsgRefreshWalletEvent>(this) {
-            initData()
-        }*/
+
     }
 
     private fun getMoney() {

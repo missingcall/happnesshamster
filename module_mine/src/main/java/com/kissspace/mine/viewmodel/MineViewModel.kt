@@ -54,11 +54,11 @@ class MineViewModel : BaseViewModel() {
     }
 
     /**
-     * 待领取松果
+     * 获取用户当前每日可获得松果
      */
-    fun queryDayIncome(onSuccess: ((String?) -> Unit)?) {
+    fun queryDayIncome(onSuccess: ((Int?) -> Unit)?) {
 
-        request<String?>(MineApi.API_HAMSTER_MARKET_QUERY_DAY_INCOME,
+        request<Int?>(MineApi.API_HAMSTER_MARKET_QUERY_DAY_INCOME,
             Method.GET,
             onSuccess = {
                 onSuccess?.invoke(it)

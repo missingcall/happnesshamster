@@ -186,9 +186,6 @@ sealed class Event {
     data class GiveGiftByCoinLocal(var tags: List<String>, var number: Int, var giftInfo: GiftInfo, var giftType: String) : Event()
 //    data class GiveGiftByCoinLocal(var tags:List<String>,var number:Int,var  giftInfo: GiftInfo,val source:String) : Event()
 
-    //刷新钱包中松子/松果/钻石余额 以及 转入转出记录
-//    object MsgRefreshWalletEvent : Event()
-
     //喂食清洗 合并事件
     object HamsterFeedingOrCleaningEvent : Event()
     //喂食
@@ -210,4 +207,6 @@ sealed class Event {
 
     //果园激活成功
     object OrchardActivationEvent : Event()
+
+    //刷新钱包
 }
