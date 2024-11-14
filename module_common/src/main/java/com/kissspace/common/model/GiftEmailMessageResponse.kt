@@ -14,24 +14,24 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class GiftEmailMessageResponse(
-    val endRow: Int,
+    val endRow: Long,
     val hasNextPage: Boolean,
     val hasPreviousPage: Boolean,
     val isFirstPage: Boolean,
     val isLastPage: Boolean,
     val list: List<GiftEmailMessageModel>?,
-    val navigateFirstPage: Int,
-    val navigateLastPage: Int,
-    val navigatePages: Int,
-    val navigatepageNums: String?,
-    val nextPage: Int,
-    val pageNum: Int,
-    val pageSize: Int,
-    val pages: Int,
-    val prePage: Int,
-    val size: Int,
-    val startRow: Int,
-    val total: Int
+    val navigateFirstPage: Long,
+    val navigateLastPage: Long,
+    val navigatePages: Long,
+    val navigatepageNums: List<Long>?,//有多少页码
+    val nextPage: Long,
+    val pageNum: Long,
+    val pageSize: Long,
+    val pages: Long,
+    val prePage: Long,
+    val size: Long,
+    val startRow: Long,
+    val total: Long
 ):Parcelable
 
 /**
@@ -80,9 +80,28 @@ object GiftEmailReceiveState{
     const val RECEIVE = "002" //已领取
     const val INVALID = "003" //已失效
 }
+/**
+ * COIN("001", "钻石"),
+ *
+ *     DIAMOND("002", "松果"),
+ *
+ *     POINTS("003", "积分 "),
+ *
+ *     INCOME("004","松子")
+ */
+
+
+
 
 
 //针对gift字段进行解析金额
-data class GiftJsonMoney(val amount:String,val amountType:String)
+data class GiftJsonMoney(val amount:String,val amountType:String){
+    object GiftMoneyType{
+        const val COIN = "001" //钻石
+        const val DIAMOND = "002" //松果
+        const val POINTS = "003" //积分
+        const val INCOME = "004" //松子
+    }
+}
 //针对gift字段进行解析仓鼠卡片
 data class GiftJsonCard(val skinIcon:String,val skinId:String)

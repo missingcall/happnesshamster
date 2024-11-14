@@ -72,6 +72,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
      */
     private val broadcastObserver = Observer<BroadcastMessage> {
         mViewModel.requestSystemMessage()
+        mViewModel.requestGiftEmailMessage()
     }
 
     @SuppressLint("UnsafeOptInUsageError")
@@ -259,8 +260,7 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
             showEmptyContent()
             FlowBus.post(Event.RefreshUnReadMsgCount)
         }, onError = {
-
-            customToast(it.message)
+            customToast(it.errorMsg)
         })
 
 
@@ -421,16 +421,16 @@ class MessageFragmentV3 : BaseLazyFragment(R.layout.fragment_message_v3) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        //请求礼物消息
+        mViewModel.requestGiftEmailMessage()
+    }
 
     private fun initData() {
         if (!isFromDialog()) mViewModel.requestBannerData()
         //请求系统消息
         mViewModel.requestSystemMessage()
-
-        //请求礼物消息
-        mViewModel.requestGiftEmailMessage()
-
-        // mViewModel.requestDynamicMessageCount()
     }
 
 

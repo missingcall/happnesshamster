@@ -42,6 +42,7 @@ class GiftEmailViewModel: BaseViewModel() {
         param["recordId"] = recordId
         request<Boolean>(MessageApi.API_GIFT_MAIL_READ, Method.GET,param, onSuccess = {
         }, onError = {
+            customToast(it.errorMsg)
         })
     }
 
@@ -56,7 +57,7 @@ class GiftEmailViewModel: BaseViewModel() {
             customToast("领取成功")
             success.invoke()
         }, onError = {
-            customToast(it.message)
+            customToast(it.errorMsg)
         })
     }
 
@@ -72,7 +73,7 @@ class GiftEmailViewModel: BaseViewModel() {
             customToast("删除成功")
             success.invoke()
         }, onError = {
-            customToast(it.message)
+            customToast(it.errorMsg)
         })
     }
 
@@ -84,7 +85,7 @@ class GiftEmailViewModel: BaseViewModel() {
             customToast("删除成功")
             success.invoke()
         }, onError = {
-            customToast(it.message)
+            customToast(it.errorMsg)
         })
     }
 
@@ -94,7 +95,7 @@ class GiftEmailViewModel: BaseViewModel() {
             customToast("一键领取成功")
             success.invoke()
         }, onError = {
-            customToast(it.message)
+            customToast(it.errorMsg)
         })
     }
 }

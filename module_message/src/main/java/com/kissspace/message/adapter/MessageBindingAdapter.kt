@@ -36,6 +36,7 @@ import com.youth.banner.Banner
 import de.hdodenhof.circleimageview.CircleImageView
 import org.libpag.PAGImageView
 import java.io.File
+import java.text.SimpleDateFormat
 
 object MessageBindingAdapter {
     @JvmStatic
@@ -215,6 +216,20 @@ object MessageBindingAdapter {
     @BindingAdapter("messageDate", requireAll = false)
     fun messageDate(textView: TextView, date: Long?) {
         textView.text = getFriendlyTimeSpanByNow(date ?: 0)
+    }
+
+    @JvmStatic
+    @BindingAdapter("messageDate", requireAll = false)
+    fun messageDate(textView: TextView, date: String?) {
+        try {
+           val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+           val time = date?.substring(0,19)?.replace("T"," ")
+           val d = format.parse(time)
+           textView.text = getFriendlyTimeSpanByNow(d?.time ?: 0)
+        }catch (ex:Exception){
+            textView.text = ""
+        }
+
     }
 
     @JvmStatic
