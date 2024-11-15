@@ -364,6 +364,10 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             }
         }
 
+        observerEvent<Event.HamsterPurchaseEvent>(this) {
+            mBinding.viewPager.currentItem = 1
+        }
+
         initData()
         initAppConfig()
     }

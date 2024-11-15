@@ -1,13 +1,14 @@
 package com.hamster.happyness.ui.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.blankj.utilcode.util.ColorUtils
+import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.utils.*
 import com.hamster.happyness.R
@@ -15,7 +16,6 @@ import com.hamster.happyness.databinding.FragmentMainHomeV3Binding
 import com.hamster.happyness.http.Api
 import com.hamster.happyness.viewmodel.GameQuickEnterModel
 import com.hamster.happyness.viewmodel.HamsterViewModel
-import com.hamster.happyness.viewmodel.HomeViewModel
 import com.hamster.happyness.widget.*
 
 import com.kissspace.common.base.BaseFragment
@@ -24,16 +24,19 @@ import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.http.getUserInfo
+import com.kissspace.common.model.wallet.HmsInfoModel
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.*
-import com.kissspace.common.util.glide.GlideApp
 import com.kissspace.common.util.mmkv.MMKVProvider
+import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
 import com.kissspace.util.loadImage
+import com.kissspace.util.logD
+import kotlinx.coroutines.Job
 
 //探索
 class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
@@ -43,20 +46,23 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     private val mWalletViewModel by activityViewModels<WalletViewModel>()
     private val mHamsterViewModel by activityViewModels<HamsterViewModel>()
 
+    private var mCountDown: Job? = null
+
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.titleBar.setMarginStatusBar()
         mBinding.mvm = mMineViewModel
         mBinding.wvm = mWalletViewModel
-        mBinding.lifecycleOwner = this
+        mBinding.lifecycleOwner = activity
 
         initRecyclerView()
         initData()
         refreshUserinfo()
         queryDayIncome()
-        getHamsterStatus()
+        getHamsterStatus(true)
         getCurrentHamsterSkin()
 
         mBinding.ivAvatar.safeClick {
+            //TODO 需要替换为可滑动 抽屉式
             ChangeAccountDialog.newInstance().show(childFragmentManager)
         }
 
@@ -70,7 +76,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             }*/
 
         //养成说明
-        mBinding.ivBalanceDescription.safeClick {
+        mBinding.clBalanceDescription.safeClick {
             DevelopmentDescriptionDialog.newInstance().show(childFragmentManager)
         }
 
@@ -84,6 +90,10 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             jump(RouterPath.PATH_TASK_CENTER_LIST)
         }
 
+
+        //设置字体
+        mBinding.tvCleanliness.typeface = Typeface.createFromAsset(activity?.assets, "fonts/AlimamaShuHeiTi-Bold.ttf")
+        mBinding.tvSatiety.typeface = Typeface.createFromAsset(activity?.assets, "fonts/AlimamaShuHeiTi-Bold.ttf")
     }
 
 
@@ -92,12 +102,12 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
         //喂食,清洗仓鼠事件
         FlowBus.observerEvent<Event.HamsterFeedingOrCleaningEvent>(this) {
-            getHamsterStatus()
+            getHamsterStatus(false)
         }
 
         //复活仓鼠事件
         FlowBus.observerEvent<Event.HamsterReviveEvent>(this) {
-            getHamsterStatus()
+            getHamsterStatus(false)
         }
 
         //当前皮肤设置成功
@@ -107,6 +117,21 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
         FlowBus.observerEvent<Event.RefreshCoin>(this) {
             getMoney()
+        }
+
+        FlowBus.observerEvent<Event.CommunicateEvent>(this) {
+            mHamsterViewModel.communicate {
+                if (it.isNullOrBlank()) {
+                    mBinding.tvCommunicate.text = it
+                    mBinding.tvCommunicate.visibility = View.VISIBLE
+                    //倒计时10秒
+                    mCountDown = countDown(10, reverse = false, scope = lifecycleScope, onTick = {
+                    }, onFinish = {
+                        mBinding.tvCommunicate.visibility = View.GONE
+                        mCountDown?.cancel()
+                    })
+                }
+            }
         }
     }
 
@@ -136,91 +161,108 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     }
 
     //获取松鼠状态
-    private fun getHamsterStatus() {
+    private fun getHamsterStatus(isFirst: Boolean) {
 
         mWalletViewModel.hmsInfo(onSuccess = {
-            when (it?.hamsterStatus) {
-                //（001 正常 002 濒死 003 已死亡 004 已到期）
-                "001", "002" -> {
-                    if (it?.cleanliness!! in 0..29) {
-                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF1A16)
-                    } else if (it.satiety!! in 30..60) {
-                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF8C5C)
-                    } else if (it.satiety!! in 60..90) {
-                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_8C28FF)
-                    } else {
-                        mBinding.wlvClean.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_5A60FF)
-                    }
-
-                    if (it?.satiety!! in 0..29) {
-                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF1A16)
-                    } else if (it.satiety!! in 30..60) {
-                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_FF8C5C)
-                    } else if (it.satiety!! in 60..90) {
-                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_8C28FF)
-                    } else {
-                        mBinding.wlvFood.allColor = ColorUtils.getColor(com.kissspace.module_common.R.color.color_5A60FF)
-                    }
-
-                    mBinding.wlvClean.progressValue = it!!.cleanliness
-                    mBinding.wlvFood.progressValue = it.satiety
-
-                    mBinding.wlvClean.centerTitle = it.cleanliness.toString() + "%"
-                    mBinding.wlvFood.centerTitle = it.satiety.toString() + "%"
-
-                    //喂食弹窗
-                    mBinding.ivSatiety.safeClick {
-                        HomeFeedDialog.newInstance().show(childFragmentManager)
-                    }
-                    mBinding.wlvFood.safeClick {
-                        HomeFeedDialog.newInstance().show(childFragmentManager)
-                    }
-
-                    //清洁弹窗
-                    mBinding.ivCleanliness.safeClick {
-                        HomeCleanDialog.newInstance().show(childFragmentManager)
-                    }
-                    mBinding.wlvClean.safeClick {
-                        HomeCleanDialog.newInstance().show(childFragmentManager)
-                    }
-                }
-                "003" -> {
-
-                    mBinding.ivSatiety.safeClick {
-                        HomeRebornDialog.newInstance().show(childFragmentManager)
-                    }
-                    mBinding.wlvFood.safeClick {
-                        HomeRebornDialog.newInstance().show(childFragmentManager)
-                    }
-                    mBinding.ivCleanliness.safeClick {
-                        HomeRebornDialog.newInstance().show(childFragmentManager)
-                    }
-                    mBinding.wlvClean.safeClick {
-                        HomeRebornDialog.newInstance().show(childFragmentManager)
-                    }
-                }
-                "004" -> {
-
-                }
-
-            }
-
+            changeHamsterUIStatus()
 
         }, onError = {
-            //TODO 测试 仓鼠不存在 或者请求失败
-            mBinding.ivSatiety.safeClick {
-                HomeRebornDialog.newInstance().show(childFragmentManager)
+            if (!isFirst) {
+                customToast(it?.errorMsg)
             }
-            mBinding.wlvFood.safeClick {
-                HomeRebornDialog.newInstance().show(childFragmentManager)
-            }
-            mBinding.ivCleanliness.safeClick {
-                HomeRebornDialog.newInstance().show(childFragmentManager)
-            }
-            mBinding.wlvClean.safeClick {
-                HomeRebornDialog.newInstance().show(childFragmentManager)
+            logD("errCode : " + it?.errCode + " , errMSg : " + it?.errorMsg)
+            if (it?.errCode == "54001" || it?.errCode == "1000") {
+                //仓鼠不存在或者请求失败时默认为004过期状态
+                mWalletViewModel.hmsInfoModel.set(HmsInfoModel())
+                changeHamsterUIStatus()
             }
         })
+
+    }
+
+
+    private fun changeHamsterUIStatus() {
+        when (mWalletViewModel.hmsInfoModel.get()?.hamsterStatus) {
+            //（001 正常 002 濒死 003 已死亡 004 已到期）
+            "001", "002" -> {
+                //右边栏
+                mBinding.clBalanceDescription.visibility = View.VISIBLE
+                mBinding.clSkin.visibility = View.VISIBLE
+                mBinding.clQuest.visibility = View.VISIBLE
+                //蒙版锁
+                mBinding.nivHamsterMask.visibility = View.GONE
+                mBinding.ivLock.visibility = View.GONE
+                //清洁喂食
+                mBinding.clHomeCleanliness.visibility = View.VISIBLE
+                mBinding.clHomeSatiety.visibility = View.VISIBLE
+                //购买复活
+                mBinding.btnPurchaseOrRevive.visibility = View.GONE
+
+                //清洁弹窗
+                mBinding.clHomeCleanliness.safeClick {
+                    HomeCleanDialog.newInstance().show(childFragmentManager)
+                }
+
+                //喂食弹窗
+                mBinding.clHomeSatiety.safeClick {
+                    HomeFeedDialog.newInstance().show(childFragmentManager)
+                }
+
+                //点击领取松果
+                mBinding.ivHamsterDevelopment.safeClick {
+                    mHamsterViewModel.click {
+                        if (it) {
+                            customToast("领取成功")
+                            FlowBus.post(Event.RefreshCoin)
+                        }
+                    }
+                }
+
+            }
+            "003" -> {
+                //右边栏
+                mBinding.clBalanceDescription.visibility = View.VISIBLE
+                mBinding.clSkin.visibility = View.VISIBLE
+                mBinding.clQuest.visibility = View.VISIBLE
+                //蒙版锁
+                mBinding.nivHamsterMask.visibility = View.GONE
+                mBinding.ivLock.visibility = View.GONE
+                //清洁喂食
+                mBinding.clHomeCleanliness.visibility = View.GONE
+                mBinding.clHomeSatiety.visibility = View.GONE
+                //购买复活
+                mBinding.btnPurchaseOrRevive.visibility = View.VISIBLE
+                mBinding.btnPurchaseOrRevive.setBackgroundResource(R.mipmap.app_icon_home_hamster_revive)
+
+                mBinding.btnPurchaseOrRevive.safeClick {
+                    HomeRebornDialog.newInstance().show(childFragmentManager)
+                }
+            }
+            "004" -> {
+                //仓鼠不存在或仓鼠已过期 隐藏右边栏/展示蒙版/展示锁
+
+                //右边栏
+                mBinding.clBalanceDescription.visibility = View.GONE
+                mBinding.clSkin.visibility = View.GONE
+//                mBinding.clSkin.visibility = View.VISIBLE //测试用
+                mBinding.clQuest.visibility = View.GONE
+                //蒙版锁
+                mBinding.nivHamsterMask.visibility = View.VISIBLE
+                mBinding.ivLock.visibility = View.VISIBLE
+                //清洁喂食
+                mBinding.clHomeCleanliness.visibility = View.GONE
+                mBinding.clHomeSatiety.visibility = View.GONE
+                //购买复活
+                mBinding.btnPurchaseOrRevive.visibility = View.VISIBLE
+                mBinding.btnPurchaseOrRevive.setBackgroundResource(R.mipmap.app_icon_home_hamster_purchase)
+
+                mBinding.btnPurchaseOrRevive.safeClick {
+                    //切换首页底下tab
+                    FlowBus.post(Event.HamsterPurchaseEvent)
+                }
+            }
+
+        }
 
     }
 
@@ -274,13 +316,18 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             list.add(game5)*/
 
             mBinding.recyclerView.addModels(list)
-       /*     if (list.size <= 4) {
-
+            if (list.size <= 4) {
+                mBinding.recyclerView.layoutManager = HoverGridLayoutManager(context, 4, RecyclerView.VERTICAL, false).apply {
+                    setScrollEnabled(false)
+                    this.stackFromEnd = stackFromEnd
                 }
-                mBinding.recyclerView.layoutManager = HoverLinearLayoutManager(context, orientation, reverseLayout).apply {
-            setScrollEnabled(scrollEnabled)
-            this.stackFromEnd = stackFromEnd
-            }*/
+
+            } else {
+                mBinding.recyclerView.layoutManager = HoverLinearLayoutManager(context, RecyclerView.HORIZONTAL, false).apply {
+                    setScrollEnabled(true)
+                    this.stackFromEnd = stackFromEnd
+                }
+            }
         })
     }
 
@@ -297,5 +344,11 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 }
             }
         }.mutable = mutableListOf()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mCountDown?.cancel()
+
     }
 }

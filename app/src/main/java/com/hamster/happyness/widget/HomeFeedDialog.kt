@@ -42,6 +42,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
         }*/
 
         mBinding.vm = mViewModel
+        mBinding.lifecycleOwner = activity
         mBinding.ibBack.safeClick {
             dismiss()
         }
@@ -50,6 +51,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
             mViewModel.improveSatiety(Constants.HamsterCultivatePayType.PROP,onSuccess = {
                 //喂食成功 刷新Dialog进度条,刷新HomeFragment喂食度
                 FlowBus.post(Event.HamsterFeedingOrCleaningEvent)
+                FlowBus.post(Event.RefreshCoin)
             })
 
         }
@@ -58,6 +60,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
             mViewModel.improveSatiety(Constants.HamsterCultivatePayType.PINE_CONE,onSuccess = {
                 //喂食成功 刷新Dialog进度条,刷新HomeFragment喂食度
                 FlowBus.post(Event.HamsterFeedingOrCleaningEvent)
+                FlowBus.post(Event.RefreshCoin)
             })
 
         }

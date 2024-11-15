@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="m"
             type="com.hamster.happyness.viewmodel.HamsterViewModel" />
@@ -24,6 +25,15 @@
             app:lineVisible="false"
             app:title="皮肤" />
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@mipmap/app_bg_home_skin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_horizontal"
@@ -34,9 +44,9 @@
 
         <ImageView
             android:id="@+id/ivImageDisplay"
+            loadImageNoPlace="@{m.record.icon}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            loadImageNoPlace="@{m.record.icon}"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
@@ -66,8 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:text="@{m.record.name}"
                 android:gravity="center"
+                android:text="@{m.record.name}"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 
@@ -76,10 +86,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
-                android:text="@{m.record.remark}"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="4"
+                android:text="@{m.record.remark}"
                 android:textColor="@color/white"
                 android:textSize="11sp" />
 
@@ -87,14 +97,14 @@
             <Button
                 android:id="@+id/btn"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="56dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="31dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
-                android:textSize="17sp"
-                android:background="@drawable/common_btn_selector_blue_deep_blue_radius15"
+                android:background="@drawable/common_shape_bg_gradient_radius45"
                 android:textColor="@color/white"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
 

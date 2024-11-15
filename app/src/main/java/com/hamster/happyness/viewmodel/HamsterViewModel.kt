@@ -25,11 +25,12 @@ class HamsterViewModel : BaseViewModel() {
     private val _infoListEvent = MutableSharedFlow<ResultState<InfoListModel>>()
     val infoListEvent = _infoListEvent.asSharedFlow()
 
-    val currentlyUseSkinModel = ObservableField<CurrentlyUseSkinModel>()
+    private val currentlyUseSkinModel = ObservableField<CurrentlyUseSkinModel>()
+
     /**
      * 用户查看皮肤首页
      */
-    fun requestInfoList(pageNum: Int ,onSuccess: ((InfoListModel) -> Unit)?) {
+    fun requestInfoList(pageNum: Int, onSuccess: ((InfoListModel) -> Unit)?) {
         val param = mutableMapOf<String, Any?>()
         param["pageNum"] = pageNum
         param["pageSize"] = Constants.PageSize
@@ -82,4 +83,22 @@ class HamsterViewModel : BaseViewModel() {
         }, onError = {
         })
     }
+
+    //点击仓鼠 获取松果
+    fun click(onSuccess: ((Boolean) -> Unit) = {}) {
+        request<Boolean>(MineApi.API_HAMSTER_CULTIVATE_CLICK, Method.GET, onSuccess = {
+            onSuccess.invoke(it)
+
+        })
+    }
+
+    //仓鼠交流语言获取
+    fun communicate(onSuccess: ((String) -> Unit) = {}) {
+        request<String>(MineApi.API_HAMSTER_CULTIVATE_COMMUNICATE, Method.GET, onSuccess = {
+            onSuccess.invoke(it)
+
+        })
+    }
+
+
 }

@@ -10,8 +10,4 @@ data class RevivePanelModel(
     val pineCone: Double = 0.0,
     @SerialName("pineNuts")
     val pineNuts: Double = 0.0,
-    @SerialName("exchangeRate")
-    val exchangeRate: Double = 0.0,
-    @SerialName("handlingFeeRate")
-    val handlingFeeRate: Int = 0
 )

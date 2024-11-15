@@ -60,6 +60,17 @@ class ChangeAccountViewModel : BaseViewModel() {
         request(CommonApi.API_USER_ACCOUNT_CREATE, Method.POST,param = params,state = _createAccouts)
     }
 
+    fun createAccountNew(userPhone:String){
+        val params = mutableMapOf<String,Any?>()
+        params["phone"] = userPhone
+        params["machineCode"] = DeviceUtils.getUniqueDeviceId()
+        params["accessFlags"] = 0
+        params["appleId"] = ""
+        params["inviteCode"] = ""
+        params["password"] = ""
+        request(CommonApi.API_USER_ACCOUNT_CREATE_NEW, Method.POST,param = params,state = _createAccouts)
+    }
+
     fun loginByUserId(userId: String){
         val params = mutableMapOf<String,Any?>()
         params["userId"] = userId

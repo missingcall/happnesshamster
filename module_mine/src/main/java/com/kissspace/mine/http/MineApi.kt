@@ -261,6 +261,12 @@ object MineApi {
     //当前使用皮肤
     const val API_HAMSTER_ACCESSORIES_CURRENTLY_USE_SKIN = "/hamster-user/accessories/currentlyUseSkin"
 
+    //点击仓鼠 获取松果
+    const val API_HAMSTER_CULTIVATE_CLICK = "/hamster-center/hamsters/cultivate/click"
+
+    //仓鼠交流语言获取
+    const val API_HAMSTER_CULTIVATE_COMMUNICATE = "/hamster-center/hamsters/cultivate/communicate"
+
 
 
 }

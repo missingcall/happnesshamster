@@ -112,7 +112,7 @@
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_marginLeft="5dp"
-                android:src="@mipmap/icon_home_describe"
+                android:src="@mipmap/app_icon_home_describe"
                 app:layout_constraintBottom_toBottomOf="@id/tvDailyCome"
                 app:layout_constraintLeft_toRightOf="@id/tvDailyCome"
                 app:layout_constraintRight_toRightOf="parent"

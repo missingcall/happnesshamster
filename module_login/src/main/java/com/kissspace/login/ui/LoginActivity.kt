@@ -60,9 +60,6 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
         mBinding.vm = mViewModel
         initAgreement()
 
-        //设置字体
-//        mBinding.tvLogin.typeface = Typeface.createFromAsset(assets, "fonts/AlimamaShuHeiTi-Bold.ttf") // 初始化字体
-
         mBinding.tvLogin.setOnClickListener {
             if (mBinding.cbAgree.isChecked) {
 //                jump(RouterPath.PATH_LOGIN_PHONE_CODE)

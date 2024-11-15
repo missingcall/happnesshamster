@@ -10,6 +10,7 @@ import com.hamster.happyness.viewmodel.HamsterViewModel
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
+import com.kissspace.common.util.customToast
 import com.kissspace.common.widget.BaseDialogFragment
 import com.kissspace.mine.viewmodel.WalletViewModel
 
@@ -52,6 +53,7 @@ class HomeSkinUnlockDialog : BaseDialogFragment<DialogHomeSkinUnlockBinding>(Dia
 
         mBinding.btnConfirm.safeClick {
             mViewModel.unLockSkin(pageNum = pageNum, skinId = skinId, onSuccess = {
+                customToast("购买成功")
                 dismiss()
                 FlowBus.post(Event.UnLockSkinEvent)
             })

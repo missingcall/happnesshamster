@@ -71,6 +71,9 @@ object CustomNotificationObserver {
     //龙之怒游戏结束
     const val DRAGON_WRATH_GAME_END = "075"
 
+    //TODO 消息类型字段等后台给 仓鼠需要喂食或清洁
+    const val HAMSTER_NEED_FOOD_OR_CLEAN = "076"
+
     fun initCustomNotificationObserver() {
         NIMClient.getService(MsgServiceObserve::class.java)
             .observeCustomNotification({ message -> // 处理自定义系统通知。
@@ -114,6 +117,9 @@ object CustomNotificationObserver {
                     }
                     MESSAGE_FAMILY_PASS ->{
                         FlowBus.post(Event.MsgFamilyPassEvent)
+                    }
+                    HAMSTER_NEED_FOOD_OR_CLEAN->{
+                        FlowBus.post(Event.CommunicateEvent)
                     }
                     else -> {
 
