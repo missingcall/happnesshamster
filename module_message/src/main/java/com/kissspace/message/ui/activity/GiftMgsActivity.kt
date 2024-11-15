@@ -134,14 +134,12 @@ class GiftMgsActivity :BaseActivity(R.layout.message_activity_gift){
             DJSDate.getDays(DJSDate.now, timestamp).let {
                 return when {
                     it <= 0 -> "已到期"
-                    it < 30 -> "${it}天后过期"
-                    else -> ""
+                    else-> "${it}天后过期"
                 }
             }
         }catch (ex:Exception){
             return ""
         }
-        return ""
     }
 
 
