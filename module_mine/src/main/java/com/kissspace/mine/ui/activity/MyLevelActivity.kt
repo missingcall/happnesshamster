@@ -101,7 +101,7 @@ class MyLevelActivity : com.kissspace.common.base.BaseActivity(R.layout.mine_act
         val consumeLevelModel:LevelModel? = consumeLevelModel?.firstOrNull { it.num > consumeLevelCount }
 
         if(charmLevelModel!=null){
-            mBinding.tvConsumeNext.text ="距离升级还需要收到："+com.kissspace.common.util.format.Format.E.format(charmLevelModel.num-charmLevelCount)+"金币"
+            mBinding.tvConsumeNext.text ="距离升级还需要收到："+com.kissspace.common.util.format.Format.E.format(charmLevelModel.num-charmLevelCount)+"钻石"
             mBinding.tvConsumeValue.text="当前魅力值:${com.kissspace.common.util.format.Format.E.format(charmLevelCount)}"
         }else{
             mBinding.tvConsumeNext.text ="已是最高等级"
@@ -111,11 +111,11 @@ class MyLevelActivity : com.kissspace.common.base.BaseActivity(R.layout.mine_act
         }
 
         if(consumeLevelModel!=null){
-            mBinding.tvCharmNext .text = "距离升级还需要消耗："+com.kissspace.common.util.format.Format.E.format(consumeLevelModel.num-consumeLevelCount)+"金币"
-            mBinding.tvCharmValue.text="当前财富值:${com.kissspace.common.util.format.Format.E.format(consumeLevelCount)}"
+            mBinding.tvCharmNext .text = "距离升级还需要消耗："+com.kissspace.common.util.format.Format.E.format(consumeLevelModel.num-consumeLevelCount)+"经验"
+            mBinding.tvCharmValue.text="当前经验值:${com.kissspace.common.util.format.Format.E.format(consumeLevelCount)}"
         }else{
             mBinding.tvCharmNext .text = "已是最高等级"
-            mBinding.tvCharmValue.text="当前财富值:${com.kissspace.common.util.format.Format.E.format(consumeLevelCount)}"
+            mBinding.tvCharmValue.text="当前经验值:${com.kissspace.common.util.format.Format.E.format(consumeLevelCount)}"
             mBinding.expendProgressInner.progress = 100
             mBinding.expendProgressOuter.progress = 100
         }

@@ -33,7 +33,7 @@ class SayHiPictureFragment : BaseFragment(R.layout.setting_fragment_say_hi_pictu
 
         mBinding.ivDeletePicture.setOnClickListener {
             currentPicture = null
-            mBinding.ivPicture.setImageResource(R.mipmap.setting_icon_add_picture)
+            mBinding.ivPicture.setImageResource(com.kissspace.module_common.R.mipmap.common_icon_add_picture)
             mBinding.ivDeletePicture.visibility = View.GONE
             mViewModel.submitEnable.set(false)
         }

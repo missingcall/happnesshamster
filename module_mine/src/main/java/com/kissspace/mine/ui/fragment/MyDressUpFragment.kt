@@ -21,6 +21,7 @@ import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineFragmentMyDressUpBinding
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
+import com.ruffian.library.widget.RTextView
 
 class MyDressUpFragment : BaseFragment(R.layout.mine_fragment_my_dress_up) {
     private val mBinding by viewBinding<MineFragmentMyDressUpBinding>()
@@ -38,7 +39,7 @@ class MyDressUpFragment : BaseFragment(R.layout.mine_fragment_my_dress_up) {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        mBinding.recyclerView.grid(2).adapter = AnimationAdapter().apply {
+        mBinding.recyclerView.grid(3).adapter = AnimationAdapter().apply {
             addType<MyDressUpListBean> {
                 when(type){
                     "001"->R.layout.mine_layout_my_dress_up_car_item
@@ -47,7 +48,7 @@ class MyDressUpFragment : BaseFragment(R.layout.mine_fragment_my_dress_up) {
                 }
             }
             onBind {
-                val wearButton = findView<ImageView>(R.id.tv_wear)
+                val wearButton = findView<RTextView>(R.id.tv_wear)
                 wearButton.visibility = if (type=="003") View.INVISIBLE else View.VISIBLE
             }
             onClick(R.id.tv_wear) {
@@ -64,11 +65,6 @@ class MyDressUpFragment : BaseFragment(R.layout.mine_fragment_my_dress_up) {
             }
             this.models = mutableListOf()
         }
-//        mBinding.recyclerView.grid(2).setup {
-//
-//
-//
-//        }.models =
         initData()
     }
 

@@ -69,6 +69,7 @@ class SayHiAudioFragment : BaseFragment(R.layout.setting_fragment_say_hi_audio),
                 audioPlayer.stop()
                 mBinding.ivStartRecord.setImageResource(R.mipmap.setting_icon_audio_record_finish)
                 mBinding.progressBar.visibility = View.INVISIBLE
+                mBinding.voiceprint.visibility=View.VISIBLE
                 animator?.cancel()
                 animator = null
                 return@setOnClickListener
@@ -78,6 +79,7 @@ class SayHiAudioFragment : BaseFragment(R.layout.setting_fragment_say_hi_audio),
                 audioPlayer.start(AudioManager.STREAM_MUSIC)
                 mBinding.ivStartRecord.setImageResource(R.mipmap.setting_icon_audio_record_playing)
                 mBinding.progressBar.visibility = View.VISIBLE
+                mBinding.voiceprint.visibility=View.VISIBLE
                 startProgressAnimation(audioLength.toInt())
                 return@setOnClickListener
             }
@@ -105,6 +107,7 @@ class SayHiAudioFragment : BaseFragment(R.layout.setting_fragment_say_hi_audio),
             audioFile = null
             audioPlayer.stop()
             mBinding.ivStartRecord.setImageResource(R.mipmap.setting_icon_audio_record)
+            mBinding.voiceprint.visibility=View.GONE
             mBinding.tvTips.text = "点击录制"
             mBinding.ivDeleteAudio.visibility = View.GONE
             mViewModel.submitEnable.set(false)
@@ -126,6 +129,7 @@ class SayHiAudioFragment : BaseFragment(R.layout.setting_fragment_say_hi_audio),
     private fun startRecord() {
         mBinding.ivStartRecord.setImageResource(R.mipmap.setting_icon_audio_start_record)
         mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.voiceprint.visibility=View.VISIBLE
         startProgressAnimation(6000)
         audioRecorder.startRecord()
         job = countDown(60, reverse = true, scope = lifecycleScope, onTick = {
@@ -161,6 +165,7 @@ class SayHiAudioFragment : BaseFragment(R.layout.setting_fragment_say_hi_audio),
         if (audioLength < 3000) {
             mBinding.ivStartRecord.setImageResource(R.mipmap.setting_icon_audio_record)
             mBinding.ivDeleteAudio.visibility = View.GONE
+            mBinding.voiceprint.visibility=View.GONE
             mBinding.tvTips.text = "点击录制"
             customToast("请最少录制3秒")
         } else {
@@ -168,6 +173,7 @@ class SayHiAudioFragment : BaseFragment(R.layout.setting_fragment_say_hi_audio),
             this.audioLength = audioLength
             mBinding.ivStartRecord.setImageResource(R.mipmap.setting_icon_audio_record_finish)
             mBinding.ivDeleteAudio.visibility = View.VISIBLE
+            mBinding.voiceprint.visibility=View.VISIBLE
             mViewModel.submitEnable.set(true)
         }
     }

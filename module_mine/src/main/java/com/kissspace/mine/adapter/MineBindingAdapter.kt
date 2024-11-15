@@ -30,6 +30,7 @@ import androidx.core.text.buildSpannedString
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.SpanUtils
 import com.blankj.utilcode.util.StringUtils
+import com.ruffian.library.widget.RTextView
 
 
 object MineBindingAdapter {
@@ -124,6 +125,20 @@ object MineBindingAdapter {
             imageView.setImageResource(R.mipmap.mine_dress_up_wear)
         }
     }
+
+    //使用rtextView
+    @JvmStatic
+    @BindingAdapter("dressUpBtnState2", requireAll = false)
+    fun dressUpBtnState2(tv: RTextView, state: String?) {
+        if (state == "001") {
+            tv.helper.backgroundColorNormalArray = intArrayOf(Color.parseColor("#36398A"),Color.parseColor("#36398A"))
+            tv.text="取消佩戴"
+         } else {
+            tv.helper.backgroundColorNormalArray = intArrayOf(Color.parseColor("#936DDE"),Color.parseColor("#6C74FB"))
+            tv.text="佩戴"
+        }
+    }
+
 
     @JvmStatic
     @BindingAdapter("followBtnState", requireAll = false)

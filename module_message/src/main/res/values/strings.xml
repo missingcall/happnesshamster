@@ -25,7 +25,7 @@
         <string name="message_system">系统消息</string>
 
         <string name="message_gift_email">礼物邮件</string>
-        <string name="message_gift_delete_read">删除已读</string>
+        <string name="message_gift_delete_receive">删除已领取</string>
         <string name="message_gift_all_receive">一键领取</string>
 
 </resources>

@@ -21,6 +21,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:text="@string/setting_say_hi_picture_title"
+            android:textSize="14sp"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +33,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/setting_icon_add_picture"
+            android:src="@mipmap/common_icon_add_picture"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
@@ -47,19 +48,25 @@
             app:layout_constraintEnd_toEndOf="@id/iv_picture"
             app:layout_constraintTop_toTopOf="@id/iv_picture" />
 
-        <TextView
+        <com.ruffian.library.widget.RTextView
             android:id="@+id/tv_submit"
-            commonBtnState="@{vm.submitEnable}"
+            commonBtnState21="@{vm.submitEnable}"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="15dp"
             android:gravity="center"
             android:text="@string/setting_save"
-            android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="15sp"
+            app:corner_radius="21dp"
+            app:gradient_orientation="LEFT_RIGHT"
+            app:gradient_type="linear"
             app:layout_constraintTop_toBottomOf="@id/iv_picture" />
+
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

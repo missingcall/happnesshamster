@@ -3,6 +3,7 @@ package com.kissspace.mine.ui.activity.feedback
 import android.os.Bundle
 import android.view.MotionEvent
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.ToastUtils
 import com.didi.drouter.annotation.Router
@@ -24,6 +25,8 @@ import com.kissspace.util.isClickThisArea
 import com.kissspace.util.loadImage
 import java.io.File
 import com.kissspace.util.orZero
+import com.kissspace.util.setStatusBarColor
+
 /**
  * @Author gaohangbo
  * @Date 2023/1/7 14:27.
@@ -43,6 +46,12 @@ class FeedBackAddActivity : BaseActivity(R.layout.mine_activtiy_add_feedback) {
     private var feedBackTypeName: String by parseIntent<String>()
 
     override fun initView(savedInstanceState: Bundle?) {
+        setStatusBarColor(
+            ContextCompat.getColor(
+                this,
+                com.kissspace.module_common.R.color.color_232323
+            ), isStatusBlackText = false
+        )
         mBinding.titleBar.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(titleBar: TitleBar?) {
                 super.onLeftClick(titleBar)

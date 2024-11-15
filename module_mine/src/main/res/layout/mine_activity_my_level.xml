@@ -24,7 +24,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.ruffian.library.widget.RConstraintLayout
         android:id="@+id/layout_expend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,8 +32,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:paddingBottom="16dp"
-        app:bl_corners_radius="16dp"
-        app:bl_solid_color="@color/color_1A000000">
+        app:corner_radius="15dp"
+        app:background_normal="#2B2B2B"
+        >
 
         <TextView
             android:id="@+id/tv_expend_title"
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/mine_level_expend"
+            android:text="平台等级"
             android:textColor="@color/common_white"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,10 +97,12 @@
                 app:line_count="200"
                 app:line_width="1dp"
                 app:progress_background_color="@color/white50"
-                app:progress_end_color="@color/color_FF955C"
-                app:progress_start_color="@color/color_FF955C"
-                app:progress_text_color="@color/color_FFFD62"
-                app:progress_text_size="16sp" />
+                app:progress_end_color="#6C74FB"
+                app:progress_start_color="#6C74FB"
+                app:progress_text_color="@color/white"
+                app:progress_text_size="16sp"
+
+                />
         </FrameLayout>
 
         <TextView
@@ -125,17 +128,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_charm_value" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.ruffian.library.widget.RConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.ruffian.library.widget.RConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:paddingBottom="16dp"
-        app:bl_corners_radius="16dp"
-        app:bl_solid_color="@color/color_1A000000">
+        app:corner_radius="15dp"
+        app:background_normal="#2B2B2B">
 
         <TextView
             android:id="@+id/tv_income_title"
@@ -198,9 +201,9 @@
                 app:line_count="200"
                 app:line_width="1dp"
                 app:progress_background_color="@color/white50"
-                app:progress_end_color="@color/color_FF955C"
-                app:progress_start_color="@color/color_FF955C"
-                app:progress_text_color="@color/color_FFFD62"
+                app:progress_end_color="#6C74FB"
+                app:progress_start_color="#6C74FB"
+                app:progress_text_color="@color/white"
                 app:progress_text_size="16sp" />
         </FrameLayout>
 
@@ -227,7 +230,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_consume_value" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.ruffian.library.widget.RConstraintLayout>
 
     <com.youth.banner.Banner
         android:id="@+id/banner"
@@ -236,6 +239,7 @@
         android:layout_marginEnd="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_12"
         android:layout_gravity="center_horizontal"
+        android:visibility="gone"
         android:layout_width="@dimen/dp_343"
         android:layout_height="@dimen/dp_80" />
 
@@ -253,7 +257,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:text="@string/mine_level_income_tips"
+        android:text="魅力等级：每收到1钻石消费获得1魅力值"
         android:textColor="@color/white50"
         android:textSize="12sp" />
 </LinearLayout>

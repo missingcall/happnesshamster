@@ -1,6 +1,7 @@
 package com.kissspace.mine.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
@@ -50,6 +51,7 @@ class MineMainFragment : BaseFragment(R.layout.mine_fragment_user_info_page) {
         mBinding.recyclerGift.grid(4).setup {
             addType<CommonGiftInfo> { R.layout.mine_layout_profile_gift_item }
             onBind {
+                Log.d("==========>","onBind")
                 val model = getModel<CommonGiftInfo>()
                 if (model.giftNum == 0) {
                     findView<ImageView>(R.id.giftIcon).alpha = 0.3f

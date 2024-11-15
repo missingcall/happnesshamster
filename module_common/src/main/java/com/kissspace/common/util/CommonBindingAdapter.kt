@@ -16,6 +16,7 @@ import com.kissspace.common.widget.AnimationView
 import com.kissspace.common.widget.UserLevelIconView
 import com.kissspace.module_common.R
 import com.kissspace.util.*
+import com.ruffian.library.widget.RTextView
 import java.io.File
 
 object CommonBindingAdapter {
@@ -52,7 +53,8 @@ object CommonBindingAdapter {
     @JvmStatic
     @BindingAdapter(value = ["imageUrlDefault", "imageRadius"])
     fun imageUrlDefault(imageView: ImageView, imageUrl: String?, imageRadius: Float = 0f) {
-        var options = RequestOptions().placeholder(com.kissspace.module_util.R.drawable.common_ic_default)
+        var options =
+            RequestOptions().placeholder(com.kissspace.module_util.R.drawable.common_ic_default)
         if (imageRadius > 0) {
             options = options.transform(RoundedCorners(imageRadius.toInt()))
         }
@@ -185,6 +187,38 @@ object CommonBindingAdapter {
         textView.isEnabled = enable
     }
 
+
+    /**
+     * 圆角为21dp
+     */
+    @JvmStatic
+    @BindingAdapter("commonBtnState21", requireAll = false)
+    fun commonBtnState21(textView: RTextView, enable: Boolean = false) {
+        if (enable) {
+            textView.helper.apply {
+                backgroundColorNormalArray = intArrayOf(
+                    ColorUtils.getColor(R.color.color_936DDE),
+                    ColorUtils.getColor(R.color.color_6C74FB)
+                )
+
+                textView.setTextColor(ColorUtils.getColor(R.color.white))
+            }
+        } else {
+
+            textView.helper.apply {
+                backgroundColorNormalArray = intArrayOf(
+                    ColorUtils.getColor(R.color.color_4D936DDE),
+                    ColorUtils.getColor(R.color.color_4D6C74FB)
+                )
+                textColorNormal =  ColorUtils.getColor(R.color.common_white80)
+            }
+
+
+        }
+        textView.isEnabled = enable
+    }
+
+
     @JvmStatic
     @BindingAdapter("commonBtnStateBlue", requireAll = false)
     fun commonBtnStateBlue(textView: TextView, enable: Boolean = false) {
@@ -279,13 +313,20 @@ object CommonBindingAdapter {
 
     @JvmStatic
     @BindingAdapter(value = ["animationUrl", "animationLoop"])
-    fun loadAnimation(animationView: AnimationView, animationUrl: String?, animationLoop: Boolean?) {
+    fun loadAnimation(
+        animationView: AnimationView,
+        animationUrl: String?,
+        animationLoop: Boolean?
+    ) {
         if (animationUrl.isNullOrEmpty()) {
             animationView.visibility = View.GONE
             animationView?.onDestroy()
         } else {
             animationView.visibility = View.VISIBLE
-            animationView.play(animationUrl, if (animationLoop != null && animationLoop) Int.MAX_VALUE else 1)
+            animationView.play(
+                animationUrl,
+                if (animationLoop != null && animationLoop) Int.MAX_VALUE else 1
+            )
         }
     }
 

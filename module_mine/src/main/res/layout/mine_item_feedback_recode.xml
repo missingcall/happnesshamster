@@ -11,15 +11,16 @@
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.ruffian.library.widget.RConstraintLayout
         android:id="@+id/cl_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="12dp"
-        android:layout_marginRight="16dp"
-        app:bl_corners_radius="8dp"
-        app:bl_solid_color="@color/color_1A000000"
+        android:layout_marginRight="15dp"
+        app:corner_radius="11dp"
+        app:bl_solid_color="@color/color_232323"
+        app:background_normal="@color/color_232323"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,8 +32,8 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:text='@{"反馈时间: "+m.createTime}'
-            android:textColor="@color/white"
-            android:textSize="13sp"
+            android:textColor="@color/color_949499"
+            android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="反馈时间：12-12 12:12" />
@@ -44,7 +45,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="12dp"
-            android:background="@color/color_494B70"
+            android:background="@color/color_2C2C2C"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_time" />
@@ -54,10 +55,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="16.5dp"
+            android:layout_marginTop="16dp"
             android:text="反馈类型"
-            android:textColor="@color/color_80FFFFFF"
-            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textSize="15sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -65,11 +66,11 @@
             android:id="@+id/tv_feedback_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16.5dp"
-            android:layout_marginRight="16.5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
             android:text="@{m.feedbackTypeName}"
-            android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textColor="@color/color_949499"
+            android:textSize="14sp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
             tools:text="我最急需的功能" />
@@ -81,7 +82,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="12dp"
-            android:background="@color/color_494B70"
+            android:background="@color/color_2C2C2C"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_feedback_text" />
@@ -93,7 +94,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
             android:text="反馈描述"
-            android:textColor="@color/color_80FFFFFF"
+            android:textSize="15sp"
+            android:textColor="@color/white"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view1" />
 
@@ -106,7 +108,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginRight="12dp"
             android:text="@{m.feedbackDescribe}"
-            android:textColor="@color/white"
+            android:textColor="@color/color_949499"
             android:textSize="15sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -120,8 +122,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="20dp"
             android:text="反馈描述"
-            android:textColor="@color/color_80FFFFFF"
-            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textSize="15sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_feedback" />
 
@@ -140,7 +142,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="12dp"
-            android:background="@color/color_494B70"
+            android:background="@color/color_2C2C2C"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_image" />
@@ -153,8 +155,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
             android:text="反馈回复"
-            android:textColor="@color/color_FFFD62"
-            android:textSize="16sp"
+            android:textColor="@color/color_5A60FF"
+            android:textSize="15sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
@@ -168,13 +170,13 @@
             android:layout_marginBottom="20dp"
             android:text="@{m.feedbackReply}"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title2"
             tools:text="感谢您的反馈，官方将持续关注此事。" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.ruffian.library.widget.RConstraintLayout>
 
 </layout>

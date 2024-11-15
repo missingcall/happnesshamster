@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -22,9 +23,11 @@
             app:leftHorizontalPadding="16dp"
             app:leftIcon="@mipmap/common_icon_back_white"
             app:lineVisible="false"
-            app:rightTitle="反馈记录"
-            app:rightTitleColor="@color/color_FFFD62"
-            app:rightTitleSize="14sp"
+            app:rightIcon="@mipmap/mine_icon_feedback_record"
+            app:rightIconWidth="21dp"
+            app:rightIconHeight="21dp"
+            app:rightHorizontalPadding="9dp"
+            android:background="@color/color_232323"
             app:title="意见反馈"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -33,7 +36,8 @@
             android:layout_height="0dp"
             android:layout_marginTop="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_bar" />
+            app:layout_constraintTop_toBottomOf="@+id/title_bar"
+            tools:listitem="@layout/mine_item_feedback_type"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
