@@ -28,6 +28,8 @@ import com.kissspace.common.model.wallet.HmsInfoModel
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.*
+import com.kissspace.common.util.mmkv.MMKVProvider
+import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.network.net.Method
@@ -60,6 +62,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         getCurrentHamsterSkin()
 
         mBinding.ivAvatar.safeClick {
+            //TODO 需要替换为可滑动 抽屉式
             ChangeAccountDialog.newInstance().show(childFragmentManager)
         }
 
@@ -167,7 +170,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             if (!isFirst) {
                 customToast(it?.errorMsg)
             }
-            logD("errCode : " + it?.errCode + " , errMSg : " +it?.errorMsg)
+            logD("errCode : " + it?.errCode + " , errMSg : " + it?.errorMsg)
             if (it?.errCode == "54001" || it?.errCode == "1000") {
                 //仓鼠不存在或者请求失败时默认为004过期状态
                 mWalletViewModel.hmsInfoModel.set(HmsInfoModel())
@@ -241,6 +244,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 //右边栏
                 mBinding.clBalanceDescription.visibility = View.GONE
                 mBinding.clSkin.visibility = View.GONE
+//                mBinding.clSkin.visibility = View.VISIBLE //测试用
                 mBinding.clQuest.visibility = View.GONE
                 //蒙版锁
                 mBinding.nivHamsterMask.visibility = View.VISIBLE

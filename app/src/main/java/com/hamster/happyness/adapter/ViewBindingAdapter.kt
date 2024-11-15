@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ResourceUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.SpanUtils
@@ -119,6 +120,44 @@ object ViewBindingAdapter {
             else -> Format.O_O_DOWN.format(value.toDouble() / 100000000).removeSuffix(".0") + "亿"
         }
     }
+
+    /**
+     * 皮肤背景
+     */
+    @JvmStatic
+    @BindingAdapter("skinBackground", requireAll = false)
+    fun skinBackground(view: View, m: InfoListModel.Record) {
+        //已选中
+        if (m.checked) {
+            //已解锁
+            if (m.unlockStatus) {
+                view.setBackgroundResource(com.kissspace.module_common.R.drawable.common_skin_item_selector_selected)
+            } else {
+                //未解锁
+                view.setBackgroundResource(com.kissspace.module_common.R.drawable.common_skin_item_selector_selected_locked)
+
+            }
+
+
+            //未选中
+        } else {
+            //已解锁
+            if (m.unlockStatus) {
+                //已佩戴
+                if (m.wearStatus) {
+                    view.setBackgroundResource(com.kissspace.module_common.R.drawable.common_skin_item_not_selected)
+                } else {
+                    view.setBackgroundResource(com.kissspace.module_common.R.drawable.common_skin_item_not_selected)
+                }
+            } else {
+                //未解锁
+                view.setBackgroundResource(com.kissspace.module_common.R.drawable.common_skin_item_locked)
+            }
+        }
+
+
+    }
+
 
     /**
      * 可用松果

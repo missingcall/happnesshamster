@@ -19,6 +19,7 @@ import com.kissspace.common.util.copyClip
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.util.oldAccountExit
 import com.kissspace.common.widget.BaseDialogFragment
+import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.network.result.collectData
 import com.kissspace.setting.viewmodel.ChangeAccountViewModel
 import com.kissspace.util.toast
@@ -52,7 +53,12 @@ class ChangeAccountDialog : BaseDialogFragment<DialogChangeAccountBinding>(Dialo
         }
 
         mBinding.conAdd.safeClick {
-            createAccount()
+            CommonConfirmDialog(requireContext(), "您确定要创建一个新的身份？ 新身份的资产将不与旧身份互通，您确定要创建嘛？") {
+                if (this) {
+                    createAccount()
+                }
+            }.show()
+
         }
         initRecyclerView()
         initData()
