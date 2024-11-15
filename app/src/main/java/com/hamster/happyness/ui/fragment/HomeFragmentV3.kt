@@ -5,12 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.blankj.utilcode.util.ColorUtils
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.utils.*
@@ -19,7 +16,6 @@ import com.hamster.happyness.databinding.FragmentMainHomeV3Binding
 import com.hamster.happyness.http.Api
 import com.hamster.happyness.viewmodel.GameQuickEnterModel
 import com.hamster.happyness.viewmodel.HamsterViewModel
-import com.hamster.happyness.viewmodel.HomeViewModel
 import com.hamster.happyness.widget.*
 
 import com.kissspace.common.base.BaseFragment
@@ -31,8 +27,6 @@ import com.kissspace.common.http.getUserInfo
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.*
-import com.kissspace.common.util.glide.GlideApp
-import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.network.net.Method
@@ -54,7 +48,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         mBinding.titleBar.setMarginStatusBar()
         mBinding.mvm = mMineViewModel
         mBinding.wvm = mWalletViewModel
-        mBinding.lifecycleOwner = this
+        mBinding.lifecycleOwner = activity
 
         initRecyclerView()
         initData()
@@ -91,14 +85,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             jump(RouterPath.PATH_TASK_CENTER_LIST)
         }
 
-        mBinding.ivHamsterDevelopment.safeClick {
-            mHamsterViewModel.click {
-                if (it) {
-                    customToast("领取成功")
-                    FlowBus.post(Event.RefreshCoin)
-                }
-            }
-        }
+
 
         //设置字体
         mBinding.tvCleanliness.typeface = Typeface.createFromAsset(activity?.assets, "fonts/AlimamaShuHeiTi-Bold.ttf")
@@ -186,6 +173,15 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                         HomeFeedDialog.newInstance().show(childFragmentManager)
                     }
 
+                    mBinding.ivHamsterDevelopment.safeClick {
+                        mHamsterViewModel.click { it1 ->
+                            if (it1) {
+                                customToast("领取成功")
+                                FlowBus.post(Event.RefreshCoin)
+                            }
+                        }
+                    }
+
                 }
                 "003" -> {
                     //死亡状态下都复活弹窗
@@ -211,11 +207,11 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             }
             //TODO 测试 仓鼠不存在 或者请求失败
             mBinding.clHomeCleanliness.safeClick {
-                HomeRebornDialog.newInstance().show(childFragmentManager)
+                HomeCleanDialog.newInstance().show(childFragmentManager)
             }
 
             mBinding.clHomeSatiety.safeClick {
-                HomeRebornDialog.newInstance().show(childFragmentManager)
+                HomeFeedDialog.newInstance().show(childFragmentManager)
             }
 
         })

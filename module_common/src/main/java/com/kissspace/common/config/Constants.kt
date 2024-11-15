@@ -718,6 +718,23 @@ object Constants {
     }
 
 
+    /**
+     * 	hamsterStatus：		仓鼠状态（001 正常 002 濒死 003 已死亡 004 已到期）
+     */
+    class HamsterStatusType {
+        companion object {
+
+            const val NORMAL = "001"
+            const val NEAR_DEATH = "002"
+            const val DEAD = "003"
+            const val EXPIRED = "004"
+
+
+        }
+    }
+
+
+
     var sendSmsType: Pair<String?, String?>? = null
 
     //活体验证type

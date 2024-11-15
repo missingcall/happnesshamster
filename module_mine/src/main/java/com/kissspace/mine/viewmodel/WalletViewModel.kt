@@ -193,6 +193,7 @@ class WalletViewModel : BaseViewModel() {
     //获取仓鼠养成培养消费面板
     var cultivationPanelModel = ObservableField<CultivationPanelModel>()
 
+    //获取仓鼠复活消费面板
     var revivePanelModel = ObservableField<RevivePanelModel>()
 
     //清洁度

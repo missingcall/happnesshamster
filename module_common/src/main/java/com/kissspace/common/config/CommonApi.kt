@@ -49,6 +49,9 @@ object CommonApi {
     //创建账号
     const val API_USER_ACCOUNT_CREATE = "/hamster-user/user/accountCreate"
 
+    //创建账号(无限制)
+    const val API_USER_ACCOUNT_CREATE_NEW = "/hamster-user/user/accountCreateNew"
+
     //根据用户id登录
     const val API_LOGIN_BY_USERID = "/hamster-user/user/loginByUserId"
 

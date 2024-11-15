@@ -27,14 +27,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.18" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@mipmap/common_bg_dialog"
+            android:background="@mipmap/common_bg_dialog_low_height"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="350:465"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -46,10 +45,10 @@
             app:layout_constraintLeft_toLeftOf="@id/guideline_vertical" />
 
         <TextView
-            android:id="@+id/tvFeed"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="60dp"
             android:text="喂养仓鼠"
             android:textColor="@color/white"
             android:textSize="26sp"
@@ -58,28 +57,56 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvAvailableProp"
+            availableFoodProp="@{vm.cultivationPanelModel.satiety.prop}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:background="@mipmap/app_home_dialog_bg_hamster"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tvAvailablePineCones"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvAvailablePineCones"
+            availablePineConesNum="@{vm.diamond}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/app_home_dialog_bg_hamster"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvAvailableProp"
+            app:layout_constraintLeft_toRightOf="@id/tvAvailableProp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvAvailableProp" />
+
 
         <ImageView
             android:id="@+id/ivCircleBg"
             android:layout_width="183dp"
             android:layout_height="183dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/app_layer_dialog_list_circle"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvFeed" />
+            app:layout_constraintTop_toBottomOf="@id/tvAvailableProp" />
 
 
         <ImageView
-            android:id="@+id/ivIconFeed"
-            android:layout_width="126dp"
-            android:layout_height="126dp"
+            android:id="@+id/ivIcon"
+            android:layout_width="138dp"
+            android:layout_height="138dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
-            android:src="@mipmap/app_icon_home_satiety"
+            android:src="@mipmap/app_icon_home_satiety_hamster"
             app:layout_constraintBottom_toBottomOf="@id/ivCircleBg"
             app:layout_constraintLeft_toLeftOf="@id/ivCircleBg"
             app:layout_constraintRight_toRightOf="@id/ivCircleBg"
@@ -92,7 +119,8 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="6dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/common_bg_black23_radius15"
+            android:background="@mipmap/app_home_dialog_bg_progress"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivCircleBg">
@@ -142,15 +170,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/tvAvailable"
-
-            propClean="@{vm.cultivationPanelModel.satiety.prop}"
-            diamond="@{vm.walletModel.diamond}"
+            android:id="@+id/tvChoose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="27dp"
             android:gravity="center"
-
+            android:text="选择喂养方式"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
@@ -161,6 +186,7 @@
 
         <Button
             android:id="@+id/btnConfirmLeft"
+            commonBtnStateBlue="@{vm.cultivationPanelModel.satiety.costPropCount &lt; vm.cultivationPanelModel.satiety.prop }"
             feedingPropConfirmation="@{vm.cultivationPanelModel}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -168,18 +194,19 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="34dp"
-            android:background="@drawable/common_bg_blue"
+            android:background="@drawable/common_shape_bg_gradient_radius45"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:textColor="@color/white"
             android:textSize="17sp"
-            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/btnConfirmRight"
-            app:layout_constraintTop_toBottomOf="@id/tvAvailable" />
+            app:layout_constraintTop_toBottomOf="@id/tvChoose" />
 
         <Button
             android:id="@+id/btnConfirmRight"
+            commonBtnStateBlue="@{vm.cultivationPanelModel.satiety.consumption &lt; vm.walletModel.diamond }"
             feedingPineConeConfirmation="@{vm.cultivationPanelModel}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -187,15 +214,14 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="34dp"
-            android:background="@drawable/common_bg_blue"
+            android:background="@drawable/common_shape_bg_gradient_radius45"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:textColor="@color/white"
             android:textSize="17sp"
-            android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/btnConfirmLeft"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvAvailable" />
+            app:layout_constraintTop_toBottomOf="@id/tvChoose" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

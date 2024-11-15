@@ -3,18 +3,14 @@ package com.hamster.happyness.widget
 import android.annotation.SuppressLint
 import android.view.Gravity
 import android.view.View
-import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.hamster.happyness.R
 import com.hamster.happyness.databinding.DialogChangeAccountBinding
-import com.hamster.happyness.databinding.DialogHomeCleanBinding
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
@@ -23,12 +19,8 @@ import com.kissspace.common.util.copyClip
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.util.oldAccountExit
 import com.kissspace.common.widget.BaseDialogFragment
-import com.kissspace.mine.viewmodel.MineViewModel
-import com.kissspace.mine.viewmodel.WalletViewModel
-import com.kissspace.module_setting.databinding.SettingActivityChangeAccountBinding
 import com.kissspace.network.result.collectData
 import com.kissspace.setting.viewmodel.ChangeAccountViewModel
-import com.kissspace.util.lifecycleOwner
 import com.kissspace.util.toast
 
 /**
@@ -46,7 +38,6 @@ class ChangeAccountDialog : BaseDialogFragment<DialogChangeAccountBinding>(Dialo
 
     companion object {
         fun newInstance() = ChangeAccountDialog().apply {
-
         }
     }
 
@@ -152,6 +143,6 @@ class ChangeAccountDialog : BaseDialogFragment<DialogChangeAccountBinding>(Dialo
     private fun createAccount() {
         isCreateAccount = true
         showLoading()
-        mViewModel.createAccount(userPhone)
+        mViewModel.createAccountNew(userPhone)
     }
 }

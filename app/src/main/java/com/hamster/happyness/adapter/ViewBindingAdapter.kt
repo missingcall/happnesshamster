@@ -1,7 +1,6 @@
 package com.hamster.happyness.adapter
 
 import android.graphics.Color
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -10,7 +9,6 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ResourceUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.SpanUtils
@@ -136,14 +134,26 @@ object ViewBindingAdapter {
     }
 
     /**
-     * 可用喂食道具
+     * 可用松果
+     */
+    @JvmStatic
+    @BindingAdapter("availablePineConesNum", requireAll = false)
+    fun availablePineConesNum(textView: TextView, diamond: String?) {
+        val spanStringAvailable = SpanUtils()
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_small)
+            .append(diamond.toString())//.setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+        textView.text = spanStringAvailable
+    }
+
+    /**
+     * 可用喂食道具v1.1.0
      */
     @JvmStatic
     @BindingAdapter(value = ["propFood", "diamond"])
     fun availableFood(textView: TextView, propFood: Int, diamond: Double) {
-
         val spanStringAvailable = SpanUtils().append("我可用的")
-            .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_satiety_small)
+            .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_satiety)
             .append(propFood.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
             .append(diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
@@ -152,16 +162,42 @@ object ViewBindingAdapter {
     }
 
     /**
-     * 可用清洁道具
+     * 可用喂食道具v1.2.0
+     */
+    @JvmStatic
+    @BindingAdapter("availableFoodProp", requireAll = false)
+    fun availableFoodProp(textView: TextView, propFood: Int) {
+        val spanStringAvailable = SpanUtils()
+            .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_satiety_small)
+            .append(propFood.toString())//.setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+        textView.text = spanStringAvailable
+    }
+
+    /**
+     * 可用清洁道具v1.1.0
      */
     @JvmStatic
     @BindingAdapter(value = ["propClean", "diamond"])
     fun availableClean(textView: TextView, propClean: Int, diamond: Double) {
         val spanStringAvailable = SpanUtils().append("我可用的")
-            .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness_small)
+            .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness)
             .append(propClean.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
             .append(diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+        textView.text = spanStringAvailable
+    }
+
+    /**
+     * 可用清洁道具v1.2.0
+     */
+    @JvmStatic
+    @BindingAdapter("availableCleanProp", requireAll = false)
+    fun availableCleanProp(textView: TextView, propClean: Int) {
+        val spanStringAvailable = SpanUtils()
+            .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness_small)
+            .append(propClean.toString())//.setForegroundColor(Color.parseColor("#FDC120"))
             .create()
         textView.text = spanStringAvailable
     }
@@ -188,8 +224,7 @@ object ViewBindingAdapter {
 
         val spanString = SpanUtils()
             .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_satiety_small)
-            .append(cultivationPanelModel?.satiety?.costPropCount.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .append("\n确认喂养")
+            .append(cultivationPanelModel?.satiety?.costPropCount.toString())
             .create()
         button.text = spanString
     }
@@ -201,9 +236,8 @@ object ViewBindingAdapter {
     @BindingAdapter("feedingPineConeConfirmation", requireAll = false)
     fun feedingPineConeConfirmation(button: Button, cultivationPanelModel: CultivationPanelModel?) {
         val spanString = SpanUtils()
-            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
-            .append(cultivationPanelModel?.satiety?.consumption.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .append("\n确认喂养")
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_small)
+            .append(cultivationPanelModel?.satiety?.consumption.toString())
             .create()
         button.text = spanString
 
@@ -217,8 +251,7 @@ object ViewBindingAdapter {
     fun cleaningPropConfirmation(button: Button, cultivationPanelModel: CultivationPanelModel?) {
         val spanString = SpanUtils()
             .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness_small)
-            .append(cultivationPanelModel?.cleanliness?.costPropCount.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .append("\n确认清洁")
+            .append(cultivationPanelModel?.cleanliness?.costPropCount.toString())//.setForegroundColor(Color.parseColor("#FDC120"))
             .create()
         button.text = spanString
     }
@@ -230,9 +263,8 @@ object ViewBindingAdapter {
     @BindingAdapter("cleaningPineConeConfirmation", requireAll = false)
     fun cleaningPineConeConfirmation(button: Button, cultivationPanelModel: CultivationPanelModel?) {
         val spanString = SpanUtils()
-            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
-            .append(cultivationPanelModel?.cleanliness?.consumption.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .append("\n确认清洁")
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_small)
+            .append(cultivationPanelModel?.cleanliness?.consumption.toString())//.setForegroundColor(Color.parseColor("#FDC120"))
             .create()
         button.text = spanString
 

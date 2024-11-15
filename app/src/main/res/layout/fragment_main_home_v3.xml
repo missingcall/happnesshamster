@@ -453,7 +453,7 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginLeft="-10dp"
-                android:src="@mipmap/app_icon_home_cleanliness"
+                android:src="@mipmap/app_icon_home_cleanliness_big"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -513,7 +513,7 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginLeft="-10dp"
-                android:src="@mipmap/app_icon_home_satiety"
+                android:src="@mipmap/app_icon_home_satiety_big"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
