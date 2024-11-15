@@ -24,6 +24,7 @@ import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.http.getUserInfo
+import com.kissspace.common.model.wallet.HmsInfoModel
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.*
@@ -32,6 +33,7 @@ import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
 import com.kissspace.util.loadImage
+import com.kissspace.util.logD
 import kotlinx.coroutines.Job
 
 //探索
@@ -84,7 +86,6 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         mBinding.clQuest.safeClick {
             jump(RouterPath.PATH_TASK_CENTER_LIST)
         }
-
 
 
         //设置字体
@@ -160,61 +161,104 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     private fun getHamsterStatus(isFirst: Boolean) {
 
         mWalletViewModel.hmsInfo(onSuccess = {
-            when (it?.hamsterStatus) {
-                //（001 正常 002 濒死 003 已死亡 004 已到期）
-                "001", "002" -> {
-                    //清洁弹窗
-                    mBinding.clHomeCleanliness.safeClick {
-                        HomeCleanDialog.newInstance().show(childFragmentManager)
-                    }
-
-                    //喂食弹窗
-                    mBinding.clHomeSatiety.safeClick {
-                        HomeFeedDialog.newInstance().show(childFragmentManager)
-                    }
-
-                    mBinding.ivHamsterDevelopment.safeClick {
-                        mHamsterViewModel.click { it1 ->
-                            if (it1) {
-                                customToast("领取成功")
-                                FlowBus.post(Event.RefreshCoin)
-                            }
-                        }
-                    }
-
-                }
-                "003" -> {
-                    //死亡状态下都复活弹窗
-                    mBinding.clHomeCleanliness.safeClick {
-                        HomeRebornDialog.newInstance().show(childFragmentManager)
-                    }
-
-                    mBinding.clHomeSatiety.safeClick {
-                        HomeRebornDialog.newInstance().show(childFragmentManager)
-                    }
-
-                }
-                "004" -> {
-
-                }
-
-            }
-
+            changeHamsterUIStatus()
 
         }, onError = {
             if (!isFirst) {
                 customToast(it?.errorMsg)
             }
-            //TODO 测试 仓鼠不存在 或者请求失败
-            mBinding.clHomeCleanliness.safeClick {
-                HomeCleanDialog.newInstance().show(childFragmentManager)
+            logD("errCode : " + it?.errCode + " , errMSg : " +it?.errorMsg)
+            if (it?.errCode == "54001" || it?.errCode == "1000") {
+                //仓鼠不存在或者请求失败时默认为004过期状态
+                mWalletViewModel.hmsInfoModel.set(HmsInfoModel())
+                changeHamsterUIStatus()
             }
-
-            mBinding.clHomeSatiety.safeClick {
-                HomeFeedDialog.newInstance().show(childFragmentManager)
-            }
-
         })
+
+    }
+
+
+    private fun changeHamsterUIStatus() {
+        when (mWalletViewModel.hmsInfoModel.get()?.hamsterStatus) {
+            //（001 正常 002 濒死 003 已死亡 004 已到期）
+            "001", "002" -> {
+                //右边栏
+                mBinding.clBalanceDescription.visibility = View.VISIBLE
+                mBinding.clSkin.visibility = View.VISIBLE
+                mBinding.clQuest.visibility = View.VISIBLE
+                //蒙版锁
+                mBinding.nivHamsterMask.visibility = View.GONE
+                mBinding.ivLock.visibility = View.GONE
+                //清洁喂食
+                mBinding.clHomeCleanliness.visibility = View.VISIBLE
+                mBinding.clHomeSatiety.visibility = View.VISIBLE
+                //购买复活
+                mBinding.btnPurchaseOrRevive.visibility = View.GONE
+
+                //清洁弹窗
+                mBinding.clHomeCleanliness.safeClick {
+                    HomeCleanDialog.newInstance().show(childFragmentManager)
+                }
+
+                //喂食弹窗
+                mBinding.clHomeSatiety.safeClick {
+                    HomeFeedDialog.newInstance().show(childFragmentManager)
+                }
+
+                //点击领取松果
+                mBinding.ivHamsterDevelopment.safeClick {
+                    mHamsterViewModel.click {
+                        if (it) {
+                            customToast("领取成功")
+                            FlowBus.post(Event.RefreshCoin)
+                        }
+                    }
+                }
+
+            }
+            "003" -> {
+                //右边栏
+                mBinding.clBalanceDescription.visibility = View.VISIBLE
+                mBinding.clSkin.visibility = View.VISIBLE
+                mBinding.clQuest.visibility = View.VISIBLE
+                //蒙版锁
+                mBinding.nivHamsterMask.visibility = View.GONE
+                mBinding.ivLock.visibility = View.GONE
+                //清洁喂食
+                mBinding.clHomeCleanliness.visibility = View.GONE
+                mBinding.clHomeSatiety.visibility = View.GONE
+                //购买复活
+                mBinding.btnPurchaseOrRevive.visibility = View.VISIBLE
+                mBinding.btnPurchaseOrRevive.setBackgroundResource(R.mipmap.app_icon_home_hamster_revive)
+
+                mBinding.btnPurchaseOrRevive.safeClick {
+                    HomeRebornDialog.newInstance().show(childFragmentManager)
+                }
+            }
+            "004" -> {
+                //仓鼠不存在或仓鼠已过期 隐藏右边栏/展示蒙版/展示锁
+
+                //右边栏
+                mBinding.clBalanceDescription.visibility = View.GONE
+                mBinding.clSkin.visibility = View.GONE
+                mBinding.clQuest.visibility = View.GONE
+                //蒙版锁
+                mBinding.nivHamsterMask.visibility = View.VISIBLE
+                mBinding.ivLock.visibility = View.VISIBLE
+                //清洁喂食
+                mBinding.clHomeCleanliness.visibility = View.GONE
+                mBinding.clHomeSatiety.visibility = View.GONE
+                //购买复活
+                mBinding.btnPurchaseOrRevive.visibility = View.VISIBLE
+                mBinding.btnPurchaseOrRevive.setBackgroundResource(R.mipmap.app_icon_home_hamster_purchase)
+
+                mBinding.btnPurchaseOrRevive.safeClick {
+                    //切换首页底下tab
+                    FlowBus.post(Event.HamsterPurchaseEvent)
+                }
+            }
+
+        }
 
     }
 

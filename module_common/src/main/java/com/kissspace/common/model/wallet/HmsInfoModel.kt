@@ -9,7 +9,7 @@ data class HmsInfoModel(
     @SerialName("cleanliness")
     val cleanliness: Int = 0,
     @SerialName("hamsterStatus")
-    var hamsterStatus: String = "",
+    var hamsterStatus: String = "004",
     @SerialName("satiety")
     val satiety: Int = 0
 )

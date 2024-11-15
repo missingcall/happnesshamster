@@ -25,7 +25,7 @@ class HamsterViewModel : BaseViewModel() {
     private val _infoListEvent = MutableSharedFlow<ResultState<InfoListModel>>()
     val infoListEvent = _infoListEvent.asSharedFlow()
 
-    val currentlyUseSkinModel = ObservableField<CurrentlyUseSkinModel>()
+    private val currentlyUseSkinModel = ObservableField<CurrentlyUseSkinModel>()
 
     /**
      * 用户查看皮肤首页

@@ -134,14 +134,27 @@ object ViewBindingAdapter {
     }
 
     /**
-     * 可用松果
+     * 可用松果数量
      */
     @JvmStatic
     @BindingAdapter("availablePineConesNum", requireAll = false)
     fun availablePineConesNum(textView: TextView, diamond: String?) {
         val spanStringAvailable = SpanUtils()
             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_small)
-            .append(diamond.toString())//.setForegroundColor(Color.parseColor("#FDC120"))
+            .append(diamond.toString())
+            .create()
+        textView.text = spanStringAvailable
+    }
+
+    /**
+     * 可用松子数量
+     */
+    @JvmStatic
+    @BindingAdapter("availablePineNutsNum", requireAll = false)
+    fun availablePineNutsNum(textView: TextView, accountBalance: String?) {
+        val spanStringAvailable = SpanUtils()
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_nut_small)
+            .append(accountBalance.toString())
             .create()
         textView.text = spanStringAvailable
     }
@@ -272,32 +285,32 @@ object ViewBindingAdapter {
 
 
     /**
-     * 松果重生-确认
-     */
-    @JvmStatic
-    @BindingAdapter("rebornConeConfirmation", requireAll = false)
-    fun rebornConeConfirmation(button: Button, revivePanelModel: RevivePanelModel?) {
-        val spanString = SpanUtils()
-            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
-            .append(revivePanelModel?.pineCone.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .append("\n确定复活")
-            .create()
-        button.text = spanString
-    }
-
-    /**
      * 松子重生-确认
      */
     @JvmStatic
     @BindingAdapter("rebornNutConfirmation", requireAll = false)
-    fun rebornNutConfirmation(button: Button, revivePanelModel: RevivePanelModel?) {
+    fun rebornNutConfirmation(button: Button, pineNuts: Double) {
         val spanString = SpanUtils()
-            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_nut)
-            .append(revivePanelModel?.pineNuts.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .append("\n确定复活")
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_nut_small)
+            .append(pineNuts.toString())
             .create()
         button.text = spanString
     }
+
+
+    /**
+     * 松果重生-确认
+     */
+    @JvmStatic
+    @BindingAdapter("rebornConeConfirmation", requireAll = false)
+    fun rebornConeConfirmation(button: Button, pineCone: Double) {
+        val spanString = SpanUtils()
+            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_small)
+            .append(pineCone.toString())
+            .create()
+        button.text = spanString
+    }
+
 
     /**
      * 皮肤状态 (已拥有，未解锁，已使用)

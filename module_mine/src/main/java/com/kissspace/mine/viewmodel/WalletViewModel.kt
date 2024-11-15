@@ -478,7 +478,7 @@ class WalletViewModel : BaseViewModel() {
         )
     }
 
-    //获取仓鼠养成培养消费面板
+    //获取仓鼠复活消费面板
     fun queryRevivePanel(block: ((RevivePanelModel?) -> Unit)?) {
         val param = mutableMapOf<String, Any?>()
         request<RevivePanelModel>(MineApi.API_HAMSTER_CULTIVATE_QUERY_REVIVEPANEL, Method.GET, param, onSuccess = {
@@ -588,7 +588,7 @@ class WalletViewModel : BaseViewModel() {
 
 
     //松子转赠
-    fun transferPineNuts(smsCode :String? ,amount: Double, targetUserDisplayId: String, onSuccess: ((Boolean) -> Unit) = {}) {
+    fun transferPineNuts(smsCode: String?, amount: Double, targetUserDisplayId: String, onSuccess: ((Boolean) -> Unit) = {}) {
         val param = mutableMapOf<String, Any?>()
         param["smsCode"] = smsCode
         param["amount"] = amount

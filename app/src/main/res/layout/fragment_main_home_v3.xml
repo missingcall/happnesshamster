@@ -362,8 +362,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"
-           />
+            app:layout_constraintGuide_percent="0.5" />
 
         <ImageView
             android:id="@+id/ivHamsterDevelopment"
@@ -380,24 +379,44 @@
             app:layout_constraintTop_toTopOf="@id/ivHamsterDevelopmentBg"
             app:layout_constraintVertical_bias="0.0" />
 
+        <com.kissspace.common.widget.NiceImageView
+            android:id="@+id/nivHamsterMask"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:is_circle="true"
+            app:layout_constraintBottom_toBottomOf="@id/ivHamsterDevelopment"
+            app:layout_constraintLeft_toLeftOf="@id/ivHamsterDevelopment"
+            app:layout_constraintRight_toRightOf="@id/ivHamsterDevelopment"
+            app:layout_constraintTop_toTopOf="@id/ivHamsterDevelopment"
+            app:mask_color="@color/color_80000000" />
+
+        <ImageView
+            android:id="@+id/ivLock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/app_icon_home_lock_hamster"
+            app:layout_constraintBottom_toBottomOf="@id/ivHamsterDevelopment"
+            app:layout_constraintLeft_toLeftOf="@id/ivHamsterDevelopment"
+            app:layout_constraintRight_toRightOf="@id/ivHamsterDevelopment"
+            app:layout_constraintTop_toTopOf="@id/ivHamsterDevelopment" />
+
         <TextView
             android:id="@+id/tvCommunicate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:background="@mipmap/app_bg_main_communicate"
+            android:ellipsize="end"
+            android:maxEms="10"
+            android:maxLines="2"
+
+            android:textColor="@color/white"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="@id/guideline_v"
             app:layout_constraintRight_toRightOf="@id/ivHamsterDevelopment"
             app:layout_constraintTop_toTopOf="@id/ivHamsterDevelopment"
-            android:layout_marginTop="30dp"
-
             tools:text="主人主人主人主人主人主人主人主人主人主人主人主人主人主人主人主人主人主人主人主人主人主人主人主人"
-            android:maxLines="2"
-            android:maxEms="10"
-            android:ellipsize="end"
-            android:textColor="@color/white"
-            android:visibility="gone"
-            tools:visibility="visible"
-            />
+            tools:visibility="visible" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -407,7 +426,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginBottom="15dp"
             android:background="@mipmap/app_icon_home_cleanliness_bg"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnPurchaseOrRevive"
             app:layout_constraintDimensionRatio="147:47"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -459,7 +478,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clHomeSatiety"
@@ -520,6 +538,17 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btnPurchaseOrRevive"
+            android:layout_width="168dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@mipmap/app_icon_home_hamster_purchase"
+           />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
