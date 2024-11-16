@@ -1,22 +1,15 @@
 package com.hamster.happyness.viewmodel
 
 import androidx.databinding.ObservableField
-import com.hamster.happyness.http.Api
 import com.kissspace.common.base.BaseViewModel
-import com.kissspace.common.config.AppConfigKey
-import com.kissspace.common.config.CommonApi
 import com.kissspace.common.config.Constants
-import com.kissspace.common.http.getAppConfigByKey
 import com.kissspace.common.model.*
-import com.kissspace.common.model.wallet.RevivePanelModel
 import com.kissspace.common.util.customToast
-import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.mine.http.MineApi
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
 import com.kissspace.network.result.ResultState
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
 class HamsterViewModel : BaseViewModel() {
@@ -66,10 +59,9 @@ class HamsterViewModel : BaseViewModel() {
     }
 
     //获取皮肤信息(基础仓鼠)
-    fun queryBaseInfoList(onSuccess: ((QueryBaseInfoList) -> Unit) = {}) {
-        request<QueryBaseInfoList>(MineApi.API_HAMSTER_MARKET_QUERY_BASE_INFO_LIST, Method.GET, onSuccess = {
+    fun queryBaseInfoList(onSuccess: ((MutableList<QueryBaseInfoList.QueryBaseInfoListItem>) -> Unit) = {}) {
+        request<MutableList<QueryBaseInfoList.QueryBaseInfoListItem>>(MineApi.API_HAMSTER_MARKET_QUERY_BASE_INFO_LIST, Method.GET, onSuccess = {
             onSuccess.invoke(it)
-
         }, onError = {
         })
     }

@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.ResourceUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.SpanUtils
@@ -19,9 +18,9 @@ import com.kissspace.common.model.InfoListModel
 import com.kissspace.common.model.RoomListBannerBean
 import com.kissspace.common.model.RoomListBean
 import com.kissspace.common.model.wallet.CultivationPanelModel
-import com.kissspace.common.model.wallet.RevivePanelModel
 import com.kissspace.common.util.format.Format
 import com.kissspace.common.util.handleSchema
+import com.kissspace.common.widget.NiceImageView
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.module_room.R
 import com.kissspace.util.loadImage
@@ -158,6 +157,18 @@ object ViewBindingAdapter {
 
     }
 
+    /**
+     * 设置NiceImageView边框
+     */
+    @JvmStatic
+    @BindingAdapter("setBorderBackground")
+    fun setBorderBackground(niceImageView: NiceImageView, isBorder: Boolean) {
+        if(niceImageView.isSelected){
+            niceImageView.setBorderWidth(2)
+        }else {
+            niceImageView.setBorderWidth(0)
+        }
+    }
 
     /**
      * 可用松果
@@ -399,7 +410,7 @@ object ViewBindingAdapter {
                 "001" -> com.kissspace.module_mine.R.mipmap.icon_pine_cone_small
                 "002" -> com.kissspace.module_mine.R.mipmap.icon_pine_nut_small
                 "003" -> com.kissspace.module_mine.R.mipmap.icon_pine_cone_small
-                else -> com.kissspace.module_mine.R.mipmap.icon_hamster_coin_small
+                else -> com.kissspace.module_mine.R.mipmap.icon_hamster_medal_small
             }
         )
     }

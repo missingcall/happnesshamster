@@ -20,5 +20,13 @@ data class WalletModel(
     var diamond: Double? = null,
     //	身份（001-普通用户，002-主播，003-公会长）
     val identity: String,
+    //积分
+    val integral: Double? = null,
+    //是否绑定支付宝账号
     val isBindAliPay: Boolean,
+    //是否绑定银行卡账号
+    val isBindBankCard: Boolean,
+    //勋章
+    val medal: Double? = null
+
 ) : Parcelable

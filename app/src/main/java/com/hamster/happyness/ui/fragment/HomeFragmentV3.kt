@@ -156,7 +156,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
     private fun queryDayIncome() {
         mMineViewModel.queryDayIncome(onSuccess = {
-            mBinding.tvDailyComeNum.text = it.toString()
+//            mBinding.tvDailyComeNum.text = it.toString()
         })
     }
 

@@ -88,14 +88,13 @@
             android:id="@+id/tvSkinSelection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
-            android:text="仓鼠皮肤"
+            android:text="选择仓鼠皮肤"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
             android:visibility="gone"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/tvDetails"
             app:layout_constraintTop_toBottomOf="@id/ivCommodityIcon" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -113,7 +112,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -135,7 +134,7 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="@id/tvSkinSelection"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/clSkinSelection" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -235,12 +234,12 @@
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="0dp"
-            android:layout_height="58dp"
+            android:layout_height="56dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="22dp"
-            android:background="@drawable/common_shape_262a2e_normal_15_stroke_2"
+            android:background="@drawable/common_btn_selector_black262a2e_radius45_stroke2"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="关闭"
@@ -255,10 +254,10 @@
         <Button
             android:id="@+id/btnConfirm"
             android:layout_width="0dp"
-            android:layout_height="58dp"
+            android:layout_height="56dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="15dp"
-            android:background="@drawable/common_bg_blue"
+            android:background="@drawable/common_btn_selector_purple_black_radius45"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="购买"

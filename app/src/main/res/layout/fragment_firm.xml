@@ -9,6 +9,10 @@
             name="mvm"
             type="com.kissspace.mine.viewmodel.MineViewModel" />
 
+        <variable
+            name="wvm"
+            type="com.kissspace.mine.viewmodel.WalletViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,139 +28,110 @@
 
         <ImageView
             android:id="@+id/ivAvatar"
-            android:layout_width="59dp"
-            android:layout_height="59dp"
+            imageRadius="@{10f}"
+            imageUrl="@{mvm.userInfo.profilePath}"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="30dp"
             android:src="@color/design_default_color_on_primary"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/titleBar"
-            imageRadius="@{10f}"
-            imageUrl="@{mvm.userInfo.profilePath}"
-            />
+            app:layout_constraintTop_toTopOf="@id/titleBar" />
 
         <TextView
             android:id="@+id/tvNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="@{mvm.userInfo.nickname}"
             android:textColor="@color/color_ui_main_text"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvMedal"
             app:layout_constraintLeft_toRightOf="@id/ivAvatar"
-            app:layout_constraintTop_toTopOf="@id/ivAvatar" />
+            app:layout_constraintTop_toTopOf="@id/ivAvatar"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/tvId"
+            android:id="@+id/tvMedal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="UID:"
-            android:textColor="@color/color_ui_main_text"
+            android:layout_marginTop="4dp"
+            android:drawableLeft="@mipmap/icon_hamster_medal_little"
+            android:drawablePadding="2dp"
+            android:ellipsize="end"
+            android:maxLength="12"
+            android:text='@{wvm.medal}'
+            android:textColor="@color/white"
             android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
             app:layout_constraintLeft_toLeftOf="@id/tvNickname"
             app:layout_constraintTop_toBottomOf="@id/tvNickname" />
 
-        <TextView
-            android:id="@+id/tvUserId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@{mvm.userInfo.displayId}"
-            android:textColor="@color/color_ui_main_text"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@id/tvId"
-            app:layout_constraintLeft_toRightOf="@id/tvId"
-            app:layout_constraintTop_toTopOf="@id/tvId" />
-
-        <ImageView
-            android:id="@+id/ivCopy"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="4dp"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:src="@mipmap/mine_ic_copy"
-            app:layout_constraintBottom_toBottomOf="@id/tvUserId"
-            app:layout_constraintLeft_toRightOf="@id/tvUserId"
-            app:layout_constraintTop_toTopOf="@id/tvUserId" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clCapacity"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="110dp"
+            android:layout_height="46dp"
             android:layout_marginRight="15dp"
-            android:background="@mipmap/app_bg_home_produce"
+            android:background="@mipmap/app_bg_firm_produce"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
             app:layout_constraintRight_toLeftOf="@id/clWareHouse"
             app:layout_constraintTop_toTopOf="@id/ivAvatar">
 
+            <ImageView
+                android:id="@+id/ivHamster"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/app_icon_hamster_avatar"
+                app:layout_constraintBottom_toTopOf="@id/ivDailyComeIcon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tvDailyCome"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
             <TextView
                 android:id="@+id/tvDailyCome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
                 android:text="每天可获得"
-                android:textColor="@color/color_ui_sub_text_middle"
+                android:textColor="@color/color_999999"
                 android:textSize="11sp"
-                app:layout_constraintBottom_toTopOf="@id/tvDailyComeNum"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/ivDailyComeDescription"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintBottom_toBottomOf="@id/ivHamster"
+                app:layout_constraintLeft_toRightOf="@id/ivHamster"
+                app:layout_constraintTop_toTopOf="@id/ivHamster" />
 
-            <ImageView
-                android:id="@+id/ivDailyComeDescription"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginLeft="5dp"
-                android:src="@mipmap/app_icon_home_describe"
-                app:layout_constraintBottom_toBottomOf="@id/tvDailyCome"
-                app:layout_constraintLeft_toRightOf="@id/tvDailyCome"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvDailyCome" />
 
             <ImageView
                 android:id="@+id/ivDailyComeIcon"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:layout_marginTop="6dp"
                 android:src="@mipmap/icon_pine_cone"
-                app:layout_constraintBottom_toBottomOf="@id/tvDailyComeNum"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/tvDailyComeNum"
-                app:layout_constraintTop_toTopOf="@id/tvDailyComeNum" />
+                app:layout_constraintTop_toBottomOf="@id/ivHamster" />
 
             <TextView
                 android:id="@+id/tvDailyComeNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginLeft="2dp"
                 android:ellipsize="end"
                 android:maxLength="9"
-                android:text=""
+                android:text='@{String.valueOf(mvm.dayIncome)}'
                 android:textColor="@color/white"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/ivDailyComeIcon"
                 app:layout_constraintLeft_toRightOf="@id/ivDailyComeIcon"
-                app:layout_constraintRight_toLeftOf="@id/tvDailyComePercent"
-                app:layout_constraintTop_toBottomOf="@id/tvDailyCome" />
-
-            <TextView
-                android:id="@+id/tvDailyComePercent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(100%)"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/tvDailyComeNum"
-                app:layout_constraintLeft_toRightOf="@id/tvDailyComeNum"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvDailyComeNum" />
+                app:layout_constraintTop_toTopOf="@id/ivDailyComeIcon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,27 +148,25 @@
 
             <ImageView
                 android:id="@+id/ivFirmWareHouse"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:src="@mipmap/app_icon_firm_warehouse"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvWareHouse"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/tvWareHouse"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvWareHouse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="11sp"
+                android:text="仓库"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/ivFirmWareHouse"
+                android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:text="仓库"
-                />
+                app:layout_constraintTop_toBottomOf="@id/ivFirmWareHouse" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

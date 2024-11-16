@@ -148,7 +148,7 @@ class WalletViewModel : BaseViewModel() {
     //coin 钻石
     val coin = MediatorLiveData<String>().apply {
         addSource(walletModel) { walletModel ->
-            setValue(Format.E_EE.format(walletModel.coin.orZero()))
+            setValue(Format.E.format(walletModel.coin.orZero()))
         }
     }
 
@@ -157,7 +157,7 @@ class WalletViewModel : BaseViewModel() {
         // java.lang.IllegalArgumentException: Cannot format given Object as a Number
         addSource(walletModel) { walletModel ->
             logE("walletModel.diamond" + walletModel.diamond)
-            setValue(Format.E_EE.format(walletModel.diamond.orZero()))
+            setValue(Format.E.format(walletModel.diamond.orZero()))
         }
     }
 
@@ -166,7 +166,16 @@ class WalletViewModel : BaseViewModel() {
     var accountBalance = MediatorLiveData<String>().apply {
         addSource(walletModel) { walletModel ->
             setValue(
-                Format.E_EE.format(walletModel.accountBalance.orZero())
+                Format.E.format(walletModel.accountBalance.orZero())
+            )
+        }
+    }
+
+    //medal 勋章
+    var medal = MediatorLiveData<String>().apply {
+        addSource(walletModel) { walletModel ->
+            setValue(
+                Format.E.format(walletModel.medal.orZero())
             )
         }
     }

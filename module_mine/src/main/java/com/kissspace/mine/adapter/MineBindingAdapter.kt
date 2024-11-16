@@ -27,9 +27,9 @@ import com.kissspace.util.loadImage
 import com.kissspace.util.orZero
 import com.kissspace.util.resToColor
 import androidx.core.text.buildSpannedString
-import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.SpanUtils
 import com.blankj.utilcode.util.StringUtils
+import com.kissspace.common.util.format.Format
 
 
 object MineBindingAdapter {
@@ -408,8 +408,8 @@ object MineBindingAdapter {
     @BindingAdapter("firmDayIncomeOrchard", requireAll = false)
     fun firmDayIncomeOrchard(textView: TextView, dayIncome: Int) {
         textView.text = SpanUtils().append("日产: ")
-            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_little)
-            .append(dayIncome.toString()).setForegroundColor(Color.parseColor("#FDC120"))
+            .appendImage(R.mipmap.icon_pine_cone_little)
+            .append(dayIncome.toString())
             .create()
 
     }
@@ -419,10 +419,18 @@ object MineBindingAdapter {
      */
     @JvmStatic
     @BindingAdapter("firmDayIncomeBank", requireAll = false)
-    fun firmDayIncomeBank(textView: TextView, dayIncome: Int) {
+    fun firmDayIncomeBank(textView: TextView, item: QueryMarketListItem) {
         textView.text = SpanUtils().append("额外赠")
-            .append(dayIncome.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_little)
+            .append(item.windInterest.toString() + "%")
+            .appendImage(
+                when (item.payType) {
+                    Constants.HamsterPayType.PINE_CONE -> R.mipmap.icon_pine_cone_little
+                    Constants.HamsterPayType.PINE_NUT -> R.mipmap.icon_pine_nut_little
+                    Constants.HamsterPayType.THREE_PARTY -> R.mipmap.icon_diamond_little
+                    Constants.HamsterPayType.MEDAL -> R.mipmap.icon_hamster_medal_little
+                    else -> R.mipmap.icon_pine_cone_little
+                }
+            )
             .create()
 
     }
@@ -431,24 +439,24 @@ object MineBindingAdapter {
     @BindingAdapter("tvCommodityStatus", requireAll = false)
     fun tvCommodityStatus(textView: TextView, item: QueryMarketListItem) {
         when (item.goodsStatue) {
-            "001" -> {
-                if (item.commodityMark == "") {
+            Constants.HamsterGoodsStatusType.AVAILABLE_FOR_PURCHASE -> {
+                if (item.commodityMark.isBlank()) {
                     textView.visibility = View.GONE
                 } else {
                     //首发
                     textView.visibility = View.VISIBLE
                     textView.text = item.commodityMark
-                    textView.setBackgroundColor(Color.parseColor("#00AC13"))
+                    textView.setBackgroundResource(R.drawable.shape_orchard_mark_green)
 
                 }
             }
-            "002" -> textView.visibility = View.GONE
-            "004" -> {
+            Constants.HamsterGoodsStatusType.SOLD_OUT -> textView.visibility = View.GONE
+            Constants.HamsterGoodsStatusType.ALREADY_OWNED_PENDING_ACTIVATION -> {
                 textView.visibility = View.VISIBLE
-                textView.setBackgroundColor(Color.parseColor("#FA3127"))
+                textView.setBackgroundResource(R.drawable.shape_orchard_mark_red)
                 textView.text = "待激活"
             }
-            "005" -> textView.visibility = View.GONE
+            Constants.HamsterGoodsStatusType.ALREADY_OWNED_IN_EFFECT -> textView.visibility = View.GONE
         }
 
     }
@@ -475,18 +483,30 @@ object MineBindingAdapter {
                 button.text = SpanUtils().append("购买 ")
                     .appendImage(
                         when (item.payType) {
-                            "001" -> R.mipmap.icon_pine_cone_little
-                            "002" -> R.mipmap.icon_pine_nut_little
-                            "003" -> R.mipmap.icon_hamster_coin_little
+                            Constants.HamsterPayType.PINE_CONE -> R.mipmap.icon_pine_cone_little
+                            Constants.HamsterPayType.PINE_NUT -> R.mipmap.icon_pine_nut_little
+                            Constants.HamsterPayType.THREE_PARTY -> R.mipmap.icon_diamond_little
+                            Constants.HamsterPayType.MEDAL -> R.mipmap.icon_hamster_medal_little
                             else -> R.mipmap.icon_pine_cone_little
                         }
                     )
-                    .append(item.coinPrice.toString())
+                    .append(Format.E.format(item.coinPrice))
                     .create()
+                button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_btn_selector_purple_black_radius45)
             }
-            "002" -> button.text = "已售罄"
-            "004" -> button.text = "去激活"
-            "005" -> button.text = "领取奖励"
+            "002" -> {
+                button.text = "已售罄"
+                button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_btn_selector_purple_black_radius45)
+            }
+            "004" -> {
+                button.text = "去激活"
+                button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_btn_selector_purple_black_radius45)
+            }
+            //TODO 后端字段待定
+            "005" -> {
+                button.text = "领取奖励"
+                button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_shape_bg_green_radius45)
+            }
         }
         button.isEnabled = item.goodsStatue != "002"
     }

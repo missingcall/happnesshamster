@@ -676,13 +676,16 @@ object Constants {
     }
 
     /**
-     * 	商品类型(001-基础仓鼠&仓鼠庄园,003-仓鼠银行)
+     * 	商品类型(001-基础仓鼠, 002-仓鼠庄园,003-仓鼠银行,004-皮肤,005-头像)
      */
-    class FirmCommodityTypes {
+    class HamsterFirmCommodityTypes {
         companion object {
 
-            const val BASIC_HAMSTER = "001"; //001-基础仓鼠&仓鼠庄园
-            const val HAMSTER_BANK = "003"; //003-仓鼠银行
+            const val BASIC_HAMSTER = "001"; //001-基础仓鼠
+            const val FARM = "002"; //002-仓鼠庄园
+            const val BANK = "003"; //003-仓鼠银行
+            const val SKIN = "004"; //004-皮肤
+            const val AVATAR = "005"; //005-头像
 
 
         }
@@ -732,6 +735,21 @@ object Constants {
         }
     }
 
+    /**
+     * goodsStatue 商品状态 001 商品可购买 002 商品已售磬 003 用户未解锁 004 用户已拥有(待激活) 005 用户已拥有(生效中)
+     */
+    class HamsterGoodsStatusType {
+        companion object {
+
+            const val AVAILABLE_FOR_PURCHASE = "001"
+            const val SOLD_OUT = "002"
+            const val NOT_UNLOCKED = "003"
+            const val ALREADY_OWNED_PENDING_ACTIVATION = "004"
+            const val ALREADY_OWNED_IN_EFFECT = "005"
+
+
+        }
+    }
 
 
     var sendSmsType: Pair<String?, String?>? = null

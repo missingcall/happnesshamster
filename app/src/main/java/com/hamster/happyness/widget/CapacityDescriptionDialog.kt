@@ -20,7 +20,7 @@ import com.kissspace.module_common.databinding.CommonDialogBosomFriendBinding
 import com.kissspace.module_login.databinding.LoginDialogLoginBinding
 
 /**
- * 底部弹窗-产能说明
+ * 底部弹窗-产能说明 (v1.2.0需求已去除
  */
 class CapacityDescriptionDialog : BaseDialogFragment<DialogHomeCapacityDescriptionBinding>(DialogHomeCapacityDescriptionBinding::inflate, Gravity.BOTTOM) {
     companion object {
