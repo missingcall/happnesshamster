@@ -90,10 +90,10 @@ class GiftEmailViewModel: BaseViewModel() {
     }
 
 
-    fun receiveGiftEmailAll(success:()->Unit){
-        request<Boolean>(MessageApi.API_GIFT_MAIL_RECEIVE_ALL, Method.GET,null, onSuccess = {
+    fun receiveGiftEmailAll(success:(List<String>)->Unit){
+        request<List<String>>(MessageApi.API_GIFT_MAIL_RECEIVE_ALL, Method.GET,null, onSuccess = {
             customToast("一键领取成功")
-            success.invoke()
+            success.invoke(it)
         }, onError = {
             customToast(it.errorMsg)
         })

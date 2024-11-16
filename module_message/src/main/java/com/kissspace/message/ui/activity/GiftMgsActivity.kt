@@ -3,6 +3,7 @@ package com.kissspace.message.ui.activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContentProviderCompat.requireContext
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -13,6 +14,7 @@ import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
+import com.kissspace.common.model.ChatListModel
 import com.kissspace.common.model.FollowListBean
 import com.kissspace.common.model.GiftEmailMessageModel
 import com.kissspace.common.model.GiftEmailReceiveState
@@ -25,10 +27,13 @@ import com.kissspace.common.util.getFriendlyTimeSpanByNow
 import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.message.viewmodel.GiftEmailViewModel
 import com.kissspace.message.widget.GiftMailDialog
+import com.kissspace.message.widget.GiftMailResultDialog
 import com.kissspace.module_message.R
 import com.kissspace.module_message.databinding.MessageActivityGiftBinding
 import com.kissspace.module_message.databinding.MessageItemGiftBinding
 import com.kissspace.network.result.collectData
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.msg.MsgService
 import java.text.SimpleDateFormat
 
 /**
@@ -104,9 +109,21 @@ class GiftMgsActivity :BaseActivity(R.layout.message_activity_gift){
 
         //一键领取所有礼物邮件
         mBinding.tvAllReceive.safeClick {
-            mViewModel.receiveGiftEmailAll(success = {
-                mBinding.pageRefreshLayout.refresh()
-            })
+
+            CommonConfirmDialog(
+                this, "一键领取", "确定要领取邮件中的所有礼物嘛？"
+            ) {
+                if (this) {
+                    mViewModel.receiveGiftEmailAll(success = { list->
+                        GiftMailResultDialog.newInstance(list as ArrayList<String>).show(supportFragmentManager)
+                        mBinding.pageRefreshLayout.refresh()
+                    })
+
+                }
+            }.show()
+
+
+
         }
     }
 

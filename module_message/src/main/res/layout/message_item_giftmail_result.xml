@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clGift"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="w,1:1"
+            >
+
+            <ImageView
+                android:id="@+id/imgGift"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tvGiftName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="仓鼠卡x2仓鼠卡x2仓鼠卡x2仓"
+            android:lines="1"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@+id/clGift"
+            android:textColor="@color/color_3D3D3D"
+            android:textSize="10sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+

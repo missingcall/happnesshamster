@@ -29,8 +29,8 @@
                     app:tab_item_is_equ_width="true"
                     app:tab_orientation="HORIZONTAL"
                     app:tab_select_color="@color/white"
-                    app:tab_text_max_size="20sp"
-                    app:tab_text_min_size="16sp" >
+                    app:tab_text_max_size="15sp"
+                    app:tab_text_min_size="14sp" >
 
 
 
