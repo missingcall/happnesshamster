@@ -41,6 +41,7 @@ import com.kissspace.common.widget.CommonHintDialog
 import com.kissspace.mine.viewmodel.FamilyViewModel
 import com.kissspace.mine.viewmodel.LevelViewModel
 import com.kissspace.mine.viewmodel.MineViewModel
+import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.FragmentMineNewBinding
 import com.kissspace.network.result.ResultState
@@ -61,6 +62,7 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
 
     private val mBinding by viewBinding<FragmentMineNewBinding>()
 
+    private val mWalletViewModel by activityViewModels<WalletViewModel>()
     private val mViewModel by activityViewModels<MineViewModel>()
 
     private var player: MediaPlayer? = null
@@ -68,7 +70,7 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.titleBar.setMarginStatusBar()
         mBinding.m = mViewModel
-        mBinding.lifecycleOwner = this
+        mBinding.lifecycleOwner = activity
         mViewModel.isShowFirstRecharge.value = MMKVProvider.firstRecharge
         // mBinding.tvHour.text = MMKVProvider.userHour.toString() +"h"
 
@@ -247,6 +249,7 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
 
     override fun onResume() {
         super.onResume()
+        getMoney()
         refreshUserinfo()
         mViewModel.isShowFirstRecharge.value = MMKVProvider.firstRecharge
         //获取我的页面新消息状态
@@ -280,5 +283,16 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
     override fun createDataObserver() {
         super.createDataObserver()
 
+        FlowBus.observerEvent<Event.RefreshCoin>(this) {
+            getMoney()
+        }
+    }
+
+    private fun getMoney() {
+        mWalletViewModel.getMyMoneyBag {
+            it?.let {
+                mWalletViewModel.walletModel.value = it
+            }
+        }
     }
 }

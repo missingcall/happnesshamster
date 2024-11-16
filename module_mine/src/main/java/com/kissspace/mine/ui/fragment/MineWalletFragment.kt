@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.LogUtils
@@ -30,7 +31,7 @@ import com.kissspace.module_mine.databinding.MineFragmentWalletBinding
  */
 class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
     private val mBinding by viewBinding<MineFragmentWalletBinding>()
-    private val mViewModel by viewModels<WalletViewModel>()
+    private val mViewModel by activityViewModels<WalletViewModel>()
     private lateinit var mType: String
     private val list = mutableListOf<CharSequence>()
     private var marqueeFactory: MarqueeFactory<TextView, CharSequence>? = null
@@ -82,11 +83,25 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
             jump(RouterPath.PATH_WALLET_TRANSFER, "type" to mType)
         }
 
+        mBinding.iconNutsNum.text = when (mType) {
+            Constants.HamsterWalletType.PINE_CONE.type -> mViewModel.walletModel.value?.diamond.toString()
+            Constants.HamsterWalletType.PINE_NUT.type -> mViewModel.walletModel.value?.accountBalance.toString()
+            else -> mViewModel.walletModel.value?.coin.toString()
+        }
+
         initData()
+
+        //监听钱包数值变化
+        mViewModel.walletModel.observe(this) {
+            mBinding.iconNutsNum.text = when (mType) {
+                Constants.HamsterWalletType.PINE_CONE.type -> mViewModel.walletModel.value?.diamond.toString()
+                Constants.HamsterWalletType.PINE_NUT.type -> mViewModel.walletModel.value?.accountBalance.toString()
+                else -> mViewModel.walletModel.value?.coin.toString()
+            }
+        }
     }
 
     private fun initData() {
-        getMoney()
 
         when (mType) {
             //松果转入转出查询
@@ -161,23 +176,9 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
     override fun createDataObserver() {
         super.createDataObserver()
 
-        FlowBus.observerEvent<Event.RefreshCoin>(this) {
-            getMoney()
-        }
+
     }
 
-    private fun getMoney() {
-        mViewModel.getMyMoneyBag {
-            it?.let {
-                mViewModel.walletModel.value = it
-                mBinding.iconNutsNum.text = when (mType) {
-                    Constants.HamsterWalletType.PINE_CONE.type -> mViewModel.walletModel.value?.diamond.toString()
-                    Constants.HamsterWalletType.PINE_NUT.type -> mViewModel.walletModel.value?.accountBalance.toString()
-                    else -> mViewModel.walletModel.value?.coin.toString()
-                }
 
-            }
-        }
-    }
 
 }

@@ -27,6 +27,8 @@ import com.kissspace.common.router.jump
 import com.kissspace.common.router.parseIntent
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setTitleBarListener
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.util.*
 import com.kissspace.common.util.mmkv.MMKVProvider
@@ -251,6 +253,7 @@ class BiometricAuthenticationActivity :
                         onSuccess = {
                             toast("活体检测通过")
                             MMKVProvider.authentication = true
+                            FlowBus.post(Event.RealNameAuthenticationEvent) //刷新账号安全中实名认证状态
                             finishActivity()
                         },
                         onError = {
