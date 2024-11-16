@@ -101,6 +101,8 @@ sealed class Event {
     //刷新树
     object RefreshTree : Event()
 
+    //实名认证
+    object RealNameAuthenticationEvent : Event()
 
     //重置礼物选择状态
     data class ClearGiftChecked(var tabId: String) : Event()

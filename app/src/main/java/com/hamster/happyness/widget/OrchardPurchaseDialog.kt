@@ -3,6 +3,7 @@ package com.hamster.happyness.widget
 import android.annotation.SuppressLint
 import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import com.drake.brv.utils.*
@@ -12,12 +13,12 @@ import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
-import com.kissspace.common.model.InfoListModel
 import com.kissspace.common.model.QueryBaseInfoList
 import com.kissspace.common.util.customToast
 import com.kissspace.common.widget.BaseDialogFragment
 import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.mine.viewmodel.WalletViewModel
+import com.kissspace.util.loadImage
 
 /**
  * 底部弹窗-果园购买/激活
@@ -43,7 +44,12 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
+        arguments?.let {
+            mType = it.getInt("type", 1)
+            mIsBaseHamster = it.getBoolean("isBaseHamster", false)
+        }
         mBinding.m = mViewModel
+        mBinding.lifecycleOwner = activity
 
         val item = mViewModel.queryMarketItem.value
 
@@ -59,6 +65,14 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
             mBinding.clSkinSelection.visibility = View.GONE
         }
 
+        mBinding.ibBack.safeClick {
+            dismiss()
+        }
+
+        mBinding.btnCancel.safeClick {
+            dismiss()
+        }
+
         //购买
         if (mType == 1) {
             mBinding.tvConditionsDetail.text = "消耗" + when (item?.payType) {
@@ -70,21 +84,14 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
 
             mBinding.ivConditionsAvailable.visibility = if (item?.coinPrice!! <= mViewModel.walletModel.value?.diamond!!) View.VISIBLE else View.GONE
 
-            mBinding.ibBack.safeClick {
-                dismiss()
-            }
-
-            mBinding.btnCancel.safeClick {
-                dismiss()
-            }
-
             mBinding.btnConfirm.safeClick {
                 CommonConfirmDialog(
                     requireContext(),
                     "您确定要消耗${item.coinPrice}个" + when (item.payType) {
-                        "001" -> "松果"
-                        "002" -> "松子"
-                        "003" -> "三方"
+                        Constants.HamsterPayType.PINE_CONE -> "松果"
+                        Constants.HamsterPayType.PINE_NUT -> "松子"
+                        Constants.HamsterPayType.THREE_PARTY -> "三方"
+                        Constants.HamsterPayType.MEDAL -> "勋章"
                         else -> "勋章"
                     } + "购买${item.commodityName}吗？",
                     ""
@@ -128,6 +135,7 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
 
 
             }
+
         }
 
 
@@ -136,11 +144,13 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
     private fun initData() {
         mHamsterViewModel.queryBaseInfoList {
             mBinding.recyclerView.models = it
+            //默认选中第一条
+            mBinding.recyclerView.bindingAdapter.setChecked(0, true)
         }
     }
 
     private fun initRecyclerView() {
-        mBinding.recyclerView.linear().setup {
+        mBinding.recyclerView.linear(LinearLayout.HORIZONTAL).setup {
             addType<QueryBaseInfoList.QueryBaseInfoListItem> { com.hamster.happyness.R.layout.rv_item_basic_hamster_skin }
 
             onFastClick(com.hamster.happyness.R.id.item) {
@@ -164,9 +174,6 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
             //单选模式
             singleMode = true
         }.models = mutableListOf()
-
-        //默认选中第一条
-        mBinding.recyclerView.bindingAdapter.setChecked(0, true)
     }
 
     override fun observerData() {

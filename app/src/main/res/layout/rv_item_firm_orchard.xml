@@ -35,9 +35,11 @@
         <TextView
             android:id="@+id/tvCommodityStatus"
             tvCommodityStatus="@{m}"
-            android:layout_width="31dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="11dp"
             android:textColor="@color/white"
+            android:paddingHorizontal="5dp"
             android:textSize="8dp"
             app:layout_constraintRight_toRightOf="@id/ivCommodityIcon"
             app:layout_constraintTop_toTopOf="@id/ivCommodityIcon"
@@ -62,7 +64,7 @@
 
         <TextView
             android:id="@+id/tvTimeLimit"
-            text='@{"周期: " + String.valueOf(m.timeLimit)}'
+            text='@{"周期：" + String.valueOf(m.timeLimit)+ "天"}'
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -94,7 +96,7 @@
             android:layout_marginTop="11dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="11dp"
-            android:background="@drawable/common_btn_selector_blue_deep_blue_radius45"
+            android:background="@drawable/common_btn_selector_purple_black_radius45"
             android:textColor="@color/white"
             android:textSize="11sp"
             android:textStyle="bold"

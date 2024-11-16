@@ -72,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvHamster" />
 
 
-        <ImageView
+        <com.kissspace.common.widget.NiceImageView
             android:id="@+id/ivCommodityIcon"
             loadImage="@{m.queryMarketItem.commodityIcon}"
             android:layout_width="90dp"
@@ -80,7 +80,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
-
+            app:border_width_s="3dp"
+            app:border_color_s="@color/color_FDC120"
+            app:corner_radius="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvWindInterest" />
@@ -207,40 +209,40 @@
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="0dp"
-            android:layout_height="58dp"
+            android:layout_height="56dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="22dp"
-            android:background="@drawable/common_shape_262a2e_normal_15_stroke_2"
+            android:background="@drawable/common_btn_selector_black262a2e_radius45_stroke2"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="关闭"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/btnConfirm"
-            app:layout_constraintTop_toBottomOf="@id/clConditions"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/clConditions" />
 
         <Button
             android:id="@+id/btnConfirm"
             android:layout_width="0dp"
-            android:layout_height="58dp"
+            android:layout_height="56dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="15dp"
-            android:background="@drawable/common_btn_selector_blue_deep_blue_radius15"
+            android:background="@drawable/common_btn_selector_purple_black_radius45"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="购买"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/btnCancel"
             app:layout_constraintLeft_toRightOf="@id/btnCancel"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btnCancel"
-            app:layout_constraintBottom_toBottomOf="@id/btnCancel"
+            app:layout_constraintTop_toTopOf="@id/btnCancel" />
             />
 
 

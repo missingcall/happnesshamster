@@ -12,15 +12,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item"
-        clIsSelected="@{m.checked}"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginEnd="8dp">
+        android:layout_marginEnd="18dp">
 
 
-        <ImageView
+        <com.kissspace.common.widget.NiceImageView
             android:id="@+id/ivIcon"
-            loadImage="@{m.icon}"
+            imageUrl="@{m.icon}"
+            imageRadius="@{5f}"
+            clIsSelected="@{m.checked}"
+            setBorderBackground="@{m.checked}"
+            app:border_color_s="@color/color_5A60FF"
+            app:corner_radius="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -70,15 +70,16 @@ class BankPurchaseDialog : BaseDialogFragment<DialogBankPurchaseBinding>(DialogB
             CommonConfirmDialog(
                 requireContext(),
                 "您确定要消耗${mTotalPrice}个" + when (item.payType) {
-                    "001" -> "松果"
-                    "002" -> "松子"
-                    "003" -> "三方"
+                    Constants.HamsterPayType.PINE_CONE -> "松果"
+                    Constants.HamsterPayType.PINE_NUT -> "松子"
+                    Constants.HamsterPayType.THREE_PARTY -> "三方"
+                    Constants.HamsterPayType.MEDAL -> "勋章"
                     else -> "勋章"
                 } + "购买" + mBinding.nvCount.currentValue + "个${item.commodityName}吗？",
                 ""
             ) {
                 if (this) {
-                    mViewModel.buy(null, item.commodityInfoId, item.coinPrice, 1, Constants.HamsterPayType.PINE_CONE,onSuccess = {
+                    mViewModel.buy(null, item.commodityInfoId, mTotalPrice, mBinding.nvCount.currentValue, item.payType,onSuccess = {
                         //购买成功
                         customToast("购买成功")
                         dismiss()

@@ -8,6 +8,8 @@ import com.kissspace.util.activityresult.registerForStartActivityResult
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.callback.ActivityResult.BindPhone
 import com.kissspace.common.ext.*
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.widget.CommonHintDialog
@@ -95,6 +97,21 @@ class AccountSafeActivity : BaseActivity(R.layout.setting_activity_account_safe)
             getUserInfo(onSuccess = { userinfo ->
                 mBinding.stvChangePhoneNumber.rightTextView.text = MMKVProvider.userPhone
             })
+        }
+    }
+
+    override fun createDataObserver() {
+        super.createDataObserver()
+
+        FlowBus.observerEvent<Event.RealNameAuthenticationEvent>(this){
+            //实名认证
+            if (MMKVProvider.authentication) {
+                mBinding.stvRealNameAuthentication.rightTextView.text = "已认证"
+                mBinding.stvRealNameAuthentication.rightTextView.setTextColor(ColorUtils.getColor(R.color.white))
+            } else {
+                mBinding.stvRealNameAuthentication.rightTextView.text = "未认证"
+                mBinding.stvRealNameAuthentication.rightTextView.setTextColor(ColorUtils.getColor(com.kissspace.module_common.R.color.color_ui_sub_text))
+            }
         }
     }
 }

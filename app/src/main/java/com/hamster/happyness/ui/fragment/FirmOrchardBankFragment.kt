@@ -44,6 +44,8 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        mBinding.lifecycleOwner = activity
+
         initData()
         mBinding.pageRefreshLayout.apply {
             setEnableLoadMore(false)
@@ -60,7 +62,8 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
 
     private fun initRecyclerView() {
 
-        if (type == Constants.FirmCommodityTypes.BASIC_HAMSTER) {
+        //基础仓鼠&庄园
+        if (type == Constants.HamsterFirmCommodityTypes.BASIC_HAMSTER) {
             mBinding.recyclerView.grid(2).setup {
                 addType<QueryMarketListItem> { com.hamster.happyness.R.layout.rv_item_firm_orchard }
                 onBind {
@@ -71,14 +74,14 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
                         //001 商品可购买 002 商品已售磬 003 用户未解锁 004 用户已拥有(待激活) 005 用户已拥有(生效中)
                         when (model.goodsStatue) {
                             "001" -> {
-                                OrchardPurchaseDialog.newInstance(1 ,model.commodityType == "001").show(childFragmentManager)
+                                OrchardPurchaseDialog.newInstance(1, model.commodityType == "001").show(childFragmentManager)
                                 //测试 底部拉起说明详情并展示购买选项
 //                            jump(RouterPath.PATH_ORCHARD_DAILY_REWARDS)
                             }
                             "002" -> com.kissspace.common.util.customToast("已售罄")
                             "004" -> {
                                 //底部拉起说明详情并展示激活选项
-                                OrchardPurchaseDialog.newInstance(2 ,model.commodityType == "001").show(childFragmentManager)
+                                OrchardPurchaseDialog.newInstance(2, model.commodityType == "001").show(childFragmentManager)
                             }
                             "005" -> {
                                 //点击跳转领取页面
@@ -92,7 +95,8 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
                 }
             }.models = mutableListOf()
 
-        } else {
+            //银行
+        } else if (type == Constants.HamsterFirmCommodityTypes.BANK) {
             mBinding.recyclerView.grid(2).setup {
                 addType<QueryMarketListItem> { com.hamster.happyness.R.layout.rv_item_firm_bank }
                 onBind {
@@ -119,11 +123,21 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
 
     private fun initData() {
         mViewModel.queryMarketList(type, onSuccess = {
-            mBinding.pageRefreshLayout.addData(
-                it.filter { queryMarketListItem -> queryMarketListItem.goodsStatue == "001" || queryMarketListItem.goodsStatue == "002" },
-                isEmpty = {
-                    it.isEmpty()
-                })
+            if (type == Constants.HamsterFirmCommodityTypes.BASIC_HAMSTER) {
+                mBinding.pageRefreshLayout.addData(
+                    it/*.filter { queryMarketListItem -> queryMarketListItem.goodsStatue == "001" || queryMarketListItem.goodsStatue == "002" }*/,
+                    isEmpty = {
+                        it.isEmpty()
+                    })
+                //银行只有可购买和已售罄两种状态
+            } else if (type == Constants.HamsterFirmCommodityTypes.BANK) {
+                mBinding.pageRefreshLayout.addData(
+                    it.filter { queryMarketListItem -> queryMarketListItem.goodsStatue == "001" || queryMarketListItem.goodsStatue == "002" },
+                    isEmpty = {
+                        it.isEmpty()
+                    })
+            }
+
         })
     }
 
