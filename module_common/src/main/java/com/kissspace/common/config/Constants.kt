@@ -273,9 +273,8 @@ object Constants {
         INTEGRAL("001", "积分"), PROPS("002", "礼物"), BLIND_BOX("003", "礼包盲盒"), MOUNT(
             "004", "坐骑"
         ),
-        HEADGEAR("005", "头饰"), COIN("006", "金币"),
+        HEADGEAR("005", "头饰"), COIN("006", "钻石"),//金币->钻石
     }
-
 
     /**
      * 消息类型

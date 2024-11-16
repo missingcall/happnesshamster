@@ -37,9 +37,7 @@ class TaskCenterListActivity : com.kissspace.common.base.BaseActivity(R.layout.m
                     }else{
                         TaskFragment.newInstance("Hamster")
                     }
-
                 override fun getItemId(position: Int): Long = position.toLong()
-
             }
         }
         ViewPager2Delegate.install(mBinding.viewPager, mBinding.tabLayout)

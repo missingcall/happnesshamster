@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="m"
-            type="com.kissspace.common.model.task.NoviceTaskInfo" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-
         android:layout_height="68dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/iv_task"
-            loadImageWithDefault="@{m.taskIcon}"
             android:layout_width="47dp"
             android:layout_height="47dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="15dp"/>
+            android:layout_marginStart="15dp" />
 
         <TextView
             android:id="@+id/tv_task"
@@ -33,7 +30,6 @@
             android:layout_marginStart="12dp"
             app:layout_constraintWidth_default="wrap"
             app:layout_constraintHorizontal_bias="0"
-            android:text="@{m.taskDesc}"
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constraintBottom_toTopOf="@id/iv_gift"
@@ -48,7 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="@color/color_ui_main_text"
-            android:text="@{m.conditional}"
             app:layout_constraintLeft_toRightOf="@+id/tv_task"
             app:layout_constraintTop_toTopOf="@+id/tv_task"
             android:visibility="gone"
@@ -75,29 +70,6 @@
             app:layout_constraintTop_toTopOf="@+id/iv_gift"
             tools:text="鱼跃龙门" />
 
-        <ImageView
-            android:id="@+id/iv_gift1"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginStart="2dp"
-            app:layout_constraintLeft_toRightOf="@+id/tv_task_reward"
-            app:layout_constraintTop_toTopOf="@+id/iv_gift"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_gift"
-            />
-
-
-        <TextView
-            android:id="@+id/tv_task_reward1"
-            style="@style/DJSSubTextView"
-            android:layout_marginStart="2dp"
-            android:textSize="11sp"
-            android:textColor="@color/color_949499"
-            app:layout_constraintLeft_toRightOf="@+id/iv_gift1"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_gift"
-            app:layout_constraintTop_toTopOf="@+id/iv_gift"
-            tools:text="鱼asdsa " />
-
-
 
         <com.ruffian.library.widget.RTextView
             android:id="@+id/tv_button"
@@ -114,6 +86,5 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginEnd="15dp"
             tools:text="前往" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
