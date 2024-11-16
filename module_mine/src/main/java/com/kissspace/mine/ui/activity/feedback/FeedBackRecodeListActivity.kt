@@ -3,6 +3,7 @@ package com.kissspace.mine.ui.activity.feedback
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.didi.drouter.annotation.Router
 import com.drake.brv.utils.bindingAdapter
@@ -18,6 +19,7 @@ import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineActivtiyFeedbackListBinding
 import com.kissspace.module_mine.databinding.MineItemFeedbackRecodeBinding
 import com.kissspace.util.logE
+import com.kissspace.util.setStatusBarColor
 
 /**
  * @Author gaohangbo
@@ -29,7 +31,12 @@ class FeedBackRecodeListActivity : com.kissspace.common.base.BaseActivity(R.layo
     private val mBinding by viewBinding<MineActivtiyFeedbackListBinding>()
     private val mViewModel by viewModels<FeedBackViewModel>()
     override fun initView(savedInstanceState: Bundle?) {
-
+        setStatusBarColor(
+            ContextCompat.getColor(
+                this,
+                com.kissspace.module_common.R.color.color_232323
+            ), isStatusBlackText = false
+        )
         mBinding.m = mViewModel
         mBinding.lifecycleOwner = this
         mBinding.titleBar.setOnTitleBarListener(object : OnTitleBarListener {

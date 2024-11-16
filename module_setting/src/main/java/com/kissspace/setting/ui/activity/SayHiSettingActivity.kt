@@ -3,6 +3,7 @@ package com.kissspace.setting.ui.activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.didi.drouter.annotation.Router
@@ -17,6 +18,7 @@ import com.kissspace.setting.ui.fragment.SayHiAudioFragment
 import com.kissspace.setting.ui.fragment.SayHiPictureFragment
 import com.kissspace.setting.ui.fragment.SayHiTextFragment
 import com.kissspace.setting.viewmodel.SayHiViewModel
+import com.kissspace.util.setStatusBarColor
 
 /**
  *
@@ -32,7 +34,12 @@ class SayHiSettingActivity : com.kissspace.common.base.BaseActivity(R.layout.set
     private val mViewModel by viewModels<SayHiViewModel>()
     private var picker: OptionPicker? = null
     override fun initView(savedInstanceState: Bundle?) {
-
+        setStatusBarColor(
+            ContextCompat.getColor(
+                this,
+                com.kissspace.module_common.R.color.color_232323
+            ), isStatusBlackText = false
+        )
         setTitleBarListener(mBinding.titleBar)
         initPicker()
         mBinding.rltChooseType.setOnClickListener {

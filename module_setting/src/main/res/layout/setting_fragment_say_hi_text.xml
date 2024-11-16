@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -14,28 +15,28 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
+        <com.ruffian.library.widget.REditText
             android:id="@+id/edit"
             android:layout_width="match_parent"
-            android:layout_height="105dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="89dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="15dp"
             android:afterTextChanged="@{vm.onTextChange}"
             android:background="@null"
             android:gravity="start"
             android:hint="@string/setting_say_hi_text_hint"
             android:maxLength="50"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
             android:paddingEnd="30dp"
             android:paddingBottom="30dp"
             android:text="@={vm.textString}"
             android:textColor="@color/white"
-            android:textColorHint="@color/color_C4C1D7"
-            android:textSize="14sp"
-            app:bl_corners_radius="8dp"
-            app:bl_solid_color="@color/color_1A000000"
+            android:textColorHint="@color/color_949499"
+            android:textSize="13sp"
+            app:corner_radius="7dp"
+            app:background_normal="@color/color_232323"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,22 +46,26 @@
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
             android:text="@{vm.textLength}"
-            android:textColor="@color/color_C4C1D7"
-            android:textSize="12sp"
+            android:textColor="@color/color_949499"
+            android:textSize="11sp"
+            tools:text="0/30"
             app:layout_constraintBottom_toBottomOf="@id/edit"
             app:layout_constraintEnd_toEndOf="@id/edit" />
 
-        <TextView
+        <com.ruffian.library.widget.RTextView
             android:id="@+id/tv_submit"
-            commonBtnState="@{vm.submitEnable}"
+            commonBtnState21="@{vm.submitEnable}"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="15dp"
             android:gravity="center"
             android:text="@string/setting_save"
-            android:textSize="16sp"
+            android:textSize="15sp"
+            app:corner_radius="21dp"
+            app:gradient_orientation="LEFT_RIGHT"
+            app:gradient_type="linear"
             app:layout_constraintTop_toBottomOf="@id/edit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

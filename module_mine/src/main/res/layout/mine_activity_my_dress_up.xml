@@ -14,7 +14,9 @@
         app:leftHorizontalPadding="16dp"
         app:leftIcon="@mipmap/common_icon_back_white"
         app:lineVisible="false"
-        app:title="我的装扮" />
+        android:background="@color/color_232323"
+        app:title="我的装扮"
+        app:titleSize="17sp"/>
 
     <com.angcyo.tablayout.DslTabLayout
         android:id="@+id/tab_layout"
@@ -23,28 +25,29 @@
         app:tab_deselect_color="@color/color_949499"
         app:tab_enable_text_bold="true"
         app:tab_item_is_equ_width="true"
-        app:tab_select_color="@color/white">
+        app:tab_select_color="@color/white"
+        android:background="@color/color_232323">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/mine_store_car"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/mine_store_avatar"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
-        <TextView
+       <!-- <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/mine_store_background"
-            android:textSize="16sp" />
+            android:textSize="16sp" />-->
     </com.angcyo.tablayout.DslTabLayout>
 
     <androidx.viewpager2.widget.ViewPager2

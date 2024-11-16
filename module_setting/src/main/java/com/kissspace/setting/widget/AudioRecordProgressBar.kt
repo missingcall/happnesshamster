@@ -54,7 +54,7 @@ class AudioRecordProgressBar : View {
         paint.strokeWidth = arcWidth
         paint.color = R.color.color_1AFFFFFF.resToColor()
         canvas?.drawCircle(bigCircleRadius, bigCircleRadius, smallCircleRadius, paint)
-        paint.color = R.color.color_FFFD62.resToColor()
+        paint.color = R.color.color_6C74FB.resToColor()
         rectF.set(arcWidth, arcWidth, size - arcWidth, size - arcWidth)
         canvas?.drawArc(rectF, 270f, current * 360 / total.toFloat(), false, paint);
     }

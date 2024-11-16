@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_161616">
 
     <ImageView
         android:layout_width="match_parent"
@@ -21,59 +23,69 @@
         app:leftIcon="@mipmap/common_icon_back_white"
         app:lineVisible="false"
         app:rightTitle="我的装扮"
-        app:rightTitleColor="@color/color_FFFD62"
+        app:rightTitleColor="@color/white"
+        app:rightTitleSize="13sp"
         app:title="装扮商城" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_balance"
         android:layout_width="match_parent"
-        android:layout_height="127dp"
+        android:layout_height="119dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:background="@mipmap/mine_bg_store_coin"
         app:layout_constraintTop_toBottomOf="@id/title_bar">
 
 
-
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="钻石"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_balance_coin"
+            app:layout_constraintBottom_toTopOf="@+id/tv_balance_coin"
+            />
+        <com.ruffian.library.widget.RTextView
             android:id="@+id/tv_balance_coin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="22dp"
+            android:layout_marginStart="19dp"
             android:fontFamily="@font/dinbold"
-            android:textColor="@color/color_FFFD62"
-            android:textStyle="bold"
+            android:textColor="@color/color_5A60FF"
+
+            android:includeFontPadding="false"
+            android:textSize="37sp"
+            tools:text="1111"
+            app:icon_normal_left="@mipmap/icon_diamond"
+            app:icon_width="33dp"
+            app:icon_height="34dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_coin_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/mine_store_coin"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="@id/tv_balance_coin"
-            app:layout_constraintTop_toBottomOf="@id/tv_balance_coin" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-        <TextView
+
+        <com.ruffian.library.widget.RTextView
             android:id="@+id/tv_recharge"
-            android:layout_width="62dp"
-            android:layout_height="32dp"
+            android:layout_width="78dp"
+            android:layout_height="30dp"
             android:layout_marginStart="10dp"
-            android:background="@mipmap/mine_icon_store_buy"
             android:gravity="center"
+            app:corner_radius="15dp"
+            android:layout_marginEnd="19dp"
             android:text="@string/mine_recharge"
-            android:textColor="@color/color_FFFD62"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_coin_title"
-            app:layout_constraintStart_toEndOf="@id/tv_coin_title"
-            app:layout_constraintTop_toTopOf="@id/tv_coin_title" />
+            app:background_normal="@array/button_color_bg"
+            app:gradient_orientation="LEFT_RIGHT"
+            app:gradient_type="linear"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
 
 
         <View
@@ -137,12 +149,12 @@
             android:text="@string/mine_store_avatar"
             android:textSize="16sp" />
 
-        <TextView
+  <!--      <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/mine_store_background"
-            android:textSize="16sp" />
+            android:textSize="16sp" />-->
     </com.angcyo.tablayout.DslTabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
@@ -150,7 +162,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+        app:layout_constraintTop_toBottomOf="@id/tab_layout"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

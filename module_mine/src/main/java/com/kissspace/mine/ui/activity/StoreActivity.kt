@@ -52,7 +52,7 @@ class StoreActivity : BaseActivity(R.layout.mine_activity_store) {
             }
         })
         mBinding.viewPager.adapter = object : FragmentStateAdapter(this) {
-            override fun getItemCount(): Int = 3
+            override fun getItemCount(): Int = 2
 
             override fun createFragment(position: Int) =
                 when (position) {

@@ -6,6 +6,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -20,9 +21,12 @@ import com.kongzue.dialogx.interfaces.OnBindView
 import com.tencent.qgame.animplayer.AnimView
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.ext.safeClick
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.http.getSelectPayChannelList
 import com.kissspace.common.model.GoodsListBean
 import com.kissspace.common.provider.IPayProvider
+import com.kissspace.common.util.ColorUtil
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.util.customToast
 import com.kissspace.common.util.getMP4Path
@@ -39,6 +43,8 @@ import com.kissspace.util.loadImage
 import com.kissspace.util.loadImageCircle
 import com.kissspace.util.resToString
 import com.kissspace.util.toast
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.msg.MsgService
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -110,16 +116,32 @@ class GoodsListFragment : BaseFragment(R.layout.mine_fragment_store_car) {
                 }
             }
             onFastClick(R.id.tv_buy) {
+
                 val model = getModel<GoodsListBean>()
                 if (model.attribute == "002") return@onFastClick
-                if (model.pointsPrice != null && model.coinPrice != null) {
+
+                CommonConfirmDialog(
+                    requireContext(), "确定花费${model.coinPrice}钻石购买装扮"
+
+                ) {
+                    if (this){ //type 001 砖石购买
+                        mViewModel.buy(model.commodityInfoId, "001")
+                    }
+                }.show()
+
+
+
+
+              /*  if (model.pointsPrice != null && model.coinPrice != null) {
                     GoodsBuyDialog.newInstance(model).setCallback {
                         mViewModel.buy(model.commodityInfoId, it)
                     }.show(childFragmentManager)
                 } else {
+
                     val type = if (model.coinPrice != null) "001" else "002"
                     val title =
                         if (model.coinPrice != null) "确定花费${model.coinPrice}金币购买装扮吗" else "确定花费${model.pointsPrice}积分购买装扮吗"
+
                     val dialog =
                         CommonConfirmDialog(
                             requireContext(),
@@ -130,7 +152,7 @@ class GoodsListFragment : BaseFragment(R.layout.mine_fragment_store_car) {
                             }
                         }
                     dialog.show()
-                }
+                }*/
 
             }
         }.models = mutableListOf()
@@ -139,45 +161,26 @@ class GoodsListFragment : BaseFragment(R.layout.mine_fragment_store_car) {
 
     private fun BindingAdapter.BindingViewHolder.bindItem() {
         val coinPrice = findView<TextView>(R.id.tv_price_coin)
-        val pointsPrice = findView<TextView>(R.id.tv_price_points)
         val tvBuy = findView<TextView>(R.id.tv_buy)
-        val coinLp = coinPrice.layoutParams as ConstraintLayout.LayoutParams
-        val pointLp = pointsPrice.layoutParams as ConstraintLayout.LayoutParams
+        //val coinLp = coinPrice.layoutParams as ConstraintLayout.LayoutParams
         val model = getModel<GoodsListBean>()
-        pointsPrice.visibility = View.INVISIBLE
+
         model.attribute.let {
             if(it == "001"){
                 tvBuy.isEnabled = true
                 tvBuy.text  = "购买"
-                tvBuy.alpha = 1f
-                when {
-                    model.coinPrice != null && model.pointsPrice != null -> {
-                        coinPrice.text = model.coinPrice.toString()
-                        pointsPrice.text = model.pointsPrice.toString()
-                        coinLp.startToStart = R.id.tv_name
-                        pointLp.endToEnd = R.id.tv_valid_day
-                        coinPrice.visibility = View.VISIBLE
-                        pointsPrice.visibility = View.VISIBLE
-                    }
+               // tvBuy.alpha = 1f
 
-                    model.coinPrice != null && model.pointsPrice == null -> {
-                        coinPrice.text = model.coinPrice.toString()
-                        coinLp.startToStart = R.id.tv_name
-                        coinPrice.visibility = View.VISIBLE
-                        pointsPrice.visibility = View.INVISIBLE
-                    }
+                tvBuy.background = ContextCompat.getDrawable(requireActivity(),com.kissspace.module_common.R.drawable.common_shape_bg_gradient)
+                coinPrice.text = model.coinPrice.toString()
+                tvBuy.setTextColor(ContextCompat.getColor(requireActivity(),com.kissspace.module_common.R.color.white))
 
-                    model.coinPrice == null && model.pointsPrice != null -> {
-                        pointsPrice.text = model.pointsPrice.toString()
-                        pointLp.startToStart = R.id.tv_name
-                        pointsPrice.visibility = View.VISIBLE
-                        coinPrice.visibility = View.INVISIBLE
-                    }
-                }
             }else{
                 tvBuy.isEnabled = false
-                tvBuy.alpha = 0.5f
+                //tvBuy.alpha = 0.5f
                 tvBuy.text  = model.description
+                tvBuy.background = null
+                tvBuy.setTextColor(ContextCompat.getColor(requireActivity(),com.kissspace.module_common.R.color.color_949499))
                 coinPrice.visibility = View.INVISIBLE
             }
         }

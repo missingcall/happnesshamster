@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.didi.drouter.annotation.Router
 import com.drake.brv.utils.bindingAdapter
@@ -27,6 +28,7 @@ import com.kissspace.mine.viewmodel.FeedBackViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineActivtiyFeedbackBinding
 import com.kissspace.util.activity
+import com.kissspace.util.setStatusBarColor
 
 /**
  * @Author gaohangbo
@@ -45,8 +47,19 @@ class FeedBackTypeListActivity : BaseActivity(R.layout.mine_activtiy_feedback) {
     private var showFeedBack by parseIntent<Boolean>(defaultValue = false)
 
     override fun initView(savedInstanceState: Bundle?) {
+
+        setStatusBarColor(
+            ContextCompat.getColor(
+                this,
+                com.kissspace.module_common.R.color.color_232323
+            ), isStatusBlackText = false
+        )
         setTitleBarListener(mBinding.titleBar, rightClick = {
-            jump(RouterPath.PATH_FEEDBACK_RECODE_LIST, activity = activity, resultLauncher = launcher)
+            jump(
+                RouterPath.PATH_FEEDBACK_RECODE_LIST,
+                activity = activity,
+                resultLauncher = launcher
+            )
         })
 
         mBinding.m = mViewModel

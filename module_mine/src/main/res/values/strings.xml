@@ -100,7 +100,7 @@
     <string name="mine_my_level">我的等级</string>
     <string name="mine_level_expend">财富等级</string>
     <string name="mine_level_income">魅力等级</string>
-    <string name="mine_level_expend_tips">财富等级：通过金币购买礼物，送礼物获得</string>
+    <string name="mine_level_expend_tips">财富等级：通过代币购买礼物，送礼物获得</string>
     <string name="mine_level_income_tips">魅力等级：每收到1金币消费获得1魅力值</string>
     <string name="mine_verify">审核中</string>
     <string name="mine_buy_way">请选择购买方式</string>
