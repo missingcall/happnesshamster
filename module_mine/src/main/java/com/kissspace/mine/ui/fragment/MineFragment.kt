@@ -286,6 +286,7 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
         FlowBus.observerEvent<Event.RefreshCoin>(this) {
             getMoney()
         }
+
     }
 
     private fun getMoney() {

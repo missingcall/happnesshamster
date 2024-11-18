@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.Gravity
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import coil.load
 import com.drake.brv.utils.bindingAdapter
@@ -16,19 +17,23 @@ import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.model.UserAccountBean
 import com.kissspace.common.util.copyClip
+import com.kissspace.common.util.customToast
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.util.oldAccountExit
 import com.kissspace.common.widget.BaseDialogFragment
 import com.kissspace.common.widget.CommonConfirmDialog
+import com.kissspace.login.ui.LoginEditProfileActivity
 import com.kissspace.network.result.collectData
 import com.kissspace.setting.viewmodel.ChangeAccountViewModel
+import com.kissspace.util.finishActivity
+import com.kissspace.util.lifecycleOwner
 import com.kissspace.util.toast
 
 /**
  * 左边抽屉-账号多身份
  */
 class ChangeAccountDialog : BaseDialogFragment<DialogChangeAccountBinding>(DialogChangeAccountBinding::inflate, Gravity.LEFT, true, false) {
-    private val mViewModel by viewModels<ChangeAccountViewModel>()
+    private val mViewModel by activityViewModels<ChangeAccountViewModel>()
     private var userPhone: String = ""
     private var isCreateAccount = false
     private var loginAccountPosition = 0;
@@ -44,6 +49,14 @@ class ChangeAccountDialog : BaseDialogFragment<DialogChangeAccountBinding>(Dialo
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
+        mViewModel.mViewStatus.observe(this) {
+            if (it) {
+                showLoading()
+            } else {
+                hideLoading()
+            }
+        }
+
         mBinding.ivAvatar.load(MMKVProvider.userInfo?.profilePath)
         mBinding.tvNickname.text = MMKVProvider.userInfo?.nickname
         mBinding.tvUserId.text = MMKVProvider.userInfo?.displayId
@@ -80,6 +93,7 @@ class ChangeAccountDialog : BaseDialogFragment<DialogChangeAccountBinding>(Dialo
             }
             mBinding.recycler.bindingAdapter.addModels(it)
             mBinding.recycler.bindingAdapter.setChecked(loginAccountPosition, true)
+
         })
 
         collectData(mViewModel.createAccounts, onSuccess = {
@@ -93,9 +107,13 @@ class ChangeAccountDialog : BaseDialogFragment<DialogChangeAccountBinding>(Dialo
             //先退出之前账号的房间
             oldAccountExit {
                 mViewModel.loginIm(it, onSuccess = {
+                    //切换身份
                     if (!isCreateAccount) {
                         isCreateAccount = false
                         changeAccountSuccess()
+                    } else {
+                        //新建身份
+                        activity?.finish()
                     }
                 })
             }
@@ -144,6 +162,7 @@ class ChangeAccountDialog : BaseDialogFragment<DialogChangeAccountBinding>(Dialo
         FlowBus.post(Event.CloseRoomFloating)
         mBinding.recycler.bindingAdapter.setChecked(loginAccountPosition, true)
         toast("切换账号成功")
+        dismiss()
     }
 
     private fun createAccount() {

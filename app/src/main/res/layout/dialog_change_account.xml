@@ -92,13 +92,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/viewLine"
-            tools:itemCount="3"
+            app:layout_constraintBottom_toTopOf="@+id/con_add"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewLine"
+            tools:itemCount="3"
             tools:listitem="@layout/layout_change_account_list_item" />
 
         <Button
@@ -110,7 +112,7 @@
             android:paddingTop="17dp"
             android:paddingBottom="17dp"
             android:text="创建新身份"
-            app:layout_constraintTop_toBottomOf="@id/recycler"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
 

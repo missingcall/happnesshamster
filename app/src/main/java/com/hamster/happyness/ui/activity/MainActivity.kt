@@ -353,6 +353,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             updateMessageCount()
         }
 
+        //切换账号
         observerEvent<Event.RefreshChangeAccountEvent>(this) {
             initConfig()
             initAppConfig()

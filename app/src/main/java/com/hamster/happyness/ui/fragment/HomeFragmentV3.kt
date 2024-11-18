@@ -134,6 +134,15 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 }
             }
         }
+
+        FlowBus.observerEvent<Event.RefreshChangeAccountEvent>(this) {
+            initRecyclerView()
+            initData()
+            refreshUserinfo()
+            queryDayIncome()
+            getHamsterStatus(true)
+            getCurrentHamsterSkin()
+        }
     }
 
     override fun onResume() {
