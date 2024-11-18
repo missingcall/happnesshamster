@@ -19,6 +19,7 @@ import com.hamster.happyness.viewmodel.HamsterViewModel
 import com.hamster.happyness.widget.*
 
 import com.kissspace.common.base.BaseFragment
+import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.flowbus.Event
@@ -171,7 +172,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 customToast(it?.errorMsg)
             }
             logD("errCode : " + it?.errCode + " , errMSg : " + it?.errorMsg)
-            if (it?.errCode == "54001" || it?.errCode == "1000") {
+            if (it?.errCode == "54001" || it?.errCode == "1000" || it?.errCode == "503") {
                 //仓鼠不存在或者请求失败时默认为004过期状态
                 mWalletViewModel.hmsInfoModel.set(HmsInfoModel())
                 changeHamsterUIStatus()
@@ -184,7 +185,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     private fun changeHamsterUIStatus() {
         when (mWalletViewModel.hmsInfoModel.get()?.hamsterStatus) {
             //（001 正常 002 濒死 003 已死亡 004 已到期）
-            "001", "002" -> {
+            Constants.HamsterStatusType.NORMAL, Constants.HamsterStatusType.NEAR_DEATH -> {
                 //右边栏
                 mBinding.clBalanceDescription.visibility = View.VISIBLE
                 mBinding.clSkin.visibility = View.VISIBLE
@@ -219,7 +220,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 }
 
             }
-            "003" -> {
+            Constants.HamsterStatusType.DEAD -> {
                 //右边栏
                 mBinding.clBalanceDescription.visibility = View.VISIBLE
                 mBinding.clSkin.visibility = View.VISIBLE
@@ -238,7 +239,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                     HomeRebornDialog.newInstance().show(childFragmentManager)
                 }
             }
-            "004" -> {
+            Constants.HamsterStatusType.EXPIRED -> {
                 //仓鼠不存在或仓鼠已过期 隐藏右边栏/展示蒙版/展示锁
 
                 //右边栏

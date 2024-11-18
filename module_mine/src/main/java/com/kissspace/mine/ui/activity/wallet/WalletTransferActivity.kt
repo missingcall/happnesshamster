@@ -19,11 +19,8 @@ import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.parseIntent
 import com.kissspace.common.widget.CommonBottomHintDialog
-import com.kissspace.common.widget.CommonConfirmDialog
-import com.kissspace.common.widget.CommonHintDialog
 import com.kissspace.mine.ui.fragment.WalletTransferFragment
 import com.kissspace.mine.viewmodel.WalletViewModel
-import com.kissspace.module_common.databinding.CommonBottomDialogHintBinding
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineActivityWalletTransferHamsterBinding
 
@@ -50,8 +47,8 @@ class WalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_transf
             override fun getItemCount(): Int = 2
 
             override fun createFragment(position: Int) = when (position) {
-                0 -> WalletTransferFragment.newInstance(Constants.HamsterWalletType.PINE_NUT.type)
-                else -> WalletTransferFragment.newInstance(Constants.HamsterWalletType.DIAMONDS.type)
+                0 -> WalletTransferFragment.newInstance(Constants.HamsterTransferAccountsType.PINE_NUTS)
+                else -> WalletTransferFragment.newInstance(Constants.HamsterTransferAccountsType.DIAMONDS)
             }
         }
 
@@ -62,6 +59,7 @@ class WalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_transf
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
+                initData(position)
                 /*when (position) {
                     0 -> pineConesToPineNuts()
                     else -> pineNutsToDiamonds()
@@ -73,13 +71,18 @@ class WalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_transf
 
         //获取钱包
         getMoney()
-        initData()
 
         //安全提示弹窗
         when (type) {
-            Constants.HamsterWalletType.PINE_NUT.type -> CommonBottomHintDialog.newInstance(getString(R.string.mine_transfer_tips_pine_nut_dialog) , true)
+            Constants.HamsterWalletType.PINE_NUT.type -> CommonBottomHintDialog.newInstance(
+                getString(R.string.mine_transfer_tips_pine_nut_dialog),
+                true
+            )
                 .show(supportFragmentManager)
-            Constants.HamsterWalletType.DIAMONDS.type -> CommonBottomHintDialog.newInstance(getString(R.string.mine_transfer_tips_diamonds_dialog) ,true)
+            Constants.HamsterWalletType.DIAMONDS.type -> CommonBottomHintDialog.newInstance(
+                getString(R.string.mine_transfer_tips_diamonds_dialog),
+                true
+            )
                 .show(supportFragmentManager)
         }
     }
@@ -92,7 +95,16 @@ class WalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_transf
         }
     }
 
-    private fun initData() {
+
+    private fun initData(position: Int) {
+        //获取兑换比例 放到WalletViewModel中 下级fragment直接取 逻辑是滑动到那个fragment就获取哪个 这样不会提前保存3个且实时
+        when (position) {
+            0 -> mViewModel.expectedTransferAccounts(1.0, null, Constants.HamsterTransferAccountsType.PINE_NUTS)
+            1 -> mViewModel.expectedTransferAccounts(1.0, null, Constants.HamsterTransferAccountsType.DIAMONDS)
+
+            else -> {}
+        }
+
 
     }
 

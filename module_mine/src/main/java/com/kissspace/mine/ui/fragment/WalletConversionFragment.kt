@@ -2,31 +2,19 @@ package com.kissspace.mine.ui.fragment
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.blankj.utilcode.util.SpanUtils
-import com.drake.brv.utils.grid
-import com.drake.brv.utils.setup
 import com.kissspace.common.base.BaseFragment
-import com.kissspace.common.config.CommonApi
-import com.kissspace.common.ext.setDrawable
-import com.kissspace.common.model.*
-import com.kissspace.common.util.mmkv.MMKVProvider
-import com.kissspace.mine.http.MineApi
+import com.kissspace.common.config.Constants
+import com.kissspace.common.ext.safeClick
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineFragmentWalletConversionBinding
-import com.kissspace.module_mine.databinding.MineFragmentWarehouseBinding
-import com.kissspace.network.net.Method
-import com.kissspace.network.net.request
-import com.kissspace.util.addAfterTextChanged
-import com.kissspace.util.lifecycleOwner
-import com.kissspace.util.toast
-import kotlinx.coroutines.flow.MutableSharedFlow
+import com.kissspace.util.*
 
 /**
  *
@@ -38,7 +26,10 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 class WalletConversionFragment : BaseFragment(R.layout.mine_fragment_wallet_conversion) {
     private val mBinding by viewBinding<MineFragmentWalletConversionBinding>()
     private val mViewModel by activityViewModels<WalletViewModel>()
+
     private lateinit var type: String
+    private var sourceAmountType: String = "松果"//源货币类型
+    private var targetAmountType: String = "松子"//目标货币类型
 
     companion object {
         fun newInstance(type: String) = WalletConversionFragment().apply {
@@ -51,87 +42,175 @@ class WalletConversionFragment : BaseFragment(R.layout.mine_fragment_wallet_conv
         type = arguments?.getString("type")!!
     }
 
+    override fun onResume() {
+        super.onResume()
+
+
+    }
+
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.m = mViewModel
+        mBinding.lifecycleOwner = activity
 
         mViewModel.walletModel.observe(this) {
             when (type) {
-                "001" -> pineConesToPineNuts()
-                "002" -> pineNutsToPineCones()
-                else -> pineNutsToDiamonds()
+                Constants.HamsterConversionType.PINE_CONES_TO_PINE_NUTS -> pineConesToPineNuts()
+                Constants.HamsterConversionType.PINE_NUTS_TO_PINE_CONES -> pineNutsToPineCones()
+                Constants.HamsterConversionType.PINE_NUTS_TO_DIAMONDS -> pineNutsToDiamonds()
+                else -> pineConesToPineNuts()
             }
+
+            updateUI(true, 1.0)
+        }
+
+        mViewModel.expectedTransferConversionModel.observe(this) {
+            when (type) {
+                Constants.HamsterConversionType.PINE_CONES_TO_PINE_NUTS -> pineConesToPineNuts()
+                Constants.HamsterConversionType.PINE_NUTS_TO_PINE_CONES -> pineNutsToPineCones()
+                Constants.HamsterConversionType.PINE_NUTS_TO_DIAMONDS -> pineNutsToDiamonds()
+                else -> pineConesToPineNuts()
+            }
+            updateWallet()
+            updateUI(true, 1.0)
+
         }
 
         mBinding.etConvertUp.addAfterTextChanged {
-            mBinding.etConvertDown.setText(it.toString())
+            if (it.toString().isNotBlank()) {
+                updateUI(false, it.toString().toDouble())
+            } else {
+
+            }
+        }
+
+        mBinding.btnConfirm.safeClick {
+            if (mBinding.etConvertUp.text.isNotBlank()) {
+                mViewModel.expectedTransferConversion(mBinding.etConvertUp.text.toString().toDouble(), type) {
+                    mViewModel.transferConversion(mBinding.etConvertUp.text.toString().toDouble(), type) {
+                        if (it) {
+                            com.kissspace.common.util.customToast("交易成功")
+                            //刷新钱包
+                            FlowBus.post(Event.RefreshCoin)
+                            mBinding.etConvertDown.setText("")
+                            mBinding.etConvertUp.setText("")
+                        } else {
+                            com.kissspace.common.util.customToast("交易失败")
+                        }
+                    }
+                }
+            } else {
+                com.kissspace.common.util.customToast("转换数量不能为空")
+            }
+
         }
 
 
+    }
 
+    private fun updateWallet() {
+
+
+    }
+
+    private fun updateUI(isFirst: Boolean, sourceAccount: Double) {
+        if (sourceAccount < 1) {
+            return
+        }
+        mBinding.tvConversionUp.text = SpanUtils()
+            .append("我的${sourceAmountType}")
+            .appendImage(
+                when (type) {
+                    Constants.HamsterConversionType.PINE_CONES_TO_PINE_NUTS -> R.mipmap.icon_pine_cone_small
+                    Constants.HamsterConversionType.PINE_NUTS_TO_PINE_CONES -> R.mipmap.icon_pine_nut_small
+                    Constants.HamsterConversionType.PINE_NUTS_TO_DIAMONDS -> R.mipmap.icon_pine_nut_small
+
+                    else -> {
+                        R.mipmap.icon_pine_cone_small
+                    }
+                }
+            )
+            .append(
+                when (type) {
+                    Constants.HamsterConversionType.PINE_CONES_TO_PINE_NUTS -> mViewModel.walletModel.value?.diamond.toString()
+                    Constants.HamsterConversionType.PINE_NUTS_TO_PINE_CONES -> mViewModel.walletModel.value?.accountBalance.toString()
+                    Constants.HamsterConversionType.PINE_NUTS_TO_DIAMONDS -> mViewModel.walletModel.value?.accountBalance.toString()
+                    else -> mViewModel.walletModel.value?.diamond.toString()
+
+                }
+            )
+            .setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+
+        mBinding.tvConversionDown.text = SpanUtils()
+            .append("我的${targetAmountType}")
+            .appendImage(
+                when (type) {
+                    Constants.HamsterConversionType.PINE_CONES_TO_PINE_NUTS -> R.mipmap.icon_pine_nut_small
+                    Constants.HamsterConversionType.PINE_NUTS_TO_PINE_CONES -> R.mipmap.icon_pine_nut_small
+                    Constants.HamsterConversionType.PINE_NUTS_TO_DIAMONDS -> R.mipmap.icon_diamond_small
+
+                    else -> {
+                        R.mipmap.icon_pine_nut_small
+                    }
+                }
+            )
+            .append(
+                when (type) {
+                    Constants.HamsterConversionType.PINE_CONES_TO_PINE_NUTS -> mViewModel.walletModel.value?.accountBalance.toString()
+                    Constants.HamsterConversionType.PINE_NUTS_TO_PINE_CONES -> mViewModel.walletModel.value?.diamond.toString()
+                    Constants.HamsterConversionType.PINE_NUTS_TO_DIAMONDS -> mViewModel.walletModel.value?.coin.toString()
+                    else -> mViewModel.walletModel.value?.accountBalance.toString()
+
+                }
+            )
+            .setForegroundColor(Color.parseColor("#FDC120"))
+            .create()
+
+        if (isFirst) {
+            mBinding.etConvertDown.setText("")
+        } else {
+            mBinding.etConvertDown.setText("${mViewModel.expectedTransferConversionModel.value?.targetAmount?.times(sourceAccount)}")
+        }
+
+        mBinding.tvConvertUp.text = sourceAmountType
+        mBinding.etConvertUp.hint = "请输入${sourceAmountType}"
+        mBinding.tvConvertDown.text = targetAmountType
+        mBinding.etConvertDown.hint = "输入${sourceAmountType}查看转换${targetAmountType}数"
+
+//        mBinding.etConvertDown.setText("${mViewModel.expectedTransferConversionModel.value?.targetAmount?.times(sourceAccount)}")
+        //转换比例num
+        mBinding.tvConversionRatioNum.text =
+            "${mViewModel.expectedTransferConversionModel.value?.configSourceAmount?.times(sourceAccount)}${sourceAmountType}=${
+                mViewModel.expectedTransferConversionModel.value?.configTargetAmount?.times(
+                    sourceAccount
+                )
+            }${targetAmountType}"
+
+        //转换手续费
+        mBinding.tvConversionFee.text = "转换手续费（${mViewModel.expectedTransferConversionModel.value?.configHandingFee}%）"
+        //转换手续费num
+        mBinding.tvConversionFeeNum.text = "${mViewModel.expectedTransferConversionModel.value?.handingFee?.times(sourceAccount)}${targetAmountType}"
+        //预计获得num
+        mBinding.tvExpectedToObtainNum.text =
+            "${mViewModel.expectedTransferConversionModel.value?.targetAmount?.times(sourceAccount)}${targetAmountType}"
     }
 
     private fun pineConesToPineNuts() {
-        mBinding.tvConversionUp.text = SpanUtils()
-            .append("我的松果")
-            .appendImage(R.mipmap.icon_pine_cone_small)
-            .append(mViewModel.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .create()
+        sourceAmountType = "松果"
+        targetAmountType = "松子"
 
-        mBinding.tvConversionDown.text = SpanUtils()
-            .append("我的松子")
-            .appendImage(R.mipmap.icon_pine_nut_small)
-            .append(mViewModel.walletModel.value?.accountBalance.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .create()
-
-        mBinding.tvConvertUp.text = "松果"
-        mBinding.etConvertUp.hint = "请输入松果"
-        mBinding.tvConvertDown.text = "松子"
-        mBinding.etConvertDown.hint = "输入松果查看转换松子数"
-        //TODO 设置兑换比例/转换手续费/预计获得
-//        mBinding.tvConversionRatioNum.text =
-//        mBinding.tvConversionFee.text =
-//        mBinding.tvConversionFeeNum.text =
-//        mBinding.tvExpectedToObtainNum.text =
     }
 
     private fun pineNutsToPineCones() {
-        mBinding.tvConversionUp.text = SpanUtils()
-            .append("我的松子")
-            .appendImage(R.mipmap.icon_pine_nut_small)
-            .append(mViewModel.walletModel.value?.accountBalance.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .create()
-
-        mBinding.tvConversionDown.text = SpanUtils()
-            .append("我的松果")
-            .appendImage(R.mipmap.icon_pine_cone_small)
-            .append(mViewModel.walletModel.value?.diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .create()
-
-        mBinding.tvConvertUp.text = "松子"
-        mBinding.etConvertUp.hint = "请输入松子"
-        mBinding.tvConvertDown.text = "松果"
-        mBinding.etConvertDown.hint = "输入松子查看转换松子数"
-
+        sourceAmountType = "松子"
+        targetAmountType = "松果"
 
     }
 
     private fun pineNutsToDiamonds() {
-        mBinding.tvConversionUp.text = SpanUtils()
-            .append("我的松子")
-            .appendImage(R.mipmap.icon_pine_nut_small)
-            .append(mViewModel.walletModel.value?.accountBalance.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .create()
+        sourceAmountType = "松子"
+        targetAmountType = "钻石"
 
-        mBinding.tvConversionDown.text = SpanUtils()
-            .append("我的钻石")
-            .appendImage(R.mipmap.icon_diamond_small)
-            .append(mViewModel.walletModel.value?.coin.toString()).setForegroundColor(Color.parseColor("#FDC120"))
-            .create()
-
-        mBinding.tvConvertUp.text = "松子"
-        mBinding.etConvertUp.hint = "请输入松子"
-        mBinding.tvConvertDown.text = "钻石"
-        mBinding.etConvertDown.hint = "输入松子查看转换钻石数"
     }
 
 }

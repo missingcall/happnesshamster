@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="m"
             type="com.kissspace.mine.viewmodel.MineViewModel" />
@@ -204,8 +205,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingTop="10dp"
             android:text="关注"
-            android:layout_marginTop="10dp"
             android:textColor="@color/color_949499"
             android:textSize="11sp"
             app:layout_constraintLeft_toLeftOf="@id/tv_follow"
@@ -218,9 +219,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingTop="10dp"
             android:text="粉丝"
             android:textColor="@color/color_949499"
             android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_follow_tip"
             app:layout_constraintLeft_toLeftOf="@id/tv_fans"
             app:layout_constraintRight_toRightOf="@id/tv_fans"
             app:layout_constraintTop_toTopOf="@id/tv_follow_tip" />
@@ -230,9 +233,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingTop="10dp"
             android:text="访客"
             android:textColor="@color/color_949499"
             android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_follow_tip"
             app:layout_constraintLeft_toLeftOf="@id/tv_visitor"
             app:layout_constraintRight_toRightOf="@id/tv_visitor"
             app:layout_constraintTop_toTopOf="@id/tv_follow_tip" />
@@ -242,9 +247,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingTop="10dp"
             android:text="收藏"
             android:textColor="@color/color_949499"
             android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_follow_tip"
             app:layout_constraintLeft_toLeftOf="@id/tv_friend"
             app:layout_constraintRight_toRightOf="@id/tv_friend"
             app:layout_constraintTop_toTopOf="@id/tv_follow_tip" />

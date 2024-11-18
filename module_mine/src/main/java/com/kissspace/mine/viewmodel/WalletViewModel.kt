@@ -15,6 +15,8 @@ import com.kissspace.common.util.customToast
 import com.kissspace.common.util.format.Format
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.util.setApplicationValue
+import com.kissspace.mine.bean.ExpectedTransferAccountsModel
+import com.kissspace.mine.bean.ExpectedTransferConversionModel
 import com.kissspace.mine.http.MineApi
 import com.kissspace.network.exception.AppException
 import com.kissspace.network.net.Method
@@ -204,6 +206,20 @@ class WalletViewModel : BaseViewModel() {
 
     //获取仓鼠复活消费面板
     var revivePanelModel = ObservableField<RevivePanelModel>()
+
+    //代币转换费率
+    var expectedTransferConversionModel = MediatorLiveData<ExpectedTransferConversionModel>().apply {
+        addSource(walletModel) {
+
+        }
+    }
+
+    //代币转赠费率
+    var expectedTransferAccountsModel = MediatorLiveData<ExpectedTransferAccountsModel>().apply {
+        addSource(walletModel) {
+
+        }
+    }
 
     //清洁度
     var cleanliness = ObservableField<Int>()
@@ -596,6 +612,49 @@ class WalletViewModel : BaseViewModel() {
     }
 
 
+    //代币转换 费率 预计获得
+    fun expectedTransferConversion(amount: Double, type: String, onSuccess: ((ExpectedTransferConversionModel) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+        param["amount"] = amount
+        param["type"] = type
+        request<ExpectedTransferConversionModel>(MineApi.API_USERNUM_EXPECTED_TRANSFER_CONVERSION, Method.POST, param, onSuccess = {
+            expectedTransferConversionModel.value = it
+            onSuccess.invoke(it)
+        }, onError = {
+        })
+    }
+
+    //代币转换 费率 预计获得
+    fun transferConversion(amount: Double, type: String, onSuccess: ((Boolean) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+        param["amount"] = amount
+        param["type"] = type
+        request<Boolean>(MineApi.API_USERNUM_TRANSFER_CONVERSION, Method.POST, param, onSuccess = {
+            onSuccess.invoke(it)
+        }, onError = {
+            customToast(it.message)
+        })
+    }
+
+
+    //代币转赠 费率 预计获得
+    fun expectedTransferAccounts(
+        amount: Double,
+        targetUserDisplayId: String?,
+        type: String,
+        onSuccess: ((ExpectedTransferAccountsModel) -> Unit) = {}
+    ) {
+        val param = mutableMapOf<String, Any?>()
+        param["amount"] = amount
+        param["targetUserDisplayId"] = targetUserDisplayId
+        param["type"] = type
+        request<ExpectedTransferAccountsModel>(MineApi.API_USERNUM_EXPECTED_TRANSFER_ACCOUNTS, Method.POST, param, onSuccess = {
+            expectedTransferAccountsModel.value = it
+            onSuccess.invoke(it)
+        }, onError = {
+        })
+    }
+
     //松子转赠
     fun transferPineNuts(smsCode: String?, amount: Double, targetUserDisplayId: String, onSuccess: ((Boolean) -> Unit) = {}) {
         val param = mutableMapOf<String, Any?>()
@@ -609,5 +668,17 @@ class WalletViewModel : BaseViewModel() {
         })
     }
 
-
+    //代币转赠 (缺验证码
+    fun transferAccounts(/*smsCode: String?,*/ amount: Double, targetUserDisplayId: String, type: String, onSuccess: ((Boolean) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+//        param["smsCode"] = smsCode
+        param["amount"] = amount
+        param["targetUserDisplayId"] = targetUserDisplayId
+        param["type"] = type
+        request<Boolean>(MineApi.API_USERNUM_TRANSFER_ACCOUNTS, Method.POST, param, onSuccess = {
+            onSuccess.invoke(it)
+        }, onError = {
+            customToast(it.message)
+        })
+    }
 }

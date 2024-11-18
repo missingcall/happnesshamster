@@ -55,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="转增松子"
+                android:text="转赠松子"
                 android:textSize="11sp"
                 app:bl_corners_radius="10dp" />
 
@@ -63,7 +63,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="转增钻石"
+                android:text="转赠钻石"
                 android:textSize="11sp"
                 app:bl_corners_radius="10dp" />
 

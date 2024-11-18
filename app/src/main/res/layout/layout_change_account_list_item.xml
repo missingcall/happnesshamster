@@ -25,40 +25,52 @@
             loadImage="@{m.profilePath}"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginLeft="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/tv_name"
+            app:layout_constraintRight_toLeftOf="@id/clNameUid"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <TextView
-            android:id="@+id/tv_name"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clNameUid"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="12dp"
-            android:singleLine="true"
-            android:text="@{m.nickname}"
-            android:textColor="@color/color_ui_main_text"
-            android:textSize="15sp"
-            app:layout_constraintLeft_toRightOf="@id/iv_avatar"
-            app:layout_constraintTop_toTopOf="@id/iv_avatar"
-            app:layout_constraintRight_toLeftOf="@id/iv_checkbox"
-            tools:text="asdasdasdasd" />
-
-        <TextView
-            android:id="@+id/tv_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:singleLine="true"
-            android:text="@{m.getId()}"
-            android:textColor="@color/color_ui_sub_text_light"
-            android:textSize="11sp"
+            android:layout_marginRight="5dp"
             app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
-            app:layout_constraintLeft_toLeftOf="@id/tv_name" />
+            app:layout_constraintLeft_toRightOf="@id/iv_avatar"
+            app:layout_constraintRight_toLeftOf="@id/iv_checkbox"
+            app:layout_constraintTop_toTopOf="@id/iv_avatar">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@{m.nickname}"
+                android:textColor="@color/color_ui_main_text"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="asdasdasdasd" />
+
+            <TextView
+                android:id="@+id/tv_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:singleLine="true"
+                android:text="@{m.getId()}"
+                android:textColor="@color/color_ui_sub_text_light"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <ImageView
             android:id="@+id/iv_checkbox"
@@ -69,7 +81,7 @@
             android:layout_marginRight="15dp"
             android:src="@mipmap/common_icon_check_normal"
             app:layout_constraintBottom_toBottomOf="parent"
-
+            app:layout_constraintLeft_toRightOf="@id/clNameUid"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

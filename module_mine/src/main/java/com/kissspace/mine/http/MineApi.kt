@@ -159,6 +159,18 @@ object MineApi {
     //松子转赠
     const val API_TRANSFER_PINE_NUTS = "/hamster-user/userNum/transferPineNuts"
 
+    //代币转换 费率 预计获得
+    const val API_USERNUM_EXPECTED_TRANSFER_CONVERSION = "/hamster-user/userNum/expectedTransferConversion"
+
+    //代币转换
+    const val API_USERNUM_TRANSFER_CONVERSION = "/hamster-user/userNum/transferConversion"
+
+    //代币转赠 费率 预计获得
+    const val API_USERNUM_EXPECTED_TRANSFER_ACCOUNTS = "/hamster-user/userNum/expectedTransferAccounts"
+
+    //代币转账
+    const val API_USERNUM_TRANSFER_ACCOUNTS = "/hamster-user/userNum/transferAccounts"
+
     //收益转账
     const val API_TRANSFER_REWARD = "/hamster-user/userNum/transferAccountBalance"
 
@@ -266,7 +278,6 @@ object MineApi {
 
     //仓鼠交流语言获取
     const val API_HAMSTER_CULTIVATE_COMMUNICATE = "/hamster-center/hamsters/cultivate/communicate"
-
 
 
 }

@@ -38,6 +38,7 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
     private val mViewModel by activityViewModels<WalletViewModel>()
     private lateinit var type: String
     private var mRecipientInfoBean: UserInfoBean? = null
+    private var amountType: String = "松子"//货币类型
 
     companion object {
         fun newInstance(type: String) = WalletTransferFragment().apply {
@@ -52,11 +53,22 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
 
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.m = mViewModel
+        mBinding.lifecycleOwner = activity
+
 
         mViewModel.walletModel.observe(this) {
             when (type) {
-                "002" -> pineNutsGift()
-                else -> diamondGift()
+                Constants.HamsterTransferAccountsType.PINE_NUTS -> pineNutsGift()
+                Constants.HamsterTransferAccountsType.DIAMONDS -> diamondGift()
+                else -> pineNutsGift()
+            }
+        }
+
+        mViewModel.expectedTransferAccountsModel.observe(this) {
+            when (type) {
+                Constants.HamsterTransferAccountsType.PINE_NUTS -> pineNutsGift()
+                Constants.HamsterTransferAccountsType.DIAMONDS -> diamondGift()
+                else -> pineNutsGift()
             }
         }
 
@@ -76,16 +88,29 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
             }
         }
 
-        mBinding.etGiftQuantity.onAfterTextChanged = {
+
+        mBinding.etGiftQuantity.addAfterTextChanged {
             if (it.isNotEmptyBlank()) {
                 mViewModel.transferUserNumber.value = it.trimString().toDouble()
+                mViewModel.transferUserId.value = it.trimString()
+                updateUI(it.toString().toDouble())
             } else {
                 mViewModel.transferUserNumber.value = 0.0
+                mViewModel.transferUserId.value = ""
             }
+
         }
 
-        mBinding.etRecipientUID.addAfterTextChanged { s ->
-            mViewModel.transferUserId.value = s.toString()
+        mBinding.etRecipientUID.addAfterTextChanged {
+            if (it.isNotEmptyBlank()) {
+                mViewModel.transferUserNumber.value = it.trimString().toDouble()
+                mViewModel.transferUserId.value = it.trimString()
+                updateUI(it.toString().toDouble())
+            } else {
+                mViewModel.transferUserNumber.value = 0.0
+                mViewModel.transferUserId.value = ""
+            }
+
         }
 
 
@@ -101,7 +126,6 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
                         com.kissspace.common.util.customToast("松子数量不足")
                     } else {
                         confirmGive()
-
                     }
                 }
 
@@ -117,13 +141,10 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
     }
 
     private fun confirmGive() {
+        mViewModel.transferUserId.value = mBinding.etRecipientUID.text.trimString()
         CommonConfirmDialog(
             requireContext(),
-            "您确定要赠送${mViewModel.transferUserNumber.value}个" + when (type) {
-                Constants.HamsterWalletType.PINE_NUT.type -> Constants.HamsterWalletType.PINE_NUT.typeName
-                Constants.HamsterWalletType.DIAMONDS.type -> Constants.HamsterWalletType.DIAMONDS.typeName
-                else -> "勋章"
-            } + "给 " + mRecipientInfoBean?.nickname + "（UID：${mRecipientInfoBean?.displayId}）吗？",
+            "您确定要赠送${mViewModel.transferUserNumber.value}个${amountType}" + "给 " + mRecipientInfoBean?.nickname + "（UID：${mRecipientInfoBean?.displayId}）吗？",
             ""
         ) {
             if (this) {
@@ -139,39 +160,42 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
     }
 
     private fun pineNutsGift() {
+        amountType = "松子"
         mBinding.tvAssets.text = SpanUtils()
             .append("我的松子")
             .appendImage(R.mipmap.icon_pine_nut_small)
             .append(mViewModel.walletModel.value?.accountBalance.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .create()
 
-        mBinding.tvTransferorFee.text = "转赠人损耗（2%）"
-        mBinding.tvTransferorFeeNum.hint = "损耗0.00松子"
-        mBinding.tvExpectedToObtainNum.hint = "共计0.00松子"
+        mBinding.tvTransferorFee.text = "转赠人损耗（${mViewModel.expectedTransferAccountsModel.value?.lossRate}%）"
+        mBinding.tvTransferorFeeNum.text = "损耗0.00松子"
+        mBinding.tvExpectedToObtainNum.text = "共计0.00松子"
 
         mBinding.tvReminder.text = getString(R.string.mine_transfer_tips_pine_nut)
     }
 
     private fun diamondGift() {
+        amountType = "钻石"
         mBinding.tvAssets.text = SpanUtils()
             .append("我的钻石")
             .appendImage(R.mipmap.icon_diamond_small)
             .append(mViewModel.walletModel.value?.coin.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .create()
 
-        mBinding.tvTransferorFee.text = "转赠人损耗（2%）"
-        mBinding.tvTransferorFeeNum.hint = "损耗0.00钻石"
-        mBinding.tvExpectedToObtainNum.hint = "共计0.00钻石"
+        mBinding.tvTransferorFee.text = "转赠人损耗（${mViewModel.expectedTransferAccountsModel.value?.lossRate}%）"
+        mBinding.tvTransferorFeeNum.text = "损耗0.00钻石"
+        mBinding.tvExpectedToObtainNum.text = "共计0.00钻石"
 
         mBinding.tvReminder.text = getString(R.string.mine_transfer_tips_diamonds)
     }
 
     private val startActivityLauncher = registerForStartActivityResult { result ->
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
-            mViewModel.transferPineNuts(
-                result.data?.getStringExtra("smsCode"),
+            mViewModel.transferAccounts(
+//                result.data?.getStringExtra("smsCode"),
                 mViewModel.transferUserNumber.value.orZero(),
-                mViewModel.transferUserId.value.orEmpty()
+                mViewModel.transferUserId.value.orEmpty(),
+                type
             ) { _ ->
                 com.kissspace.common.util.customToast("赠送成功")
 
@@ -179,4 +203,19 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
             }
         }
     }
+
+    private fun updateUI(sourceAccount: Double) {
+        if (sourceAccount < 1 || mBinding.etGiftQuantity.text.isNullOrBlank() || mBinding.etRecipientUID.text.isNullOrBlank()) {
+            return
+        }
+
+        mBinding.tvTransferorFee.text = "转赠人损耗（${mViewModel.expectedTransferAccountsModel.value?.lossRate}%）"
+        mBinding.tvTransferorFeeNum.text =
+            "损耗${mBinding.etGiftQuantity.text.toString().toDouble() * mViewModel.expectedTransferAccountsModel.value?.lossRate!! / 100}${amountType}"
+        mBinding.tvExpectedToObtainNum.text = "共计${
+            mBinding.etGiftQuantity.text.toString().toDouble() + (mBinding.etGiftQuantity.text.toString()
+                .toDouble() * mViewModel.expectedTransferAccountsModel.value?.lossRate!! / 100)
+        }${amountType}"
+    }
+
 }

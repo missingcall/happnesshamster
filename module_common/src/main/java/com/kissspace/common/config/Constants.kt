@@ -751,6 +751,32 @@ object Constants {
         }
     }
 
+    /**
+     * 转换类型 009松果换松子, 002松子换松果  010松子转换钻石
+     */
+    class HamsterConversionType {
+        companion object {
+
+            const val PINE_CONES_TO_PINE_NUTS = "009"
+            const val PINE_NUTS_TO_PINE_CONES = "002"
+            const val PINE_NUTS_TO_DIAMONDS = "010"
+
+
+        }
+    }
+
+    /**
+     * 转赠类型 	转赠类型 017松子转赠, 018钻石转赠
+     */
+    class HamsterTransferAccountsType {
+        companion object {
+
+            const val PINE_NUTS = "017"
+            const val DIAMONDS = "018"
+
+        }
+    }
+
 
     var sendSmsType: Pair<String?, String?>? = null
 

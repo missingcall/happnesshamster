@@ -281,21 +281,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name="com.kissspace.mine.ui.activity.wallet.WalletConversionActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing" />
 
-        <activity
-            android:name="com.kissspace.mine.ui.activity.wallet.WalletTransferActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing" />
 
 
         <receiver
