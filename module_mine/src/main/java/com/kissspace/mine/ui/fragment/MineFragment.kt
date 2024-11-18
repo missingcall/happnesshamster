@@ -174,7 +174,9 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
                 ivInlet.setImageResource(model.icon)
                 clInlet.safeClick {
                     when (model.title) {
-                        "个人信息" -> jump(RouterPath.PATH_USER_PROFILE, "userId" to MMKVProvider.userId)
+                       // "个人信息" -> jump(RouterPath.PATH_USER_PROFILE, "userId" to MMKVProvider.userId)
+                        "个人信息" -> jump(RouterPath.PATH_USER_PROFILE_NEW, "userId" to MMKVProvider.userId)
+
                         "我的房间" -> jumpRoom(roomType = Constants.ROOM_TYPE_PARTY)
                         "我的等级" -> jump(RouterPath.PATH_MY_LEVEL)
                         "我的仓库" -> jump(RouterPath.PATH_MY_WAREHOUSE)

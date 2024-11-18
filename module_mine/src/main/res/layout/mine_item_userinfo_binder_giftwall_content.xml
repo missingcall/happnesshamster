@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+    </data>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:background="@color/color_232323">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvGift"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/mine_layout_profile_gift_item_new"
+                app:spanCount="4"
+                android:nestedScrollingEnabled="false"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

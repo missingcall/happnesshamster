@@ -128,6 +128,8 @@ object RouterPath {
     //个人主页
     const val PATH_USER_PROFILE = PATH_BASE + "user_profile"
 
+    const val PATH_USER_PROFILE_NEW = PATH_BASE + "user_profile_new2"
+
     //编辑资料页面
     const val PATH_EDIT_PROFILE = "djs://pages/mine_edit_profile"
 
