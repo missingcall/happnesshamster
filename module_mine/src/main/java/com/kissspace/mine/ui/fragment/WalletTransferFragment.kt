@@ -30,7 +30,7 @@ import com.kissspace.util.activityresult.registerForStartActivityResult
  *
  * @Author: nicko
  * @CreateDate: 2023/1/6 15:40
- * @Description:转赠页面 002松子转赠 003钻石转赠
+ * @Description:转赠页面 017松子转赠 018钻石转赠
  *
  */
 class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transfer) {
@@ -121,7 +121,7 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
             }
 
             when (type) {
-                Constants.HamsterPayType.PINE_NUT -> {
+                Constants.HamsterTransferAccountsType.PINE_NUTS -> {
                     if (mViewModel.transferUserNumber.value!! > mViewModel.walletModel.value?.accountBalance!!) {
                         com.kissspace.common.util.customToast("松子数量不足")
                     } else {

@@ -142,6 +142,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             queryDayIncome()
             getHamsterStatus(true)
             getCurrentHamsterSkin()
+            getMoney()
         }
     }
 
