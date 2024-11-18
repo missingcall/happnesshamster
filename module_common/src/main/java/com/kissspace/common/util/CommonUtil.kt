@@ -902,7 +902,7 @@ fun getGift(key: String?, value: Any?): MutableList<Pair<Any?, String?>>? {
             val params: MutableList<Pair<Int?, String?>> = mutableListOf()
             params.add(
                 Pair(
-                    R.mipmap.common_icon_firstcharge_coin, "金币x${(value as Double).toInt()}"
+                    R.mipmap.common_icon_coin2, "钻石x${(value as Double).toInt()}"
                 )
             )
             return params.toMutableList()

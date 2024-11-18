@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -21,8 +22,8 @@
         <ImageView
             android:id="@+id/iv_avatar"
             loadCircleImage="@{m.profilePath}"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="11dp"
             android:scaleType="centerCrop"
@@ -62,7 +63,8 @@
                 android:maxLines="1"
                 android:text="@{m.nickname}"
                 android:textColor="@color/white"
-                android:textSize="15sp" />
+                tools:text="xxxxx"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <TextView
@@ -71,17 +73,25 @@
             android:layout_height="wrap_content"
             android:text='@{"ID："+m.displayId}'
             android:textColor="@color/color_80FFFFFF"
-            android:textSize="13sp"
+            android:textSize="12sp"
+            tools:text="xxxxx"
             app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
             app:layout_constraintStart_toStartOf="@id/layout_name"
             app:layout_constraintTop_toBottomOf="@id/layout_name" />
 
-        <ImageView
+        <com.ruffian.library.widget.RTextView
             android:id="@+id/tv_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="71dp"
+            android:layout_height="26dp"
+            app:corner_radius="15dp"
             android:layout_marginEnd="10dp"
-            android:src="@mipmap/setting_icon_cancel_blacklist"
+            app:background_normal="@array/button_color_bg"
+            app:gradient_orientation="LEFT_RIGHT"
+            app:gradient_type="linear"
+            android:text="解除"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_avatar" />
@@ -91,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginStart="74dp"
-            android:background="@color/color_494B70"
+            android:background="@color/color_161616"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

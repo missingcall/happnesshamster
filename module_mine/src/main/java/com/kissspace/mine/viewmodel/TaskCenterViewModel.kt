@@ -3,6 +3,7 @@ package com.kissspace.mine.viewmodel
 import androidx.databinding.ObservableField
 import com.kissspace.common.base.BaseViewModel
 import com.kissspace.common.model.UserProfileBean
+import com.kissspace.common.model.task.HamsterTaskInfo
 import com.kissspace.common.model.task.TaskCenterListModel
 import com.kissspace.mine.http.MineApi
 import com.kissspace.network.net.Method
@@ -23,4 +24,15 @@ class TaskCenterViewModel : BaseViewModel() {
             onError?.invoke()
         })
     }
+
+
+
+    fun requestHamsterTaskList(onSuccess: ((List<HamsterTaskInfo>) -> Unit)?, onError: (() -> Unit)?=null) {
+        request<List<HamsterTaskInfo>>(MineApi.API_TASK_HAMSTER, Method.GET, onSuccess = {
+            onSuccess?.invoke(it)
+        }, onError = {
+            onError?.invoke()
+        })
+    }
+
 }

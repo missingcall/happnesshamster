@@ -137,6 +137,9 @@ object MineApi {
     //任务中心
     const val API_TASK_CENTER = "/hamster-task/taskInfo/selectTaskInfoList"
 
+    //仓鼠任务
+    const val API_TASK_HAMSTER = "/hamster-user/daily/job/checkVersion"
+
     //领取任务奖励
     const val API_RECEIVE_TASK_REWARD = "/hamster-task/taskInfo/receiveTaskReward"
 
