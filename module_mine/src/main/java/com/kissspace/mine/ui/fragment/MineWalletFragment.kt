@@ -86,6 +86,7 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
         mBinding.iconNutsNum.text = when (mType) {
             Constants.HamsterWalletType.PINE_CONE.type -> mViewModel.walletModel.value?.diamond.toString()
             Constants.HamsterWalletType.PINE_NUT.type -> mViewModel.walletModel.value?.accountBalance.toString()
+            Constants.HamsterWalletType.DIAMONDS.type -> mViewModel.walletModel.value?.coin.toString()
             else -> mViewModel.walletModel.value?.coin.toString()
         }
 
@@ -96,6 +97,7 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
             mBinding.iconNutsNum.text = when (mType) {
                 Constants.HamsterWalletType.PINE_CONE.type -> mViewModel.walletModel.value?.diamond.toString()
                 Constants.HamsterWalletType.PINE_NUT.type -> mViewModel.walletModel.value?.accountBalance.toString()
+                Constants.HamsterWalletType.DIAMONDS.type -> mViewModel.walletModel.value?.coin.toString()
                 else -> mViewModel.walletModel.value?.coin.toString()
             }
         }
@@ -103,59 +105,40 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
 
     private fun initData() {
 
-        when (mType) {
-            //松果转入转出查询
-            Constants.HamsterWalletType.PINE_CONE.type -> {
-                mViewModel.queryCollectRecordList("", "", 0, 5, onSuccess = {
-                    //重置跑马灯状态
-                    list.clear()
-                    if (mBinding.mtvTransfer.isFlipping) {
-                        mBinding.mtvTransfer.stopFlipping()
-                    }
-
-                    list.add(
-                        SpanUtils().appendImage(R.mipmap.icon_hamster_clock).append("松果转入/转出记录").create()
-                    )
-                    var s = ""
-                    for (record in it?.records!!) {
-                        when (record.coinType) {
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_ALL -> s = getString(R.string.coinType_all)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_001 -> s = getString(R.string.coinType_001)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_002 -> s = getString(R.string.coinType_002)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_003 -> s = getString(R.string.coinType_003)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_004 -> s = getString(R.string.coinType_004)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_005 -> s = getString(R.string.coinType_005)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_006 -> s = getString(R.string.coinType_006)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_007 -> s = getString(R.string.coinType_007)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_008 -> s = getString(R.string.coinType_008)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_009 -> s = getString(R.string.coinType_009)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_010 -> s = getString(R.string.coinType_010)
-                            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_011 -> s = getString(R.string.coinType_011)
-
-                        }
-                        list.add(s + " :   " + record.coinNumber)
-                    }
-
-
-                    marqueeFactory?.setData(list)
-                    mBinding.mtvTransfer.startFlipping()
-
-                    marqueeFactory?.setOnItemClickListener { _, _ ->
-                        //                ToastUtils.showShort(holder.data)
-                        //跳转转入转出记录页面
-                        jump(RouterPath.PATH_TRANSFER_RECORDS)
-                    }
-                })
-
-                //获取松果余额
-
-
+        mViewModel.queryNumChangeRecord(
+            when (mType) {
+                Constants.HamsterWalletType.PINE_CONE.type -> "002"
+                Constants.HamsterWalletType.PINE_NUT.type -> "004"
+                Constants.HamsterWalletType.DIAMONDS.type -> "001"
+                else -> "002"
+            }, null, null, null, 1, 10
+        ) {
+            //重置跑马灯状态
+            list.clear()
+            if (mBinding.mtvTransfer.isFlipping) {
+                mBinding.mtvTransfer.stopFlipping()
             }
-            //TODO 松子转入转出查询 最好的情况就是原接口加个参数type 请求到的就是松果/松子/钻石
-            Constants.HamsterWalletType.PINE_NUT.type -> LogUtils.d("002")
 
-            //TODO 钻石转入转出查询
-            else -> LogUtils.d("000")
+            list.add(
+                SpanUtils().appendImage(R.mipmap.icon_hamster_clock).append(when(mType){
+                    Constants.HamsterWalletType.PINE_CONE.type -> "松果转入/转出记录"
+                    Constants.HamsterWalletType.PINE_NUT.type -> "松子转入/转出记录"
+                    Constants.HamsterWalletType.DIAMONDS.type -> "钻石转入/转出记录"
+                    else -> "松果转入/转出记录"
+                }).create()
+            )
+            for (record in it?.list!!) {
+                list.add(record.amount)
+            }
+
+            marqueeFactory?.setData(list)
+            mBinding.mtvTransfer.startFlipping()
+
+            marqueeFactory?.setOnItemClickListener { _, _ ->
+                //                ToastUtils.showShort(holder.data)
+                //跳转转入转出记录页面
+                jump(RouterPath.PATH_TRANSFER_RECORDS , "currency" to mType)
+            }
         }
 
 
@@ -178,7 +161,6 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
 
 
     }
-
 
 
 }

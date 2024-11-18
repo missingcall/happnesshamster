@@ -231,6 +231,9 @@ object MineApi {
     //分页获取采集记录列表 即松果/松子/钻石 转入转出
     const val API_QUERY_COLLECT_RECORD_LIST = "/hamster-center/hamsterMarket/queryColletRecordList"
 
+    //记录查询
+    const val API_CENTER_HMS_NUM_QUERY_NUM_CHANGE_RECORD = "/hamster-center/hms/num/queryNumChangeRecord"
+
     //获取用户当前每日可获得松果
     const val API_HAMSTER_MARKET_QUERY_DAY_INCOME = "/hamster-center/hamsterMarket/queryDayIncome"
 

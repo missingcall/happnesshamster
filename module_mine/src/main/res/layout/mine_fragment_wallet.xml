@@ -18,14 +18,30 @@
         android:layout_marginBottom="10dp">
 
 
-        <com.kissspace.common.widget.MarqueeView
-            android:id="@+id/mtv_transfer"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clTransfer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="11dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:bl_corners_radius="45dp"
+            app:bl_solid_color="@color/color_32363B"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.kissspace.common.widget.MarqueeView
+                android:id="@+id/mtv_transfer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <ImageView
             android:id="@+id/icon_nuts"

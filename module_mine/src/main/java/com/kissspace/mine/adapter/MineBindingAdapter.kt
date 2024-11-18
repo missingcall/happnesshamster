@@ -30,8 +30,12 @@ import androidx.core.text.buildSpannedString
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.SpanUtils
 import com.blankj.utilcode.util.StringUtils
+import com.blankj.utilcode.util.TimeUtils
+import com.kissspace.common.util.format.DateFormat
 import com.ruffian.library.widget.RTextView
 import com.kissspace.common.util.format.Format
+import com.kissspace.common.util.formatDate
+import java.time.temporal.TemporalAmount
 
 
 object MineBindingAdapter {
@@ -132,11 +136,11 @@ object MineBindingAdapter {
     @BindingAdapter("dressUpBtnState2", requireAll = false)
     fun dressUpBtnState2(tv: RTextView, state: String?) {
         if (state == "001") {
-            tv.helper.backgroundColorNormalArray = intArrayOf(Color.parseColor("#36398A"),Color.parseColor("#36398A"))
-            tv.text="取消佩戴"
-         } else {
-            tv.helper.backgroundColorNormalArray = intArrayOf(Color.parseColor("#936DDE"),Color.parseColor("#6C74FB"))
-            tv.text="佩戴"
+            tv.helper.backgroundColorNormalArray = intArrayOf(Color.parseColor("#36398A"), Color.parseColor("#36398A"))
+            tv.text = "取消佩戴"
+        } else {
+            tv.helper.backgroundColorNormalArray = intArrayOf(Color.parseColor("#936DDE"), Color.parseColor("#6C74FB"))
+            tv.text = "佩戴"
         }
     }
 
@@ -563,25 +567,20 @@ object MineBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("flowKindCoinType", requireAll = false)
-    fun flowKindCoinType(textView: TextView, coinType: String) {
-        var s = ""
-        when (coinType) {
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_ALL -> s = StringUtils.getString(R.string.coinType_all)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_001 -> s = StringUtils.getString(R.string.coinType_001)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_002 -> s = StringUtils.getString(R.string.coinType_002)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_003 -> s = StringUtils.getString(R.string.coinType_003)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_004 -> s = StringUtils.getString(R.string.coinType_004)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_005 -> s = StringUtils.getString(R.string.coinType_005)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_006 -> s = StringUtils.getString(R.string.coinType_006)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_007 -> s = StringUtils.getString(R.string.coinType_007)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_008 -> s = StringUtils.getString(R.string.coinType_008)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_009 -> s = StringUtils.getString(R.string.coinType_009)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_010 -> s = StringUtils.getString(R.string.coinType_010)
-            Constants.CollectRecordMode.API_HAMSTER_MARKET_RECORD_LIST_TYPE_011 -> s = StringUtils.getString(R.string.coinType_011)
-
+    @BindingAdapter("amountColor", requireAll = false)
+    fun amountColor(textView: TextView, amount: String) {
+        if (amount.toDouble() >= 0) {
+            textView.setTextColor(ColorUtils.getColor(com.kissspace.module_common.R.color.color_FDC120))
+        }else {
+            textView.setTextColor(ColorUtils.getColor(com.kissspace.module_common.R.color.color_FE5F55))
         }
-        textView.text = s
+        textView.text = amount
+    }
+
+    @JvmStatic
+    @BindingAdapter("createTimeFormat", requireAll = false)
+    fun createTimeFormat(textView: TextView, createTime: Long) {
+        textView.text = createTime.formatDate(DateFormat.YYYY_MM_DD_HH_MM_SLASH)
     }
 
 

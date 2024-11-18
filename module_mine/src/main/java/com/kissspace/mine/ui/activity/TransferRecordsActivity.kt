@@ -8,8 +8,10 @@ import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.binding.dataBinding
+import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.router.RouterPath
+import com.kissspace.common.router.parseIntent
 import com.kissspace.mine.ui.fragment.GoodsListFragment
 import com.kissspace.mine.ui.fragment.TransferRecordsFragment
 import com.kissspace.mine.ui.fragment.WalletCoinGainFragment
@@ -21,7 +23,7 @@ import com.kissspace.util.immersiveStatusBar
 
 @Router(path = RouterPath.PATH_TRANSFER_RECORDS)
 class TransferRecordsActivity : BaseActivity(R.layout.mine_activity_transfer_records) {
-
+    private val currency by parseIntent<String>()
     private val mBinding by dataBinding<MineActivityTransferRecordsBinding>()
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -38,9 +40,10 @@ class TransferRecordsActivity : BaseActivity(R.layout.mine_activity_transfer_rec
             override fun getItemCount(): Int = 3
 
             override fun createFragment(position: Int) = when(position) {
-                1 -> TransferRecordsFragment.newInstance("001")
-                2 -> TransferRecordsFragment.newInstance("002")
-                else -> TransferRecordsFragment.newInstance("000")
+                0 -> TransferRecordsFragment.newInstance(currency,"0")
+                1 -> TransferRecordsFragment.newInstance(currency,"1")
+                2 -> TransferRecordsFragment.newInstance(currency,"2")
+                else -> TransferRecordsFragment.newInstance(currency,"0")
             }
         }
 

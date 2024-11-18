@@ -223,20 +223,6 @@ object Constants {
 
     }
 
-    enum class HamsterWalletType(val type: String, val typeName: String) {
-        //松果
-        PINE_CONE("001", "松果"),
-
-        //松子
-        PINE_NUT("002", "松子"),
-
-        //钻石
-        DIAMONDS("003", "钻石"),
-
-        //勋章
-        MEDAL("004", "勋章")
-
-    }
 
 
     enum class SuccessType(val type: String) {
@@ -651,27 +637,20 @@ object Constants {
         }
     }
 
-    /**
-     * 	松果类型：001：松果领取；002：松果转入；003：存折获取；004：市场消费；005：购买皮肤头像；006：任务获得；007：邀新获得；008：养成消费；009 松果转出；010 管理员添加；011 管理员扣除
-     */
-    class CollectRecordMode {
-        companion object {
 
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_ALL = "000"; //所有记录
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_001 = "001"; //松果领取
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_002 = "002"; //松果转入
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_003 = "003"; //存折获取
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_004 = "004"; //市场消费
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_005 = "005"; //购买皮肤头像
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_006 = "006"; //任务获得
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_007 = "007"; //邀新获得
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_008 = "008"; //养成消费
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_009 = "009"; //松果转出
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_010 = "010"; //管理员添加
-            const val API_HAMSTER_MARKET_RECORD_LIST_TYPE_011 = "011"; //管理员扣除
+    enum class HamsterWalletType(val type: String, val typeName: String) {
+        //松果
+        PINE_CONE("001", "松果"),
 
+        //松子
+        PINE_NUT("002", "松子"),
 
-        }
+        //钻石
+        DIAMONDS("003", "钻石"),
+
+        //勋章
+        MEDAL("004", "勋章")
+
     }
 
     /**

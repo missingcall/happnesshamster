@@ -490,6 +490,44 @@ class WalletViewModel : BaseViewModel() {
             })
     }
 
+    /**
+     * 记录查询V1.2.0
+
+    currency	币种 002 松果 004 松子 001 钻石
+    startTime	开始时间,字符串类型(yyyy-MM-dd HH:mm:ss格式)
+    endTime	    结束时间,字符串类型(yyyy-MM-dd HH:mm:ss格式)
+    flowKind	收入类型 001 收入 002 支出
+    pageNum	    页数,示例值(1)
+    pageSize	每页条数,示例值(10)
+     */
+
+    fun queryNumChangeRecord(
+        currency: String?,
+        startTime: String?,
+        endTime: String?,
+        flowKind: String?,
+        pageNum: Int,
+        pageSize: Int,
+        onSuccess: ((QueryNumChangeRecordModel?) -> Unit)?
+    ) {
+        val param = mutableMapOf<String, Any?>()
+        param["currency"] = currency
+        param["startTime"] = startTime
+        param["endTime"] = endTime
+        param["flowKind"] = flowKind
+        param["pageNum"] = pageNum
+        param["pageSize"] = pageSize
+        request<QueryNumChangeRecordModel?>(MineApi.API_CENTER_HMS_NUM_QUERY_NUM_CHANGE_RECORD,
+            Method.GET,
+            param,
+            onSuccess = {
+                onSuccess?.invoke(it)
+            },
+            onError = {
+                customToast(it.message)
+            })
+    }
+
     //获取仓鼠养成培养消费面板
     fun queryCultivationPanel(block: ((CultivationPanelModel?) -> Unit)?) {
         val param = mutableMapOf<String, Any?>()
