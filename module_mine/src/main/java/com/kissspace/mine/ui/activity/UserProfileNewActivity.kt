@@ -45,7 +45,7 @@ import kotlinx.coroutines.launch
  * @Description: 个人主页
  *
  */
-@Router(path = RouterPath.PATH_USER_PROFILE)
+//@Router(path = RouterPath.PATH_USER_PROFILE)
 class UserProfileNewActivity : BaseActivity(R.layout.mine_activity_mine_profile_new) {
     private val userId by parseIntent<String>()
     private val mBinding by viewBinding<MineActivityMineProfileNewBinding>()

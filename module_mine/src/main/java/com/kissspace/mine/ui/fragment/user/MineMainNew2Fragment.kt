@@ -2,6 +2,7 @@ package com.kissspace.mine.ui.fragment.user
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -9,6 +10,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ConcatAdapter
 import com.kissspace.common.base.BaseLazyFragment
 import com.kissspace.common.binding.dataBinding
+import com.kissspace.common.ext.safeClick
+import com.kissspace.common.router.RouterPath
+import com.kissspace.common.router.jump
+import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.mine.ui.fragment.user.adapter.UserInfoAboutMeAdapter
 import com.kissspace.mine.ui.fragment.user.adapter.UserInfoCarAdapter
 import com.kissspace.mine.ui.fragment.user.adapter.UserInfoGiftTitleAdapter
@@ -16,8 +21,6 @@ import com.kissspace.mine.ui.fragment.user.adapter.UserInfoGiftWallAdapter
 import com.kissspace.mine.viewmodel.UserProfileViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineFragmentUserInfoPageNewBinding
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 
 /**
@@ -26,6 +29,10 @@ import kotlinx.coroutines.launch
  * @create: 2024-11-18 11:48
  **/
 class MineMainNew2Fragment : BaseLazyFragment(R.layout.mine_fragment_user_info_page_new) {
+
+    private val userId: String? by lazy { arguments?.getString("userId") }
+
+
     private val mBinding by dataBinding<MineFragmentUserInfoPageNewBinding>()
 
     private val mViewModel by activityViewModels<UserProfileViewModel>()
@@ -63,18 +70,25 @@ class MineMainNew2Fragment : BaseLazyFragment(R.layout.mine_fragment_user_info_p
 
     override fun lazyInitView() {
         val concatAdapter =
-            ConcatAdapter(userInfoAboutMeAdapter, userInfoCarAdapter, userInfoGiftTitleAdapter,userInfoGiftWallAdapter)
+            ConcatAdapter(
+                userInfoAboutMeAdapter,
+                userInfoCarAdapter,
+                userInfoGiftTitleAdapter,
+                userInfoGiftWallAdapter
+            )
+
         mBinding.rvUserInfo.adapter = concatAdapter
     }
 
     override fun lazyLoadData() {
     }
 
+    override fun lazyClickListener() {
+        super.lazyClickListener()
+    }
+
     override fun lazyDataChangeListener() {
         super.lazyDataChangeListener()
-
-
-
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
@@ -86,7 +100,8 @@ class MineMainNew2Fragment : BaseLazyFragment(R.layout.mine_fragment_user_info_p
                             list = mutableListOf(
                                 UserInfoAboutMeAdapter.UserInfoAboutMeModel.UserInfoKeyValue(
                                     "UID：",
-                                    data.displayId
+                                    data.displayId,
+                                    canCopy = true
                                 ),
                                 UserInfoAboutMeAdapter.UserInfoAboutMeModel.UserInfoKeyValue(
                                     "出生日期：",
@@ -96,7 +111,8 @@ class MineMainNew2Fragment : BaseLazyFragment(R.layout.mine_fragment_user_info_p
                                     "个性签名：",
                                     data.getActualPersonalSignature()
                                 )
-                            )
+                            ),
+                            userInfo = data
                         )
                     )
 
@@ -119,7 +135,8 @@ class MineMainNew2Fragment : BaseLazyFragment(R.layout.mine_fragment_user_info_p
                         list.add(UserInfoGiftWallAdapter.UserInfoGiftWallContentModel(it))
                     }
 
-                    userInfoGiftTitleAdapter.models = mutableListOf(UserInfoGiftTitleAdapter.UserInfoGiftWallTitleModel())
+                    userInfoGiftTitleAdapter.models =
+                        mutableListOf(UserInfoGiftTitleAdapter.UserInfoGiftWallTitleModel())
                     userInfoGiftWallAdapter.models = list
                 }
             }

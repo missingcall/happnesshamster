@@ -1,6 +1,9 @@
 package com.kissspace.mine.ui.activity.user
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -16,18 +19,25 @@ import com.hjq.bar.TitleBar
 import com.kissspace.common.adapter.BannerAdapter
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.config.Constants
+import com.kissspace.common.ext.canSendMsgToOther
+import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setMarginStatusBar
+import com.kissspace.common.model.UserProfileBean
 import com.kissspace.common.router.RouterPath
+import com.kissspace.common.router.jump
 import com.kissspace.common.router.parseIntent
 import com.kissspace.common.util.jumpRoom
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.util.previewPicture
+import com.kissspace.common.widget.UserLevelIconView
 import com.kissspace.mine.ui.fragment.user.MineMainNew2Fragment
 import com.kissspace.mine.viewmodel.UserProfileViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineActivityMineProfileNew2Binding
 import com.kissspace.util.dp
 import com.kissspace.util.immersiveStatusBar
+import com.kissspace.util.loadImage
+import com.kissspace.util.orZero
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.RectangleIndicator
 import kotlinx.coroutines.launch
@@ -37,7 +47,7 @@ import kotlinx.coroutines.launch
  * @author: yxt
  * @create: 2024-11-18 11:00
  **/
-@Router(path = RouterPath.PATH_USER_PROFILE_NEW)
+@Router(path = RouterPath.PATH_USER_PROFILE)
 class UserProfileNew2Activity : BaseActivity(R.layout.mine_activity_mine_profile_new2) {
     private val mBinding by viewBinding<MineActivityMineProfileNew2Binding>()
     private val mViewModel by viewModels<UserProfileViewModel>()
@@ -47,7 +57,7 @@ class UserProfileNew2Activity : BaseActivity(R.layout.mine_activity_mine_profile
         immersiveStatusBar(false)
         mBinding.titleBar.setMarginStatusBar()
         initTitleBar()
-
+        initOptionView()
 
         mBinding.viewPager.apply {
             adapter = object : FragmentStateAdapter(this@UserProfileNew2Activity) {
@@ -85,6 +95,28 @@ class UserProfileNew2Activity : BaseActivity(R.layout.mine_activity_mine_profile
                 }
             }
         })
+    }
+
+    private fun initOptionView(){
+        mBinding.tvEdit.safeClick {
+            jump(RouterPath.PATH_EDIT_PROFILE)
+        }
+
+        mBinding.tvFollow.safeClick {
+            mViewModel.followNew{
+               mBinding.tvFollow.text =  if (it) "取消关注" else "关注"
+            }
+        }
+
+        mBinding.tvChat.safeClick {
+                if(canSendMsgToOther()){
+                    mViewModel.userInfo.get()?.let {
+                        jump(RouterPath.PATH_CHAT, "account" to it.accid, "userId" to it.userId)
+                    }
+                }
+
+        }
+
     }
 
 
@@ -129,8 +161,50 @@ class UserProfileNew2Activity : BaseActivity(R.layout.mine_activity_mine_profile
                                 )
                         )
                     }
+                    mBinding.viewShade.visibility=View.VISIBLE
+                    //底部操作View
+                    mBinding.flBottom.visibility = View.VISIBLE
+                    if (MMKVProvider.userId == userId) {
+                        mBinding.tvEdit.visibility = View.VISIBLE
+                        mBinding.tvFollow.visibility= View.GONE
+                        mBinding.flChat.visibility= View.GONE
+
+                    } else {
+                        mBinding.tvEdit.visibility = View.GONE
+                        mBinding.tvFollow.visibility= View.VISIBLE
+                        mBinding.flChat.visibility= View.VISIBLE
+                        mBinding.tvFollow.text = if (it.attention) "取消关注" else "关注"
+                    }
+
+                    showUserMedal(mBinding.flowLayout,it)
                 }
             }
         }
     }
+
+    fun showUserMedal(layout: com.nex3z.flowlayout.FlowLayout, model: UserProfileBean?) {
+        model?.let {
+            layout.removeAllViews()
+            if (it.consumeLevel.orZero() > 0) {
+                val wealthLevel = UserLevelIconView(layout.context)
+                wealthLevel.setLeveCount(UserLevelIconView.LEVEL_TYPE_EXPEND, it.consumeLevel)
+                layout.addView(wealthLevel)
+            }
+            if (it.charmLevel.orZero() > 0) {
+                val charmLevel = UserLevelIconView(layout.context)
+                charmLevel.setLeveCount(UserLevelIconView.LEVEL_TYPE_INCOME, it.charmLevel!!)
+                layout.addView(charmLevel)
+            }
+            val lp =
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 19.dp.toInt())
+            it.medalList?.forEach { that ->
+                val image = ImageView(layout.context)
+                image.adjustViewBounds = true
+                image.layoutParams = lp
+                image.loadImage(that.url)
+                layout.addView(image)
+            }
+        }
+    }
+
 }

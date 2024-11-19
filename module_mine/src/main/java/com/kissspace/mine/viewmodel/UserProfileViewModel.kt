@@ -8,6 +8,7 @@ import com.kissspace.common.router.jump
 import com.kissspace.common.model.CommonGiftInfo
 import com.kissspace.common.model.UserProfileBean
 import com.kissspace.common.router.RouterPath
+import com.kissspace.common.util.customToast
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.mine.http.MineApi
 import com.kissspace.network.net.Method
@@ -32,10 +33,10 @@ class UserProfileViewModel : BaseViewModel() {
         })
     }
 
-    private fun requestAllGift(gifts:List<CommonGiftInfo>) {
+    private fun requestAllGift(gifts: List<CommonGiftInfo>) {
         val receiveGiftIds = gifts.map { it.giftId }
         request<MutableList<CommonGiftInfo>>(MineApi.API_QUERY_ALL_GIFT, Method.GET, onSuccess = {
-            it.removeAll {t-> receiveGiftIds.contains(t.giftId) }
+            it.removeAll { t -> receiveGiftIds.contains(t.giftId) }
             viewModelScope.launch { giftListEvent.emit(it) }
         })
     }
@@ -49,6 +50,7 @@ class UserProfileViewModel : BaseViewModel() {
         jump(RouterPath.PATH_EDIT_PROFILE)
     }
 
+
     fun follow() {
         userInfo.get()?.let {
             if (it.attention) {
@@ -58,26 +60,45 @@ class UserProfileViewModel : BaseViewModel() {
             }
 
         }
-
     }
 
-    private fun followUser() {
+    /**
+     * invoke true 关注成功  false 取关成功
+     */
+    fun followNew(invoke: (Boolean)->Unit= {}) {
+        userInfo.get()?.let {
+            if (it.attention) {
+                cancelFollow(invoke)
+            } else {
+                followUser(invoke)
+            }
+        }
+    }
+
+
+    private fun followUser(success: (Boolean) -> Unit={}) {
         val param = mutableMapOf<String, Any?>("userId" to userInfo.get()?.userId)
         request<Int>(CommonApi.API_FOLLOW_USER, Method.POST, param, onSuccess = {
             val user = userInfo.get()
             user?.attention = true
             userInfo.set(user)
             userInfo.notifyChange()
+            success.invoke(true)
+        }, onError = {
+            customToast(it.errorMsg)
         })
     }
 
-    private fun cancelFollow() {
+    private fun cancelFollow(success: (Boolean) -> Unit={}) {
         val param = mutableMapOf<String, Any?>("userId" to userInfo.get()?.userId)
         request<Int>(CommonApi.API_CANCEL_FOLLOW_USER, Method.GET, param, onSuccess = {
             val user = userInfo.get()
             user?.attention = false
             userInfo.set(user)
             userInfo.notifyChange()
+            success.invoke(false)
+        }, onError = {
+            customToast(it.errorMsg)
         })
     }
 }

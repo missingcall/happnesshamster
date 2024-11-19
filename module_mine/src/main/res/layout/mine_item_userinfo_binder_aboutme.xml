@@ -12,6 +12,58 @@
         android:layout_height="wrap_content"
         android:background="@color/color_232323"
         android:orientation="vertical">
+        <com.ruffian.library.widget.RConstraintLayout
+            android:id="@+id/rcRoomRoot"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="15dp"
+            app:background_normal="@color/color_383B44"
+            app:corner_radius="7dp">
+
+            <TextView
+                android:id="@+id/tvRoomName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="沦陷男友-新厅开业新厅开业新厅开业新厅开业"
+                android:textColor="@color/white"
+                android:layout_marginStart="11dp"
+                app:layout_constraintEnd_toStartOf="@+id/tvRoom"
+                android:textSize="13sp"
+                android:lines="1"
+                android:ellipsize="end"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            <com.ruffian.library.widget.RTextView
+                android:id="@+id/tvGoRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="11dp"
+                app:corner_radius="11dp"
+                app:background_normal="@array/button_color_bg"
+                app:gradient_orientation="LEFT_RIGHT"
+                app:gradient_type="linear"
+                app:icon_normal_left="@mipmap/common_chat_icon_live_status"
+                android:gravity="center"
+                android:text="跟随"
+                android:textSize="11sp"
+                android:textColor="@color/white"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:drawablePadding="2dp"
+                />
+        </com.ruffian.library.widget.RConstraintLayout>
         <TextView
             android:id="@+id/tvAboutMe"
             android:layout_width="wrap_content"

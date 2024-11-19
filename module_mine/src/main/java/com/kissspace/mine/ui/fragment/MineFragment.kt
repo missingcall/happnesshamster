@@ -174,14 +174,18 @@ class MineFragment : BaseFragment(R.layout.fragment_mine_new) {
                 ivInlet.setImageResource(model.icon)
                 clInlet.safeClick {
                     when (model.title) {
-                       // "个人信息" -> jump(RouterPath.PATH_USER_PROFILE, "userId" to MMKVProvider.userId)
-                        "个人信息" -> jump(RouterPath.PATH_USER_PROFILE_NEW, "userId" to MMKVProvider.userId)
+                        "个人信息" -> jump(RouterPath.PATH_USER_PROFILE, "userId" to MMKVProvider.userId)
 
                         "我的房间" -> jumpRoom(roomType = Constants.ROOM_TYPE_PARTY)
                         "我的等级" -> jump(RouterPath.PATH_MY_LEVEL)
                         "我的仓库" -> jump(RouterPath.PATH_MY_WAREHOUSE)
                         "任务中心" -> jump(RouterPath.PATH_TASK_CENTER_LIST)
-                        "活动中心" -> LogUtils.d("活动中心")
+                        "活动中心" -> jump(
+                            RouterPath.PATH_WEBVIEW,
+                            "url" to getH5Url(Constants.H5.centerActionUrl, needToken = true),
+                            "showTitle" to true
+                        )
+
                         "装扮商城" -> jump(RouterPath.PATH_STORE)
                         "邀请好友" -> jump(RouterPath.PATH_INVITE)
                         "黑名单" -> jump(RouterPath.PATH_BLACK_LIST)

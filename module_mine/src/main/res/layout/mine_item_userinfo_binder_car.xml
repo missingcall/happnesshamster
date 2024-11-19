@@ -7,7 +7,7 @@
 
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:background="@color/color_232323"
         android:layout_height="131dp"
@@ -36,29 +36,45 @@
               android:layout_marginEnd="15dp"
               app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
               android:orientation="horizontal"
+              android:visibility="gone"
+              tools:visibility="visible"
               android:nestedScrollingEnabled="false"
               tools:listitem="@layout/mine_layout_user_profile_car_item_new"
               />
     </LinearLayout>
 
         <TextView
+            android:id="@+id/tvEmptyHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="您还没有坐架，快去购买一辆吧"
+            android:textColor="@color/color_949499"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+        <TextView
             android:id="@+id/tvBuyCar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:drawableEnd="@mipmap/common_icon_arrow_right"
             android:drawablePadding="4dp"
             android:gravity="center_vertical"
             android:text="@string/mine_buy_car"
-            android:textColor="@color/white"
+            android:textColor="@color/color_5A60FF"
             android:textSize="14sp"
-            android:layout_gravity="center"
             android:visibility="gone"
             tools:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_no_car"
-            app:drawableTint="@color/color_FFFD62" />
+            app:layout_constraintTop_toBottomOf="@+id/tvEmptyHint"
+            app:drawableTint="@color/color_5A60FF"
+            />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

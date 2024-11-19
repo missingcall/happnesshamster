@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/message_follow_room"
-                app:icon_normal_left="@mipmap/message_chat_icon_live_status"
+                app:icon_normal_left="@mipmap/common_chat_icon_live_status"
                 android:textColor="@color/white"
                 android:drawablePadding="3dp"
                 android:textSize="9sp"
