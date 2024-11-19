@@ -297,7 +297,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             }
 
         }, onError = {
-            //TODO 测试数据
+            //测试数据
             var game1: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
                 "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
                 "1",
@@ -376,8 +376,8 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             onBind {
                 findView<ConstraintLayout>(R.id.cl_quick_item_bg).safeClick {
                     val model = getModel<FindHamsterQuickJumpListItem>()
-                    //TODO 跳转快捷游戏页面
-                    customToast("pso" + this.position)
+                    //跳转快捷游戏页面
+//                    customToast("pso" + this.position)
                     jump(RouterPath.PATH_WEBVIEW, "url" to model.jumpDescribe)
                 }
             }

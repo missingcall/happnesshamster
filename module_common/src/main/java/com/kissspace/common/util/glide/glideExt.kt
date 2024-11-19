@@ -17,7 +17,6 @@ import com.kissspace.module_util.R
 
 /**
  * 文件名：glideExt <br/>
- * 描述：TODO
  *
  * @author yxt
  * @since 2022/07/06 15:25

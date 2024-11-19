@@ -61,7 +61,7 @@ class HomeCleanDialog : BaseDialogFragment<DialogHomeCleanBinding>(DialogHomeCle
 
         }
 
-        //TODO 需要配置消耗道具字段
+        //需要配置消耗道具字段
         mViewModel.queryCultivationPanel {
 
         }
