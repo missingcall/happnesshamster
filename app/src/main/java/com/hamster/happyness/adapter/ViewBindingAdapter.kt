@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.SpanUtils
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
+import com.kissspace.common.config.Constants
 import com.kissspace.common.model.InfoListModel
 import com.kissspace.common.model.RoomListBannerBean
 import com.kissspace.common.model.RoomListBean
@@ -157,15 +158,25 @@ object ViewBindingAdapter {
 
     }
 
+    @JvmStatic
+    @BindingAdapter("productStatusIsVisible")
+    fun productStatusIsVisible(view: View, status: String) {
+        if(status == Constants.HamsterGoodsStatusType.SOLD_OUT){
+            view.visibility = View.VISIBLE
+        }else {
+            view.visibility = View.GONE
+        }
+    }
+
     /**
      * 设置NiceImageView边框
      */
     @JvmStatic
     @BindingAdapter("setBorderBackground")
     fun setBorderBackground(niceImageView: NiceImageView, isBorder: Boolean) {
-        if(niceImageView.isSelected){
+        if (niceImageView.isSelected) {
             niceImageView.setBorderWidth(2)
-        }else {
+        } else {
             niceImageView.setBorderWidth(0)
         }
     }
@@ -413,6 +424,22 @@ object ViewBindingAdapter {
                 else -> com.kissspace.module_mine.R.mipmap.icon_hamster_medal_small
             }
         )
+    }
+
+
+    /**
+     * 首页快捷跳转
+     * 状态 是否应用 001 启用 002 未启用 003 删除
+     */
+    @JvmStatic
+    @BindingAdapter("quickJumpStatus", requireAll = false)
+    fun quickJumpStatus(view: View, status: String) {
+        when (status) {
+            "001" -> view.visibility = View.VISIBLE
+            "002" -> view.visibility = View.GONE
+            "003" -> view.visibility = View.GONE
+            else -> view.visibility = View.VISIBLE
+        }
     }
 
 

@@ -2,6 +2,7 @@ package com.hamster.happyness.ui.fragment
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -90,6 +91,8 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
                         }
 
                     }
+
+                    findView<TextView>(com.hamster.happyness.R.id.tv_sold_out).safeClick { com.kissspace.common.util.customToast("已售罄") }
 
 
                 }

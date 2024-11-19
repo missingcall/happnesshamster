@@ -6,6 +6,7 @@ import com.kissspace.common.config.Constants
 import com.kissspace.common.model.*
 import com.kissspace.common.util.customToast
 import com.kissspace.mine.http.MineApi
+import com.kissspace.network.exception.AppException
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
 import com.kissspace.network.result.ResultState
@@ -19,6 +20,17 @@ class HamsterViewModel : BaseViewModel() {
     val infoListEvent = _infoListEvent.asSharedFlow()
 
     private val currentlyUseSkinModel = ObservableField<CurrentlyUseSkinModel>()
+
+    /**
+     * 获取首页跳转链接
+     */
+    fun findHamsterQuickJumpList(onSuccess: ((MutableList<FindHamsterQuickJumpListItem>) -> Unit)? , onError: ((AppException) -> Unit) = {} ) {
+        request<MutableList<FindHamsterQuickJumpListItem>>(MineApi.API_CENTER_HAMSTERMARKET_FINDHAMSTERQUICKJUMPLIST, Method.GET, onSuccess = {
+            onSuccess?.invoke(it)
+        }, onError = {
+            onError.invoke(it)
+        })
+    }
 
     /**
      * 用户查看皮肤首页

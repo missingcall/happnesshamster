@@ -10,14 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.layoutmanager.HoverLinearLayoutManager
-import com.drake.brv.utils.*
+import com.drake.brv.utils.addModels
+import com.drake.brv.utils.linear
+import com.drake.brv.utils.setup
 import com.hamster.happyness.R
 import com.hamster.happyness.databinding.FragmentMainHomeV3Binding
-import com.hamster.happyness.http.Api
-import com.hamster.happyness.viewmodel.GameQuickEnterModel
 import com.hamster.happyness.viewmodel.HamsterViewModel
 import com.hamster.happyness.widget.*
-
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
@@ -25,16 +24,15 @@ import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.http.getUserInfo
+import com.kissspace.common.model.FindHamsterQuickJumpListItem
 import com.kissspace.common.model.wallet.HmsInfoModel
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
-import com.kissspace.common.util.*
-import com.kissspace.common.util.mmkv.MMKVProvider
-import com.kissspace.common.widget.CommonConfirmDialog
+import com.kissspace.common.util.copyClip
+import com.kissspace.common.util.countDown
+import com.kissspace.common.util.customToast
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
-import com.kissspace.network.net.Method
-import com.kissspace.network.net.request
 import com.kissspace.util.loadImage
 import com.kissspace.util.logD
 import kotlinx.coroutines.Job
@@ -285,46 +283,71 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     }
 
     private fun initData() {
-        //请求首页游戏接口
-        val param = mutableMapOf<String, Any?>()
-        request<MutableList<GameQuickEnterModel.Game>>(Api.API_GAME_QUICK_ENTER, Method.GET, param, onSuccess = {
-            mBinding.recyclerView.addModels(it)
+        //获取首页跳转链接
+        mHamsterViewModel.findHamsterQuickJumpList(onSuccess = {
+            if (it.isEmpty()) {
+
+            } else {
+                //因为id格式为:9c2c103a0f1f5252489d97a7cc23f29a,不排序了(按id升序,筛选status为001
+                it.filter { item -> item.status == "001" }
+                /*it.sortWith { u1, u2 ->
+                    u1.id.compareTo(u2.id)
+                }*/
+                mBinding.recyclerView.addModels(it)
+            }
+
         }, onError = {
-
             //TODO 测试数据
-            var game1: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
-                gameId = "1",
+            var game1: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
                 "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "财神驾到"
+                "1",
+                "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
+                "财神驾到1",
+                "001",
+                ""
             )
-            var game2: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
-                gameId = "2",
+            var game2: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
                 "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "大逃杀1"
+                "1",
+                "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
+                "财神驾到2",
+                "001",
+                ""
             )
-            var game3: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
-                gameId = "3",
+            var game3: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
                 "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "大逃杀2"
+                "1",
+                "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
+                "财神驾到3",
+                "002",
+                ""
             )
-            var game4: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
-                gameId = "4",
+            var game4: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
                 "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "大逃杀3"
+                "1",
+                "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
+                "财神驾到4",
+                "001",
+                ""
+            )
+            var game5: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
+                "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
+                "1",
+                "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
+                "财神驾到5",
+                "001",
+                ""
             )
 
-            var list: MutableList<GameQuickEnterModel.Game> = mutableListOf()
+            var list: MutableList<FindHamsterQuickJumpListItem> = mutableListOf()
             list.add(game1)
             list.add(game2)
             list.add(game3)
             list.add(game4)
+            list.add(game5)
 
-/*            var game5: GameQuickEnterModel.Game = GameQuickEnterModel.Game(
-                gameId = "5",
-                "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "大逃杀4"
-            )
-            list.add(game5)*/
+            //筛选状态为001已启用的游戏
+            list.filter { item -> item.status == "001" }
 
             mBinding.recyclerView.addModels(list)
             if (list.size <= 4) {
@@ -340,6 +363,8 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 }
             }
         })
+
+
     }
 
     /**
@@ -347,11 +372,13 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
      */
     private fun initRecyclerView() {
         mBinding.recyclerView.linear(RecyclerView.HORIZONTAL).setup {
-            addType<GameQuickEnterModel.Game> { R.layout.rv_item_home_game_quick_entry }
+            addType<FindHamsterQuickJumpListItem> { R.layout.rv_item_home_game_quick_entry }
             onBind {
                 findView<ConstraintLayout>(R.id.cl_quick_item_bg).safeClick {
+                    val model = getModel<FindHamsterQuickJumpListItem>()
                     //TODO 跳转快捷游戏页面
                     customToast("pso" + this.position)
+                    jump(RouterPath.PATH_WEBVIEW, "url" to model.jumpDescribe)
                 }
             }
         }.mutable = mutableListOf()

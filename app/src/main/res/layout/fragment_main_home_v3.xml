@@ -424,6 +424,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:visibility="gone"
             android:layout_marginBottom="15dp"
             android:background="@mipmap/app_icon_home_cleanliness_bg"
             app:layout_constraintBottom_toTopOf="@id/btnPurchaseOrRevive"
@@ -485,6 +486,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="15dp"
+            android:visibility="gone"
             android:background="@mipmap/app_icon_home_satiety_bg"
             app:layout_constraintBottom_toBottomOf="@id/clHomeCleanliness"
             app:layout_constraintDimensionRatio="147:47"
@@ -544,11 +546,10 @@
             android:layout_width="168dp"
             android:layout_height="44dp"
             android:layout_marginBottom="20dp"
+            android:background="@mipmap/app_icon_home_hamster_purchase"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:background="@mipmap/app_icon_home_hamster_purchase"
-           />
+            app:layout_constraintRight_toRightOf="parent" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -557,9 +558,9 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="11dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/clSkin"
             app:layout_constraintRight_toRightOf="parent"
-
             app:layout_constraintVertical_chainStyle="packed">
 
             <ImageView
@@ -595,6 +596,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="11dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/clQuest"
             app:layout_constraintRight_toRightOf="parent">
 
@@ -631,6 +633,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="11dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/clHomeSatiety"
             app:layout_constraintRight_toRightOf="parent">
 

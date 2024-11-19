@@ -516,13 +516,13 @@ object MineBindingAdapter {
             }
             "002" -> {
                 button.text = "已售罄"
-                button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_btn_selector_purple_black_radius45)
+                button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_shape_bg_gradient_radius45)
             }
             "004" -> {
                 button.text = "去激活"
                 button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_btn_selector_purple_black_radius45)
             }
-            //TODO 后端字段待定
+            //后端字段待定
             "005" -> {
                 button.text = "领取奖励"
                 button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_shape_bg_green_radius45)
