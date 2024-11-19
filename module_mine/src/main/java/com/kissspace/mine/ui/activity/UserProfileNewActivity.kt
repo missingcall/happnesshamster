@@ -45,7 +45,7 @@ import kotlinx.coroutines.launch
  * @Description: 个人主页
  *
  */
-@Router(path = RouterPath.PATH_USER_PROFILE)
+//@Router(path = RouterPath.PATH_USER_PROFILE)
 class UserProfileNewActivity : BaseActivity(R.layout.mine_activity_mine_profile_new) {
     private val userId by parseIntent<String>()
     private val mBinding by viewBinding<MineActivityMineProfileNewBinding>()
@@ -97,48 +97,6 @@ class UserProfileNewActivity : BaseActivity(R.layout.mine_activity_mine_profile_
         if (userId == MMKVProvider.userId) {
             mBinding.titleBar.setRightIcon(R.mipmap.mine_icon_profile_room)
         }
-//        val lp = mBinding.viewStatusBar.layoutParams
-//        lp.height = statusBarHeight
-//        mBinding.viewStatusBar.layoutParams = lp
-//        val height = 200.dp
-//        mBinding.scrollView.viewTreeObserver.addOnScrollChangedListener {
-//            val scrollY = mBinding.scrollView.scrollY.toFloat()
-//            var scrollYPercent:Float = scrollY/height
-//            scrollYPercent = if(scrollYPercent>1) 1f else scrollYPercent
-//            mBinding.layoutStatusBar.background.alpha = (255*scrollYPercent).toInt()
-//
-//
-//
-////            if (scrollY <= 0) {
-////                setStatusBarBlackText()
-////                mBinding.titleBar.leftIcon.setTint(Color.WHITE)
-////                if (userId == MMKVProvider.userId) {
-////                    mBinding.titleBar.rightIcon.setTint(Color.WHITE)
-////                }
-////                mBinding.viewStatusBar.setBackgroundColor(Color.TRANSPARENT)
-////                mBinding.layoutStatusBar.setBackgroundColor(Color.TRANSPARENT)
-////                mBinding.titleBar.setBackgroundColor(Color.TRANSPARENT)
-////            } else if (scrollY > 0 && scrollY <= 100.dp) {
-////                setStatusBarWhiteText()
-////                mBinding.layoutStatusBar.setBackgroundColor(com.kissspace.module_common.R.color.color_E6000000.resToColor())
-////                mBinding.titleBar.setBackgroundColor(com.kissspace.module_common.R.color.color_E6000000.resToColor())
-////                val rate = (scrollY.toFloat() / 100.dp)
-////                mBinding.layoutStatusBar.background.alpha =
-////                    if (scrollY >= 100.dp.toInt()) 255 else (rate * 255).toInt()
-////                mBinding.titleBar.background.alpha =  if (scrollY >= 100.dp.toInt()) 255 else (rate * 255).toInt()
-////            } else {
-////                setStatusBarWhiteText()
-////                mBinding.titleBar.leftIcon.setTint(Color.WHITE)
-////                if (userId == MMKVProvider.userId) {
-////                    mBinding.titleBar.rightIcon.setTint(Color.WHITE)
-////                }
-////                mBinding.viewStatusBar.setBackgroundColor(com.kissspace.module_common.R.color.color_E6000000.resToColor())
-////                mBinding.layoutStatusBar.setBackgroundColor(com.kissspace.module_common.R.color.color_E6000000.resToColor())
-////                mBinding.titleBar.setBackgroundColor(com.kissspace.module_common.R.color.color_E6000000.resToColor())
-////                mBinding.layoutStatusBar.background.alpha = 255
-////
-////            }
-//        }
         mBinding.titleBar.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(titleBar: TitleBar?) {
                 super.onLeftClick(titleBar)

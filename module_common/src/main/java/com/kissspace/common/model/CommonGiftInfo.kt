@@ -9,5 +9,6 @@ data class CommonGiftInfo(
     var price: String,
     var svg: String,
     var url: String,
-    var giftNum: Int = 0
+    var giftNum: Int = 0,
+    var lightUp:Boolean = false
 )

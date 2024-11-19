@@ -14,7 +14,7 @@
         app:lineVisible="false"
         app:rightHorizontalPadding="16dp"
         app:rightTitle="@string/mine_save"
-        app:rightTitleColor="@color/color_FFFD62"
+        app:rightTitleColor="@color/color_5A60FF"
         app:rightTitleSize="14sp"
         app:barStyle="transparent"
         app:title="个性签名" />
@@ -27,7 +27,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/mine_edit_sign_tips1"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_bar" />
 
@@ -38,23 +38,24 @@
         android:layout_marginTop="8dp"
         android:text="@string/mine_edit_sign_tips2"
         android:textColor="@color/white50"
-        android:textSize="12sp"
+        android:textSize="11sp"
         app:layout_constraintStart_toStartOf="@id/tv_title"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <com.kissspace.common.widget.LimitNumEditText
         android:id="@+id/edit_sign"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="15dp"
         android:layout_width="match_parent"
         android:layout_height="95dp"
         app:hintText="@string/mine_edit_sign_hint"
         android:textColor="@color/white"
-        android:textColorHint="@color/color_CCC7CC"
-        android:textSize="15sp"
-        app:limitBackground="@color/color_1A000000"
+        android:textColorHint="@color/color_949499"
+        app:limitBackground="@color/color_232323"
         app:layout_constraintTop_toBottomOf="@id/tv_sub_title"
+        app:limitTextColor="@color/color_161616"
+        app:limitTextSize="14sp"
         app:maxWordsNum="50" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

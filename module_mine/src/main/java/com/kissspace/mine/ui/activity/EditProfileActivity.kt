@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.didi.drouter.annotation.Router
 import com.drake.brv.utils.*
@@ -32,6 +35,7 @@ import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineActivityEditProfileBinding
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
+import com.kissspace.util.setStatusBarColor
 import org.json.JSONArray
 import java.io.File
 import java.util.Calendar
@@ -44,11 +48,18 @@ import java.util.Calendar
  *
  */
 @Router(uri = RouterPath.PATH_EDIT_PROFILE)
-class EditProfileActivity : com.kissspace.common.base.BaseActivity(R.layout.mine_activity_edit_profile) {
+class EditProfileActivity :
+    com.kissspace.common.base.BaseActivity(R.layout.mine_activity_edit_profile) {
     private val mBinding by viewBinding<MineActivityEditProfileBinding>()
     private val mViewModel by viewModels<EditProfileViewModel>()
 
     override fun initView(savedInstanceState: Bundle?) {
+        setStatusBarColor(
+            ContextCompat.getColor(
+                this,
+                com.kissspace.module_common.R.color.color_232323
+            ), isStatusBlackText = false
+        )
         mBinding.vm = mViewModel
         initRecyclerView()
         initEvent()
@@ -75,12 +86,13 @@ class EditProfileActivity : com.kissspace.common.base.BaseActivity(R.layout.mine
             }
         })
         mBinding.addPicture.setOnClickListener {
-            openPictureSelector(this,4 - mBinding.recyclerView.mutable.size) {
+            openPictureSelector(this, 4 - mBinding.recyclerView.mutable.size) {
                 val file = mutableListOf<File>()
                 it?.forEach { path ->
                     file.add(File(path))
                 }
                 uploadPicture(file) { result ->
+
                     result.addAll(0, mViewModel.userInfo.get()!!.getAllPicture())
                     uploadBgPath(result)
                 }
@@ -98,17 +110,17 @@ class EditProfileActivity : com.kissspace.common.base.BaseActivity(R.layout.mine
             mViewModel.userInfo.get()?.let {
                 val picker = SexPicker(this).apply {
                     setTitle("")
-                    okView.setTextColor(com.kissspace.module_common.R.color.color_ui_sub_main.resToColor())
-                    cancelView.setTextColor(com.kissspace.module_common.R.color.color_ui_main_text.resToColor())
-                    setBackgroundColor(com.kissspace.module_common.R.color.white.resToColor())
-                    wheelLayout.setIndicatorColor(com.kissspace.module_common.R.color.color_ui_sub_main.resToColor())
+                    okView.setTextColor(com.kissspace.module_common.R.color.color_5A60FF.resToColor())
+                    cancelView.setTextColor(com.kissspace.module_common.R.color.color_9E9E9E.resToColor())
+                    setBackgroundDrawable(AppCompatResources.getDrawable(this@EditProfileActivity,R.drawable.mine_bg_select_date))
+                    wheelLayout.setIndicatorColor(com.kissspace.module_common.R.color.color_5A60FF.resToColor())
                     topLineView.visibility = View.GONE
-                    setDefaultValueByName(if(it.sex == Constants.SEX_FEMALE) "女" else "男")
+                    setDefaultValueByName(if (it.sex == Constants.SEX_FEMALE) "女" else "男")
                     setOnOptionPickedListener { _, item ->
                         val sex = (item as SexEntity).name
-                        if(sex == "男"&&it.sex == Constants.SEX_FEMALE){
+                        if (sex == "男" && it.sex == Constants.SEX_FEMALE) {
                             mViewModel.editSex(Constants.SEX_MALE)
-                        }else if(sex == "女"&&it.sex == Constants.SEX_MALE){
+                        } else if (sex == "女" && it.sex == Constants.SEX_MALE) {
                             mViewModel.editSex(Constants.SEX_FEMALE)
                         }
                     }
@@ -127,14 +139,21 @@ class EditProfileActivity : com.kissspace.common.base.BaseActivity(R.layout.mine
             val picker = DatePicker(this).apply {
                 setTitle("")
                 setBodyHeight(311)
-                okView.setTextColor(com.kissspace.module_common.R.color.color_ui_sub_main.resToColor())
-                cancelView.setTextColor(com.kissspace.module_common.R.color.color_ui_main_text.resToColor())
-                setBackgroundColor(com.kissspace.module_common.R.color.white.resToColor())
-                wheelLayout.setIndicatorColor(com.kissspace.module_common.R.color.color_ui_sub_main.resToColor())
+                okView.setTextColor(com.kissspace.module_common.R.color.color_5A60FF.resToColor())
+                cancelView.setTextColor(com.kissspace.module_common.R.color.color_9E9E9E.resToColor())
+               // setBackgroundColor(
+               //     com.kissspace.module_common.R.color.white.resToColor()
+               // )
+                setBackgroundDrawable(AppCompatResources.getDrawable(this@EditProfileActivity,R.drawable.mine_bg_select_date))
+                wheelLayout.setIndicatorColor(com.kissspace.module_common.R.color.color_E5E5E5.resToColor())
                 topLineView.visibility = View.GONE
                 wheelLayout.apply {
                     val str = mViewModel.userInfo.get()?.birthday?.split("-")
-                    val defaultDate= DateEntity.target(str?.get(0)?.toInt()?:2000, str?.get(1)?.toInt()?:1, str?.get(2)?.toInt()?:1)
+                    val defaultDate = DateEntity.target(
+                        str?.get(0)?.toInt() ?: 2000,
+                        str?.get(1)?.toInt() ?: 1,
+                        str?.get(2)?.toInt() ?: 1
+                    )
                     setRange(
                         DateEntity.target(1950, 1, 1),
                         DateEntity.target(
@@ -144,8 +163,8 @@ class EditProfileActivity : com.kissspace.common.base.BaseActivity(R.layout.mine
                         ),
                         defaultDate
                     )
-                    setSelectedTextColor(com.kissspace.module_common.R.color.color_ui_sub_main.resToColor())
-                    setTextColor(com.kissspace.module_common.R.color.color_ui_sub_text_middle.resToColor())
+                    setSelectedTextColor(com.kissspace.module_common.R.color.color_5A60FF.resToColor())
+                    setTextColor(com.kissspace.module_common.R.color.color_949499.resToColor())
                 }
                 setOnDatePickedListener { year, month, day ->
                     val monthStr = if (month < 10) "0${month}" else month
@@ -157,7 +176,7 @@ class EditProfileActivity : com.kissspace.common.base.BaseActivity(R.layout.mine
         }
 
         mBinding.layoutAvatar.setOnClickListener {
-            openPictureSelector(this,isCrop = true) {
+            openPictureSelector(this, isCrop = true) {
                 uploadPicture(mutableListOf(File(it!![0]))) { pic ->
                     mViewModel.editAvatar(pic[0])
                 }
@@ -213,6 +232,8 @@ class EditProfileActivity : com.kissspace.common.base.BaseActivity(R.layout.mine
                 mBinding.addPicture.visibility =
                     if (it.bgPath.size == 4) View.GONE else View.VISIBLE
                 mBinding.tvCountPicture.text = "(${mBinding.recyclerView.mutable.size}/4)"
+                mBinding.recyclerView.adapter?.notifyDataSetChanged()
+
             }
         }
     }
