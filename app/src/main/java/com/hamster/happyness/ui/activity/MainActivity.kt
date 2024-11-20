@@ -54,6 +54,7 @@ import com.kissspace.message.ui.fragment.MessageFragmentV3
 import com.kissspace.mine.ui.fragment.MineFragment
 import com.kissspace.network.result.collectData
 import com.kissspace.common.http.getUserInfo
+import com.kissspace.common.model.UpgradeBean
 import com.kissspace.room.manager.RoomServiceManager
 import com.kissspace.util.YYYY_MM_DD
 import com.kissspace.util.apkAbsolutePath
@@ -161,14 +162,20 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
     }
 
     private fun initData() {
-//        val dialog = UpgradeDialog.newInstance(UpgradeBean("新版本","https://cos.pgyer.com/f579a0f5b6c94a99c7ca5483fd7f2cdc.apk?sign=35ed8b14b45a2fa57257b47dc989a14f&sign2=448735d6f57edca4b2e5e8e7ee553976&t=1704708041&response-content-disposition=attachment%3Bfilename%3D%22%E7%B1%B3%E8%AF%BA%E6%98%9F%E7%90%83_1.0.4.apk"
-//                            ,"1.0.4",
-//                            4,1,"\"1.修复了已知bug\\n2.优化了用户体验\\n3.新增了功能\"",1,"1.0.4"
-//        ))
-//        dialog.setDismissCallback {
-//            showOtherDialog()
-//        }
-//        dialog.show(supportFragmentManager)
+  /*     val dialog = UpgradeDialog.newInstance(
+           UpgradeBean("新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本","https://cos.pgyer.com/f579a0f5b6c94a99c7ca5483fd7f2cdc.apk?sign=35ed8b14b45a2fa57257b47dc989a14f&sign2=448735d6f57edca4b2e5e8e7ee553976&t=1704708041&response-content-disposition=attachment%3Bfilename%3D%22%E7%B1%B3%E8%AF%BA%E6%98%9F%E7%90%83_1.0.4.apk"
+                           ,"1.0.4",
+                           4,1,"\"1.修复了已知bug\\n2.优化了用户体验\\n3.新增了功能\"",1,"1.0.4"
+       )
+       )
+       dialog.setDismissCallback {
+           showOtherDialog()
+       }
+       dialog.show(supportFragmentManager)
+*/
+
+
+
         mViewModel.checkVersion()
         mViewModel.sayHi()
         //更新用户配置
