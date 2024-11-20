@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.hjq.bar.TitleBar
 import com.kissspace.common.util.format.DateFormat
 import com.kissspace.common.util.glide.GlideApp
+import com.kissspace.common.util.glide.loadwithGlide
 import com.kissspace.common.widget.AnimationView
 import com.kissspace.common.widget.UserLevelIconView
 import com.kissspace.module_common.R
@@ -258,6 +259,13 @@ object CommonBindingAdapter {
     @BindingAdapter("loadCircleImage", requireAll = false)
     fun loadCircleImage(imageView: ImageView, imageUrl: String?) {
         imageView.loadImageCircle(imageUrl)
+    }
+
+
+    @JvmStatic
+    @BindingAdapter("loadCircleImage2", requireAll = false)
+    fun loadCircleImage2(imageView: ImageView, imageUrl: String?) {
+        imageView.loadwithGlide(imageUrl,isCircle = true)
     }
 
 
