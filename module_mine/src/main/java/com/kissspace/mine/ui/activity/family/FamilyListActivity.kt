@@ -76,7 +76,6 @@ class FamilyListActivity : com.kissspace.common.base.BaseActivity(R.layout.mine_
                                 viewBinding.tvAdd.isSelected = true
                                 viewBinding.tvAdd.visibility = View.VISIBLE
                                 viewBinding.tvAdd.isEnabled = false
-                                viewBinding.tvAdd.setImageResource(R.mipmap.mine_family_applied)
                             }
 
                             Constants.FAMILY_MEMBER -> {
@@ -86,7 +85,6 @@ class FamilyListActivity : com.kissspace.common.base.BaseActivity(R.layout.mine_
                             else -> {
                                 viewBinding.tvAdd.visibility = View.VISIBLE
                                 viewBinding.tvAdd.isSelected = false
-                                viewBinding.tvAdd.setImageResource(R.mipmap.mine_icon_family_join)
                                 viewBinding.tvAdd.isEnabled = true
                             }
                         }

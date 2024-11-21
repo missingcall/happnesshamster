@@ -82,7 +82,6 @@
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             android:textStyle="bold"
-            app:drawableStartCompat="@mipmap/mine_icon_store_coin"
             app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
 
@@ -98,7 +97,6 @@
             android:textColor="@color/color_FFFD62"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:drawableStartCompat="@mipmap/mine_icon_integral_store"
             app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
 

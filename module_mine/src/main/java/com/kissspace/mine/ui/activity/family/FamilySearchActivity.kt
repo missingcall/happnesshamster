@@ -77,7 +77,6 @@ class FamilySearchActivity : com.kissspace.common.base.BaseActivity(R.layout.min
                         when (model.userFamilyStatus) {
                             Constants.FAMILY_APPLY -> {
                                 viewBinding.tvAdd.isSelected = true
-                                viewBinding.tvAdd.setImageResource(R.mipmap.mine_family_applied)
                                 viewBinding.tvAdd.visibility = View.VISIBLE
                                 viewBinding.tvAdd.isEnabled = false
                             }
@@ -85,7 +84,6 @@ class FamilySearchActivity : com.kissspace.common.base.BaseActivity(R.layout.min
                                 viewBinding.tvAdd.visibility = View.GONE
                             }
                             else -> {
-                                viewBinding.tvAdd.setImageResource(R.mipmap.mine_icon_family_join)
                                 viewBinding.tvAdd.visibility = View.VISIBLE
                                 viewBinding.tvAdd.isSelected = false
                                 viewBinding.tvAdd.isEnabled = true

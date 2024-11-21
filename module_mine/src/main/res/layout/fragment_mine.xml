@@ -25,7 +25,6 @@
                     android:id="@+id/iv_bg"
                     android:layout_width="120dp"
                     android:layout_height="297dp"
-                    android:src="@mipmap/mine_bg_avatar_top"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +34,6 @@
                     android:id="@+id/flt_avatar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/mine_bg_avatar"
                     app:layout_constraintStart_toStartOf="@id/iv_bg"
                     app:layout_constraintTop_toTopOf="@id/iv_bg"
                     app:layout_constraintBottom_toBottomOf="@id/iv_bg"
@@ -255,7 +253,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="档案编辑"
-                    android:drawableEnd="@mipmap/mine_icon_edit"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="52dp"
@@ -291,7 +288,6 @@
                     <ImageView
                         android:layout_width="71dp"
                         android:layout_height="20dp"
-                        android:src="@mipmap/mine_bg_voice"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -299,7 +295,6 @@
                         android:id="@+id/iv_voice_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/mine_icon_voice"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -309,7 +304,6 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/mine_bg_voice_unrestrained"
                         app:layout_constraintStart_toEndOf="@id/iv_voice_icon"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -394,7 +388,6 @@
                             app:layout_constraintBottom_toTopOf="@id/tv_fans"
                             app:layout_constraintStart_toStartOf="@id/tv_fans"
                             app:layout_constraintEnd_toEndOf="@id/tv_fans"
-                            android:src="@mipmap/mine_icon_authentication"
                             android:layout_marginBottom="8dp"
                             />
 
@@ -429,7 +422,6 @@
                             app:layout_constraintBottom_toTopOf="@id/tv_follow"
                             app:layout_constraintStart_toStartOf="@id/tv_follow"
                             app:layout_constraintEnd_toEndOf="@id/tv_follow"
-                            android:src="@mipmap/mine_icon_follow"
                             android:layout_marginBottom="8dp"
                             />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -460,7 +452,6 @@
                             app:layout_constraintBottom_toTopOf="@id/tv_income"
                             app:layout_constraintStart_toStartOf="@id/tv_income"
                             app:layout_constraintEnd_toEndOf="@id/tv_income"
-                            android:src="@mipmap/mine_icon_income"
                             android:layout_marginBottom="8dp"
                             />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -483,7 +474,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="新人充值超实惠"
                         app:mineInletView_labelColor="#D54EDC"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_recharge"
                         goneUnless="@{m.isShowFirstRecharge}"
                         />
 
@@ -493,7 +483,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="我的等级"
                         app:mineInletView_labelColor="#E55198"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_level"
                         />
 
                     <com.kissspace.mine.widget.MineInletView
@@ -502,7 +491,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="我的访客"
                         app:mineInletView_labelColor="#86E4C4"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_task_center"
                         />
 
                     <com.kissspace.mine.widget.MineInletView
@@ -511,7 +499,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="我的房间"
                         app:mineInletView_labelColor="#8FE4E6"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_room"
                         />
 
 
@@ -521,7 +508,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="装扮商城"
                         app:mineInletView_labelColor="#EED88B"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_store"
                         />
 
 
@@ -531,7 +517,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="我的公会"
                         app:mineInletView_labelColor="#A4D379"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_family"
                         />
 
                     <com.kissspace.mine.widget.MineInletView
@@ -540,7 +525,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="任务中心 "
                         app:mineInletView_labelColor="#86E4C4"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_task_center"
                         />
 
                     <com.kissspace.mine.widget.MineInletView
@@ -549,7 +533,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="活动中心 "
                         app:mineInletView_labelColor="#81B1C7"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_action_center"
                         />
 
                     <com.kissspace.mine.widget.MineInletView
@@ -558,7 +541,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="意见反馈 "
                         app:mineInletView_labelColor="#7AB490"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_feed_back"
                         />
 
                     <com.kissspace.mine.widget.MineInletView
@@ -567,7 +549,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="在线客服 "
                         app:mineInletView_labelColor="#9D78E4"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_service"
                         />
 
                     <com.kissspace.mine.widget.MineInletView
@@ -576,7 +557,6 @@
                         android:layout_height="wrap_content"
                         app:mineInletView_labelText="系统设置 "
                         app:mineInletView_labelColor="#C16D3C"
-                        app:mineInletView_arrow="@mipmap/mine_icon_arrow_setting"
                         />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>

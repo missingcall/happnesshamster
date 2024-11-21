@@ -170,9 +170,7 @@ class MyWalletExchangeActivity : BaseActivity(R.layout.mine_activity_wallet_exch
             onBind {
                 val viewBinding = getBinding<MineItemExchangeBinding>()
                 if (walletType == Constants.WalletType.EARNS.type) {
-                    viewBinding.ivType.setImageResource(R.mipmap.mine_wallet_earns_withdraw)
                 } else if (walletType == Constants.WalletType.DIAMOND.type) {
-                    viewBinding.ivType.setImageResource(R.mipmap.mine_wallet_diamond_withdraw)
                 }
             }
             onFastClick(R.id.cl_charge) {
