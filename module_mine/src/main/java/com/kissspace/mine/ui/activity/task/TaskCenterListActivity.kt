@@ -24,8 +24,10 @@ class TaskCenterListActivity : com.kissspace.common.base.BaseActivity(R.layout.m
     override fun initView(savedInstanceState: Bundle?) {
         setTitleBarListener(mBinding.titleBar)
         mBinding.titleBar.rightView.setOnClickListener {
-            jump(RouterPath.PATH_MY_DRESS_UP)
+           jump(RouterPath.PATH_MY_DRESS_UP)
         }
+
+
         mBinding.viewPager.apply {
             adapter = object : FragmentStateAdapter(this@TaskCenterListActivity) {
                 override fun getItemCount(): Int = 3

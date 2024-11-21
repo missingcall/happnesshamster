@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.Gravity
 import android.view.View
 import androidx.core.content.FileProvider
@@ -55,6 +56,7 @@ class UpgradeDialog : BaseDialogFragment<DialogUpgradeBinding>(DialogUpgradeBind
     override fun getLayoutId() = R.layout.dialog_upgrade
 
     override fun initView() {
+        mBinding.tvDesc.movementMethod = ScrollingMovementMethod()
         isCancelable = upgradeBean.isForcedUpdate == 0
         mBinding.tvDesc.text = upgradeBean.descript
         mBinding.ivClose.visibility =

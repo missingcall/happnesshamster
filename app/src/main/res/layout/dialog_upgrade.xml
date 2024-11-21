@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,7 +14,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_content"
-            android:layout_width="311.5dp"
+            android:layout_width="294dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
@@ -21,112 +22,156 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/iv_top"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/app_bg_dialog_upgrade_top"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:layout_width="311.5dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="200dp"
+                android:minHeight="319dp"
                 android:orientation="vertical"
-                android:background="@drawable/app_bg_update_dialog"
-                app:layout_constraintStart_toStartOf="@id/iv_top"
-                app:layout_constraintTop_toBottomOf="@id/iv_top">
+                android:background="@mipmap/app_bg_update_dialog2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="33dp"
+                >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="123dp"
                     android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/app_upgrade_title"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textColor="@color/color_313133"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="32dp"
-                        android:layout_height="16dp"
-                        android:layout_marginStart="2dp"
-                        android:gravity="center"
-                        android:text="@string/app_upgrade_new"
-                        android:textColor="@color/white"
-                        android:textSize="10sp"
-                        app:bl_corners_radius="8dp"
-                        app:bl_solid_color="@color/color_FF4747" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="30dp"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-
-                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
+                    android:maxHeight="79dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="32dp"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/color_949499"
+                    tools:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                    android:textSize="15sp" />
 
-                    <TextView
-                        android:id="@+id/tv_update"
-                        android:layout_width="170dp"
-                        android:layout_height="56dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@mipmap/common_btn_dialog_single"
-                        android:gravity="center"
-                        android:text="@string/app_upgrade_now"
-                        android:textColor="@color/color_FFFD62"
-                        android:textSize="17sp" />
 
-                    <TextView
-                        android:id="@+id/tv_progress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textColor="@color/color_8A8A8A"
-                        android:textSize="14sp"
-                        android:visibility="gone" />
-                </FrameLayout>
 
-                <TextView
-                    android:id="@+id/tv_quit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:text="@string/app_not_upgrade"
-                    android:textColor="@color/color_80FFFFFF"
-                    android:textSize="12sp"
-                    android:visibility="gone" />
+
 
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_top"
+                android:layout_width="271dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="271:145"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/app_bg_dialog_upgrade_top"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/iv_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="23dp"
-            android:background="@mipmap/login_icon_invitation_close"
-            app:layout_constraintLeft_toLeftOf="@+id/cl_content"
-            app:layout_constraintRight_toRightOf="@+id/cl_content"
-            app:layout_constraintTop_toBottomOf="@+id/cl_content" />
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="11dp"
+            android:background="@mipmap/common_icon_black_close"
+            app:layout_constraintEnd_toEndOf="@+id/cl_content"
+            app:layout_constraintTop_toTopOf="@+id/cl_content"
+            />
+
+        <com.ruffian.library.widget.RFrameLayout
+            android:id="@+id/flCancel"
+            android:layout_width="120dp"
+            android:layout_height="39dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/cl_content"
+            app:layout_constraintEnd_toStartOf="@+id/flUpdata"
+            android:layout_marginBottom="20dp"
+            app:background_normal="@array/button_color_bg"
+            app:gradient_orientation="LEFT_RIGHT"
+            app:gradient_type="linear"
+            app:corner_radius="28dp"
+            >
+            <com.ruffian.library.widget.RTextView
+                android:id="@+id/tvQuit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:text="暂不更新"
+                android:gravity="center"
+                android:textColor="@color/color_5A60FF"
+                app:background_normal="@color/white"
+                app:corner_radius="28dp"
+                android:layout_margin="1dp"
+                android:textSize="17sp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                />
+
+        </com.ruffian.library.widget.RFrameLayout>
+
+
+        <com.ruffian.library.widget.RFrameLayout
+            android:id="@+id/flUpdata"
+            android:layout_width="120dp"
+            android:layout_height="39dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cl_content"
+            app:layout_constraintStart_toEndOf="@+id/flCancel"
+            android:layout_marginBottom="20dp"
+            app:background_normal="@array/button_color_bg"
+            app:gradient_orientation="LEFT_RIGHT"
+            app:gradient_type="linear"
+            app:corner_radius="28dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_update"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/app_upgrade_now"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    tools:text="0%"
+                    />
+
+            </LinearLayout>
+
+        </com.ruffian.library.widget.RFrameLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

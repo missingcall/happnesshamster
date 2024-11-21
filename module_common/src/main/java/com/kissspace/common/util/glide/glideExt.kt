@@ -40,7 +40,7 @@ fun ImageView.loadwithGlide(
     bottomLeftRound: Float = 0f,
     bottomRightRound: Float = 0f,
     @DrawableRes placeholderId: Int = R.drawable.common_ic_default,
-    @DrawableRes errorId: Int = 0,
+    @DrawableRes errorId: Int = R.drawable.common_ic_default,
 ) {
 
     val options: RequestOptions = RequestOptions().apply {

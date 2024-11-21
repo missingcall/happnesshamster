@@ -258,6 +258,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
 
+
+        <activity
+            android:name="com.kissspace.mine.ui.activity.user.UserProfileNew2Activity"
+            android:screenOrientation="portrait" />
+
+
     </application>
 
 </manifest>

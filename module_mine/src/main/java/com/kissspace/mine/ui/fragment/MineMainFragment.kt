@@ -73,11 +73,11 @@ class MineMainFragment : BaseFragment(R.layout.mine_fragment_user_info_page) {
                 }
             }
         }
+
         mBinding.tvIdValue.safeClick {
             mViewModel.userInfo.get()?.let {
                 copyClip(it.displayId)
             }
-
         }
 
         mBinding.ivFollowRoom.safeClick {
