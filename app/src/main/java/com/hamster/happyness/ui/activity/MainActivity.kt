@@ -175,7 +175,6 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
 */
 
 
-
         mViewModel.checkVersion()
         mViewModel.sayHi()
         //更新用户配置

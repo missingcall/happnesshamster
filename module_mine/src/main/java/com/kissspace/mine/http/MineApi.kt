@@ -140,6 +140,10 @@ object MineApi {
     //仓鼠任务
     const val API_TASK_HAMSTER = "/hamster-user/daily/job/checkVersion"
 
+    //领取仓鼠任务
+    const val API_TASK_HAMSTER_REWARD ="/hamster-user/daily/job/receiveReward"
+
+
     //领取任务奖励
     const val API_RECEIVE_TASK_REWARD = "/hamster-task/taskInfo/receiveTaskReward"
 

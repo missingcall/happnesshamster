@@ -72,6 +72,7 @@ data class NoviceTaskInfo(
  * @param rewardType 参考 001 刷子 002 食物 HamsterPropTypeEnum
  * @param status 是否可领取 001：待解锁 002：进行中 003：待领取 004：已领取 参考 TaskStatusForIntegralEnum
  * @param targetValue 目标值
+ * @param jumpParam 跳转路由
  */
 @Parcelize
 @Serializable
@@ -81,5 +82,6 @@ data class HamsterTaskInfo(
     val rewardCount: String?,
     val rewardType: String,
     val status: String,
-    val targetValue: String?
+    val targetValue: String?,
+    val jumpParam:String?
 ) : Parcelable
