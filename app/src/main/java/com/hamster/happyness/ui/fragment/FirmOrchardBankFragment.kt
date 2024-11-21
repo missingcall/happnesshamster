@@ -10,7 +10,7 @@ import com.drake.brv.utils.grid
 import com.drake.brv.utils.setup
 import com.hamster.happyness.databinding.FragmentFirmOrchardBankBinding
 import com.hamster.happyness.widget.BankPurchaseDialog
-import com.hamster.happyness.widget.OrchardPurchaseDialog
+import com.kissspace.mine.widget.OrchardPurchaseDialog
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick

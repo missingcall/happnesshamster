@@ -32,6 +32,7 @@ import com.kissspace.common.util.format.DateFormat
 import com.ruffian.library.widget.RTextView
 import com.kissspace.common.util.format.Format
 import com.kissspace.common.util.formatDate
+import com.kissspace.common.widget.NiceImageView
 import com.kissspace.util.*
 import java.time.temporal.TemporalAmount
 import kotlin.text.isNotEmpty
@@ -394,6 +395,19 @@ object MineBindingAdapter {
         }
     }
 
+    /**
+     * 设置NiceImageView边框
+     */
+    @JvmStatic
+    @BindingAdapter("setBorderBackground")
+    fun setBorderBackground(niceImageView: NiceImageView, isBorder: Boolean) {
+        if (niceImageView.isSelected) {
+            niceImageView.setBorderWidth(2)
+        } else {
+            niceImageView.setBorderWidth(0)
+        }
+    }
+
     @JvmStatic
     @BindingAdapter("wareHouseDayIncome", requireAll = false)
     fun wareHouseDayIncome(textView: TextView, item: QueryMarketListItem) {
@@ -631,4 +645,24 @@ object MineBindingAdapter {
             imageView.visibility = View.GONE
         }
     }
+
+    /**
+     * 果园购买-payType
+     */
+    @JvmStatic
+    @BindingAdapter("ivConditions", requireAll = false)
+    fun ivConditions(imageView: ImageView, payType: String) {
+        imageView.loadImage(
+            when (payType) {
+                "001" -> R.mipmap.icon_pine_cone_small
+                "002" -> R.mipmap.icon_pine_nut_small
+                "003" -> R.mipmap.icon_pine_cone_small
+                else -> R.mipmap.icon_hamster_medal_small
+            }
+        )
+    }
+
+
+
+
 }

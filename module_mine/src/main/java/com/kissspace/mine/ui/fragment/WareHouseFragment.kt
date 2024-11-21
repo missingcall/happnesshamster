@@ -3,6 +3,7 @@ package com.kissspace.mine.ui.fragment
 import android.os.Bundle
 import android.widget.Button
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.drake.brv.utils.grid
@@ -11,10 +12,13 @@ import com.drake.brv.utils.setup
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.model.*
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.mine.viewmodel.WalletViewModel
+import com.kissspace.mine.widget.OrchardPurchaseDialog
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineFragmentWarehouseBinding
 
@@ -27,7 +31,7 @@ import com.kissspace.module_mine.databinding.MineFragmentWarehouseBinding
  */
 class WareHouseFragment : BaseFragment(R.layout.mine_fragment_warehouse) {
     private val mBinding by viewBinding<MineFragmentWarehouseBinding>()
-    private val mViewModel by viewModels<WalletViewModel>()
+    private val mViewModel by activityViewModels<WalletViewModel>()
     private lateinit var type: String
 
     companion object {
@@ -64,10 +68,11 @@ class WareHouseFragment : BaseFragment(R.layout.mine_fragment_warehouse) {
                 onBind {
                     val model = getModel<QueryMarketListItem>()
                     findView<Button>(R.id.btn).safeClick {
+                        mViewModel.queryMarketItem.value = model
                         when (model.goodsStatue) {
                             Constants.HamsterGoodsStatusType.ALREADY_OWNED_PENDING_ACTIVATION -> {
                                 //激活
-//                                OrchardPurchaseDialog.newInstance(2, model.commodityType == "001").show(childFragmentManager)
+                                OrchardPurchaseDialog.newInstance(2, model.commodityType == "001").show(childFragmentManager)
                             }
                             Constants.HamsterGoodsStatusType.ALREADY_OWNED_IN_EFFECT -> {
                                 //领取
@@ -111,5 +116,14 @@ class WareHouseFragment : BaseFragment(R.layout.mine_fragment_warehouse) {
             }
 
         })
+    }
+
+    override fun createDataObserver() {
+        super.createDataObserver()
+
+        //激活成功
+        FlowBus.observerEvent<Event.OrchardActivationEvent>(this) {
+            mBinding.pageRefreshLayout.autoRefresh()
+        }
     }
 }

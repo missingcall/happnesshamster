@@ -1,6 +1,8 @@
 package com.kissspace.mine.ui.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.angcyo.tablayout.delegate2.ViewPager2Delegate
 import com.didi.drouter.annotation.Router
@@ -13,6 +15,7 @@ import com.kissspace.common.router.RouterPath
 import com.kissspace.mine.ui.fragment.GoodsListFragment
 import com.kissspace.mine.ui.fragment.WalletCoinGainFragment
 import com.kissspace.mine.ui.fragment.WareHouseFragment
+import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineActivityMyWarehouseBinding
 import com.kissspace.util.immersiveStatusBar
@@ -21,7 +24,6 @@ import com.kissspace.util.immersiveStatusBar
 class MyWarehouseActivity : BaseActivity(R.layout.mine_activity_my_warehouse) {
 
     private val mBinding by dataBinding<MineActivityMyWarehouseBinding>()
-
     override fun initView(savedInstanceState: Bundle?) {
         immersiveStatusBar(false)
         mBinding.titleBar.setMarginStatusBar()

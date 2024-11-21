@@ -1,4 +1,4 @@
-package com.hamster.happyness.widget
+package com.kissspace.mine.widget
 
 import android.annotation.SuppressLint
 import android.view.Gravity
@@ -7,8 +7,7 @@ import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import com.drake.brv.utils.*
-import com.hamster.happyness.databinding.DialogOrchardPurchaseBinding
-import com.hamster.happyness.viewmodel.HamsterViewModel
+
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
@@ -17,7 +16,10 @@ import com.kissspace.common.model.QueryBaseInfoList
 import com.kissspace.common.util.customToast
 import com.kissspace.common.widget.BaseDialogFragment
 import com.kissspace.common.widget.CommonConfirmDialog
+import com.kissspace.mine.viewmodel.HamsterViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
+import com.kissspace.module_mine.R
+import com.kissspace.module_mine.databinding.DialogOrchardPurchaseBinding
 
 /**
  * 底部弹窗-果园购买/激活
@@ -37,7 +39,7 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
 
 
     override fun getLayoutId(): Int {
-        return com.hamster.happyness.R.layout.dialog_orchard_purchase
+        return R.layout.dialog_orchard_purchase
     }
 
 
@@ -150,9 +152,9 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
 
     private fun initRecyclerView() {
         mBinding.recyclerView.linear(LinearLayout.HORIZONTAL).setup {
-            addType<QueryBaseInfoList.QueryBaseInfoListItem> { com.hamster.happyness.R.layout.rv_item_basic_hamster_skin }
+            addType<QueryBaseInfoList.QueryBaseInfoListItem> { R.layout.rv_item_basic_hamster_skin }
 
-            onFastClick(com.hamster.happyness.R.id.item) {
+            onFastClick(R.id.item) {
                 val model = getModel<QueryBaseInfoList.QueryBaseInfoListItem>()
                 //设置选中状态
                 val checked = model.checked

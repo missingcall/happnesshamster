@@ -4,9 +4,8 @@ import android.annotation.SuppressLint
 import android.view.Gravity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.hamster.happyness.databinding.DialogHomeSkinUnlockBinding
-import com.hamster.happyness.viewmodel.HamsterViewModel
+import com.kissspace.mine.viewmodel.HamsterViewModel
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus

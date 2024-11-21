@@ -10,7 +10,7 @@ import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.setup
 import com.hamster.happyness.databinding.ActivityHamsterSkinBinding
-import com.hamster.happyness.viewmodel.HamsterViewModel
+import com.kissspace.mine.viewmodel.HamsterViewModel
 import com.hamster.happyness.widget.HomeSkinUnlockDialog
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.binding.dataBinding
