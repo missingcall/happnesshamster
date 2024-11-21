@@ -10,7 +10,6 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/common_dialog_bg"
         android:scaleType="fitXY"
         />
 
@@ -68,7 +67,6 @@
             android:layout_height="40dp"
             android:layout_marginRight="5dp"
             android:gravity="center"
-            android:background="@mipmap/common_confirm_dialog_icon_cancel"
             app:layout_constraintBottom_toBottomOf="@id/tv_positive"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_positive"
@@ -80,7 +78,6 @@
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="5dp"
-            android:background="@mipmap/common_confirm_dialog_icon_agree"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv_negative"
             app:layout_constraintEnd_toEndOf="parent"

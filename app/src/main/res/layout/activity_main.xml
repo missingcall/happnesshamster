@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:url="common_home_background.mp4" />
+        />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
@@ -33,7 +33,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:url="home_tab_party.mp4"
         android:layout_marginBottom="28dp"
         />
 
@@ -120,7 +119,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@mipmap/app_icon_bottombar_explore" />
+                    />
 
                 <com.kissspace.common.widget.AssertAnimView
                     android:id="@+id/animview_explore"
@@ -131,7 +130,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:url="home_anim_explore.mp4" />
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -148,7 +147,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@mipmap/app_icon_bottombar_trends" />
+                    />
 
                 <com.kissspace.common.widget.AssertAnimView
                     android:id="@+id/animview_trends"
@@ -160,7 +159,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:alpha="0"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:url="home_anim_trends.mp4" />
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
@@ -185,7 +184,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@mipmap/app_icon_bottombar_message" />
+                    />
 
 
                 <com.kissspace.common.widget.AssertAnimView
@@ -198,7 +197,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1:1"
                     android:alpha="0"
-                    app:url="home_anim_msg.mp4" />
+                    />
 
                 <TextView
                     android:id="@+id/tv_notify_count"
@@ -223,7 +222,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@mipmap/app_icon_bottombar_mine" />
+                    />
 
                 <com.kissspace.common.widget.AssertAnimView
                     android:id="@+id/animview_mine"
@@ -235,7 +234,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:alpha="0"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:url="home_anim_mine.mp4" />
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
@@ -249,14 +248,12 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
-                android:src="@mipmap/app_icon_bottombar_explore_title"
                 android:scaleType="fitCenter"
                 android:layout_weight="1" />
 
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
-                android:src="@mipmap/app_icon_bottombar_trends_title"
                 android:scaleType="fitCenter"
                 android:layout_weight="1" />
         </LinearLayout>
@@ -271,14 +268,12 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
-                android:src="@mipmap/app_icon_bottombar_message_title"
                 android:scaleType="fitCenter"
                 android:layout_weight="1" />
 
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
-                android:src="@mipmap/app_icon_bottombar_mine_title"
                 android:scaleType="fitCenter"
                 android:layout_weight="1" />
         </LinearLayout>
@@ -293,7 +288,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:url="home_tab_line.mp4" />
+        />
 
     <com.hamster.happyness.widget.CollectRoomView
         android:id="@+id/collect_room_view"

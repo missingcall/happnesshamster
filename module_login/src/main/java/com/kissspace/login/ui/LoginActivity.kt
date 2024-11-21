@@ -91,28 +91,6 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
 //                true
 //            }
 //        }
-/*        mBinding.videoView.postRunnable {
-
-//            val mediaPlayer = MediaPlayer.create(this, R.raw.video_file_name)
-//            mediaPlayer.isLooping = true
-            val uri = Uri.parse("android.resource://" + packageName + "/" + R.raw.bg_login_with_one_key)
-            mBinding.videoView.apply {
-                setFixedSize(1200, 2500)
-                setVideoURI(uri)
-                setOnPreparedListener {
-                    it.setOnInfoListener { mediaPlayer, what, _ ->
-                        if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
-                            // 视频开始渲染时隐藏声音
-                            mediaPlayer.setVolume(0f, 0f);
-                            true
-                        } else false
-                    }
-                }
-
-                setOnCompletionListener{ start() }
-                start()
-            }
-        }*/
         showAgreeProtocol()
     }
 

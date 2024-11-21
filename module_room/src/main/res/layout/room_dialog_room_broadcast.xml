@@ -210,7 +210,6 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="28dp"
                 android:textColor="@color/color_FFFD62"
-                android:background="@mipmap/common_btn_dialog_single"
                 android:text="发送"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_cancel"

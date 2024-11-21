@@ -9,7 +9,6 @@
         android:id="@+id/iv_poster"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/app_bg_home_banner_not"
         android:scaleType="centerCrop" />
 
     <FrameLayout
@@ -105,7 +104,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:drawableStart="@mipmap/icon_home_banner_integral"
                 android:drawablePadding="3dp"
                 android:gravity="center_vertical"
                 android:text="9999"
@@ -121,7 +119,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:drawableStart="@mipmap/icon_home_banner_integral"
                 android:drawablePadding="3dp"
                 android:gravity="center_vertical"
                 android:text="9999"
