@@ -158,15 +158,6 @@ object ViewBindingAdapter {
 
     }
 
-    @JvmStatic
-    @BindingAdapter("productStatusIsVisible")
-    fun productStatusIsVisible(view: View, status: String) {
-        if(status == Constants.HamsterGoodsStatusType.SOLD_OUT){
-            view.visibility = View.VISIBLE
-        }else {
-            view.visibility = View.GONE
-        }
-    }
 
     /**
      * 设置NiceImageView边框

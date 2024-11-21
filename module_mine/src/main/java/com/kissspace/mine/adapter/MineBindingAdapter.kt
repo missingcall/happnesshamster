@@ -16,26 +16,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ResourceUtils
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import com.kissspace.util.dp
 import com.kissspace.common.config.Constants
 import com.kissspace.common.model.*
 import com.kissspace.common.util.formatNumCoin
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.widget.UserLevelIconView
 import com.kissspace.module_mine.R
-import com.kissspace.util.loadImage
-import com.kissspace.util.orZero
-import com.kissspace.util.resToColor
 import androidx.core.text.buildSpannedString
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.SpanUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
+import com.kissspace.common.ext.safeClick
 import com.kissspace.common.util.format.DateFormat
 import com.ruffian.library.widget.RTextView
 import com.kissspace.common.util.format.Format
 import com.kissspace.common.util.formatDate
+import com.kissspace.util.*
 import java.time.temporal.TemporalAmount
+import kotlin.text.isNotEmpty
 
 
 object MineBindingAdapter {
@@ -395,30 +394,14 @@ object MineBindingAdapter {
         }
     }
 
-    /**
-     * 我的仓库-仓鼠果园/松果银行
-     */
-
-    @JvmStatic
-    @BindingAdapter("wareHouseCommodityIcon", requireAll = false)
-    fun wareHouseCommodityIcon(imageView: ImageView, commodityIcon: String) {
-        imageView.loadImage(commodityIcon, com.kissspace.module_common.R.mipmap.common_app_logo)
-    }
-
     @JvmStatic
     @BindingAdapter("wareHouseDayIncome", requireAll = false)
-    fun wareHouseDayIncome(textView: TextView, dayIncome: Int) {
-        textView.text = buildSpannedString {
-            color(com.kissspace.module_common.R.color.color_999999.resToColor()) {
-                append("每天可以产出\n")
-            }
-            color(com.kissspace.module_common.R.color.color_FDC120.resToColor()) {
-                append("" + dayIncome)
-            }
-            color(com.kissspace.module_common.R.color.color_999999.resToColor()) {
-                append("松果")
-            }
-        }
+    fun wareHouseDayIncome(textView: TextView, item: QueryMarketListItem) {
+        textView.text = SpanUtils()
+            .append("${item.buyMoney}松果${item.buyDay}天预计\n额外采集")
+            .append("${item.buyMoney * item.windInterest /100}").setForegroundColor(Color.parseColor("#FDC120"))
+            .append("个松果")
+            .create()
     }
 
     /**
@@ -547,8 +530,30 @@ object MineBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("wareHouseTimeLimit", requireAll = false)
-    fun wareHouseTimeLimit(textView: TextView, timeLimit: Int) {
-        textView.text = "剩余天数: " + timeLimit + " 天"
+    fun wareHouseTimeLimit(textView: TextView, item: QueryMarketListItem) {
+        if (item.settleDay > 0) {
+            textView.text = "领取剩余天数:${item.settleDay}天"
+        } else {
+            textView.text = "结算剩余天数:${item.timeLimit}天"
+        }
+
+    }
+
+    @JvmStatic
+    @BindingAdapter("btnCollectOrClaim", requireAll = false)
+    fun btnCollectOrClaim(button: Button, item: QueryMarketListItem) {
+        if (item.settleDay > 0) {
+            button.text = "领取"
+            button.isEnabled = true
+            button.safeClick {
+                //TODO 存折领取逻辑
+
+            }
+        } else {
+            button.text = "采集中"
+            button.isEnabled = false
+        }
+
     }
 
     @JvmStatic
@@ -571,7 +576,7 @@ object MineBindingAdapter {
     fun amountColor(textView: TextView, amount: String) {
         if (amount.toDouble() >= 0) {
             textView.setTextColor(ColorUtils.getColor(com.kissspace.module_common.R.color.color_FDC120))
-        }else {
+        } else {
             textView.setTextColor(ColorUtils.getColor(com.kissspace.module_common.R.color.color_FE5F55))
         }
         textView.text = amount
@@ -583,5 +588,47 @@ object MineBindingAdapter {
         textView.text = createTime.formatDate(DateFormat.YYYY_MM_DD_HH_MM_SLASH)
     }
 
+    @JvmStatic
+    @BindingAdapter("productStatusIsVisible")
+    fun productStatusIsVisible(view: View, status: String) {
+        if (status == Constants.HamsterGoodsStatusType.SOLD_OUT) {
+            view.visibility = View.VISIBLE
+        } else {
+            view.visibility = View.GONE
+        }
+    }
 
+
+    /**
+     * 每日奖励领取状态
+     * 	领取状态 001 待领取 002 已领取 003 已过期 004可领取
+     */
+    @JvmStatic
+    @BindingAdapter("propReceiveStatus", requireAll = false)
+    fun propReceiveStatus(textView: TextView, status: String) {
+        textView.text =
+            when (status) {
+                "001" -> ""
+                "002" -> "已领取"
+                "003" -> "已过期"
+                "004" -> "领取"
+                else -> "领取"
+            }
+
+        textView.isEnabled = status == "004"
+    }
+
+    /**
+     * 领取蒙版显示
+     * 	领取状态 001 待领取 002 已领取 003 已过期 004可领取
+     */
+    @JvmStatic
+    @BindingAdapter("propReceiveLockStatus", requireAll = false)
+    fun propReceiveLockStatus(imageView: ImageView, status: String) {
+        if (status == "001") {
+            imageView.visibility = View.VISIBLE
+        } else {
+            imageView.visibility = View.GONE
+        }
+    }
 }

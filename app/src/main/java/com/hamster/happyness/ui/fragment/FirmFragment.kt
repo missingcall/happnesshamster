@@ -13,6 +13,8 @@ import com.kissspace.common.binding.dataBinding
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setMarginStatusBar
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.mine.viewmodel.MineViewModel
@@ -48,5 +50,6 @@ class FirmFragment : BaseFragment(R.layout.fragment_firm) {
         }
 
     }
+
 
 }

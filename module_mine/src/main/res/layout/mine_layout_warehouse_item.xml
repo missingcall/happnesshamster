@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="m"
             type="com.kissspace.common.model.QueryMarketListItem" />
@@ -14,19 +16,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/common_shape_262a2e_normal_15">
+        android:background="@drawable/common_bg_black23_radius15">
 
 
         <com.kissspace.common.widget.CircleImageView
 
             android:id="@+id/civ_commodity_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            imageRadius="@{10f}"
+            imageUrl="@{m.commodityIcon}"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            wareHouseCommodityIcon="@{m.commodityIcon}"
-            app:layout_constraintBottom_toBottomOf="@id/gl_horizontal"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/gl_horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,21 +38,21 @@
             android:id="@+id/tv_commodity_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginLeft="7dp"
             android:text="@{m.commodityName}"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_10"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/civ_commodity_icon"
             app:layout_constraintTop_toTopOf="@id/civ_commodity_icon" />
 
         <TextView
             android:id="@+id/tv_day_income"
-            android:layout_width="wrap_content"
+            wareHouseDayIncome="@{m}"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            wareHouseDayIncome="@{m.dayIncome}"
             android:textColor="@color/color_99FFFFFF"
-            android:textSize="@dimen/sp_8"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/civ_commodity_icon"
             app:layout_constraintLeft_toLeftOf="@id/tv_commodity_name"
             app:layout_constraintTop_toBottomOf="@id/tv_commodity_name"
@@ -60,10 +63,10 @@
             android:id="@+id/tv_total_revenue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="11dp"
             android:text="总计收益"
             android:textColor="@color/color_99FFFFFF"
-            android:textSize="@dimen/sp_8"
+            android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_commodity_name"
 
@@ -75,7 +78,7 @@
             android:layout_height="wrap_content"
             android:text="@{String.valueOf(m.totalIncome)}"
             android:textColor="@color/color_FDC120"
-            android:textSize="@dimen/sp_15"
+            android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_day_income"
             app:layout_constraintRight_toRightOf="@id/tv_total_revenue" />
 
@@ -90,75 +93,40 @@
         <View
             android:layout_width="0dp"
             android:layout_height="0.5dp"
-            android:background="@color/color_44D8D8D8"
+            android:background="@color/color_2C2C2C"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@id/gl_horizontal" />
 
 
         <TextView
             android:id="@+id/tv_time_limit"
+            wareHouseTimeLimit="@{m}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-
-            wareHouseTimeLimit="@{m.timeLimit}"
+            android:layout_marginLeft="12dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_8"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@id/gl_horizontal" />
 
 
-        <LinearLayout
-            android:id="@+id/ll_coin_price"
+        <Button
+            android:id="@+id/btn"
+            btnCollectOrClaim="@{m}"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gl_horizontal">
-
-
-            <TextView
-                android:id="@+id/tv_coin_price"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2dp"
-                android:text="采集中..."
-                android:textColor="@color/color_80F68D"
-                android:textSize="@dimen/sp_10"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <com.kissspace.common.widget.NiceImageView
-            android:id="@+id/riv_bg_mask"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            app:corner_radius="@dimen/dp_5"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:mask_color="@color/color_B3000000" />
-
-        <TextView
-            android:id="@+id/tv_sold_out"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:text="已售罄"
+            android:layout_height="26dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginBottom="11dp"
+            android:background="@drawable/common_btn_selector_blue_deep_blue_radius45"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_10"
+            android:textSize="11sp"
             android:textStyle="bold"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/gl_horizontal" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

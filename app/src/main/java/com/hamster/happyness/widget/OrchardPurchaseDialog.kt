@@ -18,7 +18,6 @@ import com.kissspace.common.util.customToast
 import com.kissspace.common.widget.BaseDialogFragment
 import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.mine.viewmodel.WalletViewModel
-import com.kissspace.util.loadImage
 
 /**
  * 底部弹窗-果园购买/激活

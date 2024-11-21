@@ -285,8 +285,11 @@ object MineApi {
     //仓鼠交流语言获取
     const val API_HAMSTER_CULTIVATE_COMMUNICATE = "/hamster-center/hamsters/cultivate/communicate"
 
-//    获取首页跳转链接
+    //获取首页跳转链接
     const val API_CENTER_HAMSTERMARKET_FINDHAMSTERQUICKJUMPLIST = "/hamster-center/hamsterMarket/findHamsterQuickJumpList"
+
+    //获取首页跳转链接
+    const val API_CENTER_HAMSTERMARKET_FINDPROPRECEIVELIST = "/hamster-center/hamsterMarket/findPropReceiveList"
 
 
 }

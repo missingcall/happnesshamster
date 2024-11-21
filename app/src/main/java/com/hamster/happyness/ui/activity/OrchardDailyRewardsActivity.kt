@@ -1,46 +1,46 @@
 package com.hamster.happyness.ui.activity
 
-import android.graphics.Color
+import android.graphics.*
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.angcyo.tablayout.delegate2.ViewPager2Delegate
 import com.blankj.utilcode.constant.TimeConstants
+import com.blankj.utilcode.util.ImageUtils
+import com.blankj.utilcode.util.SpanUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.didi.drouter.annotation.Router
-import com.drake.brv.sample.model.NestedListModel
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.hamster.happyness.R
 import com.hamster.happyness.databinding.ActivityOrchardDailyRewardsBinding
-import com.hamster.happyness.databinding.ItemNestedHorizontalRvBinding
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.binding.dataBinding
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.ext.setTitleBarListener
+import com.kissspace.common.model.FindPropReceiveListItem
 import com.kissspace.common.router.RouterPath
+import com.kissspace.common.router.parseIntent
 import com.kissspace.common.util.countDown
-import com.kissspace.mine.ui.fragment.WareHouseFragment
 import com.kissspace.mine.viewmodel.WalletViewModel
+import com.kissspace.module_mine.databinding.RvItemFindPropHorizontalBinding
 import com.kissspace.util.immersiveStatusBar
-import com.kissspace.util.jsonDecoder
 import com.kissspace.util.loadImage
 import com.kissspace.util.logE
 import com.kongzue.dialogx.DialogX
 import com.kongzue.dialogx.dialogs.CustomDialog
 import com.kongzue.dialogx.interfaces.OnBindView
+import com.luck.picture.lib.utils.BitmapUtils
 import kotlinx.coroutines.Job
-import kotlinx.serialization.json.decodeFromStream
 import java.util.*
 
 @Router(path = RouterPath.PATH_ORCHARD_DAILY_REWARDS)
 class OrchardDailyRewardsActivity : BaseActivity(R.layout.activity_orchard_daily_rewards) {
-
+    private val propId by parseIntent<String>()
+    private val timeLimit by parseIntent<String>()
+    private val dayIncome by parseIntent<String>()
     private val mBinding by dataBinding<ActivityOrchardDailyRewardsBinding>()
     private val mViewModel by viewModels<WalletViewModel>()
     var mCountDown: Job? = null
@@ -53,17 +53,30 @@ class OrchardDailyRewardsActivity : BaseActivity(R.layout.activity_orchard_daily
         mBinding.m = mViewModel
         val item = mViewModel.queryMarketItem.value
 
+        mBinding.tvTop.text =
+            SpanUtils().append("周期：${timeLimit}天\n日产：${dayIncome}").appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone_little).create()
+
+        val originalBitmap: Bitmap = BitmapFactory.decodeResource(resources, com.kissspace.module_common.R.mipmap.common_app_logo)
+        mBinding.ivIcon.setImageBitmap(ImageUtils.skew(originalBitmap, -0.25f, 0.1f))
+
+        mBinding.tvTop.typeface = Typeface.createFromAsset(assets, "fonts/AlimamaShuHeiTi-Bold.ttf")
+        mBinding.tvTitle.typeface = Typeface.createFromAsset(assets, "fonts/AlimamaShuHeiTi-Bold.ttf")
+
         mBinding.rv.setup {
-            addType<NestedListModel>(R.layout.item_nested_horizontal_rv)
+            addType<FindPropReceiveListItem>(com.kissspace.module_mine.R.layout.rv_item_find_prop_horizontal)
             onCreate {
-                getBinding<ItemNestedHorizontalRvBinding>().rv.setup {
-                    addType<String>(R.layout.item_simple_horizontal)
+                getBinding<RvItemFindPropHorizontalBinding>().rv.setup {
+                    addType<FindPropReceiveListItem.Item>(com.kissspace.module_mine.R.layout.rv_item_find_prop)
                 }
             }
 
             onBind {
-                val model = getModel<NestedListModel>()
-                getBinding<ItemNestedHorizontalRvBinding>().rv.models = model.list
+                val model = getModel<FindPropReceiveListItem>()
+                getBinding<RvItemFindPropHorizontalBinding>().rv.models = model.list
+                getBinding<RvItemFindPropHorizontalBinding>().tvStatus.safeClick {
+                    //领取
+                    showGiftDialog()
+                }
             }
         }
 
@@ -98,6 +111,7 @@ class OrchardDailyRewardsActivity : BaseActivity(R.layout.activity_orchard_daily
 
     }
 
+
     private fun showGiftDialog() {
         //已修改为activity 省略 ×默认的View方式无法显示在DialogFragment上方 所以此处修改为window方式FLOATING_ACTIVITY
         CustomDialog.build().setDialogImplMode(DialogX.IMPL_MODE.VIEW).apply {
@@ -118,7 +132,13 @@ class OrchardDailyRewardsActivity : BaseActivity(R.layout.activity_orchard_daily
     }
 
     private fun initData() {
-        mBinding.rv.models = jsonDecoder.decodeFromStream<List<NestedListModel>>(resources.openRawResource(R.raw.list_nested))
+        mViewModel.findPropReceiveList(propId) {
+            mBinding.rv.models = it
+        }
+        //测试数据 嵌套列表
+//        mBinding.rv.models = jsonDecoder.decodeFromStream<List<NestedListModel>>(resources.openRawResource(R.raw.list_nested))
+
+
     }
 
     private fun getTomorrowMills(): Long {
