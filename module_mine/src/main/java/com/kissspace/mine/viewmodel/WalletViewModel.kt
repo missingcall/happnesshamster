@@ -7,6 +7,7 @@ import com.kissspace.common.base.BaseViewModel
 import com.kissspace.common.config.CommonApi
 import com.kissspace.common.config.Constants
 import com.kissspace.common.config.Constants.TypeFaceRecognition
+import com.kissspace.common.model.FindPropReceiveListItem
 import com.kissspace.common.model.QueryMarketListItem
 import com.kissspace.common.model.UserInfoBean
 import com.kissspace.common.model.wallet.*
@@ -717,6 +718,18 @@ class WalletViewModel : BaseViewModel() {
             onSuccess.invoke(it)
         }, onError = {
             customToast(it.message)
+        })
+    }
+
+    //
+    fun findPropReceiveList(propId: String?,onSuccess: ((MutableList<FindPropReceiveListItem>) -> Unit) = {}) {
+        val param = mutableMapOf<String, Any?>()
+        param["propId"] = propId
+
+        request<MutableList<FindPropReceiveListItem>>(MineApi.API_CENTER_HAMSTERMARKET_FINDPROPRECEIVELIST, Method.POST, param, onSuccess = {
+            onSuccess.invoke(it)
+        }, onError = {
+//            customToast(it.message)
         })
     }
 }

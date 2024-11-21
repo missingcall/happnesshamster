@@ -7,7 +7,7 @@
 
         <variable
             name="m"
-            type="com.hamster.happyness.viewmodel.HamsterViewModel" />
+            type="com.kissspace.mine.viewmodel.HamsterViewModel" />
 
         <variable
             name="wvm"

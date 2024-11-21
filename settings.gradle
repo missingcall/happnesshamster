@@ -14,5 +14,5 @@ include ':SudMGPSDK'
 include ':SudMGPWrapper'
 include ':module_dynamic'
 include ':module_svga'
-
 include ':module_ui'
+

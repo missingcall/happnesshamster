@@ -10,7 +10,7 @@ import com.drake.brv.utils.grid
 import com.drake.brv.utils.setup
 import com.hamster.happyness.databinding.FragmentFirmOrchardBankBinding
 import com.hamster.happyness.widget.BankPurchaseDialog
-import com.hamster.happyness.widget.OrchardPurchaseDialog
+import com.kissspace.mine.widget.OrchardPurchaseDialog
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.config.Constants
 import com.kissspace.common.ext.safeClick
@@ -66,7 +66,7 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
         //基础仓鼠&庄园
         if (type == Constants.HamsterFirmCommodityTypes.BASIC_HAMSTER) {
             mBinding.recyclerView.grid(2).setup {
-                addType<QueryMarketListItem> { com.hamster.happyness.R.layout.rv_item_firm_orchard }
+                addType<QueryMarketListItem> { com.kissspace.module_mine.R.layout.rv_item_firm_orchard }
                 onBind {
                     val model = getModel<QueryMarketListItem>()
                     val button = findView<Button>(com.hamster.happyness.R.id.btn)
@@ -85,14 +85,20 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
                                 OrchardPurchaseDialog.newInstance(2, model.commodityType == "001").show(childFragmentManager)
                             }
                             "005" -> {
-                                //点击跳转领取页面
-                                jump(RouterPath.PATH_ORCHARD_DAILY_REWARDS)
+                                //点击跳转领取页面 根据propid领取
+                                jump(
+                                    RouterPath.PATH_ORCHARD_DAILY_REWARDS,
+                                    "propId" to model.propId,
+                                    "timeLimit" to model.timeLimit.toString(),
+                                    "dayIncome" to model.dayIncome.toString()
+
+                                )
                             }
                         }
 
                     }
 
-                    findView<TextView>(com.hamster.happyness.R.id.tv_sold_out).safeClick { com.kissspace.common.util.customToast("已售罄") }
+                    findView<TextView>(com.kissspace.module_mine.R.id.tv_sold_out).safeClick { com.kissspace.common.util.customToast("已售罄") }
 
 
                 }
@@ -101,7 +107,7 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
             //银行
         } else if (type == Constants.HamsterFirmCommodityTypes.BANK) {
             mBinding.recyclerView.grid(2).setup {
-                addType<QueryMarketListItem> { com.hamster.happyness.R.layout.rv_item_firm_bank }
+                addType<QueryMarketListItem> { com.kissspace.module_mine.R.layout.rv_item_firm_bank }
                 onBind {
                     val model = getModel<QueryMarketListItem>()
 
@@ -154,5 +160,10 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
         FlowBus.observerEvent<Event.OrchardActivationEvent>(this) {
             mBinding.pageRefreshLayout.autoRefresh()
         }
+
+        FlowBus.observerEvent<Event.RefreshChangeAccountEvent>(this) {
+            mBinding.pageRefreshLayout.autoRefresh()
+        }
+
     }
 }

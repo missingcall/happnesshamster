@@ -158,28 +158,7 @@ object ViewBindingAdapter {
 
     }
 
-    @JvmStatic
-    @BindingAdapter("productStatusIsVisible")
-    fun productStatusIsVisible(view: View, status: String) {
-        if(status == Constants.HamsterGoodsStatusType.SOLD_OUT){
-            view.visibility = View.VISIBLE
-        }else {
-            view.visibility = View.GONE
-        }
-    }
 
-    /**
-     * 设置NiceImageView边框
-     */
-    @JvmStatic
-    @BindingAdapter("setBorderBackground")
-    fun setBorderBackground(niceImageView: NiceImageView, isBorder: Boolean) {
-        if (niceImageView.isSelected) {
-            niceImageView.setBorderWidth(2)
-        } else {
-            niceImageView.setBorderWidth(0)
-        }
-    }
 
     /**
      * 可用松果
@@ -408,22 +387,6 @@ object ViewBindingAdapter {
             .append(record.price.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .create()
         button.text = spanString
-    }
-
-    /**
-     * 果园购买-payType
-     */
-    @JvmStatic
-    @BindingAdapter("ivConditions", requireAll = false)
-    fun ivConditions(imageView: ImageView, payType: String) {
-        imageView.loadImage(
-            when (payType) {
-                "001" -> com.kissspace.module_mine.R.mipmap.icon_pine_cone_small
-                "002" -> com.kissspace.module_mine.R.mipmap.icon_pine_nut_small
-                "003" -> com.kissspace.module_mine.R.mipmap.icon_pine_cone_small
-                else -> com.kissspace.module_mine.R.mipmap.icon_hamster_medal_small
-            }
-        )
     }
 
 

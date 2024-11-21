@@ -15,7 +15,7 @@ import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.hamster.happyness.R
 import com.hamster.happyness.databinding.FragmentMainHomeV3Binding
-import com.hamster.happyness.viewmodel.HamsterViewModel
+import com.kissspace.mine.viewmodel.HamsterViewModel
 import com.hamster.happyness.widget.*
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.config.Constants

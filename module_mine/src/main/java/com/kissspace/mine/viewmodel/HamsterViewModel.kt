@@ -1,4 +1,4 @@
-package com.hamster.happyness.viewmodel
+package com.kissspace.mine.viewmodel
 
 import androidx.databinding.ObservableField
 import com.kissspace.common.base.BaseViewModel

@@ -99,7 +99,7 @@
 
         <com.kissspace.login.widget.XEditText
             android:id="@+id/xet_verify"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@null"
             android:gravity="center|left"
@@ -114,6 +114,7 @@
             android:textSize="@dimen/sp_15"
             app:layout_constraintBottom_toBottomOf="@id/ll_verify"
             app:layout_constraintLeft_toLeftOf="@id/xet_phone"
+            app:layout_constraintRight_toRightOf="@id/ll_verify"
             app:layout_constraintTop_toTopOf="@id/ll_verify" />
 
 
