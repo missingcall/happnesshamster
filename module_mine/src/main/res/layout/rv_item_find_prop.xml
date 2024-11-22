@@ -17,8 +17,8 @@
         android:id="@+id/item"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
 
         android:foreground="?selectableItemBackgroundBorderless">
 
@@ -33,10 +33,9 @@
 
         <ImageView
             android:id="@+id/ivIcon"
-            loadImage="@{m.icon}"
+            SetDailyRewardIcon="@{m}"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@mipmap/icon_party_glory_gift_box"
             app:layout_constraintBottom_toBottomOf="@id/ivBg"
             app:layout_constraintLeft_toLeftOf="@id/ivBg"
             app:layout_constraintRight_toRightOf="@id/ivBg"

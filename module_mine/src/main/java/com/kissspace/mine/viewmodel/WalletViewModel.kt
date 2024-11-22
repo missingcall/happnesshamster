@@ -707,7 +707,7 @@ class WalletViewModel : BaseViewModel() {
         })
     }
 
-    //代币转赠 (缺验证码
+    //代币转赠
     fun transferAccounts(/*smsCode: String?,*/ amount: Double, targetUserDisplayId: String, type: String, onSuccess: ((Boolean) -> Unit) = {}) {
         val param = mutableMapOf<String, Any?>()
 //        param["smsCode"] = smsCode
@@ -722,7 +722,7 @@ class WalletViewModel : BaseViewModel() {
     }
 
     //
-    fun findPropReceiveList(propId: String?,onSuccess: ((MutableList<FindPropReceiveListItem>) -> Unit) = {}) {
+    fun findPropReceiveList(propId: String?, onSuccess: ((MutableList<FindPropReceiveListItem>) -> Unit) = {}) {
         val param = mutableMapOf<String, Any?>()
         param["propId"] = propId
 
@@ -731,5 +731,22 @@ class WalletViewModel : BaseViewModel() {
         }, onError = {
 //            customToast(it.message)
         })
+    }
+
+    /**
+     * 领取松果 领取每日奖励
+     */
+    fun receivePineCone(day: Int, propId: String, onSuccess: ((String?) -> Unit)?, onError: ((AppException?) -> Unit)?) {
+        val param = mutableMapOf<String, Any?>()
+        param["day"] = day
+        param["propId"] = propId
+        request<String?>(MineApi.API_HAMSTER_MARKET_RECEIVE_PINE_CONE,
+            Method.POST,
+            onSuccess = {
+                onSuccess?.invoke(it)
+            },
+            onError = {
+                onError?.invoke(it)
+            })
     }
 }

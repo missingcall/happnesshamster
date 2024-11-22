@@ -413,7 +413,7 @@ object MineBindingAdapter {
     fun wareHouseDayIncome(textView: TextView, item: QueryMarketListItem) {
         textView.text = SpanUtils()
             .append("${item.buyMoney}松果${item.buyDay}天预计\n额外采集")
-            .append("${item.buyMoney * item.windInterest /100}").setForegroundColor(Color.parseColor("#FDC120"))
+            .append("${item.buyMoney * item.windInterest / 100}").setForegroundColor(Color.parseColor("#FDC120"))
             .append("个松果")
             .create()
     }
@@ -662,7 +662,32 @@ object MineBindingAdapter {
         )
     }
 
+    /**
+     * 展示第n天奖励图标
+    道具类型(001 松果 002 松子 003 钻石 004 蓝珀 005 金珀 006 元宝 007 直播间礼物 008 清洁道具 009 勋章 010 头像框 011 座驾)
+    7,10,11会给图
+    清洁道具 icon为空 name给名字
+     */
+    @JvmStatic
+    @BindingAdapter("SetDailyRewardIcon", requireAll = false)
+    fun SetDailyRewardIcon(imageView: ImageView, item: FindPropReceiveListItem.Item) {
+        imageView.loadImage(
+            when (item.type) {
+                "001" -> R.mipmap.icon_pine_cone_small
+                "002" -> R.mipmap.icon_pine_nut_small
+                "003" -> R.mipmap.icon_diamond_small
+                "004" -> R.mipmap.mine_icon_blue_pepper
+                "005" -> R.mipmap.mine_icon_gold_pepper
+                "006" -> R.mipmap.mine_icon_yuan_bao
+                "007" -> item.icon
+                "008" ->R.mipmap.mine_icon_cleanliness
+                "009" -> R.mipmap.icon_diamond_small
+                "010" -> R.mipmap.icon_hamster_medal_small
+                "011" -> item.icon
 
-
+                else -> R.mipmap.icon_pine_cone_small
+            }
+        )
+    }
 
 }

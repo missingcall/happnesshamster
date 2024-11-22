@@ -288,7 +288,7 @@ object MineApi {
     //获取首页跳转链接
     const val API_CENTER_HAMSTERMARKET_FINDHAMSTERQUICKJUMPLIST = "/hamster-center/hamsterMarket/findHamsterQuickJumpList"
 
-    //获取首页跳转链接
+    //获取用户指定道具签到奖励详情
     const val API_CENTER_HAMSTERMARKET_FINDPROPRECEIVELIST = "/hamster-center/hamsterMarket/findPropReceiveList"
 
 

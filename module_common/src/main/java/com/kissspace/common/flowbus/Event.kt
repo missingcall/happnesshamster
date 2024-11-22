@@ -160,7 +160,7 @@ sealed class Event {
 
     data class DynamicsHandlerEvent(var dynamicsHandlerBean: DynamicsHandlerBean) : Event()
 
-    //切换账号刷新数据
+    //切换账号 刷新数据
     object RefreshChangeAccountEvent : Event()
 
 

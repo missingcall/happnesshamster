@@ -69,20 +69,6 @@ class MineViewModel : BaseViewModel() {
             })
     }
 
-    /**
-     * 领取松果
-     */
-    fun receivePinecone(onSuccess: ((String?) -> Unit)?, onError: ((AppException?) -> Unit)?) {
 
-        request<String?>(MineApi.API_HAMSTER_MARKET_RECEIVE_PINE_CONE,
-            Method.GET,
-            onSuccess = {
-                onSuccess?.invoke(it)
-            },
-            onError = {
-                customToast(it.message)
-                onError?.invoke(it)
-            })
-    }
 
 }

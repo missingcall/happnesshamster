@@ -57,7 +57,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         initData()
         refreshUserinfo()
         queryDayIncome()
-        getHamsterStatus(true)
+//        getHamsterStatus(true)
         getCurrentHamsterSkin()
 
         mBinding.ivAvatar.safeClick {
@@ -120,7 +120,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
         FlowBus.observerEvent<Event.CommunicateEvent>(this) {
             mHamsterViewModel.communicate {
-                if (it.isNullOrBlank()) {
+                if (it.isNotBlank()) {
                     mBinding.tvCommunicate.text = it
                     mBinding.tvCommunicate.visibility = View.VISIBLE
                     //倒计时10秒
@@ -135,10 +135,10 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
         FlowBus.observerEvent<Event.RefreshChangeAccountEvent>(this) {
             initRecyclerView()
+            getHamsterStatus(false)
             initData()
             refreshUserinfo()
             queryDayIncome()
-            getHamsterStatus(true)
             getCurrentHamsterSkin()
             getMoney()
         }
@@ -147,6 +147,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     override fun onResume() {
         super.onResume()
         getMoney()
+        getHamsterStatus(true)
     }
 
     private fun getMoney() {
@@ -193,7 +194,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     private fun changeHamsterUIStatus() {
         when (mWalletViewModel.hmsInfoModel.get()?.hamsterStatus) {
             //（001 正常 002 濒死 003 已死亡 004 已到期）
-            Constants.HamsterStatusType.NORMAL, Constants.HamsterStatusType.NEAR_DEATH -> {
+            Constants.HamsterStatusType.NORMAL -> {
                 //右边栏
                 mBinding.clBalanceDescription.visibility = View.VISIBLE
                 mBinding.clSkin.visibility = View.VISIBLE
@@ -228,7 +229,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 }
 
             }
-            Constants.HamsterStatusType.DEAD -> {
+            Constants.HamsterStatusType.NEAR_DEATH -> {
                 //右边栏
                 mBinding.clBalanceDescription.visibility = View.VISIBLE
                 mBinding.clSkin.visibility = View.VISIBLE
@@ -247,7 +248,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                     HomeRebornDialog.newInstance().show(childFragmentManager)
                 }
             }
-            Constants.HamsterStatusType.EXPIRED -> {
+            Constants.HamsterStatusType.DEAD, Constants.HamsterStatusType.EXPIRED -> {
                 //仓鼠不存在或仓鼠已过期 隐藏右边栏/展示蒙版/展示锁
 
                 //右边栏
@@ -293,6 +294,8 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 /*it.sortWith { u1, u2 ->
                     u1.id.compareTo(u2.id)
                 }*/
+                it.addAll(it)
+                it.addAll(it)
                 mBinding.recyclerView.addModels(it)
             }
 

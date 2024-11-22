@@ -69,10 +69,11 @@ class HomeRebornDialog : BaseDialogFragment<DialogHomeRebornBinding>(DialogHomeR
     }
 
     private fun reviveSuccess() {
-        customToast("复活成功")
         //复活成功,刷新HomeFragment喂食度
         FlowBus.post(Event.HamsterReviveEvent)
         FlowBus.post(Event.RefreshCoin)
+        customToast("复活成功")
+        dismiss()
     }
 
     override fun observerData() {

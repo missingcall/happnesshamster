@@ -234,7 +234,7 @@ object ViewBindingAdapter {
     @BindingAdapter(value = ["propClean", "diamond"])
     fun availableClean(textView: TextView, propClean: Int, diamond: Double) {
         val spanStringAvailable = SpanUtils().append("我可用的")
-            .appendImage(com.hamster.happyness.R.mipmap.app_icon_home_cleanliness)
+            .appendImage(com.kissspace.module_mine.R.mipmap.mine_icon_cleanliness)
             .append(propClean.toString()).setForegroundColor(Color.parseColor("#FDC120"))
             .appendImage(com.kissspace.module_mine.R.mipmap.icon_pine_cone)
             .append(diamond.toString()).setForegroundColor(Color.parseColor("#FDC120"))
