@@ -193,8 +193,8 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
     private fun changeHamsterUIStatus() {
         when (mWalletViewModel.hmsInfoModel.get()?.hamsterStatus) {
-            //（001 正常 002 濒死 003 已死亡 004 已到期）
-            Constants.HamsterStatusType.NORMAL -> {
+            //（001 正常 002 濒死 003 已死亡 004 已到期 005饱食度或清洁度为0）
+            Constants.HamsterStatusType.NORMAL, Constants.HamsterStatusType.SATISFY_CLEAN_EMPTINESS -> {
                 //右边栏
                 mBinding.clBalanceDescription.visibility = View.VISIBLE
                 mBinding.clSkin.visibility = View.VISIBLE
@@ -220,14 +220,18 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
                 //点击领取松果
                 mBinding.ivHamsterDevelopment.safeClick {
-                    mHamsterViewModel.click {
-                        if (it) {
-                            customToast("领取成功")
-                            FlowBus.post(Event.RefreshCoin)
+                    if (mWalletViewModel.hmsInfoModel.get() != null) {
+                        if (mWalletViewModel.hmsInfoModel.get()!!.hamsterStatus == Constants.HamsterStatusType.NORMAL || mWalletViewModel.hmsInfoModel.get()!!.hamsterStatus == Constants.HamsterStatusType.SATISFY_CLEAN_EMPTINESS) {
+                            mHamsterViewModel.click {
+                                if (it) {
+                                    customToast("领取成功")
+                                    FlowBus.post(Event.RefreshCoin)
+                                }
+                            }
                         }
                     }
-                }
 
+                }
             }
             Constants.HamsterStatusType.NEAR_DEATH -> {
                 //右边栏
@@ -271,6 +275,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                     FlowBus.post(Event.HamsterPurchaseEvent)
                 }
             }
+
 
         }
 
@@ -359,12 +364,12 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                     this.stackFromEnd = stackFromEnd
                 }
 
-            } else {
+            } /*else {
                 mBinding.recyclerView.layoutManager = HoverLinearLayoutManager(context, RecyclerView.HORIZONTAL, false).apply {
                     setScrollEnabled(true)
                     this.stackFromEnd = stackFromEnd
                 }
-            }
+            }*/
         })
 
 

@@ -741,7 +741,23 @@ class WalletViewModel : BaseViewModel() {
         param["day"] = day
         param["propId"] = propId
         request<String?>(MineApi.API_HAMSTER_MARKET_RECEIVE_PINE_CONE,
-            Method.POST,
+            Method.POST, param,
+            onSuccess = {
+                onSuccess?.invoke(it)
+            },
+            onError = {
+                onError?.invoke(it)
+            })
+    }
+
+    /**
+    领取松果--存折结算
+     */
+    fun receivePassbook(propId: String, onSuccess: ((Boolean?) -> Unit)?, onError: ((AppException?) -> Unit)?) {
+        val param = mutableMapOf<String, Any?>()
+        param["propId"] = propId
+        request<Boolean?>(MineApi.API_CENTER_HAMSTERMARKET_RECEIVEPASSBOOK,
+            Method.POST, param,
             onSuccess = {
                 onSuccess?.invoke(it)
             },

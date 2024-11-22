@@ -709,6 +709,7 @@ object Constants {
             const val NEAR_DEATH = "002"
             const val DEAD = "003"
             const val EXPIRED = "004"
+            const val SATISFY_CLEAN_EMPTINESS = "005"
 
         }
     }

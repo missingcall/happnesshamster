@@ -7,6 +7,10 @@ import kotlinx.serialization.Serializable
 @kotlinx.serialization.Serializable
 class QueryMarketList : ArrayList<QueryMarketListItem>()
 
+/**
+    timeLimit 结算倒计时，当到领取时间时为负数
+    settleDay 领取倒计时，结算时间之前为空，结算时间后开始有值，过期后继续为空
+ */
 @Serializable
 data class QueryMarketListItem(
     @SerialName("buyDay")

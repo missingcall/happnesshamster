@@ -291,5 +291,8 @@ object MineApi {
     //获取用户指定道具签到奖励详情
     const val API_CENTER_HAMSTERMARKET_FINDPROPRECEIVELIST = "/hamster-center/hamsterMarket/findPropReceiveList"
 
+    //领取松果--存折结算
+    const val API_CENTER_HAMSTERMARKET_RECEIVEPASSBOOK = "/hamster-center/hamsterMarket/receivePassbook"
+
 
 }

@@ -79,13 +79,15 @@ class OrchardDailyRewardsActivity : BaseActivity(R.layout.activity_orchard_daily
             onBind {
                 val model = getModel<FindPropReceiveListItem>()
 
-//                findViewById<TextView>(R.id.tvStatus).typeface = typeface
                 getBinding<RvItemFindPropHorizontalBinding>().rv.models = model.list
                 getBinding<RvItemFindPropHorizontalBinding>().tvStatus.safeClick {
                     //领取
                     showGiftDialog(model)
 
                 }
+
+                //空指针 先注释
+//                findViewById<TextView>(R.id.tvStatus).typeface = typeface
             }
         }
 
@@ -130,7 +132,7 @@ class OrchardDailyRewardsActivity : BaseActivity(R.layout.activity_orchard_daily
             CustomDialog.build().setDialogImplMode(DialogX.IMPL_MODE.VIEW).apply {
                 maskColor = Color.parseColor("#6D000000")
                 setCustomView(object :
-                    OnBindView<CustomDialog>(R.layout.dialog_custom_orchard_daily_rewards) {
+                    OnBindView<CustomDialog>(com.kissspace.module_mine.R.layout.dialog_custom_orchard_daily_rewards) {
                     override fun onBind(dialog: CustomDialog?, v: View?) {
                         v?.findViewById<ImageView>(com.kissspace.module_message.R.id.iv_close)
                             ?.setOnClickListener {

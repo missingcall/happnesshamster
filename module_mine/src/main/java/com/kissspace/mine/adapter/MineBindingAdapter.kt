@@ -10,7 +10,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.text.color
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ResourceUtils
@@ -22,19 +21,14 @@ import com.kissspace.common.util.formatNumCoin
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.common.widget.UserLevelIconView
 import com.kissspace.module_mine.R
-import androidx.core.text.buildSpannedString
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.SpanUtils
-import com.blankj.utilcode.util.StringUtils
-import com.blankj.utilcode.util.TimeUtils
-import com.kissspace.common.ext.safeClick
 import com.kissspace.common.util.format.DateFormat
 import com.ruffian.library.widget.RTextView
 import com.kissspace.common.util.format.Format
 import com.kissspace.common.util.formatDate
 import com.kissspace.common.widget.NiceImageView
 import com.kissspace.util.*
-import java.time.temporal.TemporalAmount
 import kotlin.text.isNotEmpty
 
 
@@ -545,10 +539,14 @@ object MineBindingAdapter {
     @JvmStatic
     @BindingAdapter("wareHouseTimeLimit", requireAll = false)
     fun wareHouseTimeLimit(textView: TextView, item: QueryMarketListItem) {
-        if (item.settleDay > 0) {
-            textView.text = "领取剩余天数:${item.settleDay}天"
-        } else {
+        //结算中
+        if (item.timeLimit >= 0) {
             textView.text = "结算剩余天数:${item.timeLimit}天"
+        } else {
+            //领取
+            if (item.settleDay >= 0) {
+                textView.text = "领取剩余天数:${item.settleDay}天"
+            }
         }
 
     }
@@ -556,16 +554,14 @@ object MineBindingAdapter {
     @JvmStatic
     @BindingAdapter("btnCollectOrClaim", requireAll = false)
     fun btnCollectOrClaim(button: Button, item: QueryMarketListItem) {
-        if (item.settleDay > 0) {
-            button.text = "领取"
-            button.isEnabled = true
-            button.safeClick {
-                //TODO 存折领取逻辑
-
-            }
-        } else {
+        if (item.timeLimit >= 0) {
             button.text = "采集中"
             button.isEnabled = false
+        } else {
+            if (item.settleDay >= 0) {
+                button.text = "领取"
+                button.isEnabled = true
+            }
         }
 
     }
@@ -669,8 +665,8 @@ object MineBindingAdapter {
     清洁道具 icon为空 name给名字
      */
     @JvmStatic
-    @BindingAdapter("SetDailyRewardIcon", requireAll = false)
-    fun SetDailyRewardIcon(imageView: ImageView, item: FindPropReceiveListItem.Item) {
+    @BindingAdapter("setDailyRewardIcon", requireAll = false)
+    fun setDailyRewardIcon(imageView: ImageView, item: FindPropReceiveListItem.Item) {
         imageView.loadImage(
             when (item.type) {
                 "001" -> R.mipmap.icon_pine_cone_small
@@ -680,7 +676,7 @@ object MineBindingAdapter {
                 "005" -> R.mipmap.mine_icon_gold_pepper
                 "006" -> R.mipmap.mine_icon_yuan_bao
                 "007" -> item.icon
-                "008" ->R.mipmap.mine_icon_cleanliness
+                "008" -> R.mipmap.mine_icon_cleanliness
                 "009" -> R.mipmap.icon_diamond_small
                 "010" -> R.mipmap.icon_hamster_medal_small
                 "011" -> item.icon

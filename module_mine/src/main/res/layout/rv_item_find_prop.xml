@@ -33,7 +33,7 @@
 
         <ImageView
             android:id="@+id/ivIcon"
-            SetDailyRewardIcon="@{m}"
+            setDailyRewardIcon="@{m}"
             android:layout_width="30dp"
             android:layout_height="30dp"
             app:layout_constraintBottom_toBottomOf="@id/ivBg"
@@ -49,8 +49,6 @@
             android:text='@{String.valueOf(m.number)}'
             android:textColor="@color/white"
             android:textSize="8sp"
-            app:bl_corners_bottomRadius="15dp"
-            app:bl_solid_color="@color/color_4D000000"
             app:layout_constraintBottom_toBottomOf="@id/ivIcon"
             app:layout_constraintRight_toRightOf="@id/ivIcon"
             tools:text="12"

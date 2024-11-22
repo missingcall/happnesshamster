@@ -206,20 +206,33 @@
 
             />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clQuickStart"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/ivBg"
-            tools:itemCount="12"
-            tools:listitem="@layout/rv_item_home_game_quick_entry" />
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="12"
+                tools:listitem="@layout/rv_item_home_game_quick_entry" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
         <ImageView
@@ -232,7 +245,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/tvPineConeBalance"
-            app:layout_constraintTop_toBottomOf="@id/recycler_view" />
+            app:layout_constraintTop_toBottomOf="@id/clQuickStart" />
 
         <TextView
             android:id="@+id/tvPineConeBalance"
@@ -257,7 +270,7 @@
             android:src="@mipmap/icon_pine_nut"
             app:layout_constraintLeft_toRightOf="@id/tvPineConeBalance"
             app:layout_constraintRight_toLeftOf="@id/tvPineNutBalance"
-            app:layout_constraintTop_toBottomOf="@id/recycler_view"
+            app:layout_constraintTop_toBottomOf="@id/clQuickStart"
             app:layout_constraintTop_toTopOf="@id/ivPineCone" />
 
         <TextView
