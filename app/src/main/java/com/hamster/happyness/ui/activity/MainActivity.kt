@@ -338,12 +338,12 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
         collectData(mViewModel.noticeEvent, onSuccess = {
             if (it.noticeFrequency == "001") {//一直弹出
                 NoticeDialog.newInstance(it.noticeParam).show(supportFragmentManager)
-                MMKVProvider.noticeCache = it.id
+                MMKVProvider.noticeCache = it.intVersion
             }else{
                 //缓存版本小就弹出
-                if(MMKVProvider.noticeCache<it.id){
+                if(MMKVProvider.noticeCache<it.intVersion){
                     NoticeDialog.newInstance(it.noticeParam).show(supportFragmentManager)
-                    MMKVProvider.noticeCache = it.id
+                    MMKVProvider.noticeCache = it.intVersion
                 }
             }
            }, onError = {}, onEmpty = {}

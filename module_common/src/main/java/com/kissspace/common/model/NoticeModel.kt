@@ -27,7 +27,7 @@ data class NoticeModel(
     val endTime: String,
     val hasDelete: String,
     val id: Long,
-    val intVersion: String,
+    val intVersion: Long,
     val noticeFrequency: String,
     val noticeIcon: String,
     val noticeLink: String,
