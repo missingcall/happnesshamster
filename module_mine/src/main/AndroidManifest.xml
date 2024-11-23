@@ -263,6 +263,14 @@
             android:name="com.kissspace.mine.ui.activity.user.UserProfileNew2Activity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.kissspace.mine.ui.activity.InviteActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.kissspace.mine.ui.activity.InvitationPosterActivity"
+            android:screenOrientation="portrait" />
+
 
     </application>
 

@@ -104,5 +104,17 @@ class HamsterViewModel : BaseViewModel() {
         })
     }
 
+    //仓鼠交流语言获取
+    fun getInvitePeopleList(pageNum: Int, onSuccess: ((InvitePeopleListModel) -> Unit)?) {
+        val param = mutableMapOf<String, Any?>()
+        param["pageNum"] = pageNum
+        param["pageSize"] = Constants.PageSize
+        request<InvitePeopleListModel>(MineApi.API_USER_INVITATION_CODE_REWARD_PEOPLE_LIST, Method.GET, param, onSuccess = {
+            onSuccess?.invoke(it)
+        }, onError = {
+//            customToast(it.message, true)
+        })
+    }
+
 
 }

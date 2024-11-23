@@ -126,4 +126,8 @@
     <string name="mine_transfer_tips_pine_nut_dialog">为了您的松子安全，请谨慎赠送\n1.请勿向陌生人转赠松子\n2.请勿相信“松子盈利”等说法</string>
     <string name="mine_transfer_tips_diamonds_dialog">为了您的钻石安全，请谨慎赠送\n1.请勿向陌生人转赠钻石\n2.请勿相信“钻石盈利”等说法</string>
 
+    <string name="mine_invite_description_1">好友购买果园、银行你将会获得松子奖励。领取果园奖励返25%松子奖励，领取存折奖励返20%松子奖励</string>
+    <string name="mine_invite_description_2">好友参与各类游戏玩法，包括但不限于大逃杀、加倍乐等，消耗一定数额的游戏币，返对应游戏币20%的松子奖励</string>
+
+
 </resources>

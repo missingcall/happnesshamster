@@ -301,4 +301,10 @@ object MineApi {
     //查询是否还有没领取的奖励
     const val API_FIND_USER_PROP_WAIT_RECEIVELIST = "/hamster-findUserPropWaitReceiveList"
 
+    //获取当前用户邀请人列表
+    const val API_USER_INVITATION_CODE_REWARD_PEOPLE_LIST = "/hamster-user/invitationCodeReward/people/list"
+
+    //获取邀请二维码
+    const val API_USER_USER_GET_QR_CODE = "/hamster-user/user/get-qr-code"
+
 }

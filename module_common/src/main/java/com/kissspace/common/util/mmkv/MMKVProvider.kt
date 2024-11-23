@@ -36,6 +36,9 @@ object MMKVProvider : MMKVOwner {
     //用户id
     var userId by mmkvString(default = "")
 
+    //邀请码
+    var inviteCode by mmkvString(default = "")
+
     //用户性别
     var sex by mmkvString(default = Constants.SEX_FEMALE)
 

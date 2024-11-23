@@ -69,6 +69,20 @@ class MineViewModel : BaseViewModel() {
             })
     }
 
+    /**
+     * 获取邀请二维码
+     */
+    fun getQrCode(onSuccess: ((String?) -> Unit)?) {
+        request<String?>(MineApi.API_USER_USER_GET_QR_CODE,
+            Method.GET,
+            onSuccess = {
+                onSuccess?.invoke(it)
+            },
+            onError = {
+
+            })
+    }
+
 
 
 }

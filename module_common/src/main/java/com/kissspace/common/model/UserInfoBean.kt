@@ -24,6 +24,7 @@ data class UserInfoBean(
     val birthday: String = "1994-03-23",
     val editDate: String = "",
     val info: String = "这个人很懒，什么都没留下",
+    val inviteCode: String = "",
     val isDestroy: Int,
     val privilege: String = "",
     val isFrozen: Int,
@@ -71,7 +72,7 @@ data class UserInfoBean(
     val headwearUrl: String = "",
     val medalList: MutableList<UserMedalBean> = mutableListOf(),
     val isSetPassword: Boolean = false,
-    val likesReceivedNum:String ="0",
+    val likesReceivedNum: String = "0",
 
     ) : Parcelable {
     fun getIntegralLong(): Long = integral.roundToLong()
@@ -83,6 +84,10 @@ data class UserInfoBean(
             year = str[0].toInt()
         }
         return "${Calendar.getInstance().get(Calendar.YEAR) - year}岁"
+    }
+
+    override fun toString(): String {
+        return "UserInfoBean(bgPath=$bgPath, birthday='$birthday', editDate='$editDate', info='$info', inviteCode='$inviteCode', isDestroy=$isDestroy, privilege='$privilege', isFrozen=$isFrozen, location=$location, machineCode='$machineCode', mobile='$mobile', nickname='$nickname', profilePath='$profilePath', registerDate='$registerDate', sex='$sex', userId='$userId', accId=$accId, displayId='$displayId', beautifulId='$beautifulId', coin=$coin, diamond=$diamond, integral=$integral, followNum=$followNum, fansNum=$fansNum, family=$family, headOfFamily=$headOfFamily, collectionNum=$collectionNum, visitorNum=$visitorNum, charmLevel=$charmLevel, consumeLevel=$consumeLevel, userRightList=$userRightList, firstRecharge=$firstRecharge, authentication=$authentication, consumeTotal=$consumeTotal, charmTotal=$charmTotal, adolescent=$adolescent, fullName=$fullName, idNumber=$idNumber, cardNo='$cardNo', userCarUrl='$userCarUrl', headwearUrl='$headwearUrl', medalList=$medalList, isSetPassword=$isSetPassword, likesReceivedNum='$likesReceivedNum')"
     }
 
 }

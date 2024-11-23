@@ -231,6 +231,9 @@ object RouterPath {
     //邀请好友
     const val PATH_INVITE = PATH_BASE + "mine_invite"
 
+    //邀请海报页
+    const val PATH_INVITATION_POSTER = PATH_BASE + "mine_invitation_poster"
+
     //我的仓库
     const val PATH_MY_WAREHOUSE = PATH_BASE + "mine_warehouse"
 

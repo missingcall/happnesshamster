@@ -20,6 +20,7 @@ object UserConfig {
 
     fun saveUserConfig(userInfoBean: UserInfoBean) {
         MMKVProvider.userInfo = userInfoBean
+        MMKVProvider.inviteCode = userInfoBean.inviteCode
         MMKVProvider.userPhone = userInfoBean.mobile
         MMKVProvider.userId = userInfoBean.userId
         MMKVProvider.displayId = userInfoBean.displayId

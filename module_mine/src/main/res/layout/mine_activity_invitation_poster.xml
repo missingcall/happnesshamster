@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/mine_invitation_poster_bg_1">
+
+        <com.hjq.bar.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:barStyle="transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftHorizontalPadding="16dp"
+            app:leftIcon="@mipmap/common_icon_back_white"
+            app:title="邀请好友"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <ImageView
+            android:id="@+id/iv_poster_bg_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="47dp"
+            android:layout_marginRight="47dp"
+            android:src="@mipmap/mine_invitation_poster_bg_top_1"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_poster_card"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:src="@mipmap/mine_invitation_poster_card_1"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+        <com.allen.library.CircleImageView
+            android:id="@+id/btn_wechat"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/mine_icon_invite_wechat"
+            app:layout_constraintBottom_toBottomOf="@id/btn_save"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/btn_save"
+            app:layout_constraintTop_toTopOf="@id/btn_save" />
+
+        <ImageButton
+            android:id="@+id/btn_save"
+            android:layout_width="121dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="@mipmap/mine_icon_invite_save_pic"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintLeft_toRightOf="@id/btn_wechat"
+            app:layout_constraintRight_toLeftOf="@id/btn_wechat_friends"
+            app:layout_constraintTop_toTopOf="@id/guideline_horizontal"
+            />
+
+        <com.allen.library.CircleImageView
+            android:id="@+id/btn_wechat_friends"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/mine_icon_invite_wechat_friends"
+            app:layout_constraintBottom_toBottomOf="@id/btn_save"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/btn_save"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_save" />
+
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
+            app:layout_constraintLeft_toLeftOf="@id/iv_poster_bg_top" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_uid"
+            app:layout_constraintLeft_toRightOf="@id/iv_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_icon" />
+
+        <TextView
+            android:id="@+id/tv_uid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_icon"
+            app:layout_constraintLeft_toRightOf="@id/iv_icon"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+        <ImageView
+            android:id="@+id/iv_qr_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@id/iv_icon"
+            app:layout_constraintRight_toRightOf="@id/iv_poster_card" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
