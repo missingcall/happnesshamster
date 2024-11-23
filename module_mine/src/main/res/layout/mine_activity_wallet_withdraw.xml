@@ -44,7 +44,6 @@
             android:layout_width="@dimen/dp_328"
             android:layout_height="142dp"
             android:layout_marginTop="18dp"
-            android:background="@mipmap/mine_icon_wallet_bg0"
             android:layout_gravity="center_horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"

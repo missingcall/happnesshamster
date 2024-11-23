@@ -24,7 +24,6 @@
         android:id="@+id/iv_real_name"
         android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:src="@mipmap/mine_bg_real_name_authentication"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
         android:scaleType="fitXY"/>
@@ -33,7 +32,6 @@
         android:id="@+id/iv_video"
         android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:src="@mipmap/mine_bg_video_authentication"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
         android:scaleType="fitXY"/>
@@ -42,7 +40,6 @@
         android:id="@+id/iv_car"
         android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:src="@mipmap/mine_bg_car_authentication"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
         android:scaleType="fitXY"/>
@@ -51,7 +48,6 @@
         android:id="@+id/iv_room"
         android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:src="@mipmap/mine_bg_room_authentication"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
         android:scaleType="fitXY"/>
@@ -60,7 +56,6 @@
         android:id="@+id/iv_school"
         android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:src="@mipmap/mine_bg_school_authentication"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
         android:scaleType="fitXY"/>
@@ -69,7 +64,6 @@
         android:id="@+id/iv_career"
         android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:src="@mipmap/mine_bg_career_authentication"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
         android:scaleType="fitXY"/>

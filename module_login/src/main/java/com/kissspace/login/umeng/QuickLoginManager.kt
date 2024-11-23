@@ -155,7 +155,7 @@ class QuickLoginManager {
                 .setLogBtnText("本机号码一键登录")
                 .setLogBtnTextColor(application.resources.getColor(com.kissspace.module_common.R.color.color_FFFD62))
                 .setHiddenLoading(false)
-                .setLogBtnBackgroundDrawable(application.resources.getDrawable(com.kissspace.module_common.R.mipmap.common_button_bg))
+            //    .setLogBtnBackgroundDrawable(application.resources.getDrawable(com.kissspace.module_common.R.mipmap.common_button_bg))
                 .setLogBtnOffsetY(315)
                 .setSwitchOffsetY(385)
                 .setSwitchAccTextColor(application.resources.getColor(com.kissspace.module_common.R.color.common_white80))

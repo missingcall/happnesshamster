@@ -34,7 +34,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:drawableStart="@mipmap/icon_home_search"
                 android:drawablePadding="3dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/white40"
@@ -50,7 +49,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="10dp"
-            android:src="@mipmap/icon_home_my_room"
             app:layout_constraintBottom_toBottomOf="@id/layout_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/layout_search" />
@@ -60,7 +58,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="10dp"
-            android:src="@mipmap/icon_home_ranking"
             app:layout_constraintEnd_toStartOf="@id/iv_my_room"
             app:layout_constraintTop_toTopOf="@id/iv_my_room" />
 
@@ -68,7 +65,6 @@
             android:id="@+id/iv_first_recharge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_home_first_recharge"
             app:layout_constraintEnd_toStartOf="@id/iv_ranking"
             app:layout_constraintTop_toTopOf="@id/layout_search"
             app:layout_constraintBottom_toBottomOf="@id/layout_search"/>
@@ -94,13 +90,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:url="home_card_dynamic.mp4"
             />
 
         <ImageView
             android:layout_width="67dp"
             android:layout_height="29dp"
-            android:src="@mipmap/app_bg_home_card_room"
             android:layout_gravity="center"
             />
     </FrameLayout>
@@ -124,13 +118,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:url="home_card_dynamic.mp4"
             />
 
         <ImageView
             android:layout_width="67dp"
             android:layout_height="29dp"
-            android:src="@mipmap/app_bg_home_card_rank"
             android:layout_gravity="center"
             />
     </FrameLayout>
@@ -149,12 +141,11 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/app_bg_home_search_top"/>
+            />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/app_bg_home_search_bottom"
             app:layout_constraintTop_toBottomOf="@id/iv"
             app:layout_constraintStart_toStartOf="@id/iv"
             app:layout_constraintEnd_toEndOf="@id/iv"
@@ -207,7 +198,6 @@
             android:id="@+id/tv_bg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
-            android:src="@mipmap/app_bg_home_show_tv"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             />
@@ -216,7 +206,6 @@
             android:id="@+id/iv_tv"
             android:layout_width="44dp"
             android:layout_height="44dp"
-            android:src="@mipmap/app_bg_home_tv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 

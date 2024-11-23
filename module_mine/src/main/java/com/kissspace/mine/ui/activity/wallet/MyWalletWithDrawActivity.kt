@@ -146,7 +146,6 @@ class MyWalletWithDrawActivity : BaseActivity(R.layout.mine_activity_wallet_with
 
         when (walletType) {
             Constants.WalletType.EARNS.type -> {
-                mViewModel.withDrawImage.value = R.mipmap.mine_wallet_earns_withdraw
                 mViewModel.withDrawType.value = Constants.WalletType.EARNS.type
                 mViewModel.withDrawTypeTitle.value = "收益提现"
 
@@ -157,7 +156,6 @@ class MyWalletWithDrawActivity : BaseActivity(R.layout.mine_activity_wallet_with
             }
 
             Constants.WalletType.DIAMOND.type -> {
-                mViewModel.withDrawImage.value = R.mipmap.mine_wallet_diamond_withdraw
                 mViewModel.withDrawType.value = Constants.WalletType.DIAMOND.type
                 mViewModel.withDrawTypeTitle.value = "钻石提现"
                 mViewModel.withDrawTextHint.value =

@@ -16,7 +16,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:paddingBottom="24dp"
-            android:background="@mipmap/room_bg_dialog_room_password">
+            >
 
             <TextView
                 android:id="@+id/tv_title"
@@ -210,7 +210,6 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="28dp"
                 android:textColor="@color/color_FFFD62"
-                android:background="@mipmap/common_btn_dialog_single"
                 android:text="发送"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_cancel"

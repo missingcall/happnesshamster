@@ -118,11 +118,6 @@ object MineBindingAdapter {
     @JvmStatic
     @BindingAdapter("dressUpBtnState", requireAll = false)
     fun dressUpBtnState(imageView: ImageView, state: String?) {
-        if (state == "001") {
-            imageView.setImageResource(R.mipmap.mine_icon_dress_up_cancel_wear)
-        } else {
-            imageView.setImageResource(R.mipmap.mine_dress_up_wear)
-        }
     }
 
     //使用rtextView
@@ -293,16 +288,6 @@ object MineBindingAdapter {
         }
     }
 
-    @JvmStatic
-    @BindingAdapter("storeCarDrawableStart", requireAll = false)
-    fun storeCarDrawableStart(textView: TextView, id: String) {
-        val drawable =
-            if (id.isNullOrEmpty()) ResourceUtils.getDrawable(R.mipmap.mine_icon_integral_store) else ResourceUtils.getDrawable(
-                R.mipmap.mine_icon_store_coin
-            )
-        drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
-        textView.setCompoundDrawables(drawable, null, null, null)
-    }
 
     @JvmStatic
     @BindingAdapter("incomeColor", requireAll = false)

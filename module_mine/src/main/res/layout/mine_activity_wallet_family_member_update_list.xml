@@ -108,7 +108,6 @@
                 app:bl_gradient_endColor="@color/color_936DDE"
                 app:bl_gradient_startColor="@color/color_936DDE"
                 app:bl_solid_color="@color/color_1A6C74FB"
-                android:background="@mipmap/mine_wallet_button_bg"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
 

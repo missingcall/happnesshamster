@@ -107,10 +107,8 @@ class MyWalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_tran
             Constants.WalletType.COIN.type -> {
                 mViewModel.transferTitle.value = "金币转账"
                 mViewModel.transferAmountTitle.value = "金币数量"
-                mViewModel.transferTitleBg.value =
-                    resources.getDrawable(R.mipmap.mine_icon_wallet_coin_transfer_text)
                 mViewModel.transferType.value = Constants.WalletType.COIN.type
-                mViewModel.transferImage.value = R.mipmap.mine_wallet_gold
+                //mViewModel.transferImage.value = R.mipmap.mine_wallet_gold
 //                mViewModel.isShowTransferTrueMoney.value = false
                 mViewModel.transferWalletHint.value =
                     resources.getString(R.string.mine_wallet_transfer_hint)
@@ -120,10 +118,8 @@ class MyWalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_tran
             Constants.WalletType.EARNS_TRANSFER.type -> {
                 mViewModel.transferTitle.value = "收益转赠"
                 mViewModel.transferAmountTitle.value = "转赠数量"
-                mViewModel.transferTitleBg.value =
-                    resources.getDrawable(R.mipmap.mine_icon_wallet_coin_transfer_text)
                 mViewModel.transferType.value = Constants.WalletType.EARNS.type
-                mViewModel.transferImage.value = R.mipmap.mine_wallet_gold
+              //  mViewModel.transferImage.value = R.mipmap.mine_wallet_gold
 //                mViewModel.isShowTransferTrueMoney.value = false
                 mViewModel.transferWalletHint.value =
                     resources.getString(R.string.mine_wallet_transfer_hint)
@@ -133,10 +129,9 @@ class MyWalletTransferActivity : BaseActivity(R.layout.mine_activity_wallet_tran
             Constants.WalletType.DIAMOND.type -> {
                 mViewModel.transferTitle.value = "钻石转账"
                 mViewModel.transferAmountTitle.value = "钻石数量"
-                mViewModel.transferTitleBg.value =
-                    resources.getDrawable(R.mipmap.mine_icon_wallet_diamond_transfer_text)
-                mViewModel.transferType.value = Constants.WalletType.DIAMOND.type
-                mViewModel.transferImage.value = R.mipmap.mine_wallet_diamond_withdraw
+             //   mViewModel.transferTitleBg.value =
+                        //        resources.getDrawable(R.mipmap.mine_icon_wallet_diamond_transfer_text)
+           //     mViewModel.transferType.value = Constants.WalletType.DIAMOND.type
 //                mViewModel.isShowTransferTrueMoney.value = false
                 mViewModel.transferWalletHint.value =
                     resources.getString(R.string.mine_wallet_transfer_diamond_hint)

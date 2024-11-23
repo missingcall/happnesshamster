@@ -1,6 +1,7 @@
 package com.kissspace.mine.ui.activity.task.fragment
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -260,14 +261,30 @@ class TaskFragment : BaseLazyFragment(R.layout.mine_fragment_task_day) {
             addType<HamsterTaskInfo>(R.layout.mine_item_task_hamster)
             addType<Footer>(R.layout.mine_task_bottom_view)
             onBind {
-
                 when (val viewBinding = getBinding<ViewDataBinding>()) {
                     is MineItemTaskHamsterBinding -> {
-                        val binding = getBinding<MineItemTaskHamsterBinding>()
                         val model = getModel<HamsterTaskInfo>()
-                        //binding.ivTask.loadwithGlide(model.icon)
+                        val binding = getBinding<MineItemTaskHamsterBinding>()
                         binding.tvTask.text = model.remark
+                        binding.tvTaskProgress.visibility=View.VISIBLE
                         binding.tvTaskProgress.text="(${model.currentValue}/${model.targetValue})"
+
+                        binding.ivTask.loadwithGlide(if (model.remark=="参与游戏") R.mipmap.mine_icon_task_game else R.mipmap.mine_icon_task_click)
+
+                        when(model.rewardType){
+                            "001"->{//刷子
+                                binding.ivGift.loadwithGlide(com.kissspace.module_ui.R.mipmap.ui_icon_home_cleanliness)
+
+                                binding.tvTaskReward.text = "刷子(${model.rewardCount})个"
+
+                            }
+                            "002"->{//食物
+                                binding.ivGift.loadwithGlide(com.kissspace.module_ui.R.mipmap.ui_icon_home_satiety)
+                                binding.tvTaskReward.text = "玉米(${model.rewardCount})个"
+                            }
+                        }
+
+
 
                         //是否可领取 001：待解锁 002：进行中 003：待领取 004：已领取 参考 TaskStatusForIntegralEnum
                         when(model.status){
@@ -346,13 +363,25 @@ class TaskFragment : BaseLazyFragment(R.layout.mine_fragment_task_day) {
 
                                 }
                             }
-
                         }
-
                     }}
 
+            }
 
-
+            onClick(R.id.tv_button){
+                val model = getModel<HamsterTaskInfo>()
+                when(model.status){
+                    "001","002"->{
+                        handleSchema(model.jumpParam)
+                    }
+                    else->{//领取奖励
+                        mViewModel.receiveRewardHamsterTask(model.rewardType, success = {
+                            mViewModel.requestHamsterTaskList(onSuccess = {
+                                mBinding.rvTask.bindingAdapter.models = it.toMutableList()
+                            })
+                        })
+                    }
+                }
 
 
             }
