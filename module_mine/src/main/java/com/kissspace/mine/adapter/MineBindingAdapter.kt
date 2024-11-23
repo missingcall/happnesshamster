@@ -513,10 +513,17 @@ object MineBindingAdapter {
                 button.text = "去激活"
                 button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_btn_selector_purple_black_radius45)
             }
-            //后端字段待定
+            //
             "005" -> {
-                button.text = "领取奖励"
-                button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_shape_bg_green_radius45)
+                //是否还有未领取奖励
+                if (!item.receiveReward) {
+                    button.text = "领取奖励"
+                    button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_shape_bg_green_radius45)
+                } else {
+                    button.text = "已领取"
+                    button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_shape_bg_darkcyan_radius45)
+                }
+
             }
         }
         button.isEnabled = item.goodsStatue != "002"
@@ -602,6 +609,7 @@ object MineBindingAdapter {
     @BindingAdapter("productStatusIsVisible")
     fun productStatusIsVisible(view: View, status: String) {
         if (status == Constants.HamsterGoodsStatusType.SOLD_OUT) {
+
             view.visibility = View.VISIBLE
         } else {
             view.visibility = View.GONE

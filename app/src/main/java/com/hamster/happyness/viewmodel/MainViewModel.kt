@@ -11,6 +11,7 @@ import com.kissspace.common.model.MyCollectResponse
 import com.kissspace.common.model.UpgradeBean
 import com.kissspace.common.model.inviationcode.InvitationSubmit
 import com.kissspace.common.util.mmkv.MMKVProvider
+import com.kissspace.mine.http.MineApi
 import com.kissspace.network.net.Method
 import com.kissspace.network.net.request
 import com.kissspace.network.result.ResultState
@@ -63,6 +64,12 @@ class MainViewModel : BaseViewModel() {
     fun loginNim() {
         val info = LoginInfo(MMKVProvider.loginResult?.accId, MMKVProvider.loginResult?.netEaseToken)
         NIMClient.getService(AuthService::class.java).login(info)
+    }
+
+    fun findUserPropWaitReceiveList(block: ((Boolean?) -> Unit)?) {
+        request<Boolean?>(MineApi.API_FIND_USER_PROP_WAIT_RECEIVELIST, Method.GET, onSuccess = {
+            block?.invoke(it)
+        })
     }
 
 }

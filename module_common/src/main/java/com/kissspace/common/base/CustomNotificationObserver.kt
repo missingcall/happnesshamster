@@ -71,8 +71,15 @@ object CustomNotificationObserver {
     //龙之怒游戏结束
     const val DRAGON_WRATH_GAME_END = "075"
 
-    //TODO 消息类型字段等后台给 仓鼠需要喂食或清洁
+    //消息类型字段等后台给 仓鼠需要喂食或清洁
     const val HAMSTER_NEED_FOOD_OR_CLEAN = "076"
+
+    //type 078 松果领取红点提示
+    //data 001 基础仓鼠领取
+    //002 仓鼠庄园
+    //003 仓鼠银行存折
+    const val HAMSTER_PINECONE_COLLECTION_RED_DOT_PROMPT = "078"
+
 
     fun initCustomNotificationObserver() {
         NIMClient.getService(MsgServiceObserve::class.java)
@@ -104,22 +111,25 @@ object CustomNotificationObserver {
                     MESSAGE_REFRESH_INTERGRAL -> {
                         FlowBus.post(Event.RefreshPoints)
                     }
-                    MESSAGE_FEEDBACK_REPLY ->{
+                    MESSAGE_FEEDBACK_REPLY -> {
                         FlowBus.post(Event.RefreshPoints)
                     }
-                    Constants.IMMessageType.MSG_SYSTEM  ->{
+                    Constants.IMMessageType.MSG_SYSTEM -> {
                         FlowBus.post(Event.MsgSystemEvent)
                     }
                     MESSAGE_FAMILY_APPLY,
                     MESSAGE_FAMILY_OUT,
-                    MESSAGE_FAMILY_MOVE_OUT->{
+                    MESSAGE_FAMILY_MOVE_OUT -> {
                         FlowBus.post(Event.MsgFamilyEvent)
                     }
-                    MESSAGE_FAMILY_PASS ->{
+                    MESSAGE_FAMILY_PASS -> {
                         FlowBus.post(Event.MsgFamilyPassEvent)
                     }
-                    HAMSTER_NEED_FOOD_OR_CLEAN->{
+                    HAMSTER_NEED_FOOD_OR_CLEAN -> {
                         FlowBus.post(Event.CommunicateEvent)
+                    }
+                    HAMSTER_PINECONE_COLLECTION_RED_DOT_PROMPT -> {
+                        FlowBus.post(Event.PineConeCollectionEvent)
                     }
                     else -> {
 
@@ -131,13 +141,13 @@ object CustomNotificationObserver {
             .observeBroadcastMessage({ message -> // 处理自定义系统通知。
                 val json = JSONObject(message.content)
                 when (json.getString("type")) {
-                    Constants.IMMessageType.MSG_SYSTEM  ->{
+                    Constants.IMMessageType.MSG_SYSTEM -> {
                         FlowBus.post(Event.MsgSystemEvent)
                     }
-                    MESSAGE_INTERSTELLAR_GAME_END ->{
+                    MESSAGE_INTERSTELLAR_GAME_END -> {
                         FlowBus.post(Event.H5InterstellarEvent(json.getJSONObject("data").toString()))
                     }
-                    MESSAGE_INTERSTELLAR_GAME_START ->{
+                    MESSAGE_INTERSTELLAR_GAME_START -> {
                         FlowBus.post(Event.H5InterstellarEvent(json.getJSONObject("data").toString()))
                     }
 

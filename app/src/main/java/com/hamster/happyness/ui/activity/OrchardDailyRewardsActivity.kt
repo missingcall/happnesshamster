@@ -24,6 +24,8 @@ import com.kissspace.common.binding.dataBinding
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setMarginStatusBar
 import com.kissspace.common.ext.setTitleBarListener
+import com.kissspace.common.flowbus.Event
+import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.model.FindPropReceiveListItem
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.parseIntent
@@ -83,7 +85,8 @@ class OrchardDailyRewardsActivity : BaseActivity(R.layout.activity_orchard_daily
                 getBinding<RvItemFindPropHorizontalBinding>().tvStatus.safeClick {
                     //领取
                     showGiftDialog(model)
-
+                    //刷新果园和仓库中的列表
+                    FlowBus.post(Event.OrchardActivationEvent)
                 }
 
                 //空指针 先注释

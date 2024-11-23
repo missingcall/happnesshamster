@@ -294,5 +294,7 @@ object MineApi {
     //领取松果--存折结算
     const val API_CENTER_HAMSTERMARKET_RECEIVEPASSBOOK = "/hamster-center/hamsterMarket/receivePassbook"
 
+    //查询是否还有没领取的奖励
+    const val API_FIND_USER_PROP_WAIT_RECEIVELIST = "/hamster-findUserPropWaitReceiveList"
 
 }

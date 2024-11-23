@@ -8,8 +8,8 @@ import kotlinx.serialization.Serializable
 class QueryMarketList : ArrayList<QueryMarketListItem>()
 
 /**
-    timeLimit 结算倒计时，当到领取时间时为负数
-    settleDay 领取倒计时，结算时间之前为空，结算时间后开始有值，过期后继续为空
+timeLimit 结算倒计时，当到领取时间时为负数
+settleDay 领取倒计时，结算时间之前为空，结算时间后开始有值，过期后继续为空
  */
 @Serializable
 data class QueryMarketListItem(
@@ -56,5 +56,7 @@ data class QueryMarketListItem(
     @SerialName("updateTime")
     val updateTime: String = "",
     @SerialName("windInterest")
-    val windInterest: Double = 0.0
+    val windInterest: Double = 0.0,
+    @SerialName("receiveReward")
+    val receiveReward: Boolean = false //是否领取当天奖励
 )

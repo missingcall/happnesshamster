@@ -1,5 +1,6 @@
 package com.hamster.happyness.ui.fragment
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
@@ -239,7 +240,9 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 mBinding.clSkin.visibility = View.VISIBLE
                 mBinding.clQuest.visibility = View.VISIBLE
                 //蒙版锁
-                mBinding.nivHamsterMask.visibility = View.GONE
+                mBinding.nivHamsterMask.visibility = View.VISIBLE
+                mBinding.nivHamsterMask.setMaskColor(Color.TRANSPARENT)
+                mBinding.nivHamsterMask.setImageResource(R.mipmap.app_bg_home_dead)
                 mBinding.ivLock.visibility = View.GONE
                 //清洁喂食
                 mBinding.clHomeCleanliness.visibility = View.GONE
@@ -262,6 +265,8 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 mBinding.clQuest.visibility = View.GONE
                 //蒙版锁
                 mBinding.nivHamsterMask.visibility = View.VISIBLE
+                mBinding.nivHamsterMask.setMaskColor(Color.parseColor("#80000000"))
+                mBinding.nivHamsterMask.setImageResource(0)
                 mBinding.ivLock.visibility = View.VISIBLE
                 //清洁喂食
                 mBinding.clHomeCleanliness.visibility = View.GONE

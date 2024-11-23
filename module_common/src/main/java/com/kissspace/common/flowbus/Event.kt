@@ -218,4 +218,7 @@ sealed class Event {
     //仓鼠需要清洁或喂食 /hamster-center/hamsters/cultivate/communicate 仓鼠交流语言获取
     object CommunicateEvent : Event()
 
+    //商行果园或银行待领取消息
+    object PineConeCollectionEvent : Event()
+
 }

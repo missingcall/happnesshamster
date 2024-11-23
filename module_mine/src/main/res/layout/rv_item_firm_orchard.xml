@@ -136,8 +136,9 @@
 
         <View
             android:id="@+id/vRed"
-            showIf='@{String.valueOf(m.goodsStatue).equals("005")}'
+            showIf='@{String.valueOf(m.goodsStatue).equals("005") &amp;&amp; !m.receiveReward}'
             android:layout_width="9dp"
+            android:visibility="gone"
             android:layout_height="9dp"
             android:background="@drawable/shape_red"
             app:layout_constraintRight_toRightOf="@id/btn"

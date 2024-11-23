@@ -1,4 +1,4 @@
- package com.hamster.happyness.ui.activity
+package com.hamster.happyness.ui.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -101,7 +101,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
 
     private val recentContactObserver = Observer<List<RecentContact>> {
         if (it != null && it.isNotEmpty()) {
-           // parseData(it, true)
+            // parseData(it, true)
             FlowBus.post(Event.RefreshUnReadMsgCount)
             // updateUnReadCount()
         }
@@ -127,52 +127,52 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
         initViewClick()
     }
 
-    fun makeFriend(){
+    fun makeFriend() {
         mBinding.tabDynamic.performClick()
     }
 
     private fun initViewClick() {
         mBinding.tabHome.setOnClickListener {
-            if(index == 0) return@setOnClickListener
+            if (index == 0) return@setOnClickListener
             mBinding.viewPager.setCurrentItem(0, false)
             bottomTabStyleChange(false)
         }
 
         mBinding.tabSquare.setOnClickListener {
-            if(index == 1) return@setOnClickListener
+            if (index == 1) return@setOnClickListener
             mBinding.viewPager.setCurrentItem(1, false)
             bottomTabStyleChange(false)
         }
 
         mBinding.tabDynamic.setOnClickListener {
-            if(index == 2) return@setOnClickListener
+            if (index == 2) return@setOnClickListener
             mBinding.viewPager.setCurrentItem(2, false)
             bottomTabStyleChange(true)
         }
         mBinding.tabMessage.setOnClickListener {
-            if(index == 3) return@setOnClickListener
+            if (index == 3) return@setOnClickListener
             mBinding.viewPager.setCurrentItem(3, false)
             bottomTabStyleChange(false)
         }
         mBinding.tabMine.setOnClickListener {
-            if(index == 4) return@setOnClickListener
+            if (index == 4) return@setOnClickListener
             mBinding.viewPager.setCurrentItem(4, false)
             bottomTabStyleChange(false)
         }
     }
 
     private fun initData() {
-  /*     val dialog = UpgradeDialog.newInstance(
-           UpgradeBean("新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本","https://cos.pgyer.com/f579a0f5b6c94a99c7ca5483fd7f2cdc.apk?sign=35ed8b14b45a2fa57257b47dc989a14f&sign2=448735d6f57edca4b2e5e8e7ee553976&t=1704708041&response-content-disposition=attachment%3Bfilename%3D%22%E7%B1%B3%E8%AF%BA%E6%98%9F%E7%90%83_1.0.4.apk"
-                           ,"1.0.4",
-                           4,1,"\"1.修复了已知bug\\n2.优化了用户体验\\n3.新增了功能\"",1,"1.0.4"
-       )
-       )
-       dialog.setDismissCallback {
-           showOtherDialog()
-       }
-       dialog.show(supportFragmentManager)
-*/
+        /*     val dialog = UpgradeDialog.newInstance(
+                 UpgradeBean("新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本新版本","https://cos.pgyer.com/f579a0f5b6c94a99c7ca5483fd7f2cdc.apk?sign=35ed8b14b45a2fa57257b47dc989a14f&sign2=448735d6f57edca4b2e5e8e7ee553976&t=1704708041&response-content-disposition=attachment%3Bfilename%3D%22%E7%B1%B3%E8%AF%BA%E6%98%9F%E7%90%83_1.0.4.apk"
+                                 ,"1.0.4",
+                                 4,1,"\"1.修复了已知bug\\n2.优化了用户体验\\n3.新增了功能\"",1,"1.0.4"
+             )
+             )
+             dialog.setDismissCallback {
+                 showOtherDialog()
+             }
+             dialog.show(supportFragmentManager)
+      */
 
 
 
@@ -208,8 +208,8 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             try {
                 val pattern = "0.##%"
                 val decimalFormat = DecimalFormat(pattern)
-                MMKVProvider.withdrawDepositFee =  decimalFormat.format(it.toFloat())
-            }catch (_:Exception){
+                MMKVProvider.withdrawDepositFee = decimalFormat.format(it.toFloat())
+            } catch (_: Exception) {
 
             }
         }
@@ -244,7 +244,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
 
     private fun initViewPager() {
         val fragments =
-            arrayOf(HomeFragmentV3(),FirmFragment(), PartyV2Fragment(), MessageFragmentV3(), MineFragment())
+            arrayOf(HomeFragmentV3(), FirmFragment(), PartyV2Fragment(), MessageFragmentV3(), MineFragment())
         mBinding.viewPager.apply {
             offscreenPageLimit = fragments.size
             isUserInputEnabled = false
@@ -269,7 +269,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
         refreshBottomBar(0)
     }
 
-    private fun initTab(){
+    private fun initTab() {
 //        mBinding.animviewExplore.stopPlay()
 //        mBinding.animviewExplore.visibility = View.GONE
 //        mBinding.ivHomeTop.visibility = View.VISIBLE
@@ -291,7 +291,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
         mBinding.appSelectExplore.isSelected = index == 0
         mBinding.appSelectSquare.isSelected = index == 1
         mBinding.appSelectParty.isSelected = index == 2
-        mBinding.appSelectMessage.isSelected = index ==3
+        mBinding.appSelectMessage.isSelected = index == 3
         mBinding.appSelectMine.isSelected = index == 4
         //initTab()
     }
@@ -367,13 +367,20 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
         }
 
         observerEvent<Event.PhoneInCome>(this) {
-            if(roomFloating!=null&&roomFloating?.isShow()==true){
+            if (roomFloating != null && roomFloating?.isShow() == true) {
                 RoomServiceManager.release()
             }
         }
 
         observerEvent<Event.HamsterPurchaseEvent>(this) {
             mBinding.viewPager.currentItem = 1
+        }
+
+        //商行待领取红点
+        observerEvent<Event.PineConeCollectionEvent>(this) {
+            mViewModel.findUserPropWaitReceiveList {
+                mBinding.vRedShape.visibility = if (it == true) View.VISIBLE else View.GONE
+            }
         }
 
         initData()
@@ -389,7 +396,6 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             .observeRecentContact(recentContactObserver, false)
 
         roomFloating?.cancel()
-
 
 
     }
@@ -423,7 +429,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
 
     private fun updateMessageCount() {
         try {
-            if(NIMClient.getStatus() == StatusCode.LOGINED) {
+            if (NIMClient.getStatus() == StatusCode.LOGINED) {
                 val unReadCount = NIMClient.getService(MsgService::class.java).totalUnreadCount  //+ MMKVProvider.systemMessageUnReadCount
                 mBinding.tvNotifyCount.visibility = if (unReadCount > 0) View.VISIBLE else View.GONE
                 mBinding.tvNotifyCount.text =
@@ -455,25 +461,32 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
     /**
      *  @param isSlectPart 是否选中party tab
      */
-    private fun bottomTabStyleChange(isSlectPart:Boolean){
-        if (isSlectPart){
+    private fun bottomTabStyleChange(isSlectPart: Boolean) {
+        if (isSlectPart) {
             mBinding.appSelectExplore.setImageResource(R.mipmap.app_ic_home_purple)
             mBinding.appSelectSquare.setImageResource(R.mipmap.app_ic_company_purple)
             mBinding.appSelectParty.setImageResource(R.mipmap.app_ic_party_purple)
             mBinding.appSelectMessage.setImageResource(R.mipmap.app_ic_message_purple)
             mBinding.appSelectMine.setImageResource(R.mipmap.app_ic_mine_purple)
-            mBinding.bottomBar.setBackgroundColor(ContextCompat.getColor(this,
-                com.kissspace.module_common.R.color.color_1B0753))
+            mBinding.bottomBar.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    com.kissspace.module_common.R.color.color_1B0753
+                )
+            )
 
-        }else{
+        } else {
             mBinding.appSelectExplore.setImageResource(R.drawable.app_select_home)
             mBinding.appSelectSquare.setImageResource(R.drawable.app_select_company)
             mBinding.appSelectParty.setImageResource(R.drawable.app_select_party)
             mBinding.appSelectMessage.setImageResource(R.drawable.app_select_message)
             mBinding.appSelectMine.setImageResource(R.drawable.app_select_mine)
-            mBinding.bottomBar.setBackgroundColor(ContextCompat.getColor(this,
-                com.kissspace.module_common.R.color.color_262A2E))
-
+            mBinding.bottomBar.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    com.kissspace.module_common.R.color.color_262A2E
+                )
+            )
 
 
         }

@@ -1,6 +1,7 @@
 package com.hamster.happyness.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.angcyo.tablayout.delegate2.ViewPager2Delegate
@@ -8,6 +9,8 @@ import com.didi.drouter.annotation.Router
 import com.hamster.happyness.R
 
 import com.hamster.happyness.databinding.FragmentFirmBinding
+import com.hamster.happyness.viewmodel.HomeViewModel
+import com.hamster.happyness.viewmodel.MainViewModel
 import com.kissspace.common.base.BaseFragment
 import com.kissspace.common.binding.dataBinding
 import com.kissspace.common.config.Constants
@@ -26,6 +29,7 @@ class FirmFragment : BaseFragment(R.layout.fragment_firm) {
     private val mBinding by dataBinding<FragmentFirmBinding>()
     private val mMineViewModel by activityViewModels<MineViewModel>()
     private val mWalletViewModel by activityViewModels<WalletViewModel>()
+    private val mMainViewModel by activityViewModels<MainViewModel>()
 
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -49,6 +53,17 @@ class FirmFragment : BaseFragment(R.layout.fragment_firm) {
             jump(RouterPath.PATH_MY_WAREHOUSE)
         }
 
+    }
+
+    override fun createDataObserver() {
+        super.createDataObserver()
+
+        //商行待领取红点
+        FlowBus.observerEvent<Event.PineConeCollectionEvent>(this) {
+            mMainViewModel.findUserPropWaitReceiveList {
+                mBinding.vRedShape.visibility = if (it == true) View.VISIBLE else View.GONE
+            }
+        }
     }
 
 
