@@ -86,4 +86,8 @@ object CommonApi {
 
     const val QUERY_PLATFORM_RANKING = "/hamster-user/systemRank/queryPlatformRanking"
 
+
+    //主页获取公告
+    const val API_NOTICE = "/hamster-user/channel/notice/checkVersion"
+
 }
