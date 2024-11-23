@@ -1,13 +1,11 @@
 package com.kissspace.mine.ui.activity
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.blankj.utilcode.util.EncodeUtils
 import com.blankj.utilcode.util.ImageUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.didi.drouter.annotation.Router
+import com.king.zxing.util.CodeUtils
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.binding.dataBinding
 import com.kissspace.common.ext.safeClick
@@ -20,7 +18,6 @@ import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineActivityInvitationPosterBinding
 import com.kissspace.util.loadImage
-import com.kissspace.util.logD
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
 
 @Router(path = RouterPath.PATH_INVITATION_POSTER)
@@ -43,23 +40,27 @@ class InvitationPosterActivity : BaseActivity(R.layout.mine_activity_invitation_
         mBinding.tvName.text = MMKVProvider.userInfo?.nickname
         mBinding.tvUid.text = "UID : " + MMKVProvider.displayId
 
-        mBinding.btnSave.safeClick {
-            ImageUtils.save2Album(mQrCode, Bitmap.CompressFormat.PNG)
-            customToast("图片已保存到相册")
-        }
-
     }
 
     private fun generateQRCode() {
         mViewModel.getQrCode {
 
-            val bitmapArray = EncodeUtils.base64Decode(it)
+            /*val bitmapArray = EncodeUtils.base64Decode(it)
             mQrCode = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.size)
+            mBinding.ivQrCode.setImageBitmap(mQrCode)*/
+
+            mUrl = it
+            mQrCode = CodeUtils.createQRCode(mUrl, 200, null)
             mBinding.ivQrCode.setImageBitmap(mQrCode)
 
             mBinding.btnWechat.safeClick {
                 //分享到对话
                 ShareUtil.sendToWeiXin("title", mUrl, "des", null, SendMessageToWX.Req.WXSceneSession, this)
+            }
+
+            mBinding.btnSave.safeClick {
+                ImageUtils.save2Album(mQrCode, Bitmap.CompressFormat.PNG)
+                customToast("图片已保存到相册")
             }
 
             mBinding.btnWechatFriends.safeClick {

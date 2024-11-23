@@ -381,7 +381,7 @@ project.ext {
 //                    extension.api "io.coil-kt.coil3:coil:3.0.1"
                     extension.api (libs.util.kotlinxserializationjson)
                     extension.api (libs.util.permissionx)
-//                    extension.api (libs.util.zxing)
+                    extension.api (libs.util.zxing)
                     break
                 case "module_dynamic":
                     extension.implementation extension.project(path: ':module_webview')
