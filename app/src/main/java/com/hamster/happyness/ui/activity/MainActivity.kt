@@ -36,6 +36,7 @@ import com.hamster.happyness.ui.fragment.HomeFragmentV2
 import com.hamster.happyness.ui.fragment.HomeFragmentV3
 import com.hamster.happyness.ui.fragment.PartyV2Fragment
 import com.hamster.happyness.viewmodel.MainViewModel
+import com.hamster.happyness.widget.NoticeDialog
 import com.hamster.happyness.widget.UpgradeDialog
 
 import com.kissspace.common.config.AppConfigKey
@@ -236,6 +237,8 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
     }
 
     private fun showOtherDialog() {
+        mViewModel.requestNotice()
+
 //        if (showAdolescentDialog(MMKVProvider.userId)) {
 //            TeenagerDialog(this).show()
 //        }
@@ -321,6 +324,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             deleteDir(File(apkAbsolutePath))
             showOtherDialog()
         })
+
         collectData(mViewModel.collectListEvent, onSuccess = {
             if (it.total > 0 && mBinding.viewPager.currentItem == 2) {
                 mBinding.collectRoomView.visibility = View.VISIBLE
@@ -328,8 +332,25 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             } else {
                 mBinding.collectRoomView.visibility = View.GONE
             }
-
         })
+
+        //监听通知弹框事件
+        collectData(mViewModel.noticeEvent, onSuccess = {
+            if (it.noticeFrequency == "001") {//一直弹出
+                NoticeDialog.newInstance(it.noticeParam).show(supportFragmentManager)
+                MMKVProvider.noticeCache = it.intVersion
+            }else{
+                //缓存版本小就弹出
+                if(MMKVProvider.noticeCache<it.intVersion){
+                    NoticeDialog.newInstance(it.noticeParam).show(supportFragmentManager)
+                    MMKVProvider.noticeCache = it.intVersion
+                }
+            }
+           }, onError = {}, onEmpty = {}
+        )
+
+
+
 
         //当电话进来时帮他退出房间
 
@@ -381,6 +402,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
                 mBinding.vRedShape.visibility = if (it == true) View.VISIBLE else View.GONE
             }
         }
+
 
         initData()
         initAppConfig()

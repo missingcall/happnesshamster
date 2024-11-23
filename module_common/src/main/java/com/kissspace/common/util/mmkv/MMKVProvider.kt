@@ -144,6 +144,7 @@ object MMKVProvider : MMKVOwner {
     //聊天财富等级最低限制
     var userChatMinLevel by mmkvInt(default = 2)
 
+    var noticeCache by mmkvLong(default = 0L)
     //是否显示游戏
 //    var isShowGame by mmkvBool(default = false)
 

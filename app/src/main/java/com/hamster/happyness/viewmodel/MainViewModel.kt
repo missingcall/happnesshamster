@@ -8,6 +8,7 @@ import com.kissspace.common.base.BaseViewModel
 import com.kissspace.common.config.CommonApi
 import com.kissspace.common.model.inviationcode.InvitationModel
 import com.kissspace.common.model.MyCollectResponse
+import com.kissspace.common.model.NoticeModel
 import com.kissspace.common.model.UpgradeBean
 import com.kissspace.common.model.inviationcode.InvitationSubmit
 import com.kissspace.common.util.mmkv.MMKVProvider
@@ -25,6 +26,10 @@ class MainViewModel : BaseViewModel() {
     private val _collectListEvent = MutableSharedFlow<ResultState<MyCollectResponse>>()
     val collectListEvent = _collectListEvent.asSharedFlow()
 
+    private val _noticeEvent = MutableSharedFlow<ResultState<NoticeModel?>>()
+    val noticeEvent = _noticeEvent.asSharedFlow()
+
+
     fun requestCollectList() {
         val param = mutableMapOf<String, Any?>()
         param["pageNum"] = 1
@@ -38,6 +43,9 @@ class MainViewModel : BaseViewModel() {
     fun checkVersion() {
         val params = mutableMapOf<String, Any?>("os" to 1)
         request(Api.API_UPGRADE, Method.GET, params, state = _checkVersionEvent)
+    }
+    fun requestNotice() {
+        request(CommonApi.API_NOTICE, Method.GET,param = hashMapOf("os" to "1"), state = _noticeEvent)
     }
 
     fun sayHi() {
@@ -65,6 +73,8 @@ class MainViewModel : BaseViewModel() {
         val info = LoginInfo(MMKVProvider.loginResult?.accId, MMKVProvider.loginResult?.netEaseToken)
         NIMClient.getService(AuthService::class.java).login(info)
     }
+
+
 
     fun findUserPropWaitReceiveList(block: ((Boolean?) -> Unit)?) {
         request<Boolean?>(MineApi.API_FIND_USER_PROP_WAIT_RECEIVELIST, Method.GET, onSuccess = {
