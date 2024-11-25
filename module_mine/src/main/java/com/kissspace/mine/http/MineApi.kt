@@ -304,7 +304,10 @@ object MineApi {
     //获取当前用户邀请人列表
     const val API_USER_INVITATION_CODE_REWARD_PEOPLE_LIST = "/hamster-user/invitationCodeReward/people/list"
 
-    //获取邀请二维码
+    //获取邀请二维码(图片)
     const val API_USER_USER_GET_QR_CODE = "/hamster-user/user/get-qr-code"
+
+    //获取邀请二维码(地址)
+    const val API_USER_USER_GET_QR_URL = "/hamster-user/user/get-qr-url"
 
 }

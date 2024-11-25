@@ -43,7 +43,7 @@ class InvitationPosterActivity : BaseActivity(R.layout.mine_activity_invitation_
     }
 
     private fun generateQRCode() {
-        mViewModel.getQrCode {
+        mViewModel.getQrUrl {
 
             /*val bitmapArray = EncodeUtils.base64Decode(it)
             mQrCode = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.size)
