@@ -50,6 +50,9 @@ class BankPurchaseDialog : BaseDialogFragment<DialogBankPurchaseBinding>(DialogB
                 else -> "勋章"
             } + mTotalPrice + "/" + mViewModel.walletModel.value?.diamond
 
+            if(mViewModel.walletModel.value == null){
+                return@setOnValueChangeListener
+            }
             mBinding.ivConditionsAvailable.visibility = if (mTotalPrice <= mViewModel.walletModel.value?.diamond!!) View.VISIBLE else View.GONE
             mBinding.btnConfirm.isEnabled = mTotalPrice <= mViewModel.walletModel.value?.diamond!!
         }

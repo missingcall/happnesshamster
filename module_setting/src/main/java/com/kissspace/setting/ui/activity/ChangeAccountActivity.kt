@@ -33,6 +33,7 @@ import com.kissspace.util.toast
  *@date: 2023/4/7
  *@Description:切换账号
  */
+@Deprecated("语聊版本")
 @Router(path = RouterPath.PATH_CHANGE_ACCOUNT)
 class ChangeAccountActivity : com.kissspace.common.base.BaseActivity(R.layout.setting_activity_change_account) {
 

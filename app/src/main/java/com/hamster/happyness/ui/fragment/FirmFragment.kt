@@ -9,6 +9,7 @@ import com.didi.drouter.annotation.Router
 import com.hamster.happyness.R
 
 import com.hamster.happyness.databinding.FragmentFirmBinding
+import com.hamster.happyness.ui.activity.MainActivity
 import com.hamster.happyness.viewmodel.HomeViewModel
 import com.hamster.happyness.viewmodel.MainViewModel
 import com.kissspace.common.base.BaseFragment
@@ -48,6 +49,12 @@ class FirmFragment : BaseFragment(R.layout.fragment_firm) {
         }
 
         ViewPager2Delegate.install(mBinding.viewPager, mBinding.dslTabLayout)
+
+        mBinding.ivAvatar.safeClick {
+            if (activity is MainActivity) {
+                (activity as MainActivity).changeDrawLayout()
+            }
+        }
 
         mBinding.clWareHouse.safeClick {
             jump(RouterPath.PATH_MY_WAREHOUSE)

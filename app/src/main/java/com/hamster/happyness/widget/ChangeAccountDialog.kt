@@ -30,13 +30,14 @@ import com.kissspace.util.lifecycleOwner
 import com.kissspace.util.toast
 
 /**
- * 左边抽屉-账号多身份
+ * 左边弹窗-账号多身份
  */
+@Deprecated("仓鼠v1.1.0版本")
 class ChangeAccountDialog : BaseDialogFragment<DialogChangeAccountBinding>(DialogChangeAccountBinding::inflate, Gravity.LEFT, true, false) {
     private val mViewModel by activityViewModels<ChangeAccountViewModel>()
     private var userPhone: String = ""
     private var isCreateAccount = false
-    private var loginAccountPosition = 0;
+    private var loginAccountPosition = 0
 
     override fun getLayoutId(): Int {
         return R.layout.dialog_change_account

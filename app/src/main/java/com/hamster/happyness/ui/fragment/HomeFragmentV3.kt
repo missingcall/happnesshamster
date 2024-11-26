@@ -16,6 +16,7 @@ import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.hamster.happyness.R
 import com.hamster.happyness.databinding.FragmentMainHomeV3Binding
+import com.hamster.happyness.ui.activity.MainActivity
 import com.kissspace.mine.viewmodel.HamsterViewModel
 import com.hamster.happyness.widget.*
 import com.kissspace.common.base.BaseFragment
@@ -63,7 +64,10 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
         mBinding.ivAvatar.safeClick {
             //TODO 需要替换为可滑动 抽屉式
-            ChangeAccountDialog.newInstance().show(childFragmentManager)
+//            ChangeAccountDialog.newInstance().show(childFragmentManager)
+            if (activity is MainActivity) {
+                (activity as MainActivity).changeDrawLayout()
+            }
         }
 
         mBinding.ivCopy.safeClick {

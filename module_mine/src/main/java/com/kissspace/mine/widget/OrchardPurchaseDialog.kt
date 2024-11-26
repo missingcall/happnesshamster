@@ -83,6 +83,10 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
                 else -> "勋章"
             } + item?.coinPrice + "/" + mViewModel.walletModel.value?.diamond
 
+            if (item == null || mViewModel.walletModel.value == null) {
+                return
+            }
+
             mBinding.ivConditionsAvailable.visibility = if (item?.coinPrice!! <= mViewModel.walletModel.value?.diamond!!) View.VISIBLE else View.GONE
 
             mBinding.btnConfirm.safeClick {

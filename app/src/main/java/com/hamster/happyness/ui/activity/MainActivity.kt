@@ -2,25 +2,29 @@ package com.hamster.happyness.ui.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ContextWrapper
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
+import coil.load
 import com.didi.drouter.annotation.Router
+import com.drake.brv.utils.bindingAdapter
+import com.drake.brv.utils.linear
+import com.drake.brv.utils.setup
 import com.hamster.happyness.databinding.ActivityMainV2Binding
-import com.kissspace.dynamic.ui.fragment.CompanyFragmentV2
 import com.kissspace.util.finishAllActivities
 import com.kissspace.util.toast
 import com.netease.nimlib.sdk.NIMClient
@@ -32,7 +36,6 @@ import com.petterp.floatingx.assist.FxGravity
 import com.petterp.floatingx.assist.helper.ScopeHelper
 import com.hamster.happyness.R
 import com.hamster.happyness.ui.fragment.FirmFragment
-import com.hamster.happyness.ui.fragment.HomeFragmentV2
 import com.hamster.happyness.ui.fragment.HomeFragmentV3
 import com.hamster.happyness.ui.fragment.PartyV2Fragment
 import com.hamster.happyness.viewmodel.MainViewModel
@@ -55,8 +58,10 @@ import com.kissspace.message.ui.fragment.MessageFragmentV3
 import com.kissspace.mine.ui.fragment.MineFragment
 import com.kissspace.network.result.collectData
 import com.kissspace.common.http.getUserInfo
-import com.kissspace.common.model.UpgradeBean
+import com.kissspace.common.model.UserAccountBean
+import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.room.manager.RoomServiceManager
+import com.kissspace.setting.viewmodel.ChangeAccountViewModel
 import com.kissspace.util.YYYY_MM_DD
 import com.kissspace.util.apkAbsolutePath
 import com.kissspace.util.appVersionCode
@@ -85,8 +90,13 @@ import java.util.*
 class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_main_v2) {
     private val mBinding by viewBinding<ActivityMainV2Binding>()
     private val mViewModel by viewModels<MainViewModel>()
+    private val mChangeAccountViewModel by viewModels<ChangeAccountViewModel>()
     private var roomFloating: IFxScopeControl<Activity>? = null
     private var index = 0
+
+    private var userPhone: String = ""
+    private var isCreateAccount = false
+    private var loginAccountPosition = 0;
 
     private val onlineStatusObserver = Observer<StatusCode> {
         logE("${it}云信code")
@@ -126,6 +136,97 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             jump(RouterPath.PATH_MY_COLLECT)
         }
         initViewClick()
+        initDrawerLayout()
+
+    }
+
+    private fun initDrawerLayout() {
+        mChangeAccountViewModel.mViewStatus.observe(this) {
+            if (it) {
+                showLoading()
+            } else {
+                hideLoading()
+            }
+        }
+        initDrawerInfo()
+
+        mBinding.ivCopy.safeClick {
+            copyClip(mBinding.tvUserId.text.toString())
+        }
+
+        mBinding.conAdd.safeClick {
+            CommonConfirmDialog(this, "您确定要创建一个新的身份？ 新身份的资产将不与旧身份互通，您确定要创建嘛？") {
+                if (this) {
+                    createAccount()
+                }
+            }.show()
+
+        }
+        initRecyclerView()
+        userPhone = MMKVProvider.userPhone
+        mChangeAccountViewModel.requestUserListByPhone(MMKVProvider.userPhone)
+
+        // 禁止手势滑动
+//        mBinding.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+    }
+
+    private fun initDrawerInfo() {
+        mBinding.ivAvatar.loadImageWithDefault(MMKVProvider.userInfo?.profilePath, 45f)
+        //        mBinding.ivAvatar.load(MMKVProvider.userInfo?.profilePath)
+        mBinding.tvNickname.text = MMKVProvider.userInfo?.nickname
+        mBinding.tvUserId.text = MMKVProvider.userInfo?.displayId
+    }
+
+    //切换抽屉状态
+    fun changeDrawLayout() {
+        if (mBinding.drawer.isDrawerOpen(Gravity.LEFT)) {
+            mBinding.drawer.closeDrawers()
+        } else {
+            mBinding.drawer.openDrawer(Gravity.LEFT)
+        }
+    }
+
+    private fun initRecyclerView() {
+        mBinding.recycler.linear()
+            //.divider(com.kissspace.module_common.R.drawable.common_user_account_divider_item)
+            .setup {
+                addType<UserAccountBean> {
+                    R.layout.layout_change_account_list_item
+                }
+                onBind {
+                    findView<ConstraintLayout>(R.id.root).safeClick {
+                        val model = getModel<UserAccountBean>()
+                        if (model.checked) {
+                            toast("当前账号已登录")
+                            return@safeClick
+                        }
+                        loginAccountPosition = adapterPosition
+                        showLoading("切换中...")
+                        mChangeAccountViewModel.loginByUserId(model.userId)
+                    }
+                }
+                onChecked { position, isChecked, _ ->
+                    val model = getModel<UserAccountBean>(position)
+                    model.checked = isChecked
+                    model.notifyChange()
+                }
+                singleMode = true
+                clickThrottle = 500
+            }.models = mutableListOf()
+    }
+
+    private fun changeAccountSuccess() {
+        FlowBus.post(Event.RefreshChangeAccountEvent)
+        FlowBus.post(Event.CloseRoomFloating)
+        mBinding.recycler.bindingAdapter.setChecked(loginAccountPosition, true)
+        customToast("切换账号成功")
+        mBinding.drawer.closeDrawers()
+    }
+
+    private fun createAccount() {
+        isCreateAccount = true
+        showLoading()
+        mChangeAccountViewModel.createAccountNew(userPhone)
     }
 
     fun makeFriend() {
@@ -339,17 +440,15 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             if (it.noticeFrequency == "001") {//一直弹出
                 NoticeDialog.newInstance(it.noticeParam).show(supportFragmentManager)
                 MMKVProvider.noticeCache = it.intVersion
-            }else{
+            } else {
                 //缓存版本小就弹出
-                if(MMKVProvider.noticeCache<it.intVersion){
+                if (MMKVProvider.noticeCache < it.intVersion) {
                     NoticeDialog.newInstance(it.noticeParam).show(supportFragmentManager)
                     MMKVProvider.noticeCache = it.intVersion
                 }
             }
-           }, onError = {}, onEmpty = {}
+        }, onError = {}, onEmpty = {}
         )
-
-
 
 
         //当电话进来时帮他退出房间
@@ -384,6 +483,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
         observerEvent<Event.RefreshChangeAccountEvent>(this) {
             initConfig()
             initAppConfig()
+            initDrawerInfo()
         }
 
         observerEvent<Event.PhoneInCome>(this) {
@@ -403,6 +503,50 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
             }
         }
 
+        //拉取身份列表
+        collectData(mChangeAccountViewModel.accounts, onSuccess = {
+            it.forEachIndexed { index, userAccountBean ->
+                if (userAccountBean.userId == MMKVProvider.userId) {
+                    loginAccountPosition = index
+                }
+            }
+            if (it.size < 10) {
+                mBinding.conAdd.visibility = View.VISIBLE
+            } else {
+                mBinding.conAdd.visibility = View.GONE
+            }
+            mBinding.recycler.bindingAdapter.addModels(it)
+            mBinding.recycler.bindingAdapter.setChecked(loginAccountPosition, true)
+
+        })
+
+        //创建账号
+        collectData(mChangeAccountViewModel.createAccounts, onSuccess = {
+            mChangeAccountViewModel.loginByUserId(it.userId)
+        }, onError = {
+            hideLoading()
+            toast("创建账号失败,请稍后重试")
+        })
+
+        //切换账号
+        collectData(mChangeAccountViewModel.token, onSuccess = {
+            //先退出之前账号的房间
+            oldAccountExit {
+                mChangeAccountViewModel.loginIm(it, onSuccess = {
+                    //切换身份
+                    if (!isCreateAccount) {
+                        isCreateAccount = false
+                        changeAccountSuccess()
+                    } else {
+                        //新建身份
+                        finish()
+                    }
+                })
+            }
+        }, onError = {
+            hideLoading()
+            toast("切换账号失败")
+        })
 
         initData()
         initAppConfig()
