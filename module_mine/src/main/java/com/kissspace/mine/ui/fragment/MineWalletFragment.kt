@@ -67,7 +67,7 @@ class MineWalletFragment : BaseFragment(R.layout.mine_fragment_wallet) {
             }
             else -> {
                 mBinding.iconNuts.setImageResource(R.mipmap.icon_diamond)
-                mBinding.btnRecharge.visibility = View.VISIBLE
+//                mBinding.btnRecharge.visibility = View.VISIBLE
             }
         }
 
