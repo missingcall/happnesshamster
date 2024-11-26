@@ -65,7 +65,7 @@ class HomeFeedDialog : BaseDialogFragment<DialogHomeFeedBinding>(DialogHomeFeedB
 
         }
 
-        //TODO 需要配置消耗道具字段
+        //需要配置消耗道具字段
         mViewModel.queryCultivationPanel {
 
         }

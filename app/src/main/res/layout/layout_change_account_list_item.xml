@@ -20,9 +20,12 @@
         app:bl_corners_radius="8dp"
         app:bl_solid_color="@color/color_383B44">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.kissspace.common.widget.NiceImageView
             android:id="@+id/iv_avatar"
-            loadImage="@{m.profilePath}"
+            app:border_color_s="@color/color_5A60FF"
+            app:border_width_s="1dp"
+            app:is_circle="true"
+            loadImageCircle="@{m.profilePath}"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginLeft="15dp"

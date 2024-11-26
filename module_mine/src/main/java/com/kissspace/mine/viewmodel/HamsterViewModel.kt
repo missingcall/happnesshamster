@@ -24,7 +24,7 @@ class HamsterViewModel : BaseViewModel() {
     /**
      * 获取首页跳转链接
      */
-    fun findHamsterQuickJumpList(onSuccess: ((MutableList<FindHamsterQuickJumpListItem>) -> Unit)? , onError: ((AppException) -> Unit) = {} ) {
+    fun findHamsterQuickJumpList(onSuccess: ((MutableList<FindHamsterQuickJumpListItem>) -> Unit)?, onError: ((AppException) -> Unit) = {}) {
         request<MutableList<FindHamsterQuickJumpListItem>>(MineApi.API_CENTER_HAMSTERMARKET_FINDHAMSTERQUICKJUMPLIST, Method.GET, onSuccess = {
             onSuccess?.invoke(it)
         }, onError = {
@@ -92,7 +92,8 @@ class HamsterViewModel : BaseViewModel() {
     fun click(onSuccess: ((Boolean) -> Unit) = {}) {
         request<Boolean>(MineApi.API_HAMSTER_CULTIVATE_CLICK, Method.GET, onSuccess = {
             onSuccess.invoke(it)
-
+        }, onError = {
+            customToast(it.errorMsg)
         })
     }
 

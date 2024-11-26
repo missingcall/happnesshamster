@@ -231,6 +231,8 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                                 if (it) {
                                     customToast("领取成功")
                                     FlowBus.post(Event.RefreshCoin)
+                                } else {
+
                                 }
                             }
                         }

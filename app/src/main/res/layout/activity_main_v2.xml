@@ -190,10 +190,9 @@
                 android:layout_width="59dp"
                 android:layout_height="59dp"
                 android:layout_marginTop="37dp"
-                android:src="@color/design_default_color_on_primary"
-                app:bl_corners_topRadius="10dp"
                 app:border_color_s="@color/color_5A60FF"
-                app:corner_radius="5dp"
+                app:border_width_s="2dp"
+                app:is_circle="true"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

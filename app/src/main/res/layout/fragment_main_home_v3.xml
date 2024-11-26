@@ -252,7 +252,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            android:text="@{String.valueOf(wvm.diamond)}"
+            android:text='@{wvm.diamond==null?"0":String.valueOf(wvm.diamond)}'
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -278,7 +278,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            android:text="@{String.valueOf(wvm.accountBalance)}"
+            android:text='@{wvm.accountBalance==null?"0":String.valueOf(wvm.accountBalance)}'
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"

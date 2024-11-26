@@ -17,6 +17,7 @@ import com.kissspace.mine.viewmodel.WalletViewModel
 /**
  * 底部弹窗-1:喂养 2.清洁 3.重生
  */
+@Deprecated("分开创建")
 class HomeCultivationDialog : BaseDialogFragment<DialogHomeCultivationBinding>(DialogHomeCultivationBinding::inflate, Gravity.BOTTOM) {
     private val mViewModel by activityViewModels<WalletViewModel>()
 
