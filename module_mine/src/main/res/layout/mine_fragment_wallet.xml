@@ -24,23 +24,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginRight="11dp"
-            app:layout_constraintRight_toRightOf="parent"
             app:bl_corners_radius="45dp"
             app:bl_solid_color="@color/color_32363B"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.kissspace.common.widget.MarqueeView
                 android:id="@+id/mtv_transfer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         <ImageView
@@ -86,6 +84,7 @@
                 android:textColor="@drawable/common_text_color_selector_white"
                 android:textSize="11sp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/btnTransformation"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -111,12 +110,12 @@
                 android:layout_width="45dp"
                 android:layout_height="26dp"
                 android:layout_gravity="center"
+                android:background="@drawable/common_shape_blue_deep_normal_45"
                 android:gravity="center"
                 android:text="转赠"
                 android:textColor="@drawable/common_text_color_selector_white"
                 android:textSize="11sp"
                 android:textStyle="bold"
-                android:background="@drawable/common_shape_blue_deep_normal_45"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -422,7 +422,6 @@
             android:ellipsize="end"
             android:maxEms="10"
             android:maxLines="2"
-
             android:textColor="@color/white"
             android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="@id/guideline_v"
