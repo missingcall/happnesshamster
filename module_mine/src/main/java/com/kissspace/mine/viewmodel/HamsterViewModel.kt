@@ -120,7 +120,7 @@ class HamsterViewModel : BaseViewModel() {
     //API_CENTER_HAMSTERS_CULTIVATE_REFRESHDEATH
     fun refreshDeath( onSuccess: ((InvitePeopleListModel) -> Unit)?) {
 //        val param = mutableMapOf<String, Any?>()
-        request<InvitePeopleListModel>(MineApi.API_USER_INVITATION_CODE_REWARD_PEOPLE_LIST, Method.GET, onSuccess = {
+        request<InvitePeopleListModel>(MineApi.API_CENTER_HAMSTERS_CULTIVATE_REFRESHDEATH, Method.GET, onSuccess = {
             onSuccess?.invoke(it)
         }, onError = {
 //            customToast(it.message, true)
