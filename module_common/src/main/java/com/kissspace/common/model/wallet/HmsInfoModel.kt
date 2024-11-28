@@ -11,5 +11,7 @@ data class HmsInfoModel(
     @SerialName("hamsterStatus")
     var hamsterStatus: String = "004",
     @SerialName("satiety")
-    val satiety: Int = 0
+    val satiety: Int = 0,
+    @SerialName("deathOfTimestamp")
+    val deathOfTimestamp: Long = 0
 )

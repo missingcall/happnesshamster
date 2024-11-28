@@ -9,6 +9,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.blankj.utilcode.constant.TimeConstants
+import com.blankj.utilcode.util.TimeUtils
 import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.utils.addModels
@@ -33,10 +35,14 @@ import com.kissspace.common.router.jump
 import com.kissspace.common.util.copyClip
 import com.kissspace.common.util.countDown
 import com.kissspace.common.util.customToast
+import com.kissspace.common.util.format.DateFormat
+import com.kissspace.common.util.format.Format
+import com.kissspace.common.util.formatDate
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.util.loadImage
 import com.kissspace.util.logD
+import com.kissspace.util.logE
 import kotlinx.coroutines.Job
 
 //探索
@@ -48,6 +54,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     private val mHamsterViewModel by activityViewModels<HamsterViewModel>()
 
     private var mCountDown: Job? = null
+    private var mCountDownReborn: Job? = null
 
     override fun initView(savedInstanceState: Bundle?) {
         mBinding.titleBar.setMarginStatusBar()
@@ -213,6 +220,10 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 //购买复活
                 mBinding.btnPurchaseOrRevive.visibility = View.GONE
 
+                //复活倒计时
+                mCountDownReborn?.cancel()
+                mBinding.tvCountdownTime.visibility = View.GONE
+
                 //清洁弹窗
                 mBinding.clHomeCleanliness.safeClick {
                     HomeCleanDialog.newInstance().show(childFragmentManager)
@@ -257,6 +268,21 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 mBinding.btnPurchaseOrRevive.visibility = View.VISIBLE
                 mBinding.btnPurchaseOrRevive.setBackgroundResource(R.mipmap.app_icon_home_hamster_revive)
 
+                //倒计时
+                mBinding.tvCountdownTime.visibility = View.VISIBLE
+                val millisByNow = TimeUtils.getTimeSpanByNow(mWalletViewModel.hmsInfoModel.get()!!.deathOfTimestamp, TimeConstants.MSEC)
+
+                mCountDownReborn = countDown(millisByNow, reverse = false, scope = lifecycleScope, onTick = {
+                    mBinding.tvCountdownTime.text = TimeUtils.getFitTimeSpanByNow(mWalletViewModel.hmsInfoModel.get()!!.deathOfTimestamp, 4)
+                }, onFinish = {
+                    mHamsterViewModel.refreshDeath {
+                        //死亡倒计时结束 仓鼠已过期
+                        FlowBus.post(Event.HamsterReviveEvent)
+                    }
+                    mBinding.tvCountdownTime.visibility = View.GONE
+                    mCountDownReborn?.cancel()
+                })
+
                 mBinding.btnPurchaseOrRevive.safeClick {
                     HomeRebornDialog.newInstance().show(childFragmentManager)
                 }
@@ -280,6 +306,10 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                 //购买复活
                 mBinding.btnPurchaseOrRevive.visibility = View.VISIBLE
                 mBinding.btnPurchaseOrRevive.setBackgroundResource(R.mipmap.app_icon_home_hamster_purchase)
+
+                //复活倒计时
+                mCountDownReborn?.cancel()
+                mBinding.tvCountdownTime.visibility = View.GONE
 
                 mBinding.btnPurchaseOrRevive.safeClick {
                     //切换首页底下tab
@@ -406,6 +436,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
     override fun onStop() {
         super.onStop()
         mCountDown?.cancel()
+        mCountDownReborn?.cancel()
 
     }
 }

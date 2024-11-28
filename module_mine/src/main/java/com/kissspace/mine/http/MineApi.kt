@@ -304,6 +304,9 @@ object MineApi {
     //获取当前用户邀请人列表
     const val API_USER_INVITATION_CODE_REWARD_PEOPLE_LIST = "/hamster-user/invitationCodeReward/people/list"
 
+    //刷新仓鼠死亡 仓鼠死亡倒计时结束 - 前端调取
+    const val API_CENTER_HAMSTERS_CULTIVATE_REFRESHDEATH = "/hamster-center/hamsters/cultivate/refreshDeath"
+
     //获取邀请二维码(图片)
     const val API_USER_USER_GET_QR_CODE = "/hamster-user/user/get-qr-code"
 

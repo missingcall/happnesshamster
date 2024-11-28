@@ -210,13 +210,12 @@
             android:id="@+id/clQuickStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ivBg"
-            >
+            app:layout_constraintTop_toTopOf="@id/ivBg">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -231,8 +230,6 @@
                 tools:listitem="@layout/rv_item_home_game_quick_entry" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
         <ImageView
@@ -392,6 +389,7 @@
             app:layout_constraintTop_toTopOf="@id/ivHamsterDevelopmentBg"
             app:layout_constraintVertical_bias="0.0" />
 
+
         <com.kissspace.common.widget.NiceImageView
             android:id="@+id/nivHamsterMask"
             android:layout_width="0dp"
@@ -436,9 +434,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:visibility="gone"
             android:layout_marginBottom="15dp"
             android:background="@mipmap/app_icon_home_cleanliness_bg"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/btnPurchaseOrRevive"
             app:layout_constraintDimensionRatio="147:47"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -498,8 +496,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="15dp"
-            android:visibility="gone"
             android:background="@mipmap/app_icon_home_satiety_bg"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/clHomeCleanliness"
             app:layout_constraintDimensionRatio="147:47"
             app:layout_constraintLeft_toRightOf="@id/clHomeCleanliness"
@@ -552,6 +550,20 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvCountdownTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivHamsterDevelopment"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="12:12:12"
+            />
 
         <Button
             android:id="@+id/btnPurchaseOrRevive"
