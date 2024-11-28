@@ -5,6 +5,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@mipmap/mine_invitation_poster_bg_1">
@@ -17,8 +18,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:leftHorizontalPadding="16dp"
             app:leftIcon="@mipmap/common_icon_back_white"
-            app:title="邀请好友"
-            />
+            app:title="邀请好友" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_horizontal"
@@ -28,30 +28,30 @@
             app:layout_constraintGuide_percent="0.8" />
 
         <ImageView
-            android:id="@+id/iv_poster_bg_top"
+            android:id="@+id/ivPosterBgTop"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="47dp"
             android:layout_marginRight="47dp"
-            android:src="@mipmap/mine_invitation_poster_bg_top_1"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@mipmap/mine_invitation_poster_bg_top_2"
             app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
             app:layout_constraintDimensionRatio="2:3"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/iv_poster_card"
+            android:id="@+id/ivPosterCard"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:src="@mipmap/mine_invitation_poster_card_1"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
             app:layout_constraintDimensionRatio="2:3"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <com.allen.library.CircleImageView
@@ -76,8 +76,7 @@
             app:layout_constraintHorizontal_weight="3"
             app:layout_constraintLeft_toRightOf="@id/btn_wechat"
             app:layout_constraintRight_toLeftOf="@id/btn_wechat_friends"
-            app:layout_constraintTop_toTopOf="@id/guideline_horizontal"
-            />
+            app:layout_constraintTop_toTopOf="@id/guideline_horizontal" />
 
         <com.allen.library.CircleImageView
             android:id="@+id/btn_wechat_friends"
@@ -97,8 +96,8 @@
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_poster_bg_top"
-            app:layout_constraintLeft_toLeftOf="@id/iv_poster_bg_top" />
+            app:layout_constraintBottom_toBottomOf="@id/ivPosterBgTop"
+            app:layout_constraintLeft_toLeftOf="@id/ivPosterBgTop" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -127,11 +126,11 @@
             android:id="@+id/iv_qr_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="fitXY"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="@id/iv_icon"
-            app:layout_constraintRight_toRightOf="@id/iv_poster_card" />
+            app:layout_constraintRight_toRightOf="@id/ivPosterCard" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

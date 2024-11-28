@@ -17,6 +17,7 @@ import com.kissspace.common.util.ShareUtil
 import com.kissspace.common.util.checkAlbumPermission
 import com.kissspace.common.util.customToast
 import com.kissspace.common.util.mmkv.MMKVProvider
+import com.kissspace.common.util.randomRange
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineActivityInvitationPosterBinding
@@ -37,6 +38,18 @@ class InvitationPosterActivity : BaseActivity(R.layout.mine_activity_invitation_
     override fun initView(savedInstanceState: Bundle?) {
         setTitleBarListener(mBinding.titleBar)
         mBinding.lifecycleOwner = this
+
+        //随机生成2选1背景
+        val randoms = (0..1).random()
+        if (randoms == 0) {
+            mBinding.clBg.setBackgroundResource(R.mipmap.mine_invitation_poster_bg_1)
+            mBinding.ivPosterBgTop.setImageResource(R.mipmap.mine_invitation_poster_bg_top_1)
+            mBinding.ivPosterCard.setImageResource(R.mipmap.mine_invitation_poster_card_1)
+        } else {
+            mBinding.clBg.setBackgroundResource(R.mipmap.mine_invitation_poster_bg_2)
+            mBinding.ivPosterBgTop.setImageResource(R.mipmap.mine_invitation_poster_bg_top_2)
+            mBinding.ivPosterCard.setImageResource(R.mipmap.mine_invitation_poster_card_2)
+        }
 
         //生成二维码
         generateQRCode()
