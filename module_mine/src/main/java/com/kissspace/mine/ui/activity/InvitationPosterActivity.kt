@@ -1,9 +1,11 @@
 package com.kissspace.mine.ui.activity
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.blankj.utilcode.util.ImageUtils
+import com.blankj.utilcode.util.SizeUtils
 import com.didi.drouter.annotation.Router
 import com.king.zxing.util.CodeUtils
 import com.kissspace.common.base.BaseActivity
@@ -12,13 +14,16 @@ import com.kissspace.common.ext.safeClick
 import com.kissspace.common.ext.setTitleBarListener
 import com.kissspace.common.router.RouterPath
 import com.kissspace.common.util.ShareUtil
+import com.kissspace.common.util.checkAlbumPermission
 import com.kissspace.common.util.customToast
 import com.kissspace.common.util.mmkv.MMKVProvider
 import com.kissspace.mine.viewmodel.MineViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.MineActivityInvitationPosterBinding
+import com.kissspace.util.context
 import com.kissspace.util.loadImage
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
+import com.umeng.socialize.utils.CommonUtil
 
 @Router(path = RouterPath.PATH_INVITATION_POSTER)
 class InvitationPosterActivity : BaseActivity(R.layout.mine_activity_invitation_poster) {
@@ -50,7 +55,12 @@ class InvitationPosterActivity : BaseActivity(R.layout.mine_activity_invitation_
             mBinding.ivQrCode.setImageBitmap(mQrCode)*/
 
             mUrl = it
-            mQrCode = CodeUtils.createQRCode(mUrl, 200, null)
+
+            mQrCode = CodeUtils.createQRCode(
+                mUrl,
+                SizeUtils.dp2px(70f),
+                BitmapFactory.decodeResource(context.resources, com.kissspace.module_util.R.drawable.common_ic_default)
+            )
             mBinding.ivQrCode.setImageBitmap(mQrCode)
 
             mBinding.btnWechat.safeClick {
@@ -59,8 +69,11 @@ class InvitationPosterActivity : BaseActivity(R.layout.mine_activity_invitation_
             }
 
             mBinding.btnSave.safeClick {
-                ImageUtils.save2Album(mQrCode, Bitmap.CompressFormat.PNG)
-                customToast("图片已保存到相册")
+                checkAlbumPermission {
+                    ImageUtils.save2Album(mQrCode, Bitmap.CompressFormat.PNG)
+                    customToast("图片已保存到相册")
+                }
+
             }
 
             mBinding.btnWechatFriends.safeClick {

@@ -401,7 +401,7 @@ private fun checkCameraPermission(callBack: () -> Unit) {
         }
 }
 
-private fun checkStoragePermission(callBack: () -> Unit) {
+fun checkStoragePermission(callBack: () -> Unit) {
     PermissionX.init(topActivity as AppCompatActivity).permissions(
         Manifest.permission.CAMERA,
         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -418,6 +418,26 @@ private fun checkStoragePermission(callBack: () -> Unit) {
                 callBack()
             } else {
                 ToastUtils.showShort("请打开相关权限")
+            }
+        }
+}
+
+fun checkAlbumPermission(callBack: () -> Unit) {
+    PermissionX.init(topActivity as AppCompatActivity).permissions(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
+        .onExplainRequestReason { scope, deniedList ->
+            val message =
+                "为了您能正常体验邀请好友功能，需向你申请访问存储权限"
+            scope.showRequestReasonDialog(deniedList, message, "确定", "取消")
+        }
+        .explainReasonBeforeRequest()
+        .request { allGranted, _, _ ->
+            if (allGranted) {
+                callBack()
+            } else {
+                ToastUtils.showShort("请打开存储权限")
             }
         }
 }

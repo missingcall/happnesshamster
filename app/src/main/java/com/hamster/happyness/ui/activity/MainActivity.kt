@@ -25,8 +25,6 @@ import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.hamster.happyness.databinding.ActivityMainV2Binding
-import com.kissspace.util.finishAllActivities
-import com.kissspace.util.toast
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.Observer
 import com.netease.nimlib.sdk.StatusCode
@@ -62,16 +60,7 @@ import com.kissspace.common.model.UserAccountBean
 import com.kissspace.common.widget.CommonConfirmDialog
 import com.kissspace.room.manager.RoomServiceManager
 import com.kissspace.setting.viewmodel.ChangeAccountViewModel
-import com.kissspace.util.YYYY_MM_DD
-import com.kissspace.util.apkAbsolutePath
-import com.kissspace.util.appVersionCode
-import com.kissspace.util.deleteDir
-import com.kissspace.util.immersiveStatusBar
-import com.kissspace.util.isNotEmpty
-import com.kissspace.util.loadImageWithDefault
-import com.kissspace.util.logE
-import com.kissspace.util.millis2String
-import com.kissspace.util.orZero
+import com.kissspace.util.*
 import com.netease.nimlib.sdk.msg.MsgServiceObserve
 import com.netease.nimlib.sdk.msg.model.RecentContact
 import com.petterp.floatingx.listener.control.IFxScopeControl
@@ -171,7 +160,7 @@ class MainActivity : com.kissspace.common.base.BaseActivity(R.layout.activity_ma
     }
 
     private fun initDrawerInfo() {
-        mBinding.ivAvatar.loadImageWithDefault(MMKVProvider.userInfo?.profilePath, 45f)
+        mBinding.ivAvatar.loadImageCircle(MMKVProvider.userInfo?.profilePath, com.kissspace.module_util.R.drawable.common_ic_default)
         //        mBinding.ivAvatar.load(MMKVProvider.userInfo?.profilePath)
         mBinding.tvNickname.text = MMKVProvider.userInfo?.nickname
         mBinding.tvUserId.text = MMKVProvider.userInfo?.displayId

@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="3dp"
-                android:text='@{"恢复至" + String.valueOf(vm.cultivationPanelModel.satiety.promote + vm.hmsInfoModel.satiety) + "%"}'
+                android:text='@{vm.cultivationPanelModel.satiety.promote + vm.hmsInfoModel.satiety >= 100? "已满" :"恢复至" + String.valueOf(vm.cultivationPanelModel.satiety.promote + vm.hmsInfoModel.satiety) + "%" }'
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="bold"

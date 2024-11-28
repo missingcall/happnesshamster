@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 import com.blankj.utilcode.util.ColorUtils
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners

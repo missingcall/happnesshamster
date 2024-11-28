@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.kissspace.mine.viewmodel.WalletViewModel" />
@@ -127,7 +128,6 @@
             <ProgressBar
                 android:id="@+id/pbProgress"
                 style="@android:style/Widget.ProgressBar.Horizontal"
-                android:progress="@{vm.hmsInfoModel.cleanliness}"
                 android:layout_width="match_parent"
                 android:layout_height="11dp"
                 android:layout_marginLeft="11dp"
@@ -135,16 +135,17 @@
                 android:layout_marginBottom="14dp"
                 android:layout_weight="1"
                 android:max="100"
+                android:progress="@{vm.hmsInfoModel.cleanliness}"
                 android:progressDrawable="@drawable/app_bg_progress_exp"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
             <TextView
                 android:id="@+id/tvCurrent"
-                android:text='@{"当前" + String.valueOf(vm.hmsInfoModel.cleanliness) + "%"}'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="3dp"
+                android:text='@{"当前" + String.valueOf(vm.hmsInfoModel.cleanliness) + "%"}'
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -152,13 +153,14 @@
                 app:layout_constraintLeft_toLeftOf="@id/pbProgress"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <TextView
                 android:id="@+id/tvTarget"
-                android:text='@{"恢复至" + String.valueOf(vm.cultivationPanelModel.cleanliness.promote + vm.hmsInfoModel.cleanliness) + "%"}'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="3dp"
+                android:text='@{vm.cultivationPanelModel.cleanliness.promote + vm.hmsInfoModel.cleanliness >= 100 ? "已满" :"恢复至" + String.valueOf(vm.cultivationPanelModel.cleanliness.promote + vm.hmsInfoModel.cleanliness) + "%"}'
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -185,8 +187,8 @@
 
         <Button
             android:id="@+id/btnConfirmLeft"
-            commonBtnStateBlue="@{vm.cultivationPanelModel.cleanliness.costPropCount &lt; vm.cultivationPanelModel.cleanliness.prop }"
             cleaningPropConfirmation="@{vm.cultivationPanelModel}"
+            commonBtnStateBlue="@{vm.cultivationPanelModel.cleanliness.costPropCount &lt; vm.cultivationPanelModel.cleanliness.prop }"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -205,8 +207,8 @@
 
         <Button
             android:id="@+id/btnConfirmRight"
-            commonBtnStateBlue="@{vm.cultivationPanelModel.cleanliness.consumption &lt; vm.walletModel.diamond }"
             cleaningPineConeConfirmation="@{vm.cultivationPanelModel}"
+            commonBtnStateBlue="@{vm.cultivationPanelModel.cleanliness.consumption &lt; vm.walletModel.diamond }"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

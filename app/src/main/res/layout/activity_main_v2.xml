@@ -185,14 +185,11 @@
             android:clickable="true">
 
 
-            <com.kissspace.common.widget.NiceImageView
+            <ImageView
                 android:id="@+id/ivAvatar"
                 android:layout_width="59dp"
                 android:layout_height="59dp"
                 android:layout_marginTop="37dp"
-                app:border_color_s="@color/color_5A60FF"
-                app:border_width_s="2dp"
-                app:is_circle="true"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
