@@ -92,9 +92,8 @@ object CustomNotificationObserver {
                         if (data.userId == MMKVProvider.userId) {
                             topActivity?.let {
                                 CommonConfirmDialog(
-                                    it.context,
-                                    title = "提示",
-                                    subTitle = data.reason + "解封时间：" + data.frozenDeadline,
+                                    it,
+                                    title = data.reason + "解封时间：" + data.frozenDeadline,
                                     isShowNegative = false,
                                     cancelable = false
                                 ) {

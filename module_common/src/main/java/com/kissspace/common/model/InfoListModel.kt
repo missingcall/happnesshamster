@@ -53,7 +53,7 @@ data class InfoListModel(
         @SerialName("name")
         val name: String = "",
         @SerialName("price")
-        val price: Int = 0,
+        val price: Double = 0.0,
         @SerialName("remark")
         val remark: String = "",
         @SerialName("unlockMethod")

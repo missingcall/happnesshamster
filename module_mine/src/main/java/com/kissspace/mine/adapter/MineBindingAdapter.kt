@@ -435,7 +435,7 @@ object MineBindingAdapter {
     @BindingAdapter("tvCommodityStatus", requireAll = false)
     fun tvCommodityStatus(textView: TextView, item: QueryMarketListItem) {
         when (item.goodsStatue) {
-            Constants.HamsterGoodsStatusType.AVAILABLE_FOR_PURCHASE -> {
+            Constants.HamsterGoodsStatusType.AVAILABLE_FOR_PURCHASE ,Constants.HamsterGoodsStatusType.ALREADY_OWNED_IN_EFFECT -> {
                 if (item.commodityMark.isBlank()) {
                     textView.visibility = View.GONE
                 } else {
@@ -452,7 +452,7 @@ object MineBindingAdapter {
                 textView.setBackgroundResource(R.drawable.shape_orchard_mark_red)
                 textView.text = "待激活"
             }
-            Constants.HamsterGoodsStatusType.ALREADY_OWNED_IN_EFFECT -> textView.visibility = View.GONE
+
         }
 
     }
@@ -486,7 +486,7 @@ object MineBindingAdapter {
                             else -> R.mipmap.icon_pine_cone_little
                         }
                     )
-                    .append(Format.E.format(item.coinPrice))
+                    .append(Format.E_EE.format(item.coinPrice))
                     .create()
                 button.setBackgroundResource(com.kissspace.module_common.R.drawable.common_btn_selector_purple_black_radius45)
             }

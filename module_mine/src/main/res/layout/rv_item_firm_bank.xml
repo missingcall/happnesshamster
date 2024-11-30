@@ -47,18 +47,20 @@
 
         <TextView
             android:id="@+id/tvCommodityName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:maxLines="1"
             android:text="@{m.commodityName}"
             android:textColor="@color/white"
             android:textSize="13sp"
             android:textStyle="bold"
-
             app:layout_constraintBottom_toTopOf="@id/tvTimeLimit"
             app:layout_constraintLeft_toRightOf="@id/ivCommodityIcon"
-
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/ivCommodityIcon" />
 
         <TextView

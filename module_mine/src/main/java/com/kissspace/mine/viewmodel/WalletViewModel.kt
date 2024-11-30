@@ -161,7 +161,7 @@ class WalletViewModel : BaseViewModel() {
         // java.lang.IllegalArgumentException: Cannot format given Object as a Number
         addSource(walletModel) { walletModel ->
             logE("walletModel.diamond" + walletModel.diamond)
-            setValue(Format.E.format(walletModel.diamond.orZero()))
+            setValue(Format.E_EE.format(walletModel.diamond.orZero()))
         }
     }
 
@@ -170,7 +170,7 @@ class WalletViewModel : BaseViewModel() {
     var accountBalance = MediatorLiveData<String>().apply {
         addSource(walletModel) { walletModel ->
             setValue(
-                Format.E.format(walletModel.accountBalance.orZero())
+                Format.E_EE.format(walletModel.accountBalance.orZero())
             )
         }
     }

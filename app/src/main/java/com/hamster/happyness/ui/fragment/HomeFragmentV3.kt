@@ -101,6 +101,12 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             jump(RouterPath.PATH_TASK_CENTER_LIST)
         }
 
+        //默认跳转果园
+        mBinding.btnPurchaseOrRevive.safeClick {
+            //切换首页底下tab
+            FlowBus.post(Event.HamsterPurchaseEvent)
+        }
+
 
         //设置字体
         mBinding.tvCleanliness.typeface = Typeface.createFromAsset(activity?.assets, "fonts/AlimamaShuHeiTi-Bold.ttf")
@@ -335,83 +341,81 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
             if (it.isEmpty()) {
 
             } else {
-                //因为id格式为:9c2c103a0f1f5252489d97a7cc23f29a,不排序了(按id升序,筛选status为001
-                it.filter { item -> item.status == "001" }
-                /*it.sortWith { u1, u2 ->
-                    u1.id.compareTo(u2.id)
-                }*/
-                it.addAll(it)
-                it.addAll(it)
+
+                if (it.size <= 4) {
+                    mBinding.recyclerView.layoutManager = HoverGridLayoutManager(context, 4, RecyclerView.VERTICAL, false).apply {
+                        setScrollEnabled(false)
+                        this.stackFromEnd = stackFromEnd
+                    }
+
+                } else {
+                    mBinding.recyclerView.layoutManager = HoverLinearLayoutManager(context, RecyclerView.HORIZONTAL, false).apply {
+                        setScrollEnabled(true)
+                        this.stackFromEnd = stackFromEnd
+                    }
+                }
                 mBinding.recyclerView.addModels(it)
             }
 
         }, onError = {
             //测试数据
-            var game1: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
-                "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "1",
-                "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
-                "财神驾到1",
-                "001",
-                ""
-            )
-            var game2: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
-                "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "1",
-                "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
-                "财神驾到2",
-                "001",
-                ""
-            )
-            var game3: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
-                "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "1",
-                "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
-                "财神驾到3",
-                "002",
-                ""
-            )
-            var game4: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
-                "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "1",
-                "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
-                "财神驾到4",
-                "001",
-                ""
-            )
-            var game5: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
-                "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
-                "1",
-                "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
-                "财神驾到5",
-                "001",
-                ""
-            )
+            /*  var game1: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
+                  "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
+                  "1",
+                  "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
+                  "财神驾到1",
+                  "001",
+                  ""
+              )
+              var game2: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
+                  "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
+                  "1",
+                  "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
+                  "财神驾到2",
+                  "001",
+                  ""
+              )
+              var game3: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
+                  "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
+                  "1",
+                  "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
+                  "财神驾到3",
+                  "002",
+                  ""
+              )
+              var game4: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
+                  "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
+                  "1",
+                  "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
+                  "财神驾到4",
+                  "001",
+                  ""
+              )
+              var game5: FindHamsterQuickJumpListItem = FindHamsterQuickJumpListItem(
+                  "https://fastly.picsum.photos/id/668/200/200.jpg?hmac=mVqr1fc4nHFre2QMZp5cuqUKLIRSafUtWt2vwlA9jG0",
+                  "1",
+                  "http://121.40.238.170/cocos/caishen/web-mobile/?token=1",
+                  "财神驾到5",
+                  "001",
+                  ""
+              )
 
-            var list: MutableList<FindHamsterQuickJumpListItem> = mutableListOf()
-            list.add(game1)
-            list.add(game2)
-            list.add(game3)
-            list.add(game4)
-            list.add(game5)
+              var list: MutableList<FindHamsterQuickJumpListItem> = mutableListOf()
+              list.add(game1)
+              list.add(game2)
+              list.add(game3)
+              list.add(game4)
+              list.add(game5)
 
-            //筛选状态为001已启用的游戏
-            list.filter { item -> item.status == "001" }
+              //筛选状态为001已启用的游戏
+              list.filter { item -> item.status == "001" }
 
-            mBinding.recyclerView.addModels(list)
-            if (list.size <= 4) {
-                mBinding.recyclerView.layoutManager = HoverGridLayoutManager(context, 4, RecyclerView.VERTICAL, false).apply {
-                    setScrollEnabled(false)
-                    this.stackFromEnd = stackFromEnd
-                }
+              mBinding.recyclerView.addModels(list)
+              */
 
-            } /*else {
-                mBinding.recyclerView.layoutManager = HoverLinearLayoutManager(context, RecyclerView.HORIZONTAL, false).apply {
-                    setScrollEnabled(true)
-                    this.stackFromEnd = stackFromEnd
-                }
-            }*/
-        })
+
+        }
+        )
 
 
     }
