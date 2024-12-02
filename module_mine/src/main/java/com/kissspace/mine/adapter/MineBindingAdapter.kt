@@ -450,7 +450,7 @@ object MineBindingAdapter {
             Constants.HamsterGoodsStatusType.ALREADY_OWNED_PENDING_ACTIVATION -> {
                 textView.visibility = View.VISIBLE
                 textView.setBackgroundResource(R.drawable.shape_orchard_mark_red)
-                textView.text = "待激活"
+                textView.text = item.commodityMark
             }
 
         }
