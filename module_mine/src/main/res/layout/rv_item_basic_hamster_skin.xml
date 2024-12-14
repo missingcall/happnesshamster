@@ -19,7 +19,7 @@
 
         <com.kissspace.common.widget.NiceImageView
             android:id="@+id/ivIcon"
-            imageUrl="@{m.icon}"
+            imageUrl="@{m.skinIcon}"
             imageRadius="@{5f}"
             clIsSelected="@{m.checked}"
             setBorderBackground="@{m.checked}"

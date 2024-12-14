@@ -99,7 +99,8 @@ class SendSmsCodeActivity :
 
             TransferAccount -> {
                 smsType = "14"
-                mBinding.etPhoneNumber.setText(MMKVProvider.userPhone)
+                phoneNumberReal = MMKVProvider.userPhone
+                mBinding.etPhoneNumber.setText(mobileEncrypt(MMKVProvider.userPhone))
                 mBinding.etPhoneNumber.isEnabled = false
                 mBinding.titleBar.title = "转账认证"
             }

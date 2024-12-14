@@ -79,10 +79,12 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
                     mRecipientInfoBean = it
                     mBinding.tvRecipientNickname.text = "昵称：" + it?.nickname
                     mBinding.tvRecipientNickname.setTextColor(ColorUtils.getColor(com.kissspace.module_common.R.color.color_FDC120))
+                    mBinding.btnConfirm.isEnabled = true
                 },
                     onError = {
                         mBinding.tvRecipientNickname.text = it?.errorMsg
                         mBinding.tvRecipientNickname.setTextColor(ColorUtils.getColor(com.kissspace.module_common.R.color.color_FE5F55))
+                        mBinding.btnConfirm.isEnabled = false
                     }
                 )
             }
@@ -115,14 +117,24 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
 
 
         mBinding.btnConfirm.safeClick {
-            if (mViewModel.transferUserNumber.value.isNullOrZero() && mViewModel.walletModel.value?.accountBalance.isNullOrZero()) {
+            if (mBinding.etRecipientUID.text.trimString() == "" || mBinding.etRecipientUID.text.trimString().toInt().isNullOrZero()
+            ) {
+                com.kissspace.common.util.customToast("用户UID不能为空", true)
+                return@safeClick
+            }
+
+
+            if (mViewModel.transferUserNumber.value.isNullOrZero() || mViewModel.walletModel.value?.accountBalance.isNullOrZero() ||
+                mBinding.etGiftQuantity.text.trimString() == "" || mBinding.etGiftQuantity.text.trimString().toInt().isNullOrZero()
+            ) {
                 com.kissspace.common.util.customToast("赠送数量不能为空", true)
                 return@safeClick
             }
 
             when (type) {
                 Constants.HamsterTransferAccountsType.PINE_NUTS -> {
-                    if (mViewModel.transferUserNumber.value!! > mViewModel.walletModel.value?.accountBalance!!) {
+                    if ((mBinding.etGiftQuantity.text.toString().toDouble() + (mBinding.etGiftQuantity.text.toString()
+                            .toDouble() * mViewModel.expectedTransferAccountsModel.value?.lossRate!! / 100)) > mViewModel.walletModel.value?.accountBalance!!) {
                         com.kissspace.common.util.customToast("松子数量不足")
                     } else {
                         confirmGive()
@@ -130,7 +142,8 @@ class WalletTransferFragment : BaseFragment(R.layout.mine_fragment_wallet_transf
                 }
 
                 else -> {
-                    if (mBinding.etGiftQuantity.text.toString().toDouble() > mViewModel.walletModel.value?.coin!!) {
+                    if ((mBinding.etGiftQuantity.text.toString().toDouble() + (mBinding.etGiftQuantity.text.toString()
+                            .toDouble() * mViewModel.expectedTransferAccountsModel.value?.lossRate!! / 100)) > mViewModel.walletModel.value?.coin!!) {
                         com.kissspace.common.util.customToast("钻石数量不足")
                     } else {
                         confirmGive()

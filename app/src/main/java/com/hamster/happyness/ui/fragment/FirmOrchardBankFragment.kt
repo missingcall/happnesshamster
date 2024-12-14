@@ -25,7 +25,7 @@ import com.kissspace.mine.viewmodel.WalletViewModel
  *
  * @Author: nicko
  * @CreateDate: 2023/1/6 15:40
- * @Description: 商行-果园
+ * @Description: 商行-果园/银行 页面
  *
  */
 class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.fragment_firm_orchard_bank) {
@@ -134,7 +134,7 @@ class FirmOrchardBankFragment : BaseFragment(com.hamster.happyness.R.layout.frag
         mViewModel.queryMarketList(type, onSuccess = {
             if (type == Constants.HamsterFirmCommodityTypes.BASIC_HAMSTER) {
                 mBinding.pageRefreshLayout.addData(
-                    it/*.filter { queryMarketListItem -> queryMarketListItem.goodsStatue == "001" || queryMarketListItem.goodsStatue == "002" }*/,
+                    it/*.filter { queryMarketListItem -> queryMarketListItem.goodsStatue == "010"}*/,
                     isEmpty = {
                         it.isEmpty()
                     })

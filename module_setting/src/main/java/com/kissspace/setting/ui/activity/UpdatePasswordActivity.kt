@@ -31,8 +31,8 @@ class UpdatePasswordActivity : BaseActivity(R.layout.setting_activity_update_log
         mBinding.tvSubmit.safeClick {
             val oldPassword = mBinding.editOldPassword.text.toString().trim()
             val newPassword = mBinding.editNewPassword.text.toString().trim()
-            if (oldPassword.length < 6) {
-                customToast("密码最少6位")
+            if (oldPassword.length < 8) {
+                customToast("密码最少8位")
                 return@safeClick
             }
             if (oldPassword.length > 32) {

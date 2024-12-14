@@ -20,6 +20,7 @@ import com.kissspace.mine.viewmodel.HamsterViewModel
 import com.kissspace.mine.viewmodel.WalletViewModel
 import com.kissspace.module_mine.R
 import com.kissspace.module_mine.databinding.DialogOrchardPurchaseBinding
+import com.kissspace.util.loadImage
 
 /**
  * 底部弹窗-果园购买/激活
@@ -57,12 +58,14 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
         //是否是基础仓鼠
         if (mIsBaseHamster) {
             mBinding.tvSkinSelection.visibility = View.VISIBLE
+            mBinding.tvSkinSelectionSub.visibility = View.VISIBLE
             mBinding.clSkinSelection.visibility = View.VISIBLE
 
             initRecyclerView()
             initData()
         } else {
             mBinding.tvSkinSelection.visibility = View.GONE
+            mBinding.tvSkinSelectionSub.visibility = View.GONE
             mBinding.clSkinSelection.visibility = View.GONE
         }
 
@@ -111,11 +114,11 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
                     }
                 }.show()
 
-
             }
             //激活
         } else {
             mBinding.tvSkinSelection.visibility = View.GONE
+            mBinding.tvSkinSelectionSub.visibility = View.GONE
             mBinding.clSkinSelection.visibility = View.GONE
             mBinding.tvConditions.visibility = View.GONE
             mBinding.clConditions.visibility = View.GONE
@@ -165,6 +168,8 @@ class OrchardPurchaseDialog : BaseDialogFragment<DialogOrchardPurchaseBinding>(D
                 if (!checked) {
                     setChecked(adapterPosition, !checked)
                 }
+                //替换展示图片
+                mBinding.ivCommodityIcon.loadImage(model.skinIcon)
 
             }
 

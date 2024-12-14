@@ -15,6 +15,7 @@ import com.drake.brv.layoutmanager.HoverGridLayoutManager
 import com.drake.brv.layoutmanager.HoverLinearLayoutManager
 import com.drake.brv.utils.addModels
 import com.drake.brv.utils.linear
+import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.hamster.happyness.R
 import com.hamster.happyness.databinding.FragmentMainHomeV3Binding
@@ -63,7 +64,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
         mBinding.lifecycleOwner = activity
 
         initRecyclerView()
-        initData()
+//        initData()
         refreshUserinfo()
         queryDayIncome()
 //        getHamsterStatus(true)
@@ -164,6 +165,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
 
     override fun onResume() {
         super.onResume()
+        initData()
         getMoney()
         getHamsterStatus(true)
     }
@@ -354,7 +356,7 @@ class HomeFragmentV3 : BaseFragment(R.layout.fragment_main_home_v3) {
                         this.stackFromEnd = stackFromEnd
                     }
                 }
-                mBinding.recyclerView.addModels(it)
+                mBinding.recyclerView.models = it
             }
 
         }, onError = {

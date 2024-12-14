@@ -114,6 +114,7 @@
             android:gravity="center|left"
             android:hint="@string/login_input_nickname"
             android:inputType="text"
+            android:text="@={vm.userInfoBean.nickname}"
             android:maxLength="15"
             android:maxLines="1"
             android:singleLine="true"

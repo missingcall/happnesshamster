@@ -64,6 +64,9 @@ class AccountCreateActivity : BaseActivity(R.layout.login_activity_account_creat
 //            mViewModel.phoneIconState.set(it?.isNotEmpty())
             mViewModel.getCodeBtnState.set(it?.length == 13 && (mCountDown?.isActive == false || mCountDown == null))
         }
+        mBinding.xetPassword.addAfterTextChanged {
+            mViewModel.btnEnable.set(it?.length!! >= 8 && mBinding.xetPhone.text?.length == 13 && mBinding.xetInvite.length() == 6)
+        }
         mBinding.etVerify.addAfterTextChanged {
             mViewModel.btnEnable.set(it?.length == 6 && mBinding.xetPhone.text?.length == 13 && mBinding.xetInvite.length() == 6)
         }

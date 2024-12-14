@@ -12,6 +12,7 @@ import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.kissspace.common.base.BaseActivity
 import com.kissspace.common.ext.safeClick
+import com.kissspace.common.ext.setTitleBarListener
 import com.kissspace.common.flowbus.Event
 import com.kissspace.common.flowbus.FlowBus
 import com.kissspace.common.model.ChatListModel
@@ -49,6 +50,7 @@ class GiftMgsActivity :BaseActivity(R.layout.message_activity_gift){
     private val pageSize = 20
 
     override fun initView(savedInstanceState: Bundle?) {
+        setTitleBarListener(mBinding.titleBar)
         mBinding.pageRefreshLayout.apply {
             onRefresh {
               mViewModel.requestGiftEmailMessage(mBinding.pageRefreshLayout.index,pageSize)

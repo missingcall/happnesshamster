@@ -10,6 +10,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.didi.drouter.annotation.Router
 import com.drake.net.NetConfig
 import com.kissspace.common.base.BaseActivity
+import com.kissspace.common.callback.ActivityResult
 import com.kissspace.common.config.*
 import com.kissspace.common.ext.safeClick
 import com.kissspace.common.flowbus.Event
@@ -18,6 +19,9 @@ import com.kissspace.common.router.RouterPath
 import com.kissspace.common.router.jump
 import com.kissspace.common.util.*
 import com.kissspace.common.util.mmkv.MMKVProvider
+import com.kissspace.common.widget.CommonBottomConfirmDialog
+import com.kissspace.common.widget.CommonConfirmDialog
+import com.kissspace.common.widget.CommonHintDialog
 import com.kissspace.login.umeng.QuickLoginManager
 import com.kissspace.login.umeng.callback.QuickLoginCallback
 import com.kissspace.login.viewmodel.LoginViewModel
@@ -65,7 +69,11 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
 //                jump(RouterPath.PATH_LOGIN_PHONE_CODE)
                 LoginDialog.newInstance().show(supportFragmentManager)
             } else {
-                customToast("请勾选同意后登录")
+//                customToast("请勾选同意后登录")
+                CommonBottomConfirmDialog.newInstance().apply {
+                    this.setCallBackk { this@LoginActivity.mBinding.cbAgree.isChecked = it }
+                    this.show(supportFragmentManager)
+                }
             }
         }
 
@@ -73,7 +81,11 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
             if (mBinding.cbAgree.isChecked) {
                 jump(RouterPath.PATH_ACCOUNT_CREATE)
             } else {
-                customToast("请勾选同意后注册")
+//                customToast("请勾选同意后注册")
+                CommonBottomConfirmDialog.newInstance().apply {
+                    this.setCallBackk { this@LoginActivity.mBinding.cbAgree.isChecked = it }
+                    this.show(supportFragmentManager)
+                }
             }
         }
 
@@ -81,7 +93,11 @@ class LoginActivity : BaseActivity(R.layout.login_activity_login),
             if (mBinding.cbAgree.isChecked) {
                 jump(RouterPath.PATH_LOGIN_PASSWORD)
             } else {
-                customToast("请勾选同意后登录")
+//                customToast("请勾选同意后登录")
+                CommonBottomConfirmDialog.newInstance().apply {
+                    this.setCallBackk { this@LoginActivity.mBinding.cbAgree.isChecked = it }
+                    this.show(supportFragmentManager)
+                }
             }
         }
 
